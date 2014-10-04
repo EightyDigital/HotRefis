@@ -9,6 +9,9 @@ body {
   background: linear-gradient(to right, #434e62, #505a73, #546078);
   color: #fff; }
 
+.clr {
+  clear: both; }
+
 a {
   text-decoration: none;
   color: #fff; }
@@ -216,5 +219,13 @@ ul.filter-list {
     padding: 10px;
     background: #00c0ff;
     color: #fff; }
+
+.prospect-box {
+  clear: both;
+  border: 1px solid #9da1aa;
+  border-radius: 5px;
+  background: #4a5265;
+  padding: 10px;
+  margin-bottom: 10px; }
 
 /*# sourceMappingURL=master.css.map */

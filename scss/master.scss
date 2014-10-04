@@ -21,6 +21,8 @@ $sliderButtonDim: 28px;
 $borderArrowDown: 20px;
 $borderArrowDownColor: #fff;
 
+$prospectBoxBorderColor: #9da1aa;
+
 // responsive dimensions
 $Dim_phone: "only screen and (max-width: 800px)";
 
@@ -37,6 +39,8 @@ body{
 
   color: $baseTextColor;
 }
+
+.clr{ clear: both; }
 
 a{
   text-decoration: none;
@@ -304,3 +308,12 @@ ul.filter-list{
     color: #fff;
   }
 }// ul
+
+.prospect-box{
+  clear: both;
+  border: 1px solid $prospectBoxBorderColor;
+  border-radius: 5px;
+  background: #4a5265;
+  padding: 10px;
+  margin-bottom: 10px;
+}

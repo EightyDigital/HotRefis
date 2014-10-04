@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAKA,UAAU;EACR,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI;;AAGlB,WAAW;EACT,SAAS,EAXA,IAAI;EAYb,SAAS,EAXC,KAAK;EAYf,KAAK,EAbI,IAAI;EAcb,MAAM,EAbI,KAAK;EAcf,UAAU,EAhBJ,IAAI",
-"sources": ["../scss/mod.scss"],
-"names": [],
-"file": "mod.css"
-}
