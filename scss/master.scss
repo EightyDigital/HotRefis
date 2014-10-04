@@ -244,7 +244,9 @@ header{
     padding: 10px 20px;
   }
 
-
+.filter-bar{
+  margin-bottom: 20px;
+}
 ul.filter-list{
   margin: 0;
   padding: 0;
@@ -263,35 +265,35 @@ ul.filter-list{
     ul{
       margin: 0;
       padding: 0;
+      width: 100%;
       position: absolute;
       z-index: 99999;
       display: none;
 
       li{
         background: #202636;
+        border-bottom: 1px solid #696d78;
         width: 100%;
         padding-right: 0;
-        cursor: pointer;
 
         a{
+          display: block;
+          width: 100%;
           color: #fff;
           text-decoration: none;
+          font-family: $fontFamily;
+        }
+        a:before{
+          text-align: center;
+          padding: 10px;
+          font-size: 1.3em;
+        }
+        a:hover:before{
+          color: #57d5fe;
         }
       }//ul li
       li:hover{
         background: #00c0ff;
-      }
-
-      li:before{
-        font-family: 'Ionicons';
-        display: inline-block;
-        background: #202636;
-        color: #fff;
-        font-size: 1.3em;
-      }//li li:before
-      li:hover:before{
-        background: #00c0ff;
-        color: #56d5ff;
       }
     }
   }//li
@@ -306,6 +308,7 @@ ul.filter-list{
     padding: 10px;
     background: #00c0ff;
     color: #fff;
+    cursor: pointer;
   }
 }// ul
 
@@ -316,4 +319,16 @@ ul.filter-list{
   background: #4a5265;
   padding: 10px;
   margin-bottom: 10px;
+
+  .pb-label{
+    text-align: center;
+    font-size: 1.1em;
+
+    i.ionicons{
+      display: block;
+      width: 100%;
+      font-size: 2em;
+    }
+  }
+
 }

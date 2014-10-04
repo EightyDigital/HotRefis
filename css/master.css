@@ -171,6 +171,9 @@ header .bar1 {
 .ion-ios7-paperplane-outline {
   padding: 10px 20px; }
 
+.filter-bar {
+  margin-bottom: 20px; }
+
 ul.filter-list {
   margin: 0;
   padding: 0;
@@ -187,28 +190,29 @@ ul.filter-list {
     ul.filter-list li ul {
       margin: 0;
       padding: 0;
+      width: 100%;
       position: absolute;
       z-index: 99999;
       display: none; }
       ul.filter-list li ul li {
         background: #202636;
+        border-bottom: 1px solid #696d78;
         width: 100%;
-        padding-right: 0;
-        cursor: pointer; }
+        padding-right: 0; }
         ul.filter-list li ul li a {
+          display: block;
+          width: 100%;
           color: #fff;
-          text-decoration: none; }
+          text-decoration: none;
+          font-family: Tahoma; }
+        ul.filter-list li ul li a:before {
+          text-align: center;
+          padding: 10px;
+          font-size: 1.3em; }
+        ul.filter-list li ul li a:hover:before {
+          color: #57d5fe; }
       ul.filter-list li ul li:hover {
         background: #00c0ff; }
-      ul.filter-list li ul li:before {
-        font-family: 'Ionicons';
-        display: inline-block;
-        background: #202636;
-        color: #fff;
-        font-size: 1.3em; }
-      ul.filter-list li ul li:hover:before {
-        background: #00c0ff;
-        color: #56d5ff; }
   ul.filter-list li:hover ul {
     display: block; }
   ul.filter-list li:before {
@@ -218,7 +222,8 @@ ul.filter-list {
     margin-right: 10px;
     padding: 10px;
     background: #00c0ff;
-    color: #fff; }
+    color: #fff;
+    cursor: pointer; }
 
 .prospect-box {
   clear: both;
@@ -227,5 +232,12 @@ ul.filter-list {
   background: #4a5265;
   padding: 10px;
   margin-bottom: 10px; }
+  .prospect-box .pb-label {
+    text-align: center;
+    font-size: 1.1em; }
+    .prospect-box .pb-label i.ionicons {
+      display: block;
+      width: 100%;
+      font-size: 2em; }
 
 /*# sourceMappingURL=master.css.map */

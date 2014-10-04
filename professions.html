@@ -75,7 +75,7 @@
         </div>
 
         <div class="span4">
-          <div class='certainty-slider' ui-slider min="0" max="100" ng-model="demoVals.sliderExample5"></div>
+          <div class='certainty-slider' ui-slider min="0" max="100" ng-model="demoVals.sliderExample9"></div>
           <div class="scale">
             <img src="css/images/certainty-scale.png" alt="">
           </div>
@@ -84,7 +84,7 @@
         <div class="span4 scale_details">
           <div class="span12 scale_display">
             <div class="span6"><span>TOTAL PROSPECTS</span></div>
-            <div class="span6"><input type='text' ng-model="demoVals.sliderExample5" readonly /></div>
+            <div class="span6"><input type='text' ng-model="demoVals.sliderExample9" readonly /></div>
           </div>
           <button class='btn-gen btn-green'><i class="ionicons ion-ios7-loop-strong"></i> REFRESH</button>
         </div>
@@ -101,15 +101,15 @@
 <!-- \#Certainty -->
 <hr>
 
-<div class="container">
+<div class="container filter-bar">
   <div class="row-fluid">
     <div class="span8">
       <ul class="filter-list">
         <li class="fa fa-bars">PROSPECT FILTER
           <ul>
-            <li class="ionicons ion-ios7-location-outline"><a href="#">Property</a></li>
-            <li class="ionicons ion-stats-bars"><a href="#">Financial</a></li>
-            <li class="ionicons ion-briefcase"><a href="#">Professions</a></li>
+            <li><a class="ionicons ion-ios7-location-outline" href="#">Property</a></li>
+            <li><a class="ionicons ion-stats-bars" href="#">Financial</a></li>
+            <li><a class="ionicons ion-briefcase" href="#">Professions</a></li>
           </ul>
         </li>
       </ul>
@@ -125,7 +125,10 @@
   <div class="row-fluid">
     <div class="span5">
         <div class="prospect-box">
-          <div class="span3">Property Value</div>
+          <div class="span3 pb-label">
+            <i class="ionicons ion-ios7-location-outline"></i>
+            Property Value
+          </div>
           <div class="span9">
             <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample7"></div>
             <br>
@@ -135,7 +138,10 @@
         </div>
         <!-- Property Value -->
         <div class="prospect-box">
-          <div class="span3">Property LTV</div>
+          <div class="span3 pb-label">
+            <i class="ionicons ion-briefcase"></i>
+            Property LTV
+          </div>
           <div class="span9">
             <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample2"></div>
             <br>
@@ -145,7 +151,10 @@
         </div>
         <!-- Property LTV -->
         <div class="prospect-box">
-          <div class="span3">Equity</div>
+          <div class="span3 pb-label">
+            <i class="ionicons ion-stats-bars"></i>
+            Equity
+          </div>
           <div class="span9">
             <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample3"></div>
             <br>
@@ -156,7 +165,47 @@
         <!-- Equity -->
     </div>
     <div class="span2">&nbsp;</div>
-    <div class="span5">Lorem ipsum dolor sit amet</div>
+    <div class="span5">
+      <div class="prospect-box">
+        <div class="span3 pb-label">
+          <i class="ionicons ion-ios7-copy-outline"></i>
+          Property Type
+        </div>
+        <div class="span9">
+          <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample4"></div>
+          <br>
+          <input type="text" ng-model="demoVals.sliderExample4" />
+        </div>
+        <div class="clr"></div>
+      </div>
+      <!-- Property Type -->
+      <div class="prospect-box">
+        <div class="span3 pb-label">
+          <i class="ionicons ion-android-timer"></i>
+          Loan Age
+        </div>
+        <div class="span9">
+          <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample5"></div>
+          <br>
+          <input type="text" ng-model="demoVals.sliderExample5" />
+        </div>
+        <div class="clr"></div>
+      </div>
+      <!-- Loan Age -->
+      <div class="prospect-box">
+        <div class="span3 pb-label">
+          <i class="ionicons ion-ios7-flag-outline"></i>
+          Tenure
+        </div>
+        <div class="span9">
+          <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample6"></div>
+          <br>
+          <input type="text" ng-model="demoVals.sliderExample6" />
+        </div>
+        <div class="clr"></div>
+      </div>
+      <!-- Tenure -->
+    </div>
   </div>
   <!-- row-fluid -->
 </div>
