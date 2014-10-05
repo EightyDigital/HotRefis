@@ -72,6 +72,40 @@ header{
     height: $mapHeight;
   }
 }
+
+// menu
+.nav_menu{
+  background: #262e45;
+
+  ul{
+    margin: 0;
+    padding: 0;
+
+    li{
+      list-style: none;
+      display: inline-block;
+
+      a{
+        display: inline-block;
+        padding: 15px 10px 20px;
+        text-decoration: none;
+        font-family: $fontFamily;
+        font-size: .9em;
+      }
+      a:before{
+        display: inline-block;
+        font-size: 2.3em;
+        margin-right: 10px;
+        position: relative;
+        bottom: -5px;
+      }
+      a.ion-ios7-settings:before{
+        transform: rotate(90deg);
+      }
+      a:hover{ background: #434e62; }
+    }//li
+  }//ul
+}
 // #Certainty
 #Certainty{
   padding: 10px;
