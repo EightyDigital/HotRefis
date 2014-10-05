@@ -406,3 +406,40 @@ ul.filter-list{
 
 }
 // prospect-box
+
+
+#Prospect-Table{
+  margin: 0 0 20px 0;
+  padding: 0;
+  width: 100%;
+  border: 1px solid #9ca0a9;
+
+  th, td{
+    padding: 15px;
+    background: #394052;
+  }
+  th{
+    font-weight: 100;
+    font-size: 1em;
+
+    .ion-ios7-reload{
+      font-size: 1.5em;
+    }
+    .fa-angle-left, .fa-angle-right{
+      font-size: 2em;
+    }
+  }
+  .off{
+    color: #686e7c;
+  }
+  th.firstcol{
+    background: #56627c;
+  }
+
+  .thleft{float: left;}
+  .thright{float: right;}
+
+  .firstcol{
+    width: 3%;
+  }
+}

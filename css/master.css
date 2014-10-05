@@ -283,4 +283,30 @@ ul.filter-list {
   .prospect-box .ui-slider-handle {
     cursor: pointer; }
 
+#Prospect-Table {
+  margin: 0 0 20px 0;
+  padding: 0;
+  width: 100%;
+  border: 1px solid #9ca0a9; }
+  #Prospect-Table th, #Prospect-Table td {
+    padding: 15px;
+    background: #394052; }
+  #Prospect-Table th {
+    font-weight: 100;
+    font-size: 1em; }
+    #Prospect-Table th .ion-ios7-reload {
+      font-size: 1.5em; }
+    #Prospect-Table th .fa-angle-left, #Prospect-Table th .fa-angle-right {
+      font-size: 2em; }
+  #Prospect-Table .off {
+    color: #686e7c; }
+  #Prospect-Table th.firstcol {
+    background: #56627c; }
+  #Prospect-Table .thleft {
+    float: left; }
+  #Prospect-Table .thright {
+    float: right; }
+  #Prospect-Table .firstcol {
+    width: 3%; }
+
 /*# sourceMappingURL=master.css.map */
