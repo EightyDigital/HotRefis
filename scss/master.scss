@@ -331,4 +331,34 @@ ul.filter-list{
     }
   }
 
+  .ui-slider{
+    height: 20px;
+
+    $PArrowDownWidth: 10px;
+    $PArrowDownColor: #00c0ff;
+    $PScrollWidth: 22px;
+    $PScrollHeight: 29px;
+    .ui-slider-handle{
+      width: $PScrollWidth;
+      height: $PScrollHeight;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      background: url(images/handle.png) no-repeat center;
+      border: 0;
+    }//.ui-slider-handle
+    // .ui-slider-handle:after{
+    //   display: inline-block;
+    //   content: '';
+    //   border-top: $PArrowDownWidth solid $PArrowDownColor;
+    //   border-right: $PArrowDownWidth solid transparent;
+    //   border-left: $PArrowDownWidth solid transparent;
+    //   position: relative;
+    //   bottom: -($PScrollHeight - 6px);
+    // }//.ui-slider-handle:after
+    .ui-slider-range{
+      background: $PArrowDownColor;
+    }//.ui-slider-range
+  }//.ui-slider
+
 }
+// prospect-box

@@ -239,5 +239,16 @@ ul.filter-list {
       display: block;
       width: 100%;
       font-size: 2em; }
+  .prospect-box .ui-slider {
+    height: 20px; }
+    .prospect-box .ui-slider .ui-slider-handle {
+      width: 22px;
+      height: 29px;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      background: url(images/handle.png) no-repeat center;
+      border: 0; }
+    .prospect-box .ui-slider .ui-slider-range {
+      background: #00c0ff; }
 
 /*# sourceMappingURL=master.css.map */

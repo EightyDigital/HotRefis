@@ -37,7 +37,7 @@ app.controller('sliderDemoCtrl', function($scope, $log, colorpicker) {
   // Slider options with event handlers
   $scope.slider = {
     'options': {
-      start: function (event, ui) { $log.info('Event: Slider start - set with slider options', event); },
+        start: function (event, ui) { $log.info('Event: Slider start - set with slider options', event); },
         stop: function (event, ui) { $log.info('Event: Slider stop - set with slider options', event); }
     }
   }

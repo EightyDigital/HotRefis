@@ -38,8 +38,6 @@
       var map = new google.maps.Map(mapCanvas, mapOptions);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
-
-    loadScript();
   </script>
 
   <div id="map_canvas"></div>
@@ -130,7 +128,7 @@
             Property Value
           </div>
           <div class="span9">
-            <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample7"></div>
+            <div ui-slider="{range: true}" min="0" max="20" step="0.01" use-decimals ng-model="demoVals.sliderExample7"></div>
             <br>
             <input type="text" ng-model="demoVals.sliderExample7" />
           </div>
