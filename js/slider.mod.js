@@ -1,19 +1,19 @@
 var app = angular.module('sliderDemoApp', ['ui.slider']);
-app.factory('colorpicker', function () {
-  function hexFromRGB(r, g, b) {
-    var hex = [r.toString(16), g.toString(16), b.toString(16)];
-    angular.forEach(hex, function(value, key) {
-      if (value.length === 1) hex[key] = "0" + value;
-    });
-    return hex.join('').toUpperCase();
-  }
-  return {
-    refreshSwatch: function (r, g, b) {
-      var color = '#' + hexFromRGB(r, g, b);
-      angular.element('#swatch').css('background-color', color);
-    }
-  };
-});
+// app.factory('colorpicker', function () {
+//   function hexFromRGB(r, g, b) {
+//     var hex = [r.toString(16), g.toString(16), b.toString(16)];
+//     angular.forEach(hex, function(value, key) {
+//       if (value.length === 1) hex[key] = "0" + value;
+//     });
+//     return hex.join('').toUpperCase();
+//   }
+//   return {
+//     refreshSwatch: function (r, g, b) {
+//       var color = '#' + hexFromRGB(r, g, b);
+//       angular.element('#swatch').css('background-color', color);
+//     }
+//   };
+// });
 
 /*
 // To set an option for all sliders
@@ -27,12 +27,12 @@ app.factory('uiSliderConfig', function ($log) {
 
 app.controller('sliderDemoCtrl', function($scope, $log, colorpicker) {
 
-  function refreshSwatch (ev, ui) {
-    var red = $scope.colorpicker.red,
-      green = $scope.colorpicker.green,
-      blue = $scope.colorpicker.blue;
-    colorpicker.refreshSwatch(red, green, blue);
-  }
+  // function refreshSwatch (ev, ui) {
+  //   var red = $scope.colorpicker.red,
+  //     green = $scope.colorpicker.green,
+  //     blue = $scope.colorpicker.blue;
+  //   colorpicker.refreshSwatch(red, green, blue);
+  // }
 
   // Slider options with event handlers
   $scope.slider = {
@@ -52,9 +52,6 @@ app.controller('sliderDemoCtrl', function($scope, $log, colorpicker) {
   };
 
   $scope.colorpicker = {
-    red: 255,
-    green: 140,
-    blue: 60,
     options: {
       orientation: 'horizontal',
       min: 0,
