@@ -478,25 +478,43 @@ ul.filter-list{
 }
 
 // PROFILE-A
-.profile-a{
+.profile-a, .profile-b{
   margin-top: 30px;
 
   h1.coltitle{
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: 700;
   }
 
-  .box1, .box2{
+  .box1, .box2, .box3{
     padding: 10px;
   }
 
-  .profile-img{
-    background: #2f3954;
-    box-shadow: 0 0 0 8px #555f78, 0 0 0 13px #6f778c;
-    border-radius: 50%;
-    margin: 10px auto;
-    width: $profileIMG-dim;
-    height: $profileIMG-dim;
+  .row1{
+    .profile-img{
+      background: #2f3954;
+      box-shadow: 0 0 0 8px #555f78, 0 0 0 13px #6f778c;
+      border-radius: 50%;
+      margin: 10px auto;
+      width: $profileIMG-dim;
+      height: $profileIMG-dim;
+    }
+
+  }
+  // row1
+  .row2{
+    h3.colsubtitle{
+      font-size: 1.3em;
+      margin: 50px auto 30px;
+    }
+    .buttons{
+      margin-top: 50px;
+      text-align: right;
+
+      button:first-child{
+        margin-right: 10px;
+      }
+    }
   }
 
   .box1{
@@ -506,5 +524,14 @@ ul.filter-list{
   .box2{
     background: #2f3954;
   }
+
+  .box3{
+      background: -webkit-linear-gradient(#677288, #565d6f, #606b7f);
+      background: -o-linear-gradient(#677288, #565d6f, #606b7f);
+      background: linear-gradient(#677288, #565d6f, #606b7f);
+
+      border: 1px solid #fff;
+      border-radius: 5px;
+    }
 }
 // profile-a
