@@ -63,6 +63,8 @@ header .bar1 {
         transform: rotate(90deg); }
       .nav_menu ul li a:hover {
         background: #434e62; }
+    .nav_menu ul li.current_page a {
+      background: #434e62; }
 
 #Certainty {
   padding: 10px; }
@@ -289,8 +291,9 @@ ul.filter-list {
   width: 100%;
   border: 1px solid #9ca0a9; }
   #Prospect-Table th, #Prospect-Table td {
-    padding: 15px;
-    background: #394052; }
+    padding: 8px;
+    background: #394052;
+    text-align: center; }
   #Prospect-Table th {
     font-weight: 100;
     font-size: 1em; }
@@ -308,5 +311,22 @@ ul.filter-list {
     float: right; }
   #Prospect-Table .firstcol {
     width: 3%; }
+  #Prospect-Table tbody td {
+    font-size: .85em; }
+    #Prospect-Table tbody td hr.C, #Prospect-Table tbody td hr.M, #Prospect-Table tbody td hr.Y {
+      width: 50px;
+      height: 19px;
+      margin: 0 auto; }
+    #Prospect-Table tbody td hr.C {
+      background: #00d5c3; }
+    #Prospect-Table tbody td hr.M {
+      background: #ee4363; }
+    #Prospect-Table tbody td hr.Y {
+      background: #f3ed7b; }
+  #Prospect-Table tbody .check, #Prospect-Table tbody .star {
+    width: 5%;
+    color: #545863; }
+    #Prospect-Table tbody .check i, #Prospect-Table tbody .star i {
+      font-size: 1.5em; }
 
 /*# sourceMappingURL=master.css.map */

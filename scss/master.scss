@@ -23,6 +23,10 @@ $borderArrowDownColor: #fff;
 
 $prospectBoxBorderColor: #9da1aa;
 
+$prospectC: #00d5c3;
+$prospectM: #ee4363;
+$prospectY: #f3ed7b;
+
 // responsive dimensions
 $Dim_phone: "only screen and (max-width: 800px)";
 
@@ -107,6 +111,9 @@ header{
       }
       a:hover{ background: #434e62; }
     }//li
+    li.current_page a{
+      background: #434e62;
+    }
   }//ul
 }
 // #Certainty
@@ -415,8 +422,9 @@ ul.filter-list{
   border: 1px solid #9ca0a9;
 
   th, td{
-    padding: 15px;
+    padding: 8px;
     background: #394052;
+    text-align: center;
   }
   th{
     font-weight: 100;
@@ -441,5 +449,28 @@ ul.filter-list{
 
   .firstcol{
     width: 3%;
+  }
+
+  tbody{
+    td{
+      font-size: .85em;
+
+      hr.C, hr.M, hr.Y{
+        width: 50px;
+        height: 19px;
+        margin: 0 auto;
+      }
+      hr.C{ background: $prospectC; }
+      hr.M{ background: $prospectM; }
+      hr.Y{ background: $prospectY; }
+    }
+    .check, .star{
+      width: 5%;
+      color: #545863;
+
+      i{
+        font-size: 1.5em;
+      }
+    }// .check, .star
   }
 }
