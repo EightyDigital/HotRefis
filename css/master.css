@@ -329,4 +329,23 @@ ul.filter-list {
     #Prospect-Table tbody .check i, #Prospect-Table tbody .star i {
       font-size: 1.5em; }
 
+.profile-a {
+  margin-top: 30px; }
+  .profile-a h1.coltitle {
+    font-size: 1.8em;
+    font-weight: 700; }
+  .profile-a .box1, .profile-a .box2 {
+    padding: 10px; }
+  .profile-a .profile-img {
+    background: #2f3954;
+    box-shadow: 0 0 0 8px #555f78, 0 0 0 13px #6f778c;
+    border-radius: 50%;
+    margin: 10px auto;
+    width: 150px;
+    height: 150px; }
+  .profile-a .box1 {
+    background: #5d6b86; }
+  .profile-a .box2 {
+    background: #2f3954; }
+
 /*# sourceMappingURL=master.css.map */

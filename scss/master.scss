@@ -27,6 +27,8 @@ $prospectC: #00d5c3;
 $prospectM: #ee4363;
 $prospectY: #f3ed7b;
 
+$profileIMG-dim: 150px;
+
 // responsive dimensions
 $Dim_phone: "only screen and (max-width: 800px)";
 
@@ -474,3 +476,35 @@ ul.filter-list{
     }// .check, .star
   }
 }
+
+// PROFILE-A
+.profile-a{
+  margin-top: 30px;
+
+  h1.coltitle{
+    font-size: 1.8em;
+    font-weight: 700;
+  }
+
+  .box1, .box2{
+    padding: 10px;
+  }
+
+  .profile-img{
+    background: #2f3954;
+    box-shadow: 0 0 0 8px #555f78, 0 0 0 13px #6f778c;
+    border-radius: 50%;
+    margin: 10px auto;
+    width: $profileIMG-dim;
+    height: $profileIMG-dim;
+  }
+
+  .box1{
+    background: #5d6b86;
+  }
+
+  .box2{
+    background: #2f3954;
+  }
+}
+// profile-a
