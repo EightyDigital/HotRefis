@@ -600,13 +600,17 @@ ul.filter-list{
 
   .desc{
     margin-bottom: 20px;
+
+    label{
+      display: block;
+      width: 80% !important;
+    }
+    label+div{
+      clear: both;
+    }
   }
 
-  img.scale-result{
-    padding: 10px 30px;
-    background: #283349;
-    border-radius: 5px;
-  }
+  
 }
 
 .prembox{
@@ -633,3 +637,45 @@ ul.filter-list{
 
   }
 }
+
+.profile-b{
+  .mdetails{
+    .s2{
+      font-weight: bold;
+    }
+
+    .ionicons{
+      font-size: 1.8em;
+      vertical-align: middle;
+      text-align: center;
+      width: 30px;
+    }
+  }// .mdetails
+
+  .box3{
+
+    .clr{
+      margin: 0 auto;
+    }
+    label, .text{
+      font-size: 1.1em;
+    }
+    label{
+      width: 40%;
+      float: left;
+    }
+    .text{
+      float: left;
+    }
+
+    .bulleted{
+      margin-left: 15px;
+
+      i{
+        width: 15px;
+        font-size: .9em;
+        vertical-align: middle;
+      }
+    }
+  }// .box3
+}//profile-b

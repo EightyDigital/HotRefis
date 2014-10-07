@@ -408,10 +408,11 @@ ul.filter-list {
   padding: 30px !important; }
   .inferred-data .desc {
     margin-bottom: 20px; }
-  .inferred-data img.scale-result {
-    padding: 10px 30px;
-    background: #283349;
-    border-radius: 5px; }
+    .inferred-data .desc label {
+      display: block;
+      width: 80% !important; }
+    .inferred-data .desc label + div {
+      clear: both; }
 
 .prembox {
   padding-left: 40px !important; }
@@ -429,5 +430,28 @@ ul.filter-list {
       font-size: .3em;
       margin-right: 5px;
       color: #00c0ff; }
+
+.profile-b .mdetails .s2 {
+  font-weight: bold; }
+.profile-b .mdetails .ionicons {
+  font-size: 1.8em;
+  vertical-align: middle;
+  text-align: center;
+  width: 30px; }
+.profile-b .box3 .clr {
+  margin: 0 auto; }
+.profile-b .box3 label, .profile-b .box3 .text {
+  font-size: 1.1em; }
+.profile-b .box3 label {
+  width: 40%;
+  float: left; }
+.profile-b .box3 .text {
+  float: left; }
+.profile-b .box3 .bulleted {
+  margin-left: 15px; }
+  .profile-b .box3 .bulleted i {
+    width: 15px;
+    font-size: .9em;
+    vertical-align: middle; }
 
 /*# sourceMappingURL=master.css.map */
