@@ -413,6 +413,10 @@ ul.filter-list {
       width: 80% !important; }
     .inferred-data .desc label + div {
       clear: both; }
+  .inferred-data img.scale-result {
+    padding: 10px 30px;
+    background: #283349;
+    border-radius: 5px; }
 
 .prembox {
   padding-left: 40px !important; }
@@ -453,5 +457,9 @@ ul.filter-list {
     width: 15px;
     font-size: .9em;
     vertical-align: middle; }
+.profile-b .box3 img.scale-result {
+  background: none;
+  border: 0;
+  border-radius: 0; }
 
 /*# sourceMappingURL=master.css.map */
