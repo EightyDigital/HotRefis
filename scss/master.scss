@@ -29,6 +29,10 @@ $prospectY: #f3ed7b;
 
 $profileIMG-dim: 130px;
 
+$reportHeadBorderColor: #f1f1f1;
+
+$whiteboxIconWidth: 75px;
+$headColor: #3a4364;
 // responsive dimensions
 $Dim_phone: "only screen and (max-width: 800px)";
 
@@ -60,6 +64,11 @@ hr{
   background: #c8cbd4;
   border: 0;
 }
+
+.aligncenter{ text-align: center; }
+.alignleft{ text-align: left; }
+.alignright{ text-align: right; }
+
 header{
   .bar1{
     background-color: $headBar1BG;
@@ -87,6 +96,7 @@ header{
   background: #262e45;
 
   ul{
+    background: transparent;
     margin: 0;
     padding: 0;
 
@@ -117,6 +127,24 @@ header{
       background: #434e62;
     }
   }//ul
+
+  ul.breadcrumb{
+    li{
+      text-shadow: 0 0 0 !important;
+    }
+    li:before{
+      display: inline-block;
+      content: '>';
+      margin-right: 5px;
+    }
+    li:first-child:before{
+      content: '';
+    }
+    li:first-child a.ion-ios7-home-outline:before{
+      color: #00c1fe;
+    }
+  }
+
 }
 // #Certainty
 #Certainty{
@@ -692,3 +720,311 @@ ul.filter-list{
 
   }// .box3
 }//profile-b
+
+// REPORT PAGE
+body.report{
+  background: #eaedf2;
+
+  .nav_menu{
+    margin-bottom: 50px;
+  }
+
+  .whitebox{
+    background: #fff;
+    color: #777;
+
+    .pad{
+      padding: 22px 20px;
+    }
+
+    .head{
+      font-size: 1.8em;
+      border-bottom: 1px solid $reportHeadBorderColor;
+      color: $headColor;
+    }
+
+    .fa-file-text:before{
+      color: #fff;
+      background: #00c0ff;
+      width: $whiteboxIconWidth;
+      padding: 15px;
+      border-radius: 50%;
+      margin-right: 10px;
+      font-size: .6em;
+    }
+
+    .text{
+      padding-left: $whiteboxIconWidth;
+    }
+  }
+  // .whitebox
+
+  .row1, .row2, .row3, .row4, .row5, .row6, .row7{
+    margin-bottom: 15px;
+  }
+
+  .row2{
+
+    .whitebox{
+      color: #394261 !important;
+    }
+
+    .head{
+      border-bottom: 0;
+    }
+
+    .cvr-comp{
+      width: 70%;
+      margin: 0 auto;
+      border: 1px solid $reportHeadBorderColor;
+      border-width: 1px 0;
+      padding: 20px 0;
+      font-size: 1.5em;
+
+      strong{
+        display: inline-block;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+      .from{
+        text-align: right;
+      }
+      .mid{
+        text-align: center;
+      }
+      .to{
+        text-align: left;
+      }
+    }// \cvr-comp
+
+    .note{
+      padding: 20px 0 40px;
+      font-size: 1.5em;
+    }
+  }// \row2
+
+  .icon-cvr{
+    background: #1dbbe2 url("images/icon-cvr.gif") no-repeat center;
+    width: 31px;
+    height: 29px;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+  }
+
+  .row3{
+    table.latest_transaction{
+      width: 100%;
+      color: #fff;
+      border: 1px solid #dce1e7;
+
+      th{
+        padding: 10px;
+        font-size: .9em;
+      }
+
+      thead{
+        background: #394263;
+
+        th{
+          span.alignleft{
+            float: left;
+          }
+          span.alignright{
+            float: right;
+          }
+          .fa{
+            font-size: 1.3em;
+          }
+        }
+      }
+
+      tbody{
+        td.wide{
+          width: 12%;
+        }
+        td.wide2{
+          width: 13%;
+        }
+        td{
+          color: #666;
+          text-align: center;
+          font-size: .9em;
+          padding: 8px 10px;
+          border-color: #dce1e7;
+        }
+      }
+
+    }// table
+  }
+  // \row3
+
+  .row4{
+    center{
+      font-size: 1.5em;
+      font-style: italic;
+      font-weight: 100;
+      line-height: 25px;
+      margin-top: 150px;
+      color: $headColor;
+    }
+  }
+  // \row4
+
+  .row5{
+    .ion-help-circled:before{
+      color: #fff;
+      background: #00c0ff;
+      padding: 10px;
+      border-radius: 50%;
+      margin-right: 10px;
+      font-size: .6em;
+    }
+
+    .colText{
+      padding-left: $whiteboxIconWidth;
+
+      p.text{
+        margin: 0 0 10px 0;
+        padding: 0;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .row-fluid{
+        margin: 0;
+        padding: 0;
+      }
+      .row-fluid [class*='span']{
+        min-height: 1px !important;
+      }
+      .row-fluid.last{
+        margin-bottom: 30px;
+      }
+    }
+  }
+  // \row5
+
+  .row6{
+    .whitebox{
+      .bordered{
+        border: 1px solid #dae1e9;
+        margin-bottom: 30px;
+
+        .row-fluid [class*='span']{
+          min-height: 1px !important;
+        }
+      }
+
+      .redRow{
+        text-align: center;
+        margin-bottom: 10px;
+        background: #e84c3d;
+        color: #fff;
+        padding: 10px;
+      }
+
+      table.sales-pitch{
+        border: 1px solid #eaedf2;
+        width: 98%;
+        margin: 0 auto 10px;
+
+        thead{
+          background: #f9fafc;
+
+          th{
+            padding: 5px;
+          }
+        }
+
+        tbody{
+          .pitch-icon{
+            position: relative;
+            margin-right: 10px;
+          }
+          .pitch-icon:before{
+            background: url("images/sprite-pitches.jpg") no-repeat left top;
+            width: 19px;
+            height: 19px;
+            display: inline-block;
+            content: '';
+            vertical-align: middle;
+          }
+          td{
+            padding: 5px;
+            text-align: center;
+
+            span.tla:before{ background-position: 0 0; }
+            span.mpa:before{ background-position: 0 -19px; }
+            span.ie:before{ background-position: 0 -38px; }
+            span.f3y:before{ background-position: 0 -57px; }
+            span.f5y:before{ background-position: 0 -76px; }
+            span.f10y:before{ background-position: 0 -95px; }
+            span.te:before{ background-position: 0 -114px; }
+          }
+          td:first-child{
+            text-align: left;
+            width: 20%;
+          }
+        }
+      }
+
+      .rp-btn button{
+        background: #6ad2eb;
+        color: #fff;
+        border: 1px solid #1dbbe2;
+        border-radius: 3px;
+        padding: 8px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  // \row6
+
+  .row7{
+    .rowhead{
+      background: #394263;
+      color: #fff;
+      padding: 5px 15px;
+    }
+    .main{
+      border-bottom: 1px solid #f1f1f1;
+      color: $headColor;
+      margin-bottom: 30px;
+
+      .bigtext{
+        margin: 0;
+        padding: 0;
+        font-size: 2em;
+        font-weight: 100;
+      }
+      .desc{
+        margin-bottom: 10px;
+        font-size: .9em;
+      }
+    }// \main
+    .subtext{
+      font-size: .9em;
+
+      ol{
+        margin-left: 50px;
+        li{
+          line-height: 25px;
+        }
+      }
+    }
+
+    .rightSubtext{
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 1.2em;
+
+      div{
+        margin-bottom: 3px;
+      }
+    }
+  }
+  // \row7
+}
+// body.report

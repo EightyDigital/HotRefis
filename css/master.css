@@ -24,6 +24,15 @@ hr {
   background: #c8cbd4;
   border: 0; }
 
+.aligncenter {
+  text-align: center; }
+
+.alignleft {
+  text-align: left; }
+
+.alignright {
+  text-align: right; }
+
 header .bar1 {
   background-color: #00c0ff; }
   header .bar1 h1 {
@@ -42,6 +51,7 @@ header .bar1 {
 .nav_menu {
   background: #262e45; }
   .nav_menu ul {
+    background: transparent;
     margin: 0;
     padding: 0; }
     .nav_menu ul li {
@@ -65,6 +75,16 @@ header .bar1 {
         background: #434e62; }
     .nav_menu ul li.current_page a {
       background: #434e62; }
+  .nav_menu ul.breadcrumb li {
+    text-shadow: 0 0 0 !important; }
+  .nav_menu ul.breadcrumb li:before {
+    display: inline-block;
+    content: '>';
+    margin-right: 5px; }
+  .nav_menu ul.breadcrumb li:first-child:before {
+    content: ''; }
+  .nav_menu ul.breadcrumb li:first-child a.ion-ios7-home-outline:before {
+    color: #00c1fe; }
 
 #Certainty {
   padding: 10px; }
@@ -465,5 +485,200 @@ ul.filter-list {
     background: none;
     border: 0;
     border-radius: 0; }
+
+body.report {
+  background: #eaedf2; }
+  body.report .nav_menu {
+    margin-bottom: 50px; }
+  body.report .whitebox {
+    background: #fff;
+    color: #777; }
+    body.report .whitebox .pad {
+      padding: 22px 20px; }
+    body.report .whitebox .head {
+      font-size: 1.8em;
+      border-bottom: 1px solid #f1f1f1;
+      color: #3a4364; }
+    body.report .whitebox .fa-file-text:before {
+      color: #fff;
+      background: #00c0ff;
+      width: 75px;
+      padding: 15px;
+      border-radius: 50%;
+      margin-right: 10px;
+      font-size: .6em; }
+    body.report .whitebox .text {
+      padding-left: 75px; }
+  body.report .row1, body.report .row2, body.report .row3, body.report .row4, body.report .row5, body.report .row6, body.report .row7 {
+    margin-bottom: 15px; }
+  body.report .row2 .whitebox {
+    color: #394261 !important; }
+  body.report .row2 .head {
+    border-bottom: 0; }
+  body.report .row2 .cvr-comp {
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid #f1f1f1;
+    border-width: 1px 0;
+    padding: 20px 0;
+    font-size: 1.5em; }
+    body.report .row2 .cvr-comp strong {
+      display: inline-block;
+      font-size: 1.5em;
+      margin-bottom: 10px; }
+    body.report .row2 .cvr-comp .from {
+      text-align: right; }
+    body.report .row2 .cvr-comp .mid {
+      text-align: center; }
+    body.report .row2 .cvr-comp .to {
+      text-align: left; }
+  body.report .row2 .note {
+    padding: 20px 0 40px;
+    font-size: 1.5em; }
+  body.report .icon-cvr {
+    background: #1dbbe2 url("images/icon-cvr.gif") no-repeat center;
+    width: 31px;
+    height: 29px;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    vertical-align: middle; }
+  body.report .row3 table.latest_transaction {
+    width: 100%;
+    color: #fff;
+    border: 1px solid #dce1e7; }
+    body.report .row3 table.latest_transaction th {
+      padding: 10px;
+      font-size: .9em; }
+    body.report .row3 table.latest_transaction thead {
+      background: #394263; }
+      body.report .row3 table.latest_transaction thead th span.alignleft {
+        float: left; }
+      body.report .row3 table.latest_transaction thead th span.alignright {
+        float: right; }
+      body.report .row3 table.latest_transaction thead th .fa {
+        font-size: 1.3em; }
+    body.report .row3 table.latest_transaction tbody td.wide {
+      width: 12%; }
+    body.report .row3 table.latest_transaction tbody td.wide2 {
+      width: 13%; }
+    body.report .row3 table.latest_transaction tbody td {
+      color: #666;
+      text-align: center;
+      font-size: .9em;
+      padding: 8px 10px;
+      border-color: #dce1e7; }
+  body.report .row4 center {
+    font-size: 1.5em;
+    font-style: italic;
+    font-weight: 100;
+    line-height: 25px;
+    margin-top: 150px;
+    color: #3a4364; }
+  body.report .row5 .ion-help-circled:before {
+    color: #fff;
+    background: #00c0ff;
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-size: .6em; }
+  body.report .row5 .colText {
+    padding-left: 75px; }
+    body.report .row5 .colText p.text {
+      margin: 0 0 10px 0;
+      padding: 0;
+      font-size: 1.2em;
+      font-weight: bold; }
+    body.report .row5 .colText .row-fluid {
+      margin: 0;
+      padding: 0; }
+    body.report .row5 .colText .row-fluid [class*='span'] {
+      min-height: 1px !important; }
+    body.report .row5 .colText .row-fluid.last {
+      margin-bottom: 30px; }
+  body.report .row6 .whitebox .bordered {
+    border: 1px solid #dae1e9;
+    margin-bottom: 30px; }
+    body.report .row6 .whitebox .bordered .row-fluid [class*='span'] {
+      min-height: 1px !important; }
+  body.report .row6 .whitebox .redRow {
+    text-align: center;
+    margin-bottom: 10px;
+    background: #e84c3d;
+    color: #fff;
+    padding: 10px; }
+  body.report .row6 .whitebox table.sales-pitch {
+    border: 1px solid #eaedf2;
+    width: 98%;
+    margin: 0 auto 10px; }
+    body.report .row6 .whitebox table.sales-pitch thead {
+      background: #f9fafc; }
+      body.report .row6 .whitebox table.sales-pitch thead th {
+        padding: 5px; }
+    body.report .row6 .whitebox table.sales-pitch tbody .pitch-icon {
+      position: relative;
+      margin-right: 10px; }
+    body.report .row6 .whitebox table.sales-pitch tbody .pitch-icon:before {
+      background: url("images/sprite-pitches.jpg") no-repeat left top;
+      width: 19px;
+      height: 19px;
+      display: inline-block;
+      content: '';
+      vertical-align: middle; }
+    body.report .row6 .whitebox table.sales-pitch tbody td {
+      padding: 5px;
+      text-align: center; }
+      body.report .row6 .whitebox table.sales-pitch tbody td span.tla:before {
+        background-position: 0 0; }
+      body.report .row6 .whitebox table.sales-pitch tbody td span.mpa:before {
+        background-position: 0 -19px; }
+      body.report .row6 .whitebox table.sales-pitch tbody td span.ie:before {
+        background-position: 0 -38px; }
+      body.report .row6 .whitebox table.sales-pitch tbody td span.f3y:before {
+        background-position: 0 -57px; }
+      body.report .row6 .whitebox table.sales-pitch tbody td span.f5y:before {
+        background-position: 0 -76px; }
+      body.report .row6 .whitebox table.sales-pitch tbody td span.f10y:before {
+        background-position: 0 -95px; }
+      body.report .row6 .whitebox table.sales-pitch tbody td span.te:before {
+        background-position: 0 -114px; }
+    body.report .row6 .whitebox table.sales-pitch tbody td:first-child {
+      text-align: left;
+      width: 20%; }
+  body.report .row6 .whitebox .rp-btn button {
+    background: #6ad2eb;
+    color: #fff;
+    border: 1px solid #1dbbe2;
+    border-radius: 3px;
+    padding: 8px;
+    margin-bottom: 10px; }
+  body.report .row7 .rowhead {
+    background: #394263;
+    color: #fff;
+    padding: 5px 15px; }
+  body.report .row7 .main {
+    border-bottom: 1px solid #f1f1f1;
+    color: #3a4364;
+    margin-bottom: 30px; }
+    body.report .row7 .main .bigtext {
+      margin: 0;
+      padding: 0;
+      font-size: 2em;
+      font-weight: 100; }
+    body.report .row7 .main .desc {
+      margin-bottom: 10px;
+      font-size: .9em; }
+  body.report .row7 .subtext {
+    font-size: .9em; }
+    body.report .row7 .subtext ol {
+      margin-left: 50px; }
+      body.report .row7 .subtext ol li {
+        line-height: 25px; }
+  body.report .row7 .rightSubtext {
+    margin-top: 30px;
+    font-weight: bold;
+    font-size: 1.2em; }
+    body.report .row7 .rightSubtext div {
+      margin-bottom: 3px; }
 
 /*# sourceMappingURL=master.css.map */
