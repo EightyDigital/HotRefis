@@ -610,7 +610,11 @@ ul.filter-list{
     }
   }
 
-  
+  img.scale-result{
+    padding: 10px 30px;
+    background: #283349;
+    border-radius: 5px;
+  }
 }
 
 .prembox{
@@ -677,5 +681,12 @@ ul.filter-list{
         vertical-align: middle;
       }
     }
+
+    img.scale-result{
+      background: none;
+      border: 0;
+      border-radius: 0;
+    }
+
   }// .box3
 }//profile-b
