@@ -3,7 +3,7 @@ html, body {
   padding: 0; }
 
 body {
-  font-family: Tahoma;
+  font-family: Arial;
   background: -webkit-linear-gradient(left, #434e62, #505a73, #546078);
   background: -o-linear-gradient(left, #434e62, #505a73, #546078);
   background: linear-gradient(to right, #434e62, #505a73, #546078);
@@ -51,7 +51,7 @@ header .bar1 {
         display: inline-block;
         padding: 15px 10px 20px;
         text-decoration: none;
-        font-family: Tahoma;
+        font-family: Arial;
         font-size: .9em; }
       .nav_menu ul li a:before {
         display: inline-block;
@@ -160,7 +160,7 @@ header .bar1 {
   border-bottom-width: 3px;
   border-bottom-style: solid;
   font-size: 1.5em;
-  font-family: Tahoma;
+  font-family: Arial;
   font-weight: 100; }
 
 .btn-green {
@@ -212,7 +212,7 @@ ul.filter-list {
   width: 70%; }
   ul.filter-list li {
     list-style: none;
-    font-family: Tahoma;
+    font-family: Arial;
     font-size: 1em;
     background: #fff;
     position: relative;
@@ -234,7 +234,7 @@ ul.filter-list {
           width: 100%;
           color: #fff;
           text-decoration: none;
-          font-family: Tahoma; }
+          font-family: Arial; }
         ul.filter-list li ul li a:before {
           text-align: center;
           padding: 10px;
@@ -340,9 +340,9 @@ ul.filter-list {
     background: #2f3954;
     box-shadow: 0 0 0 8px #555f78, 0 0 0 13px #6f778c;
     border-radius: 50%;
-    margin: 10px auto;
-    width: 150px;
-    height: 150px; }
+    margin: 25px auto;
+    width: 130px;
+    height: 130px; }
   .profile-a .row2 h3.colsubtitle, .profile-b .row2 h3.colsubtitle {
     font-size: 1.3em;
     margin: 50px auto 30px; }
@@ -361,5 +361,73 @@ ul.filter-list {
     background: linear-gradient(#677288, #565d6f, #606b7f);
     border: 1px solid #fff;
     border-radius: 5px; }
+
+.profile-a .profile-info {
+  padding: 30px 0; }
+  .profile-a .profile-info .name {
+    margin: 0;
+    padding: 0; }
+  .profile-a .profile-info .title {
+    margin: 5px 0; }
+  .profile-a .profile-info .loc {
+    color: #57d6ff; }
+    .profile-a .profile-info .loc i {
+      display: inline-block;
+      margin-right: 5px; }
+    .profile-a .profile-info .loc i:before {
+      font-size: 1.5em;
+      position: relative;
+      bottom: -3px; }
+.profile-a .box2 .clr {
+  margin: 0 auto; }
+.profile-a .box2 label, .profile-a .box2 .text {
+  font-size: 1.1em; }
+.profile-a .box2 label {
+  width: 40%;
+  float: left; }
+.profile-a .box2 .text {
+  float: left; }
+.profile-a .box2 .bulleted {
+  margin-left: 15px; }
+  .profile-a .box2 .bulleted i {
+    margin-right: 5px; }
+
+.s1, .s2, .s3 {
+  font-weight: normal; }
+
+.s3 {
+  font-size: 2em; }
+
+.s2 {
+  font-size: 1em; }
+
+.s1 {
+  font-size: .9em; }
+
+.inferred-data {
+  padding: 30px !important; }
+  .inferred-data .desc {
+    margin-bottom: 20px; }
+  .inferred-data img.scale-result {
+    padding: 10px 30px;
+    background: #283349;
+    border-radius: 5px; }
+
+.prembox {
+  padding-left: 40px !important; }
+  .prembox .prembox-title {
+    margin-bottom: 10px; }
+  .prembox ul {
+    margin: 0;
+    padding: 0; }
+    .prembox ul li {
+      list-style: none; }
+    .prembox ul li:before {
+      font-family: "FontAwesome";
+      content: "\f111";
+      vertical-align: middle;
+      font-size: .3em;
+      margin-right: 5px;
+      color: #00c0ff; }
 
 /*# sourceMappingURL=master.css.map */
