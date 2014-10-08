@@ -163,7 +163,7 @@ header .bar1 {
         margin-bottom: 10px; } }
   #Certainty .scale_display {
     border: 1px solid #a0a7af;
-    background: #5b667c;
+    background: #7c8392;
     border-radius: 5px; }
     @media only screen and (max-width: 400px) {
       #Certainty .scale_display {
@@ -405,7 +405,7 @@ ul.filter-list {
       font-size: 2em; }
   .prospect-box .ui-slider {
     height: 20px;
-    background: #000;
+    background: #386270;
     border: 0; }
     .prospect-box .ui-slider .ui-slider-handle {
       width: 22px;
