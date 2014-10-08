@@ -25,7 +25,7 @@ app.factory('uiSliderConfig', function ($log) {
 });
 */
 
-app.controller('sliderDemoCtrl', function($scope, $log, colorpicker) {
+app.controller('sliderDemoCtrl', function($scope, $log) {
 
   // function refreshSwatch (ev, ui) {
   //   var red = $scope.colorpicker.red,
@@ -61,4 +61,5 @@ app.controller('sliderDemoCtrl', function($scope, $log, colorpicker) {
       slide: refreshSwatch
     }
   };
+
 });

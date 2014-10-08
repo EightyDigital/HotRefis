@@ -63,6 +63,9 @@ header .bar1 {
         text-decoration: none;
         font-family: Arial;
         font-size: .9em; }
+        @media only screen and (max-width: 400px) {
+          .nav_menu ul li a {
+            font-size: 1em; } }
       .nav_menu ul li a:before {
         display: inline-block;
         font-size: 2.3em;
@@ -75,6 +78,12 @@ header .bar1 {
         background: #434e62; }
     .nav_menu ul li.current_page a {
       background: #434e62; }
+    @media only screen and (max-width: 767px) {
+      .nav_menu ul li:nth-child(3) {
+        clear: both; } }
+    @media only screen and (max-width: 400px) {
+      .nav_menu ul li:nth-child(3) {
+        clear: both; } }
   .nav_menu ul.breadcrumb li {
     text-shadow: 0 0 0 !important; }
   .nav_menu ul.breadcrumb li:before {
@@ -95,7 +104,7 @@ header .bar1 {
     width: 50px;
     height: 20px;
     margin: 0 auto; }
-    @media only screen and (max-width: 800px) {
+    @media only screen and (max-width: 400px) {
       #Certainty .filter40-60, #Certainty .filter60-80, #Certainty .filter80-100 {
         width: 80%; } }
   #Certainty .filter40-60 {
@@ -104,13 +113,25 @@ header .bar1 {
     background: #f3ed7b; }
   #Certainty .filter80-100 {
     background: #ee4363; }
+  @media only screen and (max-width: 767px) {
+    #Certainty .filter40-60, #Certainty .filter60-80, #Certainty .filter80-100 {
+      width: 100%; } }
   #Certainty .title {
     margin: 0;
     padding: 0;
     font-weight: 100;
     font-size: 2.3em; }
+    @media only screen and (max-width: 1200px) {
+      #Certainty .title {
+        font-size: 2em; } }
+    @media only screen and (max-width: 980px) {
+      #Certainty .title {
+        font-size: 1.5em; } }
   #Certainty .desc {
     font-size: .8em; }
+    @media only screen and (max-width: 1200px) {
+      #Certainty .desc {
+        font-size: .7em; } }
   #Certainty .certainty-slider {
     background: -webkit-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
     background: -o-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
@@ -135,10 +156,20 @@ header .bar1 {
       bottom: -24px; }
   #Certainty .scale img {
     margin-left: 1px; }
+    @media only screen and (max-width: 767px) {
+      #Certainty .scale img {
+        margin-bottom: 10px;
+        min-width: 100%; } }
+    @media only screen and (max-width: 400px) {
+      #Certainty .scale img {
+        margin-bottom: 10px; } }
   #Certainty .scale_display {
     border: 1px solid #a0a7af;
     background: #5b667c;
     border-radius: 5px; }
+    @media only screen and (max-width: 400px) {
+      #Certainty .scale_display {
+        margin-bottom: 10px; } }
     #Certainty .scale_display span {
       display: inline-block;
       background: #4d5466;
@@ -146,6 +177,14 @@ header .bar1 {
       border-radius: 5px 0 0 5px;
       font-size: 1em;
       text-align: center; }
+      @media only screen and (max-width: 767px) {
+        #Certainty .scale_display span {
+          display: block;
+          border-radius: 5px 5px 0 0; } }
+      @media only screen and (max-width: 400px) {
+        #Certainty .scale_display span {
+          display: block;
+          border-radius: 5px 5px 0 0; } }
     #Certainty .scale_display input {
       display: inline-block;
       padding: 0;
@@ -157,6 +196,14 @@ header .bar1 {
       font-size: 1.5em;
       position: relative;
       bottom: -5px; }
+      @media only screen and (max-width: 767px) {
+        #Certainty .scale_display input {
+          display: block;
+          width: 100%; } }
+      @media only screen and (max-width: 400px) {
+        #Certainty .scale_display input {
+          display: block;
+          width: 100%; } }
   #Certainty .scale_details .btn-gen {
     float: right;
     margin-top: 20px;
@@ -169,8 +216,20 @@ header .bar1 {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
     padding: 8px 0 13px; }
+  @media only screen and (max-width: 767px) {
+    #Certainty .scale_details button {
+      margin-bottom: 10px; } }
+  @media only screen and (max-width: 400px) {
+    #Certainty .scale_details button {
+      margin-bottom: 10px; } }
   #Certainty .quick-icons {
     text-align: right; }
+    @media only screen and (max-width: 767px) {
+      #Certainty .quick-icons {
+        clear: both; } }
+    @media only screen and (max-width: 400px) {
+      #Certainty .quick-icons {
+        clear: both; } }
 
 .btn-gen {
   border: 0;
@@ -217,12 +276,47 @@ header .bar1 {
   padding: 10px 15px;
   margin: 0 3px 5px 0;
   cursor: pointer; }
+  @media only screen and (max-width: 1200px) {
+    .ion-printer, .ion-ios7-paperplane-outline {
+      font-size: 3em;
+      padding: 5px 10px; } }
+  @media only screen and (max-width: 980px) {
+    .ion-printer, .ion-ios7-paperplane-outline {
+      font-size: 1.5em;
+      padding: 5px 10px; } }
+  @media only screen and (max-width: 767px) {
+    .ion-printer, .ion-ios7-paperplane-outline {
+      font-size: 3em; } }
 
-.ion-ios7-paperplane-outline {
-  padding: 10px 20px; }
+@media only screen and (min-width: 1200px) {
+  .ion-ios7-paperplane-outline {
+    padding: 10px 20px; } }
+@media only screen and (max-width: 1200px) {
+  .ion-ios7-paperplane-outline {
+    padding: 5px 15px; } }
+@media only screen and (max-width: 980px) {
+  .ion-ios7-paperplane-outline {
+    padding: 5px 10px; } }
 
 .filter-bar {
+  width: 80%;
+  margin: 0 auto;
   margin-bottom: 20px; }
+  @media only screen and (max-width: 1400px) {
+    .filter-bar button {
+      margin-bottom: 10px;
+      font-size: 1.1em;
+      padding: 10px 20px; } }
+  @media only screen and (max-width: 980px) {
+    .filter-bar button {
+      margin-bottom: 10px;
+      font-size: .8em;
+      padding: 10px 10px; } }
+  @media only screen and (max-width: 400px) {
+    .filter-bar button {
+      margin-bottom: 10px;
+      font-size: 1.3em;
+      padding: 10px 20px; } }
 
 ul.filter-list {
   margin: 0;
@@ -230,6 +324,12 @@ ul.filter-list {
   color: #888;
   float: left;
   width: 70%; }
+  @media only screen and (max-width: 767px) {
+    ul.filter-list {
+      margin-bottom: 10px; } }
+  @media only screen and (max-width: 400px) {
+    ul.filter-list {
+      margin-bottom: 10px; } }
   ul.filter-list li {
     list-style: none;
     font-family: Arial;
@@ -237,6 +337,9 @@ ul.filter-list {
     background: #fff;
     position: relative;
     padding: 0 10px 0 0; }
+    @media only screen and (max-width: 767px) {
+      ul.filter-list li {
+        font-size: .8em; } }
     ul.filter-list li ul {
       margin: 0;
       padding: 0;
@@ -282,9 +385,23 @@ ul.filter-list {
   background: #4a5265;
   padding: 10px;
   margin-bottom: 10px; }
+  @media only screen and (max-width: 767px) {
+    .prospect-box {
+      width: 90%;
+      margin: 0 auto 10px; } }
+  @media only screen and (max-width: 400px) {
+    .prospect-box {
+      width: 90%;
+      margin: 0 auto 10px; } }
   .prospect-box .pb-label {
     text-align: center;
     font-size: 1.1em; }
+    @media only screen and (max-width: 767px) {
+      .prospect-box .pb-label {
+        margin-bottom: 10px; } }
+    @media only screen and (max-width: 400px) {
+      .prospect-box .pb-label {
+        margin-bottom: 10px; } }
     .prospect-box .pb-label i.ionicons {
       display: block;
       width: 100%;
@@ -304,6 +421,15 @@ ul.filter-list {
       background: #00c0ff; }
   .prospect-box .ui-slider-handle {
     cursor: pointer; }
+  @media only screen and (max-width: 980px) {
+    .prospect-box input[readonly] {
+      width: 95%; } }
+  @media only screen and (max-width: 767px) {
+    .prospect-box input[readonly] {
+      width: 95%; } }
+  @media only screen and (max-width: 400px) {
+    .prospect-box input[readonly] {
+      width: 95%; } }
 
 #Prospect-Table {
   margin: 0 0 20px 0;
@@ -345,45 +471,63 @@ ul.filter-list {
       background: #f3ed7b; }
   #Prospect-Table tbody .check, #Prospect-Table tbody .star {
     width: 5%;
-    color: #545863; }
+    color: #545863;
+    cursor: pointer; }
     #Prospect-Table tbody .check i, #Prospect-Table tbody .star i {
       font-size: 1.5em; }
+  #Prospect-Table tbody .check.on {
+    background: #00c0ff;
+    color: white; }
 
-.profile-a, .profile-b {
-  margin-top: 30px; }
-  .profile-a h1.coltitle, .profile-b h1.coltitle {
-    font-size: 1.6em;
-    font-weight: 700; }
-  .profile-a .box1, .profile-a .box2, .profile-a .box3, .profile-b .box1, .profile-b .box2, .profile-b .box3 {
-    padding: 10px; }
-  .profile-a .row1 .profile-img, .profile-b .row1 .profile-img {
-    background: #2f3954;
-    box-shadow: 0 0 0 8px #555f78, 0 0 0 13px #6f778c;
-    border-radius: 50%;
-    margin: 25px auto;
-    width: 130px;
-    height: 130px; }
-  .profile-a .row2 h3.colsubtitle, .profile-b .row2 h3.colsubtitle {
-    font-size: 1.3em;
-    margin: 50px auto 30px; }
-  .profile-a .row2 .buttons, .profile-b .row2 .buttons {
-    margin-top: 50px;
-    text-align: right; }
-    .profile-a .row2 .buttons button:first-child, .profile-b .row2 .buttons button:first-child {
-      margin-right: 10px; }
-  .profile-a .box1, .profile-b .box1 {
-    background: #5d6b86; }
-  .profile-a .box2, .profile-b .box2 {
-    background: #2f3954; }
-  .profile-a .box3, .profile-b .box3 {
-    background: -webkit-linear-gradient(#677288, #565d6f, #606b7f);
-    background: -o-linear-gradient(#677288, #565d6f, #606b7f);
-    background: linear-gradient(#677288, #565d6f, #606b7f);
-    border: 1px solid #fff;
-    border-radius: 5px; }
+.profile-a h1.coltitle, .profile-b h1.coltitle {
+  font-size: 1.6em;
+  font-weight: 700; }
+  @media only screen and (max-width: 767px) {
+    .profile-a h1.coltitle, .profile-b h1.coltitle {
+      text-align: center; } }
+.profile-a .box1, .profile-a .box2, .profile-a .box3, .profile-b .box1, .profile-b .box2, .profile-b .box3 {
+  padding: 10px; }
+.profile-a .row1 .profile-img, .profile-b .row1 .profile-img {
+  background: #2f3954;
+  box-shadow: 0 0 0 8px #555f78, 0 0 0 13px #6f778c;
+  border-radius: 50%;
+  margin: 25px auto;
+  width: 130px;
+  height: 130px; }
+.profile-a .row2 h3.colsubtitle, .profile-b .row2 h3.colsubtitle {
+  font-size: 1.3em;
+  margin: 50px auto 30px; }
+  @media only screen and (max-width: 767px) {
+    .profile-a .row2 h3.colsubtitle, .profile-b .row2 h3.colsubtitle {
+      text-align: center; } }
+.profile-a .row2 .buttons, .profile-b .row2 .buttons {
+  margin-top: 50px;
+  text-align: right; }
+  @media only screen and (max-width: 767px) {
+    .profile-a .row2 .buttons, .profile-b .row2 .buttons {
+      margin-right: 20px;
+      margin-bottom: 50px; }
+      .profile-a .row2 .buttons button, .profile-b .row2 .buttons button {
+        font-size: .9em;
+        padding: 10px 20px; } }
+  .profile-a .row2 .buttons button:first-child, .profile-b .row2 .buttons button:first-child {
+    margin-right: 10px; }
+.profile-a .box1, .profile-b .box1 {
+  background: #5d6b86; }
+.profile-a .box2, .profile-b .box2 {
+  background: #2f3954; }
+.profile-a .box3, .profile-b .box3 {
+  background: -webkit-linear-gradient(#677288, #565d6f, #606b7f);
+  background: -o-linear-gradient(#677288, #565d6f, #606b7f);
+  background: linear-gradient(#677288, #565d6f, #606b7f);
+  border: 1px solid #fff;
+  border-radius: 5px; }
 
 .profile-a .profile-info {
   padding: 30px 0; }
+  @media only screen and (max-width: 767px) {
+    .profile-a .profile-info {
+      text-align: center; } }
   .profile-a .profile-info .name {
     margin: 0;
     padding: 0; }
@@ -400,6 +544,12 @@ ul.filter-list {
       bottom: -3px; }
 .profile-a .box2 {
   padding-left: 30px; }
+  @media only screen and (max-width: 767px) {
+    .profile-a .box2 {
+      padding-left: 150px; } }
+  @media only screen and (max-width: 767px) {
+    .profile-a .box2 .coltitle {
+      text-align: left; } }
   .profile-a .box2 .clr {
     margin: 0 auto; }
   .profile-a .box2 label, .profile-a .box2 .text {
@@ -428,6 +578,9 @@ ul.filter-list {
 
 .inferred-data {
   padding: 30px !important; }
+  @media only screen and (max-width: 767px) {
+    .inferred-data {
+      padding-left: 150px !important; } }
   .inferred-data .desc {
     margin-bottom: 20px; }
     .inferred-data .desc label {
@@ -442,6 +595,10 @@ ul.filter-list {
 
 .prembox {
   padding-left: 40px !important; }
+  @media only screen and (max-width: 767px) {
+    .prembox {
+      padding-left: 150px !important;
+      margin-bottom: 10px; } }
   .prembox .prembox-title {
     margin-bottom: 10px; }
   .prembox ul {
@@ -464,6 +621,10 @@ ul.filter-list {
   vertical-align: middle;
   text-align: center;
   width: 30px; }
+@media only screen and (max-width: 767px) {
+  .profile-b .dim_stab-box3 {
+    width: 95%;
+    margin: 0 auto; } }
 .profile-b .box3 {
   padding: 20px 30px; }
   .profile-b .box3 .clr {
@@ -526,15 +687,26 @@ body.report {
       display: inline-block;
       font-size: 1.5em;
       margin-bottom: 10px; }
+      @media only screen and (max-width: 980px) {
+        body.report .row2 .cvr-comp strong {
+          font-size: 1.1em; } }
     body.report .row2 .cvr-comp .from {
       text-align: right; }
     body.report .row2 .cvr-comp .mid {
       text-align: center; }
     body.report .row2 .cvr-comp .to {
       text-align: left; }
+    @media only screen and (max-width: 980px) {
+      body.report .row2 .cvr-comp .from, body.report .row2 .cvr-comp .mid, body.report .row2 .cvr-comp .to {
+        text-align: center;
+        font-size: .9em;
+        margin-bottom: 10px; } }
   body.report .row2 .note {
     padding: 20px 0 40px;
     font-size: 1.5em; }
+    @media only screen and (max-width: 980px) {
+      body.report .row2 .note {
+        font-size: 1em; } }
   body.report .icon-cvr {
     background: #1dbbe2 url("images/icon-cvr.gif") no-repeat center;
     width: 31px;
@@ -575,6 +747,12 @@ body.report {
     line-height: 25px;
     margin-top: 150px;
     color: #3a4364; }
+    @media only screen and (max-width: 1200px) {
+      body.report .row4 center {
+        margin-top: 80px; } }
+    @media only screen and (max-width: 980px) {
+      body.report .row4 center {
+        margin-top: 30px; } }
   body.report .row5 .ion-help-circled:before {
     color: #fff;
     background: #00c0ff;
@@ -589,6 +767,9 @@ body.report {
       padding: 0;
       font-size: 1.2em;
       font-weight: bold; }
+      @media only screen and (max-width: 980px) {
+        body.report .row5 .colText p.text {
+          font-size: .9em; } }
     body.report .row5 .colText .row-fluid {
       margin: 0;
       padding: 0; }

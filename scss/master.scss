@@ -34,7 +34,11 @@ $reportHeadBorderColor: #f1f1f1;
 $whiteboxIconWidth: 75px;
 $headColor: #3a4364;
 // responsive dimensions
-$Dim_phone: "only screen and (max-width: 800px)";
+$Dim_ldesktop: "only screen and (max-width: 1400px)";
+$Dim_sdesktop: "only screen and (max-width: 1200px)";
+$Dim_ltab: "only screen and (max-width: 980px)";
+$Dim_stab: "only screen and (max-width: 767px)";
+$Dim_phone: "only screen and (max-width: 400px)";
 
 html, body{
   margin: 0;
@@ -110,6 +114,9 @@ header{
         text-decoration: none;
         font-family: $fontFamily;
         font-size: .9em;
+        @media #{$Dim_phone}{
+          font-size: 1em;
+        }
       }
       a:before{
         display: inline-block;
@@ -125,6 +132,16 @@ header{
     }//li
     li.current_page a{
       background: #434e62;
+    }
+    @media #{$Dim_stab}{
+      li:nth-child(3){
+        clear: both;
+      }
+    }
+    @media #{$Dim_phone}{
+      li:nth-child(3){
+        clear: both;
+      }
     }
   }//ul
 
@@ -172,15 +189,31 @@ header{
   .filter80-100{
     background: $filter80-100-BG;
   }
+  @media #{$Dim_stab}{
+    .filter40-60, .filter60-80, .filter80-100{
+      width: 100%;
+    }
+  }
 
   .title{
     margin: 0;
     padding: 0;
     font-weight: 100;
     font-size: 2.3em;
+
+    @media #{$Dim_sdesktop}{
+      font-size: 2em;
+    }
+    @media #{$Dim_ltab}{
+      font-size: 1.5em;
+    }
   }
   .desc{
     font-size: .8em;
+
+    @media #{$Dim_sdesktop}{
+      font-size: .7em;
+    }
   }
 
   .certainty-slider{
@@ -216,6 +249,14 @@ header{
   .scale{
     img{
       margin-left: 1px;
+
+      @media #{$Dim_stab}{
+        margin-bottom: 10px;
+        min-width: 100%;
+      }
+      @media #{$Dim_phone}{
+        margin-bottom: 10px;
+      }
     }
   }
 
@@ -223,6 +264,9 @@ header{
     border: 1px solid #a0a7af;
     background: #5b667c;
     border-radius: 5px;
+    @media #{$Dim_phone}{
+      margin-bottom: 10px;
+    }
 
     span{
       display: inline-block;
@@ -231,6 +275,15 @@ header{
       border-radius: 5px 0 0 5px;
       font-size: 1em;
       text-align: center;
+
+      @media #{$Dim_stab}{
+        display: block;
+        border-radius: 5px 5px 0 0;
+      }
+      @media #{$Dim_phone}{
+        display: block;
+        border-radius: 5px 5px 0 0;
+      }
     }
     input{
       display: inline-block;
@@ -243,6 +296,14 @@ header{
       font-size: 1.5em;
       position: relative;
       bottom: -5px;
+      @media #{$Dim_stab}{
+        display: block;
+        width: 100%;
+      }
+      @media #{$Dim_phone}{
+        display: block;
+        width: 100%;
+      }
     }
   }//scale_display
   .scale_details{
@@ -260,9 +321,27 @@ header{
       transform: rotate(90deg);
       padding: 8px 0 13px;
     }
+    @media #{$Dim_stab}{
+      button{
+        margin-bottom: 10px;
+      }
+    }
+    @media #{$Dim_phone}{
+      button{
+        margin-bottom: 10px;
+      }
+    }
   }//scale_details
   .quick-icons{
     text-align: right;
+
+    @media #{$Dim_stab}{
+      clear: both;
+    }
+    @media #{$Dim_phone}{
+      clear: both;
+    }
+
   }
 }
 // #Certainty
@@ -313,20 +392,72 @@ header{
   padding: 10px 15px;
   margin: 0 3px 5px 0;
   cursor: pointer;
+
+  @media #{$Dim_sdesktop}{
+    font-size: 3em;
+    padding: 5px 10px;
+  }
+  @media #{$Dim_ltab}{
+    font-size: 1.5em;
+    padding: 5px 10px;
+  }
+  @media #{$Dim_stab}{
+    font-size: 3em;
+  }
 }
   .ion-ios7-paperplane-outline{
-    padding: 10px 20px;
+    @media only screen and (min-width: 1200px){
+      padding: 10px 20px;
+    }
+    @media #{$Dim_sdesktop}{
+      padding: 5px 15px;
+    }
+    @media #{$Dim_ltab}{
+      padding: 5px 10px;
+    }
   }
 
 .filter-bar{
+  width: 80%;
+  margin: 0 auto;
   margin-bottom: 20px;
-}
+
+  @media #{$Dim_ldesktop}{
+    button{
+      margin-bottom: 10px;
+      font-size: 1.1em;
+      padding: 10px 20px;
+    }
+  }
+  @media #{$Dim_ltab}{
+    button{
+      margin-bottom: 10px;
+      font-size: .8em;
+      padding: 10px 10px;
+    }
+  }
+  @media #{$Dim_phone}{
+    button{
+      margin-bottom: 10px;
+      font-size: 1.3em;
+      padding: 10px 20px;
+    }
+  }
+
+}//filter-bar
 ul.filter-list{
   margin: 0;
   padding: 0;
   color: #888;
   float: left;
   width: 70%;
+
+  @media #{$Dim_stab}{
+    margin-bottom: 10px;
+  }
+  @media #{$Dim_phone}{
+    margin-bottom: 10px;
+  }
 
   li{
     list-style: none;
@@ -335,6 +466,10 @@ ul.filter-list{
     background: #fff;
     position: relative;
     padding: 0 10px 0 0;
+
+    @media #{$Dim_stab}{
+      font-size: .8em;
+    }
 
     ul{
       margin: 0;
@@ -394,9 +529,24 @@ ul.filter-list{
   padding: 10px;
   margin-bottom: 10px;
 
+  @media #{$Dim_stab}{
+    width: 90%;
+    margin: 0 auto 10px;
+  }
+  @media #{$Dim_phone}{
+    width: 90%;
+    margin: 0 auto 10px;
+  }
+
   .pb-label{
     text-align: center;
     font-size: 1.1em;
+    @media #{$Dim_stab}{
+      margin-bottom: 10px;
+    }
+    @media #{$Dim_phone}{
+      margin-bottom: 10px;
+    }
 
     i.ionicons{
       display: block;
@@ -441,6 +591,21 @@ ul.filter-list{
     cursor: pointer;
   }
 
+  @media #{$Dim_ltab}{
+    input[readonly]{
+      width: 95%;
+    }
+  }
+  @media #{$Dim_stab}{
+    input[readonly]{
+      width: 95%;
+    }
+  }
+  @media #{$Dim_phone}{
+    input[readonly]{
+      width: 95%;
+    }
+  }
 }
 // prospect-box
 
@@ -497,21 +662,29 @@ ul.filter-list{
     .check, .star{
       width: 5%;
       color: #545863;
+      cursor: pointer;
 
       i{
         font-size: 1.5em;
       }
     }// .check, .star
+    .check.on{
+      background: $headBar1BG;
+      color: white;
+    }
   }
 }
 
 // PROFILE-A
 .profile-a, .profile-b{
-  margin-top: 30px;
 
   h1.coltitle{
     font-size: 1.6em;
     font-weight: 700;
+
+    @media #{$Dim_stab}{
+      text-align: center;
+    }
   }
 
   .box1, .box2, .box3{
@@ -534,10 +707,24 @@ ul.filter-list{
     h3.colsubtitle{
       font-size: 1.3em;
       margin: 50px auto 30px;
+
+      @media #{$Dim_stab}{
+        text-align: center;
+      }
     }
     .buttons{
       margin-top: 50px;
       text-align: right;
+
+      @media #{$Dim_stab}{
+        margin-right: 20px;
+        margin-bottom: 50px;
+
+        button{
+          font-size: .9em;
+          padding: 10px 20px;
+        }
+      }
 
       button:first-child{
         margin-right: 10px;
@@ -565,8 +752,13 @@ ul.filter-list{
 // profile-a, profile-a
 
 .profile-a{
+
   .profile-info{
     padding: 30px 0;
+
+    @media #{$Dim_stab}{
+      text-align: center;
+    }
 
     .name{
       margin: 0;
@@ -592,6 +784,15 @@ ul.filter-list{
 
   .box2{
     padding-left: 30px;
+
+    @media #{$Dim_stab}{
+      padding-left: 150px;
+    }
+    @media #{$Dim_stab}{
+      .coltitle{
+        text-align: left;
+      }
+    }
 
     .clr{
       margin: 0 auto;
@@ -627,6 +828,10 @@ ul.filter-list{
 .inferred-data{
   padding: 30px !important;
 
+  @media #{$Dim_stab}{
+    padding-left: 150px !important;
+  }
+
   .desc{
     margin-bottom: 20px;
 
@@ -648,6 +853,11 @@ ul.filter-list{
 
 .prembox{
   padding-left: 40px !important;
+
+  @media #{$Dim_stab}{
+    padding-left: 150px !important;
+    margin-bottom: 10px;
+  }
 
   .prembox-title{
     margin-bottom: 10px;
@@ -684,6 +894,13 @@ ul.filter-list{
       width: 30px;
     }
   }// .mdetails
+
+  @media #{$Dim_stab}{
+    .dim_stab-box3{
+      width: 95%;
+      margin: 0 auto;
+    }
+  }
 
   .box3{
     padding: 20px 30px;
@@ -785,6 +1002,10 @@ body.report{
         display: inline-block;
         font-size: 1.5em;
         margin-bottom: 10px;
+
+        @media #{$Dim_ltab}{
+          font-size: 1.1em;
+        }
       }
       .from{
         text-align: right;
@@ -795,11 +1016,23 @@ body.report{
       .to{
         text-align: left;
       }
+
+      @media #{$Dim_ltab}{
+        .from, .mid, .to{
+          text-align: center;
+          font-size: .9em;
+          margin-bottom: 10px;
+        }
+      }
     }// \cvr-comp
 
     .note{
       padding: 20px 0 40px;
       font-size: 1.5em;
+
+      @media #{$Dim_ltab}{
+        font-size: 1em;
+      }
     }
   }// \row2
 
@@ -868,6 +1101,13 @@ body.report{
       line-height: 25px;
       margin-top: 150px;
       color: $headColor;
+
+      @media #{$Dim_sdesktop}{
+        margin-top: 80px;
+      }
+      @media #{$Dim_ltab}{
+        margin-top: 30px;
+      }
     }
   }
   // \row4
@@ -890,6 +1130,10 @@ body.report{
         padding: 0;
         font-size: 1.2em;
         font-weight: bold;
+
+        @media #{$Dim_ltab}{
+          font-size: .9em;
+        }
       }
 
       .row-fluid{
