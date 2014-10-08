@@ -4,9 +4,7 @@ html, body {
 
 body {
   font-family: Arial;
-  background: -webkit-linear-gradient(left, #434e62, #505a73, #546078);
-  background: -o-linear-gradient(left, #434e62, #505a73, #546078);
-  background: linear-gradient(to right, #434e62, #505a73, #546078);
+  background: #919aac;
   color: #fff; }
 
 .clr {
@@ -380,9 +378,8 @@ ul.filter-list {
 
 .prospect-box {
   clear: both;
-  border: 1px solid #9da1aa;
+  border: 1px solid #ced0d5;
   border-radius: 5px;
-  background: #4a5265;
   padding: 10px;
   margin-bottom: 10px; }
   @media only screen and (max-width: 767px) {
@@ -435,7 +432,7 @@ ul.filter-list {
   margin: 0 0 20px 0;
   padding: 0;
   width: 100%;
-  border: 1px solid #9ca0a9; }
+  border: 1px solid #ced0d5; }
   #Prospect-Table th, #Prospect-Table td {
     padding: 8px;
     background: #394052;
@@ -477,6 +474,8 @@ ul.filter-list {
       font-size: 1.5em; }
   #Prospect-Table tbody .check.on {
     background: #00c0ff;
+    color: white; }
+  #Prospect-Table tbody .star.son {
     color: white; }
 
 .profile-a h1.coltitle, .profile-b h1.coltitle {

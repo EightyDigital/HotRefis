@@ -1,4 +1,5 @@
 $fontFamily: Arial;
+$bodyBG: #919aac;
 $baseTextColor: #fff;
 $linkColor: #fff;
 $hoverColor: #ccc;
@@ -21,7 +22,7 @@ $sliderButtonDim: 28px;
 $borderArrowDown: 20px;
 $borderArrowDownColor: #fff;
 
-$prospectBoxBorderColor: #9da1aa;
+$prospectBoxBorderColor: #ced0d5;
 
 $prospectC: #00d5c3;
 $prospectM: #ee4363;
@@ -47,10 +48,10 @@ html, body{
 
 body{
   font-family: $fontFamily;
-  background: -webkit-linear-gradient(left, #434e62, #505a73, #546078);
-  background: -o-linear-gradient(left, #434e62, #505a73, #546078);
-  background: linear-gradient(to right, #434e62, #505a73, #546078);
-
+  // background: -webkit-linear-gradient(left, #434e62, #505a73, #546078);
+  // background: -o-linear-gradient(left, #434e62, #505a73, #546078);
+  // background: linear-gradient(to right, #434e62, #505a73, #546078);
+  background: $bodyBG;
   color: $baseTextColor;
 }
 
@@ -525,7 +526,6 @@ ul.filter-list{
   clear: both;
   border: 1px solid $prospectBoxBorderColor;
   border-radius: 5px;
-  background: #4a5265;
   padding: 10px;
   margin-bottom: 10px;
 
@@ -614,7 +614,7 @@ ul.filter-list{
   margin: 0 0 20px 0;
   padding: 0;
   width: 100%;
-  border: 1px solid #9ca0a9;
+  border: 1px solid #ced0d5;
 
   th, td{
     padding: 8px;
@@ -670,6 +670,9 @@ ul.filter-list{
     }// .check, .star
     .check.on{
       background: $headBar1BG;
+      color: white;
+    }
+    .star.son{
       color: white;
     }
   }
