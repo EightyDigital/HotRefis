@@ -297,7 +297,6 @@ header .bar1 {
     padding: 5px 10px; } }
 
 .filter-bar {
-  width: 80%;
   margin: 0 auto;
   margin-bottom: 20px; }
   @media only screen and (max-width: 1400px) {
