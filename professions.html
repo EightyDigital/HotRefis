@@ -25,20 +25,7 @@
 </header>
 
 <!-- menu  -->
-<div class="nav_menu">
-<div class="container">
-  <div class="row-fluid">
-    <div class="span12">
-      <ul>
-        <li class="current_page"><a href="professions.html" class="ionicons ion-ios7-home-outline">HOME</a></li>
-        <li><a href="#" class="ionicons ion-ios7-settings">PROSPECT FILTERS</a></li>
-        <li><a href="prospect-listing.html" class="ionicons ion-navicon">PROSPECT LISTS</a></li>
-        <li><a href="#" class="ionicons ion-ios7-paper-outline">REFI REPORTS</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-</div>
+<div ng-include src="'nav.html'"></div>
 <!-- \menu  -->
 
 <!-- the_map -->
@@ -690,7 +677,7 @@
     <div class="span5">
         <div class="prospect-box">
           <div class="span3 pb-label">
-            <i class="ionicons ion-ios7-location-outline"></i>
+            <i class="ionicons ion-ios7-location"></i>
             Property Value
           </div>
           <div class="span9">
@@ -732,20 +719,25 @@
     <div class="span5">
       <div class="prospect-box">
         <div class="span3 pb-label">
-          <i class="ionicons ion-ios7-copy-outline"></i>
+          <i class="ionicons ion-ios7-copy"></i>
           Property Type
         </div>
         <div class="span9">
-          <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample4"></div>
+          <div class="property_type_val" ng-init="ptv_init='&nbsp;'">{{ptv_init}}</div> <br>
+          <span class="cbchoice"><input type="checkbox" value="Condo"/>Condo</span>
+          <span class="cbchoice"><input type="checkbox" value="Landed"/>Landed</span>
+          <span class="cbchoice"><input type="checkbox" value="HDB"/>HDB</span>
+          <span class="cbchoice"><input type="checkbox" value="Comm"/>Comm</span>
+          <!-- <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample4"></div>
           <br>
-          {{demoVals.sliderExample4[0]}} - {{demoVals.sliderExample4[1]}}
+          {{demoVals.sliderExample4[0]}} - {{demoVals.sliderExample4[1]}} -->
         </div>
         <div class="clr"></div>
       </div>
       <!-- Property Type -->
       <div class="prospect-box">
         <div class="span3 pb-label">
-          <i class="ionicons ion-android-timer"></i>
+          <i class="ionicons ion-funnel"></i>
           Loan Age
         </div>
         <div class="span9">
@@ -758,7 +750,7 @@
       <!-- Loan Age -->
       <div class="prospect-box">
         <div class="span3 pb-label">
-          <i class="ionicons ion-ios7-flag-outline"></i>
+          <i class="ionicons ion-ios7-flag"></i>
           Tenure
         </div>
         <div class="span9">

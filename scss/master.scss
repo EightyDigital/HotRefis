@@ -1,6 +1,6 @@
 $fontFamily: Arial;
-$bodyBG: #919aac;
-$baseTextColor: #fff;
+$bodyBG: #ffffff;
+$baseTextColor: #111;
 $linkColor: #fff;
 $hoverColor: #ccc;
 
@@ -149,6 +149,7 @@ header{
   ul.breadcrumb{
     li{
       text-shadow: 0 0 0 !important;
+      color: #fff;
     }
     li:before{
       display: inline-block;
@@ -228,22 +229,13 @@ header{
     margin-bottom: 15px;
 
     .ui-corner-all{
-      height: $sliderButtonDim - 3px;
-      width: $sliderButtonDim;
+      height: 40px;
+      width: 30px;
       border: 0;
-      border-radius: 4px 4px 0 0;
-      background: #fff;
+      background: url(images/handle.png) no-repeat center / cover;
     }
 
-    .ui-corner-all:after{
-      display: inline-block;
-      content: '';
-      border-top: $borderArrowDown solid $borderArrowDownColor;
-      border-left: $borderArrowDown - 6px solid transparent;
-      border-right: $borderArrowDown - 6px solid transparent;
-      position: relative;
-      bottom: -24px;
-    }
+
   }
   // certainty-slider
 
@@ -263,7 +255,7 @@ header{
 
   .scale_display{
     border: 1px solid #a0a7af;
-    background: #7c8392;
+    background: #fff;
     border-radius: 5px;
     @media #{$Dim_phone}{
       margin-bottom: 10px;
@@ -271,7 +263,7 @@ header{
 
     span{
       display: inline-block;
-      background: #4d5466;
+      background: #e9edf0;
       padding: 8px 20px;
       border-radius: 5px 0 0 5px;
       font-size: 1em;
@@ -293,10 +285,12 @@ header{
       border-radius: 0;
       border: 0;
       outline: 0;
-      color: #fff;
+      color: #4d4d4d;
       font-size: 1.5em;
       position: relative;
       bottom: -5px;
+      -webkit-box-shadow: 0 0 0 0;
+      box-shadow: 0 0 0 0;
       @media #{$Dim_stab}{
         display: block;
         width: 100%;
@@ -335,6 +329,7 @@ header{
   }//scale_details
   .quick-icons{
     text-align: right;
+    color: #4d4d4d;
 
     @media #{$Dim_stab}{
       clear: both;
@@ -388,7 +383,7 @@ header{
   }
 .ion-printer, .ion-ios7-paperplane-outline{
   font-size: 4em;
-  border: 1px solid #fff;
+  border: 1px solid $baseTextColor;
   border-radius: 50%;
   padding: 10px 15px;
   margin: 0 3px 5px 0;
@@ -419,7 +414,7 @@ header{
   }
 
 .filter-bar{
-  
+
   margin: 0 auto;
   margin-bottom: 20px;
 
@@ -465,6 +460,7 @@ ul.filter-list{
     font-family: $fontFamily;
     font-size: 1em;
     background: #fff;
+    border: 1px solid #ced0d5;
     position: relative;
     padding: 0 10px 0 0;
 
@@ -479,17 +475,18 @@ ul.filter-list{
       position: absolute;
       z-index: 99999;
       display: none;
+      border: 1px solid #ced0d5;
 
       li{
-        background: #202636;
-        border-bottom: 1px solid #696d78;
+        background: #fff;
         width: 100%;
         padding-right: 0;
+        border: 0;
 
         a{
           display: block;
           width: 100%;
-          color: #fff;
+          color: #111;
           text-decoration: none;
           font-family: $fontFamily;
         }
@@ -551,13 +548,27 @@ ul.filter-list{
     i.ionicons{
       display: block;
       width: 100%;
-      font-size: 2em;
+      font-size: 3em;
+      color: #4d4d4d;
     }
   }
 
+  .property_type_val{
+    border: 1px solid #e9edf2;
+    border-radius: 5px;
+    padding: 0 5px;
+  }
+    .cbchoice{
+      margin-right: 5px;
+    }
+    input[type="checkbox"]{
+      vertical-align: top;
+      margin-right: 3px;
+    }
+
   .ui-slider{
     height: 20px;
-    background: #386270;
+    background: #e9edf0;
     border: 0;
     // margin-top: 25px;
 
@@ -618,7 +629,7 @@ ul.filter-list{
 
   th, td{
     padding: 8px;
-    background: #394052;
+    background: #d9dee3;
     text-align: center;
   }
   th{
@@ -636,7 +647,7 @@ ul.filter-list{
     color: #686e7c;
   }
   th.firstcol{
-    background: #56627c;
+    background: #c7d4e2;
   }
 
   .thleft{float: left;}
@@ -684,6 +695,7 @@ ul.filter-list{
   h1.coltitle{
     font-size: 1.6em;
     font-weight: 700;
+    color: #444;
 
     @media #{$Dim_stab}{
       text-align: center;
@@ -696,8 +708,8 @@ ul.filter-list{
 
   .row1{
     .profile-img{
-      background: #2f3954;
-      box-shadow: 0 0 0 8px #555f78, 0 0 0 13px #6f778c;
+      background: #999;
+      box-shadow: 0 0 0 8px #efefef, 0 0 0 13px #555f78;
       border-radius: 50%;
       margin: 25px auto;
       width: $profileIMG-dim;
@@ -710,6 +722,7 @@ ul.filter-list{
     h3.colsubtitle{
       font-size: 1.3em;
       margin: 50px auto 30px;
+      color: #444;
 
       @media #{$Dim_stab}{
         text-align: center;
@@ -736,23 +749,28 @@ ul.filter-list{
   }
 
   .box1{
-    background: #5d6b86;
+    background: #efefef;
   }
 
   .box2{
-    background: #2f3954;
+    background: #ccc;
   }
 
   .box3{
-      background: -webkit-linear-gradient(#677288, #565d6f, #606b7f);
-      background: -o-linear-gradient(#677288, #565d6f, #606b7f);
-      background: linear-gradient(#677288, #565d6f, #606b7f);
-
-      border: 1px solid #fff;
+      background: #efefef;
+      color: #444;
+      border: 1px solid #999;
       border-radius: 5px;
+
+      .coltitle{
+        border-bottom: 1px solid #afafaf;
+
+        color: #444;
+        margin: 10px 0 !important;
+      }
     }
 }
-// profile-a, profile-a
+// profile-a, profile-b
 
 .profile-a{
 
@@ -878,7 +896,7 @@ ul.filter-list{
       vertical-align: middle;
       font-size: .3em;
       margin-right: 5px;
-      color: #00c0ff;
+      color: #444;
     }
 
   }
