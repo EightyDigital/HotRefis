@@ -1064,10 +1064,10 @@ body.report{
       color: #fff;
       background: #00c0ff;
       width: $whiteboxIconWidth;
-      padding: 15px;
+      padding: 10px 13px;
       border-radius: 50%;
       margin-right: 10px;
-      font-size: .6em;
+      font-size: 1em;
     }
 
     .text{
@@ -1216,10 +1216,10 @@ body.report{
     .ion-help-circled:before{
       color: #fff;
       background: #00c0ff;
-      padding: 10px;
+      padding: 10px 11px;
       border-radius: 50%;
       margin-right: 10px;
-      font-size: .6em;
+      font-size: 1em;
     }
 
     .colText{
@@ -1635,4 +1635,77 @@ body.calculator{
       margin: 0 auto;
     }
   }
+}
+
+
+.modal_wrap{
+  display: none;
+
+  position: fixed;
+  z-index: 9;
+  background: rgba(255,255,255, .7);
+  min-width: 100%;
+  min-height: 100%;
+  top: 0;
+}
+
+.ui-dialog{
+  display: none !important;
+  padding: 0 !important;
+
+  hr{
+    margin: 0;
+  }
+
+  .ui-dialog-titlebar{
+     background: #f9fafc;
+     border: 0;
+     border-bottom: 1px solid #eaedf2;
+     border-radius: 0;
+   }
+   .ui-dialog-content{
+     padding: 0 !important;
+   }
+
+   .form-wrapper{
+     form{
+       margin: 0;
+       padding: 0;
+
+       .fields-wrap{
+         padding: 10px;
+
+         div{
+           border: 1px solid #ccc;
+           border-radius: 5px;
+           margin-bottom: 10px;
+
+           input{
+             border: 0;
+           }
+         }
+       }
+
+       i:before{
+        font-size: 2em;
+        min-width: 50px;
+        padding: 5px 10px;
+        text-align: center;
+        vertical-align: middle;
+        border-right: 1px solid #ccc;
+        margin-right: 5px;
+       }
+
+       .modal-buttons{
+         border: 0;
+         border-radius: 0;
+         background: #f9fafc;
+
+         .btn-gen{
+           padding: 5px 15px;
+         }
+       }
+     }
+     // \form
+   }
 }
