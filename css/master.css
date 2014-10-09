@@ -729,10 +729,10 @@ body.report {
       color: #fff;
       background: #00c0ff;
       width: 75px;
-      padding: 15px;
+      padding: 10px 13px;
       border-radius: 50%;
       margin-right: 10px;
-      font-size: .6em; }
+      font-size: 1em; }
     body.report .whitebox .text {
       padding-left: 75px; }
   body.report .row1, body.report .row2, body.report .row3, body.report .row4, body.report .row5, body.report .row6, body.report .row7 {
@@ -821,10 +821,10 @@ body.report {
   body.report .row5 .ion-help-circled:before {
     color: #fff;
     background: #00c0ff;
-    padding: 10px;
+    padding: 10px 11px;
     border-radius: 50%;
     margin-right: 10px;
-    font-size: .6em; }
+    font-size: 1em; }
   body.report .row5 .colText {
     padding-left: 75px; }
     body.report .row5 .colText p.text {
@@ -1086,5 +1086,52 @@ body.calculator {
     .indvPros .propspect-rating img {
       width: 80%;
       margin: 0 auto; }
+
+.modal_wrap {
+  display: none;
+  position: fixed;
+  z-index: 9;
+  background: rgba(255, 255, 255, 0.7);
+  min-width: 100%;
+  min-height: 100%;
+  top: 0; }
+
+.ui-dialog {
+  display: none !important;
+  padding: 0 !important; }
+  .ui-dialog hr {
+    margin: 0; }
+  .ui-dialog .ui-dialog-titlebar {
+    background: #f9fafc;
+    border: 0;
+    border-bottom: 1px solid #eaedf2;
+    border-radius: 0; }
+  .ui-dialog .ui-dialog-content {
+    padding: 0 !important; }
+  .ui-dialog .form-wrapper form {
+    margin: 0;
+    padding: 0; }
+    .ui-dialog .form-wrapper form .fields-wrap {
+      padding: 10px; }
+      .ui-dialog .form-wrapper form .fields-wrap div {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px; }
+        .ui-dialog .form-wrapper form .fields-wrap div input {
+          border: 0; }
+    .ui-dialog .form-wrapper form i:before {
+      font-size: 2em;
+      min-width: 50px;
+      padding: 5px 10px;
+      text-align: center;
+      vertical-align: middle;
+      border-right: 1px solid #ccc;
+      margin-right: 5px; }
+    .ui-dialog .form-wrapper form .modal-buttons {
+      border: 0;
+      border-radius: 0;
+      background: #f9fafc; }
+      .ui-dialog .form-wrapper form .modal-buttons .btn-gen {
+        padding: 5px 15px; }
 
 /*# sourceMappingURL=master.css.map */
