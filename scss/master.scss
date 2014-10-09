@@ -122,8 +122,11 @@ header{
         text-decoration: none;
         font-family: $fontFamily;
         font-size: .9em;
+        @media #{$Dim_stab}{
+          font-size: 0;
+        }
         @media #{$Dim_phone}{
-          font-size: 1em;
+          padding: 10px 5px 15px;
         }
       }
       a:before{
@@ -132,6 +135,9 @@ header{
         margin-right: 10px;
         position: relative;
         bottom: -5px;
+        @media #{$Dim_stab}{
+          font-size: 30px;
+        }
       }
       a.ion-ios7-settings:before{
         transform: rotate(90deg);
@@ -175,6 +181,10 @@ header{
 // #Certainty
 #Certainty{
   padding: 20px 0 0;
+
+  .pagetitle-bar{
+    margin-bottom: 10px;
+  }
 
   .filterLabel{
     font-size: .75em;
@@ -263,6 +273,7 @@ header{
   .scale{
     img{
       margin-left: 1px;
+      width: 100%;
 
       @media #{$Dim_stab}{
         margin-bottom: 10px;
@@ -546,7 +557,6 @@ ul.filter-list{
   li:before{
     font-family: 'FontAwesome';
     display: inline-block;
-    width: 10px;
     margin-right: 10px;
     padding: 10px;
     background: #00c0ff;
@@ -1010,6 +1020,10 @@ ul.filter-list{
 body.report{
   background: #eaedf2;
 
+  img{
+    width: 100%;
+  }
+
   .nav_menu{
     margin-bottom: 50px;
   }
@@ -1108,7 +1122,7 @@ body.report{
     background: #1dbbe2 url("images/icon-cvr.gif") no-repeat center;
     width: 31px;
     height: 29px;
-    padding: 10px;
+    padding: 10px 25px;
     margin-right: 10px;
     border-radius: 50%;
     vertical-align: middle;
@@ -1403,4 +1417,14 @@ body.report{
 
 .btn-fin{
   margin-bottom: 10px;
+}
+
+.tologin{
+  float: right;
+  margin-top: 30px;
+  margin-right: 20px;
+
+  a{
+    font-size: 2em;
+  }
 }
