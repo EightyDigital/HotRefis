@@ -601,49 +601,14 @@
 <div id="Certainty">
   <div class="container">
     <div class="row-fluid">
-
-        <div class="span2">
-          <h1 class="title">MILLWATS</h1>
-          <div class="desc">(THERMAL)PER SQUARE METER</div>
-
-          <div class="span3">
-            <div class="filter40-60"></div>
-            <div class="filterLabel">40-60</div>
-          </div>
-          <div class="span1"></div>
-
-          <div class="span3">
-            <div class="filter60-80"></div>
-            <div class="filterLabel">60-80</div>
-          </div>
-          <div class="span1"></div>
-
-          <div class="span3">
-            <div class="filter80-100"></div>
-            <div class="filterLabel">80-100</div>
-          </div>
-
-        </div>
-
-        <div class="span4">
-          <div class='certainty-slider' ui-slider min="0" max="100" ng-model="demoVals.sliderExample9"></div>
-          <div class="scale">
-            <img src="css/images/certainty-scale.png" alt="">
-          </div>
-        </div>
-
-        <div class="span4 scale_details">
-          <div class="span12 scale_display">
-            <div class="span6"><span>TOTAL PROSPECTS</span></div>
-            <div class="span6"><input type='text' ng-model="demoVals.sliderExample9" readonly /></div>
-          </div>
-          <button class='btn-gen btn-green'><i class="ionicons ion-ios7-loop-strong"></i> REFRESH</button>
-        </div>
-
-        <div class="span2 quick-icons">
-          <div class="ionicons ion-printer"></div>
-          <div class="ionicons ion-ios7-paperplane-outline"></div>
-        </div>
+      <div class="span3 pl-head">
+        <i class="ionicons ion-document-text"></i> Propspect List: <b>Properties</b>
+      </div>
+      <div class="span5">&nbsp;</div>
+      <div class="span4">
+        <button class="btn-gen btn-blue">SAVE LIST</button>
+        <button class="btn-gen btn-red">FINISH</button>
+      </div>
     </div>
     <!-- row-fluid -->
   </div>
@@ -665,10 +630,7 @@
         </li>
       </ul>
     </div>
-    <div class="span4">
-      <button class="btn-gen btn-blue">SAVE LIST</button>
-      <button class="btn-gen btn-red">FINISH</button>
-    </div>
+    <div class="span4">&nbsp;</div>
   </div>
 </div>
 
@@ -681,9 +643,8 @@
             Property Value
           </div>
           <div class="span9">
+            <div class="slider_result">{{demoVals.sliderExample7[0]}},{{demoVals.sliderExample7[1]}}</div>
             <div ui-slider="{range: true}" min="0" max="20" step="0.01" use-decimals ng-model="demoVals.sliderExample7"></div>
-            <br>
-            {{demoVals.sliderExample7[0]}} - {{demoVals.sliderExample7[1]}}
           </div>
           <div class="clr"></div>
         </div>
@@ -694,9 +655,8 @@
             Property LTV
           </div>
           <div class="span9">
+            <div class="slider_result">{{demoVals.sliderExample2[0]}},{{demoVals.sliderExample2[1]}}</div>
             <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample2"></div>
-            <br>
-            {{demoVals.sliderExample2[0]}} - {{demoVals.sliderExample2[1]}}
           </div>
           <div class="clr"></div>
         </div>
@@ -707,9 +667,8 @@
             Equity
           </div>
           <div class="span9">
+            <div class="slider_result">{{demoVals.sliderExample3[0]}},{{demoVals.sliderExample3[1]}}</div>
             <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample3"></div>
-            <br>
-            {{demoVals.sliderExample3[0]}} - {{demoVals.sliderExample3[1]}}
           </div>
           <div class="clr"></div>
         </div>
@@ -723,11 +682,11 @@
           Property Type
         </div>
         <div class="span9">
-          <div class="property_type_val" ng-init="ptv_init='&nbsp;'">{{ptv_init}}</div> <br>
-          <span class="cbchoice"><input type="checkbox" value="Condo"/>Condo</span>
-          <span class="cbchoice"><input type="checkbox" value="Landed"/>Landed</span>
-          <span class="cbchoice"><input type="checkbox" value="HDB"/>HDB</span>
-          <span class="cbchoice"><input type="checkbox" value="Comm"/>Comm</span>
+          <div class="property_type_val slider_result" ng-init="Ptype='&nbsp;'">{{Ptype}}</div> <br>
+          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="Condo"/>Condo</span>
+          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="Landed"/>Landed</span>
+          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="HDB"/>HDB</span>
+          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="Comm"/>Comm</span>
           <!-- <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample4"></div>
           <br>
           {{demoVals.sliderExample4[0]}} - {{demoVals.sliderExample4[1]}} -->
@@ -741,9 +700,8 @@
           Loan Age
         </div>
         <div class="span9">
+          <div class="slider_result">{{demoVals.sliderExample5[0]}},{{demoVals.sliderExample5[1]}}</div>
           <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample5"></div>
-          <br>
-          {{demoVals.sliderExample5[0]}} - {{demoVals.sliderExample5[1]}}
         </div>
         <div class="clr"></div>
       </div>
@@ -754,9 +712,8 @@
           Tenure
         </div>
         <div class="span9">
+          <div class="slider_result">{{demoVals.sliderExample6[0]}},{{demoVals.sliderExample6[1]}}</div>
           <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample6"></div>
-          <br>
-          {{demoVals.sliderExample6[0]}} - {{demoVals.sliderExample6[1]}}
         </div>
         <div class="clr"></div>
       </div>

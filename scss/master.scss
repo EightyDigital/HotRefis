@@ -1,6 +1,6 @@
 $fontFamily: Arial;
 $bodyBG: #ffffff;
-$baseTextColor: #111;
+$baseTextColor: #4d4d4d;
 $linkColor: #fff;
 $hoverColor: #ccc;
 
@@ -8,6 +8,7 @@ $headBar1BG: #00c0ff;
 
 $navBorderWidth: 1px;
 $navBorderColor: #000;
+$darkblueBG: #063141;
 
 $mapWidth: 100%;
 $mapHeight: 300px;
@@ -31,6 +32,12 @@ $prospectY: #f3ed7b;
 $profileIMG-dim: 130px;
 
 $reportHeadBorderColor: #f1f1f1;
+
+$iconBG: #00baff;
+$iconColor: #fff;
+$iconFontSize: 1.6em;
+$iconBorderRadius: 50%;
+$iconPadding: 5px 13px;
 
 $whiteboxIconWidth: 75px;
 $headColor: #3a4364;
@@ -98,7 +105,7 @@ header{
 
 // menu
 .nav_menu{
-  background: #262e45;
+  background: $darkblueBG;
 
   ul{
     background: transparent;
@@ -167,7 +174,7 @@ header{
 }
 // #Certainty
 #Certainty{
-  padding: 10px;
+  padding: 20px 0 0;
 
   .filterLabel{
     font-size: .75em;
@@ -194,6 +201,20 @@ header{
   @media #{$Dim_stab}{
     .filter40-60, .filter60-80, .filter80-100{
       width: 100%;
+    }
+  }
+
+  .pl-head{
+    font-size: 1.1em;
+    color: $baseTextColor;
+
+    i:before{
+      color: $iconColor;
+      background: $iconBG;
+      padding: $iconPadding;
+      font-size: $iconFontSize;
+      border-radius: $iconBorderRadius;
+      vertical-align: middle;
     }
   }
 
@@ -345,7 +366,7 @@ header{
 .btn-gen{
   border: 0;
   outline: 0;
-  padding: 20px 40px;
+  padding: 10px 40px;
   border-radius: 5px;
   border-bottom-width: 3px;
   border-bottom-style: solid;
@@ -364,28 +385,36 @@ header{
     border-bottom-color: #027970;
   }
 .btn-blue{
-  background: #00c0ff;
-  border-bottom-color: #009acc;
+  background: #6ad2eb url(images/btn-bluebg.gif) repeat-x left top;
+  border: 1px solid #019dd6;
   color: #fff;
 }
   .btn-blue:active{
     background: #009acc;
-    border-bottom-color: #01769c;
   }
 .btn-red{
-  background: #d95d75;
-  border-bottom-color: #ae4b5d;
+  background: #e14d43 url(images/btn-redbg.gif) repeat-x left top;
+  border: 1px solid #c64037;
   color: #fff;
 }
   .btn-red:active{
-    background: #ae4b5d;
-    border-bottom-color: #72303d;
+    background: #d1463d;
   }
+.ion-printer{
+  background: #01b9ff;
+  color: #fff;
+  border: 1px solid #009ed8;
+}
+.ion-ios7-paperplane-outline{
+  background: #f7be64;
+  color: #fff;
+  border: 1px solid #f0a436;
+  padding: 10px 13px !important;
+}
 .ion-printer, .ion-ios7-paperplane-outline{
-  font-size: 4em;
-  border: 1px solid $baseTextColor;
+  font-size: 2em;
   border-radius: 50%;
-  padding: 10px 15px;
+  padding: 10px 13px;
   margin: 0 3px 5px 0;
   cursor: pointer;
 
@@ -553,6 +582,14 @@ ul.filter-list{
     }
   }
 
+  .slider_result{
+    border: 1px solid #dae1e9;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 50%;
+  }
+
   .property_type_val{
     border: 1px solid #e9edf2;
     border-radius: 5px;
@@ -561,7 +598,7 @@ ul.filter-list{
     .cbchoice{
       margin-right: 5px;
     }
-    input[type="checkbox"]{
+    input[type="radio"]{
       vertical-align: top;
       margin-right: 3px;
     }
@@ -629,12 +666,13 @@ ul.filter-list{
 
   th, td{
     padding: 8px;
-    background: #d9dee3;
     text-align: center;
   }
   th{
     font-weight: 100;
     font-size: 1em;
+    background: $darkblueBG;
+    color: #fff;
 
     .ion-ios7-reload{
       font-size: 1.5em;
@@ -665,6 +703,7 @@ ul.filter-list{
         width: 50px;
         height: 19px;
         margin: 0 auto;
+        border: 1px solid #ccc;
       }
       hr.C{ background: $prospectC; }
       hr.M{ background: $prospectM; }
@@ -685,6 +724,7 @@ ul.filter-list{
     }
     .star.son{
       color: white;
+      text-shadow: 0 0 5px #444;
     }
   }
 }
@@ -1079,7 +1119,7 @@ body.report{
       }
 
       thead{
-        background: #394263;
+        background: $darkblueBG;
 
         th{
           span.alignleft{
@@ -1236,7 +1276,7 @@ body.report{
       }
 
       .rp-btn button{
-        background: #6ad2eb;
+        background: #6ad2eb url(images/btn-bluebg.gif) repeat-x left top;
         color: #fff;
         border: 1px solid #1dbbe2;
         border-radius: 3px;
@@ -1254,8 +1294,8 @@ body.report{
       padding: 5px 15px;
     }
     .main{
-      border-bottom: 1px solid #f1f1f1;
-      color: $headColor;
+      background: #32323a;
+      color: #fff;
       margin-bottom: 30px;
 
       .bigtext{
@@ -1283,7 +1323,7 @@ body.report{
     .rightSubtext{
       margin-top: 30px;
       font-weight: bold;
-      font-size: 1.2em;
+      font-size: 1em;
 
       div{
         margin-bottom: 3px;
@@ -1291,5 +1331,69 @@ body.report{
     }
   }
   // \row7
+
+  .signature{
+    .avatar{
+      background: #593a64;
+      text-align: center;
+      padding: 5px;
+
+      i{
+        background: #db4a39;
+        border-radius: 50%;
+        padding: 20px;
+      }
+      i:before{
+        color: #fff;
+        font-size: 4em;
+      }
+    }
+    // avatar
+    .main{
+      background: none;
+      color: $baseTextColor;
+      border-bottom: 1px dashed #e9edf0;
+
+      .name{
+        margin: 0;
+        padding: 0;
+      }
+    }
+    // \main
+    .others{
+      padding-top: 0;
+
+      b{
+        color: $baseTextColor;
+      }
+    }
+    // \others
+    .bottominfo{
+      text-align: center;
+      background: #32323a;
+      color: #fff;
+
+      .row-fluid div{
+        padding: 5px;
+
+        b{
+          color: #6ad2ed;
+          font-size: 1.1em;
+        }
+      }
+    }
+    // \bottominfo
+  }
+  .pagetitle{
+    color: #fff;
+    font-size: 1.5em;
+  }
+  .btn-sendreport{
+    margin-bottom: 30px;
+  }
 }
 // body.report
+
+.btn-fin{
+  margin-bottom: 10px;
+}

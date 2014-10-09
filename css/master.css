@@ -5,7 +5,7 @@ html, body {
 body {
   font-family: Arial;
   background: #ffffff;
-  color: #111; }
+  color: #4d4d4d; }
 
 .clr {
   clear: both; }
@@ -47,7 +47,7 @@ header .bar1 {
   height: 300px; }
 
 .nav_menu {
-  background: #262e45; }
+  background: #063141; }
   .nav_menu ul {
     background: transparent;
     margin: 0;
@@ -95,7 +95,7 @@ header .bar1 {
     color: #00c1fe; }
 
 #Certainty {
-  padding: 10px; }
+  padding: 20px 0 0; }
   #Certainty .filterLabel {
     font-size: .75em;
     text-align: center; }
@@ -115,6 +115,16 @@ header .bar1 {
   @media only screen and (max-width: 767px) {
     #Certainty .filter40-60, #Certainty .filter60-80, #Certainty .filter80-100 {
       width: 100%; } }
+  #Certainty .pl-head {
+    font-size: 1.1em;
+    color: #4d4d4d; }
+    #Certainty .pl-head i:before {
+      color: #fff;
+      background: #00baff;
+      padding: 5px 13px;
+      font-size: 1.6em;
+      border-radius: 50%;
+      vertical-align: middle; }
   #Certainty .title {
     margin: 0;
     padding: 0;
@@ -227,7 +237,7 @@ header .bar1 {
 .btn-gen {
   border: 0;
   outline: 0;
-  padding: 20px 40px;
+  padding: 10px 40px;
   border-radius: 5px;
   border-bottom-width: 3px;
   border-bottom-style: solid;
@@ -245,28 +255,36 @@ header .bar1 {
   border-bottom-color: #027970; }
 
 .btn-blue {
-  background: #00c0ff;
-  border-bottom-color: #009acc;
+  background: #6ad2eb url(images/btn-bluebg.gif) repeat-x left top;
+  border: 1px solid #019dd6;
   color: #fff; }
 
 .btn-blue:active {
-  background: #009acc;
-  border-bottom-color: #01769c; }
+  background: #009acc; }
 
 .btn-red {
-  background: #d95d75;
-  border-bottom-color: #ae4b5d;
+  background: #e14d43 url(images/btn-redbg.gif) repeat-x left top;
+  border: 1px solid #c64037;
   color: #fff; }
 
 .btn-red:active {
-  background: #ae4b5d;
-  border-bottom-color: #72303d; }
+  background: #d1463d; }
+
+.ion-printer {
+  background: #01b9ff;
+  color: #fff;
+  border: 1px solid #009ed8; }
+
+.ion-ios7-paperplane-outline {
+  background: #f7be64;
+  color: #fff;
+  border: 1px solid #f0a436;
+  padding: 10px 13px !important; }
 
 .ion-printer, .ion-ios7-paperplane-outline {
-  font-size: 4em;
-  border: 1px solid #111;
+  font-size: 2em;
   border-radius: 50%;
-  padding: 10px 15px;
+  padding: 10px 13px;
   margin: 0 3px 5px 0;
   cursor: pointer; }
   @media only screen and (max-width: 1200px) {
@@ -400,13 +418,19 @@ ul.filter-list {
       width: 100%;
       font-size: 3em;
       color: #4d4d4d; }
+  .prospect-box .slider_result {
+    border: 1px solid #dae1e9;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 50%; }
   .prospect-box .property_type_val {
     border: 1px solid #e9edf2;
     border-radius: 5px;
     padding: 0 5px; }
   .prospect-box .cbchoice {
     margin-right: 5px; }
-  .prospect-box input[type="checkbox"] {
+  .prospect-box input[type="radio"] {
     vertical-align: top;
     margin-right: 3px; }
   .prospect-box .ui-slider {
@@ -441,11 +465,12 @@ ul.filter-list {
   border: 1px solid #ced0d5; }
   #Prospect-Table th, #Prospect-Table td {
     padding: 8px;
-    background: #d9dee3;
     text-align: center; }
   #Prospect-Table th {
     font-weight: 100;
-    font-size: 1em; }
+    font-size: 1em;
+    background: #063141;
+    color: #fff; }
     #Prospect-Table th .ion-ios7-reload {
       font-size: 1.5em; }
     #Prospect-Table th .fa-angle-left, #Prospect-Table th .fa-angle-right {
@@ -465,7 +490,8 @@ ul.filter-list {
     #Prospect-Table tbody td hr.C, #Prospect-Table tbody td hr.M, #Prospect-Table tbody td hr.Y {
       width: 50px;
       height: 19px;
-      margin: 0 auto; }
+      margin: 0 auto;
+      border: 1px solid #ccc; }
     #Prospect-Table tbody td hr.C {
       background: #00d5c3; }
     #Prospect-Table tbody td hr.M {
@@ -482,7 +508,8 @@ ul.filter-list {
     background: #00c0ff;
     color: white; }
   #Prospect-Table tbody .star.son {
-    color: white; }
+    color: white;
+    text-shadow: 0 0 5px #444; }
 
 .profile-a h1.coltitle, .profile-b h1.coltitle {
   font-size: 1.6em;
@@ -733,7 +760,7 @@ body.report {
       padding: 10px;
       font-size: .9em; }
     body.report .row3 table.latest_transaction thead {
-      background: #394263; }
+      background: #063141; }
       body.report .row3 table.latest_transaction thead th span.alignleft {
         float: left; }
       body.report .row3 table.latest_transaction thead th span.alignright {
@@ -837,7 +864,7 @@ body.report {
       text-align: left;
       width: 20%; }
   body.report .row6 .whitebox .rp-btn button {
-    background: #6ad2eb;
+    background: #6ad2eb url(images/btn-bluebg.gif) repeat-x left top;
     color: #fff;
     border: 1px solid #1dbbe2;
     border-radius: 3px;
@@ -848,8 +875,8 @@ body.report {
     color: #fff;
     padding: 5px 15px; }
   body.report .row7 .main {
-    border-bottom: 1px solid #f1f1f1;
-    color: #3a4364;
+    background: #32323a;
+    color: #fff;
     margin-bottom: 30px; }
     body.report .row7 .main .bigtext {
       margin: 0;
@@ -868,8 +895,47 @@ body.report {
   body.report .row7 .rightSubtext {
     margin-top: 30px;
     font-weight: bold;
-    font-size: 1.2em; }
+    font-size: 1em; }
     body.report .row7 .rightSubtext div {
       margin-bottom: 3px; }
+  body.report .signature .avatar {
+    background: #593a64;
+    text-align: center;
+    padding: 5px; }
+    body.report .signature .avatar i {
+      background: #db4a39;
+      border-radius: 50%;
+      padding: 20px; }
+    body.report .signature .avatar i:before {
+      color: #fff;
+      font-size: 4em; }
+  body.report .signature .main {
+    background: none;
+    color: #4d4d4d;
+    border-bottom: 1px dashed #e9edf0; }
+    body.report .signature .main .name {
+      margin: 0;
+      padding: 0; }
+  body.report .signature .others {
+    padding-top: 0; }
+    body.report .signature .others b {
+      color: #4d4d4d; }
+  body.report .signature .bottominfo {
+    text-align: center;
+    background: #32323a;
+    color: #fff; }
+    body.report .signature .bottominfo .row-fluid div {
+      padding: 5px; }
+      body.report .signature .bottominfo .row-fluid div b {
+        color: #6ad2ed;
+        font-size: 1.1em; }
+  body.report .pagetitle {
+    color: #fff;
+    font-size: 1.5em; }
+  body.report .btn-sendreport {
+    margin-bottom: 30px; }
+
+.btn-fin {
+  margin-bottom: 10px; }
 
 /*# sourceMappingURL=master.css.map */

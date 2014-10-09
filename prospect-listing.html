@@ -603,44 +603,10 @@
   <div class="container">
     <div class="row-fluid">
 
-        <div class="span2">
-          <h1 class="title">MILLWATS</h1>
-          <div class="desc">(THERMAL)PER SQUARE METER</div>
-
-          <div class="span3">
-            <div class="filter40-60"></div>
-            <div class="filterLabel">40-60</div>
-          </div>
-          <div class="span1"></div>
-
-          <div class="span3">
-            <div class="filter60-80"></div>
-            <div class="filterLabel">60-80</div>
-          </div>
-          <div class="span1"></div>
-
-          <div class="span3">
-            <div class="filter80-100"></div>
-            <div class="filterLabel">80-100</div>
-          </div>
-
+        <div class="span3 pl-head">
+          <i class="ionicons ion-document-text"></i> Hot Lists for <b>REFIS</b>
         </div>
-
-        <div class="span4">
-          <div class='certainty-slider' ui-slider min="0" max="100" ng-model="demoVals.sliderExample9"></div>
-          <div class="scale">
-            <img src="css/images/certainty-scale.png" alt="">
-          </div>
-        </div>
-
-        <div class="span4 scale_details">
-          <div class="span12 scale_display">
-            <div class="span6"><span>TOTAL PROSPECTS</span></div>
-            <div class="span6"><input type='text' ng-model="demoVals.sliderExample9" readonly /></div>
-          </div>
-          <button class='btn-gen btn-green'><i class="ionicons ion-ios7-loop-strong"></i> REFRESH</button>
-        </div>
-
+        <div class="span7 scale_details"></div>
         <div class="span2 quick-icons">
           <div class="ionicons ion-printer"></div>
           <div class="ionicons ion-ios7-paperplane-outline"></div>
@@ -678,26 +644,15 @@
     <div class="span12">
       <table id="Prospect-Table" border="1" ng-app="tablemod">
         <thead>
-          <th class="firstcol" align='left'><i class="ionicons ion-ios7-reload"></i></th>
           <th colspan='13'>
-            <span class="thleft">Hot List for Refi</span>
-            <span class="thright off">1-50 of 300</span>
+            <span class="thleft">Hot List for <b>REFI</b></span>
+            <span class="thright">1-50 of 300</span>
           </th>
-          <th width="4%"><a href="#"><i class='fa fa-angle-left off'></i></a></th>
-          <th width="4%"><a href="#"><i class='fa fa-angle-right off'></i></a></th>
+          <th width="4%"><a href="#"><i class='fa fa-angle-left'></i></a></th>
+          <th width="4%"><a href="#"><i class='fa fa-angle-right'></i></a></th>
         </thead>
         <tbody>
           <tr>
-            <td class="check"
-              ng-class="{'on': this.isActive1}"
-              ng-init="{this.isActive1 = false}"
-              ng-click="this.isActive1 = !this.isActive1"
-            ><i class="fa fa-check"></i></td>
-            <td class="star"
-              ng-class="{'son': this.isActive11}"
-              ng-init="{this.isActive11 = false}"
-              ng-click="this.isActive11 = !this.isActive11"
-            ><i class="fa fa-star-o"></i></td>
             <td>Lorem Ipsum</td>
             <td>Michael J. Morgan</td>
             <td>Engineer</td>
@@ -712,16 +667,6 @@
             <td colspan='7' width="10%">Today, 10:15 PM</td>
           </tr>
           <tr>
-            <td class="check"
-              ng-class="{'on': this.isActive2}"
-              ng-init="{this.isActive2 = false}"
-              ng-click="this.isActive2 = !this.isActive2"
-            ><i class="fa fa-check"></i></td>
-            <td class="star"
-              ng-class="{'son': this.isActive21}"
-              ng-init="{this.isActive21 = false}"
-              ng-click="this.isActive21 = !this.isActive21"
-            ><i class="fa fa-star-o"></i></td>
             <td>Ut ad et aliquam</td>
             <td>Feugiat ea vero</td>
             <td>Adipiscing sed</td>
@@ -736,16 +681,6 @@
             <td colspan='7' width="10%">7/12/14, 7:24 PM</td>
           </tr>
           <tr>
-            <td class="check"
-              ng-class="{'on': this.isActive3}"
-              ng-init="{this.isActive3 = false}"
-              ng-click="this.isActive3 = !this.isActive3"
-            ><i class="fa fa-check"></i></td>
-            <td class="star"
-              ng-class="{'son': this.isActive31}"
-              ng-init="{this.isActive31 = false}"
-              ng-click="this.isActive31 = !this.isActive31"
-            ><i class="fa fa-star-o"></i></td>
             <td>Luptatum</td>
             <td>hendrerit hendrerit</td>
             <td>hendrerit </td>
@@ -760,16 +695,6 @@
             <td colspan='7' width="10%">8/8/14, 10:15 PM</td>
           </tr>
           <tr>
-            <td class="check"
-              ng-class="{'on': this.isActive4}"
-              ng-init="{this.isActive4 = false}"
-              ng-click="this.isActive4 = !this.isActive4"
-            ><i class="fa fa-check"></i></td>
-            <td class="star"
-              ng-class="{'son': this.isActive41}"
-              ng-init="{this.isActive41 = false}"
-              ng-click="this.isActive41 = !this.isActive41"
-            ><i class="fa fa-star-o"></i></td>
             <td>Dignissim illum</td>
             <td>luptatum molestie</td>
             <td>nonummy</td>
@@ -784,16 +709,6 @@
             <td colspan='7' width="10%">7/6/14, 10:15 PM</td>
           </tr>
           <tr>
-            <td class="check"
-              ng-class="{'on': this.isActive5}"
-              ng-init="{this.isActive5 = false}"
-              ng-click="this.isActive5 = !this.isActive5"
-            ><i class="fa fa-check"></i></td>
-            <td class="star"
-              ng-class="{'son': this.isActive51}"
-              ng-init="{this.isActive51 = false}"
-              ng-click="this.isActive51 = !this.isActive51"
-            ><i class="fa fa-star-o"></i></td>
             <td>Tincidunt ea ut</td>
             <td>Consequat consequat</td>
             <td>Blandit nulla</td>
@@ -808,16 +723,6 @@
             <td colspan='7' width="10%">5/25/14, 10:15 PM</td>
           </tr>
           <tr>
-            <td class="check"
-              ng-class="{'on': this.isActive6}"
-              ng-init="{this.isActive6 = false}"
-              ng-click="this.isActive6 = !this.isActive6"
-            ><i class="fa fa-check"></i></td>
-            <td class="star"
-              ng-class="{'son': this.isActive61}"
-              ng-init="{this.isActive61 = false}"
-              ng-click="this.isActive61 = !this.isActive61"
-            ><i class="fa fa-star-o"></i></td>
             <td>Consequat</td>
             <td>Autem praesent</td>
             <td>dignissim ea</td>
@@ -832,16 +737,6 @@
             <td colspan='7' width="10%">9/9/14, 10:15 PM</td>
           </tr>
           <tr>
-            <td class="check"
-              ng-class="{'on': this.isActive7}"
-              ng-init="{this.isActive7 = false}"
-              ng-click="this.isActive7 = !this.isActive7"
-            ><i class="fa fa-check"></i></td>
-            <td class="star"
-              ng-class="{'son': this.isActive71}"
-              ng-init="{this.isActive71 = false}"
-              ng-click="this.isActive71 = !this.isActive71"
-            ><i class="fa fa-star-o"></i></td>
             <td>Lorem Ipsum</td>
             <td>Michael J. Morgan</td>
             <td>Engineer</td>
@@ -856,16 +751,6 @@
             <td colspan='7' width="10%">Today, 10:15 PM</td>
           </tr>
           <tr>
-            <td class="check"
-              ng-class="{'on': this.isActive8}"
-              ng-init="{this.isActive8 = false}"
-              ng-click="this.isActive8 = !this.isActive8"
-            ><i class="fa fa-check"></i></td>
-            <td class="star"
-              ng-class="{'son': this.isActive81}"
-              ng-init="{this.isActive81 = false}"
-              ng-click="this.isActive81 = !this.isActive81"
-            ><i class="fa fa-star-o"></i></td>
             <td>Dignissim illum</td>
             <td>luptatum adipiscing</td>
             <td>nonummy</td>
@@ -880,16 +765,6 @@
             <td colspan='7' width="10%">7/6/14, 10:15 PM</td>
           </tr>
           <tr>
-            <td class="check"
-              ng-class="{'on': this.isActive9}"
-              ng-init="{this.isActive9 = false}"
-              ng-click="this.isActive9 = !this.isActive9"
-            ><i class="fa fa-check"></i></td>
-            <td class="star"
-              ng-class="{'son': this.isActive91}"
-              ng-init="{this.isActive91 = false}"
-              ng-click="this.isActive91 = !this.isActive91"
-            ><i class="fa fa-star-o"></i></td>
             <td>Ex nibh duis</td>
             <td>Aliquam in eu</td>
             <td>Eros velit</td>
@@ -909,6 +784,19 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="row-fluid">
+    <div class="span12">
+
+      <div class="alignright">
+        <button class="btn-red btn-gen btn-fin">FINISH</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
