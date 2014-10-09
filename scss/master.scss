@@ -402,6 +402,15 @@ header{
     background: #01a99c;
     border-bottom-color: #027970;
   }
+.btn-lime{
+  background: #aad178 url(images/btn-limebg.gif) repeat-x left top;
+  border: 1px solid #9aca5c;
+  color: #fff;
+}
+  .btn-lime:active{
+    background: #9aca5c;
+    border-color: #86b14e;
+  }
 .btn-blue{
   background: #6ad2eb url(images/btn-bluebg.gif) repeat-x left top;
   border: 1px solid #019dd6;
@@ -1561,6 +1570,69 @@ body.calculator{
     }
     input[type='radio']:checked + .overlay{
       background: #1cbae1;
+    }
+  }
+}
+
+
+.indvPros{
+  background: #eaedf2;
+
+  .btn-gen{
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+
+  .whitebox{
+    background: #fff;
+
+    .boxhead{
+      background: #f9fafc;
+      font-size: .9em;
+      border-bottom: 1px solid #e9ecf1;
+      margin: 0;
+    }
+
+    .coltitle{
+      border: 1px dashed #ebecf0;
+      border-width: 1px 0;
+      padding: 5px 10px;
+      font-size: 1em;
+    }
+    label{
+      width: 200px;
+
+      i:before{
+        margin-right: 5px;
+      }
+    }
+    .text{
+      display: inline-block;
+    }
+
+  }
+  // \whitebox
+
+  .propspect-equity{
+    margin-bottom: 10px;
+
+    .desc{
+      border-bottom: 1px dashed #ebecf0;
+      padding: 10px 30px;
+    }
+    .desc:last-child{
+      border: 0;
+    }
+  }
+  .propspect-rating{
+    margin-bottom: 10px;
+
+    .span12{
+      text-align: center;
+    }
+    img{
+      width: 80%;
+      margin: 0 auto;
     }
   }
 }
