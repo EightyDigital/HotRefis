@@ -61,15 +61,21 @@ header .bar1 {
         text-decoration: none;
         font-family: Arial;
         font-size: .9em; }
+        @media only screen and (max-width: 767px) {
+          .nav_menu ul li a {
+            font-size: 0; } }
         @media only screen and (max-width: 400px) {
           .nav_menu ul li a {
-            font-size: 1em; } }
+            padding: 10px 5px 15px; } }
       .nav_menu ul li a:before {
         display: inline-block;
         font-size: 2.3em;
         margin-right: 10px;
         position: relative;
         bottom: -5px; }
+        @media only screen and (max-width: 767px) {
+          .nav_menu ul li a:before {
+            font-size: 30px; } }
       .nav_menu ul li a.ion-ios7-settings:before {
         transform: rotate(90deg); }
       .nav_menu ul li a:hover {
@@ -96,6 +102,8 @@ header .bar1 {
 
 #Certainty {
   padding: 20px 0 0; }
+  #Certainty .pagetitle-bar {
+    margin-bottom: 10px; }
   #Certainty .filterLabel {
     font-size: .75em;
     text-align: center; }
@@ -155,7 +163,8 @@ header .bar1 {
       border: 0;
       background: url(images/handle.png) no-repeat center/cover; }
   #Certainty .scale img {
-    margin-left: 1px; }
+    margin-left: 1px;
+    width: 100%; }
     @media only screen and (max-width: 767px) {
       #Certainty .scale img {
         margin-bottom: 10px;
@@ -387,7 +396,6 @@ ul.filter-list {
   ul.filter-list li:before {
     font-family: 'FontAwesome';
     display: inline-block;
-    width: 10px;
     margin-right: 10px;
     padding: 10px;
     background: #00c0ff;
@@ -690,6 +698,8 @@ ul.filter-list {
 
 body.report {
   background: #eaedf2; }
+  body.report img {
+    width: 100%; }
   body.report .nav_menu {
     margin-bottom: 50px; }
   body.report .whitebox {
@@ -752,7 +762,7 @@ body.report {
     background: #1dbbe2 url("images/icon-cvr.gif") no-repeat center;
     width: 31px;
     height: 29px;
-    padding: 10px;
+    padding: 10px 25px;
     margin-right: 10px;
     border-radius: 50%;
     vertical-align: middle; }
@@ -941,5 +951,12 @@ body.report {
 
 .btn-fin {
   margin-bottom: 10px; }
+
+.tologin {
+  float: right;
+  margin-top: 30px;
+  margin-right: 20px; }
+  .tologin a {
+    font-size: 2em; }
 
 /*# sourceMappingURL=master.css.map */

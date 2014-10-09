@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="sliderDemoApp" id="top">
 <head>
+  <meta name="viewport" content="width=1400">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>HotRefis: Target List Creator - Property Value</title>
@@ -591,7 +592,60 @@
 <!-- \the_map -->
 
 <div id="Certainty">
+
   <div class="container">
+    <div class="row-fluid">
+
+        <div class="span2">
+          <h1 class="title">MILLWATS</h1>
+          <div class="desc">(THERMAL)PER SQUARE METER</div>
+
+          <div class="span3">
+            <div class="filter40-60"></div>
+            <div class="filterLabel">40-60</div>
+          </div>
+          <div class="span1"></div>
+
+          <div class="span3">
+            <div class="filter60-80"></div>
+            <div class="filterLabel">60-80</div>
+          </div>
+          <div class="span1"></div>
+
+          <div class="span3">
+            <div class="filter80-100"></div>
+            <div class="filterLabel">80-100</div>
+          </div>
+
+        </div>
+
+        <div class="span4">
+          <div class='certainty-slider' ui-slider min="0" max="100" ng-model="demoVals.sliderExample9"></div>
+          <div class="scale">
+            <img src="css/images/certainty-scale.png" alt="">
+          </div>
+        </div>
+
+        <div class="span4 scale_details">
+          <div class="span12 scale_display">
+            <div class="span6"><span>TOTAL PROSPECTS</span></div>
+            <div class="span6"><input type='text' ng-model="demoVals.sliderExample9" readonly /></div>
+          </div>
+          <button class='btn-gen btn-green'><i class="ionicons ion-ios7-loop-strong"></i> REFRESH</button>
+        </div>
+
+        <div class="span2 quick-icons">
+          <div class="ionicons ion-printer"></div>
+          <div class="ionicons ion-ios7-paperplane-outline"></div>
+        </div>
+    </div>
+    <!-- row-fluid -->
+  </div>
+  <!-- container -->
+
+  <hr>
+
+  <div class="container pagetitle-bar">
     <div class="row-fluid">
       <div class="span3 pl-head">
         <i class="ionicons ion-document-text"></i> Propspect List: <b>Properties</b>
@@ -607,7 +661,7 @@
   <!-- container -->
 </div>
 <!-- \#Certainty -->
-<hr>
+
 
 <div ng-include src="'filter.html'"></div>
 
@@ -621,7 +675,7 @@
           </div>
           <div class="span9">
             <div class="slider_result">{{demoVals.sliderExample7[0]}},{{demoVals.sliderExample7[1]}}</div>
-            <div ui-slider="{range: true}" min="0" max="20" step="0.01" use-decimals ng-model="demoVals.sliderExample7"></div>
+            <div ui-slider="{range: true}" min="0" max="20" step="0.01" use-decimals ng-model="demoVals.sliderExample7" ng-init="demoVals.sliderExample7=[0,20]"></div>
           </div>
           <div class="clr"></div>
         </div>
@@ -633,7 +687,7 @@
           </div>
           <div class="span9">
             <div class="slider_result">{{demoVals.sliderExample2[0]}},{{demoVals.sliderExample2[1]}}</div>
-            <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample2"></div>
+            <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample2" ng-init="demoVals.sliderExample2=[0,100]"></div>
           </div>
           <div class="clr"></div>
         </div>
@@ -645,7 +699,7 @@
           </div>
           <div class="span9">
             <div class="slider_result">{{demoVals.sliderExample3[0]}},{{demoVals.sliderExample3[1]}}</div>
-            <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample3"></div>
+            <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample3" ng-init="demoVals.sliderExample3=[0,100]"></div>
           </div>
           <div class="clr"></div>
         </div>
@@ -660,13 +714,10 @@
         </div>
         <div class="span9">
           <div class="property_type_val slider_result" ng-init="Ptype='&nbsp;'">{{Ptype}}</div> <br>
-          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="Condo"/>Condo</span>
-          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="Landed"/>Landed</span>
-          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="HDB"/>HDB</span>
-          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="Comm"/>Comm</span>
-          <!-- <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample4"></div>
-          <br>
-          {{demoVals.sliderExample4[0]}} - {{demoVals.sliderExample4[1]}} -->
+          <span class="cbchoice"><input type="radio" name="Ptype" ng-model="Ptype" value="Condo" checked="true">Condo</span>
+          <span class="cbchoice"><input type="radio" name="Ptype" ng-model="Ptype" value="Landed">Landed</span>
+          <span class="cbchoice"><input type="radio" name="Ptype" ng-model="Ptype" value="HDB">HDB</span>
+          <span class="cbchoice"><input type="radio" name="Ptype" ng-model="Ptype" value="Comm">Comm</span>
         </div>
         <div class="clr"></div>
       </div>
@@ -678,7 +729,7 @@
         </div>
         <div class="span9">
           <div class="slider_result">{{demoVals.sliderExample5[0]}},{{demoVals.sliderExample5[1]}}</div>
-          <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample5"></div>
+          <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample5" ng-init="demoVals.sliderExample5=[0,100]"></div>
         </div>
         <div class="clr"></div>
       </div>
@@ -690,7 +741,7 @@
         </div>
         <div class="span9">
           <div class="slider_result">{{demoVals.sliderExample6[0]}},{{demoVals.sliderExample6[1]}}</div>
-          <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample6"></div>
+          <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample6" ng-init="demoVals.sliderExample6=[0,100]"></div>
         </div>
         <div class="clr"></div>
       </div>
