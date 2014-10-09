@@ -31,17 +31,24 @@
 
   <script src="loginAndwidgets/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
   <script>
-  // $(function(){
-  //   $( "#dialog" ).dialog();
-  //
-  //   $(".btn-sendreport").click(function(){
-  //     $( "#dialog" ).dialog("open");
-  //   });
-  // });
+  $(function(){
+    $( "#dialog" ).dialog({ autoOpen: false });
+
+    $(".btn-sendreport").click(function(event){
+      $( ".modal_wrap" ).css({display: "block"});
+      $( "#dialog" ).dialog("open");
+      $( "#dialog" ).css({display: 'block'});
+    });
+
+    $(".ui-dialog-titlebar-close").click(function(){
+      $( ".modal_wrap" ).css({display: "none"});
+    });
+
+  });
 
   </script>
 
@@ -71,32 +78,6 @@
   </div>
 </div>
 
-<!-- <div class="modal_wrap"></div>
-<div id="dialog" title="SEND REPORT">
-  <div class="form-wrapper">
-    <form action="#" method='get'>
-      <div class="fields-wrap">
-        <div><i class="ionicons ion-ios7-person"></i><input type="text" placeholder="First Name"></div>
-        <div><i class="ionicons ion-ios7-person"></i><input type="text" placeholder="Last Name"></div>
-        <div><i class="ionicons ion-ios7-email-outline"></i><input type="text" placeholder="Email Address"></div>
-        <div><i class="ionicons ion-iphone"></i><input type="text" placeholder="Mobile"></div>
-      </div>
-
-      <hr>
-
-      <div class="fields-wrap">
-        <label>Send Email <input type="checkbox" checked></label>
-        <label>Send SMS <input type="checkbox"></label>
-      </div>
-
-      <div class="modal-buttons fields-wrap">
-        <button class="btn-gen btn-blue">Submit</button>
-        <button class="btn-gen btn-yellow">Reset</button>
-      </div>
-    </form>
-  </div>
-</div>
- -->
 <!-- row 1: property details + map   -->
 <div class="container row1">
   <div class="row-fluid">
@@ -617,6 +598,31 @@
   <script>$(function(){ CompCharts.init(); });</script>
 
 
+<div class="modal_wrap"></div>
+<div id="dialog" title="SEND REPORT">
+  <div class="form-wrapper">
+    <form action="#" method='get'>
+      <div class="fields-wrap">
+        <div><i class="ionicons ion-ios7-person"></i><input type="text" placeholder="First Name"></div>
+        <div><i class="ionicons ion-ios7-person"></i><input type="text" placeholder="Last Name"></div>
+        <div><i class="ionicons ion-ios7-email-outline"></i><input type="text" placeholder="Email Address"></div>
+        <div><i class="ionicons ion-iphone"></i><input type="text" placeholder="Mobile"></div>
+      </div>
+
+      <hr>
+
+      <div class="fields-wrap">
+        <label>Send Email <input type="checkbox" checked></label>
+        <label>Send SMS <input type="checkbox"></label>
+      </div>
+
+      <div class="modal-buttons fields-wrap">
+        <button class="btn-gen btn-blue">Submit</button>
+        <button class="btn-gen btn-yellow">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 </body>
 </html>
