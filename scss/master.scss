@@ -747,7 +747,7 @@ ul.filter-list{
 }
 
 // PROFILE-A
-.profile-a, .profile-b{
+.profile-a, .profile-b, .calculator{
 
   h1.coltitle{
     font-size: 1.6em;
@@ -829,7 +829,7 @@ ul.filter-list{
 }
 // profile-a, profile-b
 
-.profile-a{
+.profile-a, .calculator{
 
   .profile-info{
     padding: 30px 0;
@@ -1427,4 +1427,96 @@ body.report{
   a{
     font-size: 2em;
   }
+}
+
+
+$boxheadColor: #4d4d4d;
+$boxheadBG: #f9fafc;
+
+body.calculator{
+  color: $boxheadColor;
+
+  .pad{
+    padding: 10px;
+  }
+
+  .boxhead{
+    font-size: .9em;
+    padding: 5px 10px;
+    border-bottom: 1px solid #999;
+    font-weight: bold;
+    background: $boxheadBG;
+
+    i{
+      margin-right: 10px;
+    }
+  }
+
+  .calcbox{
+    .coltitle{
+      border: 1px dashed #eaeef1;
+      border-width: 1px 0;
+      font-size: .9em;
+      padding: 5px 10px;
+    }
+    .pad{
+      label{
+        width: 200px;
+
+        i{
+          margin-right: 10px;
+        }
+      }
+      .text{
+        display: inline;
+      }
+
+      .mt_label{
+        width: 280px;
+      }
+    }
+  }
+
+  .row2{
+    label{
+      margin-right: 5px;
+    }
+    input{
+      padding: 3px;
+      margin-bottom: 3px;
+    }
+
+    .proffin{
+      label{
+        text-align: right;
+        width: 200px;
+      }
+    }
+
+    table{
+      width: 95%;
+      tr{
+        td:first-child{
+          width: 13%;
+        }
+        td.head{
+          background: #f9f9f9;
+          width: 10%;
+          font-size: 12px !important;
+          color: #00c0ff;
+          padding: 5px 8px;
+        }
+      }
+      tr.data{
+        td{
+          padding: 8px;
+        }
+        td:first-child{
+          text-align: right;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+  // \row2
 }

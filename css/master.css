@@ -523,94 +523,94 @@ ul.filter-list {
     color: white;
     text-shadow: 0 0 5px #444; }
 
-.profile-a h1.coltitle, .profile-b h1.coltitle {
+.profile-a h1.coltitle, .profile-b h1.coltitle, .calculator h1.coltitle {
   font-size: 1.6em;
   font-weight: 700;
   color: #444; }
   @media only screen and (max-width: 767px) {
-    .profile-a h1.coltitle, .profile-b h1.coltitle {
+    .profile-a h1.coltitle, .profile-b h1.coltitle, .calculator h1.coltitle {
       text-align: center; } }
-.profile-a .box1, .profile-a .box2, .profile-a .box3, .profile-b .box1, .profile-b .box2, .profile-b .box3 {
+.profile-a .box1, .profile-a .box2, .profile-a .box3, .profile-b .box1, .profile-b .box2, .profile-b .box3, .calculator .box1, .calculator .box2, .calculator .box3 {
   padding: 10px; }
-.profile-a .row1 .profile-img, .profile-b .row1 .profile-img {
+.profile-a .row1 .profile-img, .profile-b .row1 .profile-img, .calculator .row1 .profile-img {
   background: #999;
   box-shadow: 0 0 0 8px #efefef, 0 0 0 13px #555f78;
   border-radius: 50%;
   margin: 25px auto;
   width: 130px;
   height: 130px; }
-.profile-a .row2 h3.colsubtitle, .profile-b .row2 h3.colsubtitle {
+.profile-a .row2 h3.colsubtitle, .profile-b .row2 h3.colsubtitle, .calculator .row2 h3.colsubtitle {
   font-size: 1.3em;
   margin: 50px auto 30px;
   color: #444; }
   @media only screen and (max-width: 767px) {
-    .profile-a .row2 h3.colsubtitle, .profile-b .row2 h3.colsubtitle {
+    .profile-a .row2 h3.colsubtitle, .profile-b .row2 h3.colsubtitle, .calculator .row2 h3.colsubtitle {
       text-align: center; } }
-.profile-a .row2 .buttons, .profile-b .row2 .buttons {
+.profile-a .row2 .buttons, .profile-b .row2 .buttons, .calculator .row2 .buttons {
   margin-top: 50px;
   text-align: right; }
   @media only screen and (max-width: 767px) {
-    .profile-a .row2 .buttons, .profile-b .row2 .buttons {
+    .profile-a .row2 .buttons, .profile-b .row2 .buttons, .calculator .row2 .buttons {
       margin-right: 20px;
       margin-bottom: 50px; }
-      .profile-a .row2 .buttons button, .profile-b .row2 .buttons button {
+      .profile-a .row2 .buttons button, .profile-b .row2 .buttons button, .calculator .row2 .buttons button {
         font-size: .9em;
         padding: 10px 20px; } }
-  .profile-a .row2 .buttons button:first-child, .profile-b .row2 .buttons button:first-child {
+  .profile-a .row2 .buttons button:first-child, .profile-b .row2 .buttons button:first-child, .calculator .row2 .buttons button:first-child {
     margin-right: 10px; }
-.profile-a .box1, .profile-b .box1 {
+.profile-a .box1, .profile-b .box1, .calculator .box1 {
   background: #efefef; }
-.profile-a .box2, .profile-b .box2 {
+.profile-a .box2, .profile-b .box2, .calculator .box2 {
   background: #ccc; }
-.profile-a .box3, .profile-b .box3 {
+.profile-a .box3, .profile-b .box3, .calculator .box3 {
   background: #efefef;
   color: #444;
   border: 1px solid #999;
   border-radius: 5px; }
-  .profile-a .box3 .coltitle, .profile-b .box3 .coltitle {
+  .profile-a .box3 .coltitle, .profile-b .box3 .coltitle, .calculator .box3 .coltitle {
     border-bottom: 1px solid #afafaf;
     color: #444;
     margin: 10px 0 !important; }
 
-.profile-a .profile-info {
+.profile-a .profile-info, .calculator .profile-info {
   padding: 30px 0; }
   @media only screen and (max-width: 767px) {
-    .profile-a .profile-info {
+    .profile-a .profile-info, .calculator .profile-info {
       text-align: center; } }
-  .profile-a .profile-info .name {
+  .profile-a .profile-info .name, .calculator .profile-info .name {
     margin: 0;
     padding: 0; }
-  .profile-a .profile-info .title {
+  .profile-a .profile-info .title, .calculator .profile-info .title {
     margin: 5px 0; }
-  .profile-a .profile-info .loc {
+  .profile-a .profile-info .loc, .calculator .profile-info .loc {
     color: #57d6ff; }
-    .profile-a .profile-info .loc i {
+    .profile-a .profile-info .loc i, .calculator .profile-info .loc i {
       display: inline-block;
       margin-right: 5px; }
-    .profile-a .profile-info .loc i:before {
+    .profile-a .profile-info .loc i:before, .calculator .profile-info .loc i:before {
       font-size: 1.5em;
       position: relative;
       bottom: -3px; }
-.profile-a .box2 {
+.profile-a .box2, .calculator .box2 {
   padding-left: 30px; }
   @media only screen and (max-width: 767px) {
-    .profile-a .box2 {
+    .profile-a .box2, .calculator .box2 {
       padding-left: 150px; } }
   @media only screen and (max-width: 767px) {
-    .profile-a .box2 .coltitle {
+    .profile-a .box2 .coltitle, .calculator .box2 .coltitle {
       text-align: left; } }
-  .profile-a .box2 .clr {
+  .profile-a .box2 .clr, .calculator .box2 .clr {
     margin: 0 auto; }
-  .profile-a .box2 label, .profile-a .box2 .text {
+  .profile-a .box2 label, .profile-a .box2 .text, .calculator .box2 label, .calculator .box2 .text {
     font-size: 1.1em; }
-  .profile-a .box2 label {
+  .profile-a .box2 label, .calculator .box2 label {
     width: 40%;
     float: left; }
-  .profile-a .box2 .text {
+  .profile-a .box2 .text, .calculator .box2 .text {
     float: left; }
-  .profile-a .box2 .bulleted {
+  .profile-a .box2 .bulleted, .calculator .box2 .bulleted {
     margin-left: 15px; }
-    .profile-a .box2 .bulleted i {
+    .profile-a .box2 .bulleted i, .calculator .box2 .bulleted i {
       margin-right: 5px; }
 
 .s1, .s2, .s3 {
@@ -958,5 +958,54 @@ body.report {
   margin-right: 20px; }
   .tologin a {
     font-size: 2em; }
+
+body.calculator {
+  color: #4d4d4d; }
+  body.calculator .pad {
+    padding: 10px; }
+  body.calculator .boxhead {
+    font-size: .9em;
+    padding: 5px 10px;
+    border-bottom: 1px solid #999;
+    font-weight: bold;
+    background: #f9fafc; }
+    body.calculator .boxhead i {
+      margin-right: 10px; }
+  body.calculator .calcbox .coltitle {
+    border: 1px dashed #eaeef1;
+    border-width: 1px 0;
+    font-size: .9em;
+    padding: 5px 10px; }
+  body.calculator .calcbox .pad label {
+    width: 200px; }
+    body.calculator .calcbox .pad label i {
+      margin-right: 10px; }
+  body.calculator .calcbox .pad .text {
+    display: inline; }
+  body.calculator .calcbox .pad .mt_label {
+    width: 280px; }
+  body.calculator .row2 label {
+    margin-right: 5px; }
+  body.calculator .row2 input {
+    padding: 3px;
+    margin-bottom: 3px; }
+  body.calculator .row2 .proffin label {
+    text-align: right;
+    width: 200px; }
+  body.calculator .row2 table {
+    width: 95%; }
+    body.calculator .row2 table tr td:first-child {
+      width: 13%; }
+    body.calculator .row2 table tr td.head {
+      background: #f9f9f9;
+      width: 10%;
+      font-size: 12px !important;
+      color: #00c0ff;
+      padding: 5px 8px; }
+    body.calculator .row2 table tr.data td {
+      padding: 8px; }
+    body.calculator .row2 table tr.data td:first-child {
+      text-align: right;
+      padding-right: 10px; }
 
 /*# sourceMappingURL=master.css.map */
