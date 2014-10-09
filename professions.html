@@ -636,7 +636,7 @@
 
         <div class="span2 quick-icons">
           <div class="ionicons ion-printer"></div>
-          <div class="ionicons ion-ios7-paperplane-outline"></div>
+          <div class="fa fa-paper-plane"></div>
         </div>
     </div>
     <!-- row-fluid -->
@@ -711,14 +711,13 @@
           Property Type
         </div>
         <div class="span9">
-          <div class="property_type_val slider_result" ng-init="Ptype='&nbsp;'">{{Ptype}}</div> <br>
-          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="Condo"/>Condo</span>
-          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="Landed"/>Landed</span>
-          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="HDB"/>HDB</span>
-          <span class="cbchoice"><input type="radio" ng-model="Ptype" value="Comm"/>Comm</span>
-          <!-- <div ui-slider="{range: true}" min="0" max="100" step="0.01" use-decimals ng-model="demoVals.sliderExample4"></div>
-          <br>
-          {{demoVals.sliderExample4[0]}} - {{demoVals.sliderExample4[1]}} -->
+          <div class="slider_result" ng-init="Ptype='&nbsp;'">{{Ptype}}</div> <br>
+          <div class="property-type-bar">
+            <span class="cbchoice"><input type="radio" ng-model="Ptype" value="CONDO" title="CONDO"/><span class="overlay"></span></span>
+            <span class="cbchoice"><input type="radio" ng-model="Ptype" value="LANDED" title="LANDED"/><span class="overlay"></span></span>
+            <span class="cbchoice"><input type="radio" ng-model="Ptype" value="HDB" title="HDB"/><span class="overlay"></span></span>
+            <span class="cbchoice"><input type="radio" ng-model="Ptype" value="COMM" title="COMM"/><span class="overlay"></span></span>
+          </div>
         </div>
         <div class="clr"></div>
       </div>

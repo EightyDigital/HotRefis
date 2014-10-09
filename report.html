@@ -4,14 +4,32 @@
   <meta name="viewport" content="width=1400">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>HotRefis: Profile-A</title>
+  <title>HotRefis: Report</title>
 
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css">
+
   <link rel="stylesheet" href="css/master.css">
+
+  <!-- Stylesheets -->
+  <!-- Bootstrap is included in its original form, unaltered -->
+  <link rel="stylesheet" href="loginAndwidgets/css/bootstrap.min.css">
+
+  <!-- Related styles of various icon packs and plugins -->
+  <link rel="stylesheet" href="loginAndwidgets/css/plugins.css">
+
+  <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+  <link rel="stylesheet" href="loginAndwidgets/css/main.css">
+
+  <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+
+  <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+  <link rel="stylesheet" href="loginAndwidgets/css/themes.css">
+  <!-- END Stylesheets -->
+
+  <script src="loginAndwidgets/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
 
 </head>
 <body class="report">
@@ -251,7 +269,21 @@
       <center>How your Property has grown<br> compare to the average in the District</center>
     </div>
     <div class="span7 pad the_graph">
-      <img src="css/images/sample-graph.jpg" alt="">
+      <script src="loginAndwidgets/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
+      <!-- Classic Chart Block -->
+      <div class="block full">
+          <!-- Classic Chart Title -->
+          <div class="block-title">
+              <h2><strong>Classic</strong> Chart</h2>
+          </div>
+          <!-- END Classic Chart Title -->
+
+          <!-- Classic Chart Content -->
+          <!-- Flot Charts (initialized in js/pages/compCharts.js), for more examples you can check out http://www.flotcharts.org/ -->
+          <div id="chart-classic" class="chart"></div>
+          <!-- END Classic Chart Content -->
+      </div>
+      <!-- END Classic Chart Block -->
     </div>
   </div>
 </div>
@@ -521,11 +553,30 @@
 </div>
 <!-- \row7  -->
 
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-<script src='js/slider.js'></script>
+  <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
 
-<script src='js/slider.mod.js'></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <script src='js/slider.js'></script>
+
+  <script src='js/slider.mod.js'></script>
+
+  <!-- Bootstrap.js, Jquery plugins and Custom JS code -->
+  <script src="loginAndwidgets/js/vendor/bootstrap.min.js"></script>
+  <script src="loginAndwidgets/js/plugins.js"></script>
+  <script src="loginAndwidgets/js/app.js"></script>
+
+  <!-- tables -->
+  <script src="loginAndwidgets/js/pages/tablesDatatables.js"></script>
+  <script>$(function(){ TablesDatatables.init(); });</script>
+
+  <!-- charts -->
+  <script src="loginAndwidgets/js/pages/compCharts.js"></script>
+  <script>$(function(){ CompCharts.init(); });</script>
+
+
+
 </body>
 </html>

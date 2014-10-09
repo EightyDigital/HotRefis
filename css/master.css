@@ -17,6 +17,9 @@ a {
 a:hover {
   color: #ccc; }
 
+img {
+  outline: none; }
+
 hr {
   height: 1px;
   background: #c8cbd4;
@@ -40,7 +43,8 @@ header .bar1 {
     font-size: 2.3em;
     text-transform: uppercase; }
     header .bar1 h1 a {
-      text-decoration: none; }
+      text-decoration: none;
+      color: #fff !important; }
 
 #the_map #map-canvas {
   min-width: 100%;
@@ -196,7 +200,7 @@ header .bar1 {
           border-radius: 5px 5px 0 0; } }
     #Certainty .scale_display input {
       display: inline-block;
-      padding: 0;
+      padding: 8px 0;
       background: none;
       border-radius: 0;
       border: 0;
@@ -288,38 +292,38 @@ header .bar1 {
   color: #fff;
   border: 1px solid #009ed8; }
 
-.ion-ios7-paperplane-outline {
+.fa-paper-plane {
   background: #f7be64;
   color: #fff;
   border: 1px solid #f0a436;
-  padding: 10px 13px !important; }
+  padding: 10px 14px 10px 8px !important; }
 
-.ion-printer, .ion-ios7-paperplane-outline {
+.ion-printer, .fa-paper-plane {
   font-size: 2em;
   border-radius: 50%;
   padding: 10px 13px;
   margin: 0 3px 5px 0;
   cursor: pointer; }
   @media only screen and (max-width: 1200px) {
-    .ion-printer, .ion-ios7-paperplane-outline {
+    .ion-printer, .fa-paper-plane {
       font-size: 3em;
       padding: 5px 10px; } }
   @media only screen and (max-width: 980px) {
-    .ion-printer, .ion-ios7-paperplane-outline {
+    .ion-printer, .fa-paper-plane {
       font-size: 1.5em;
       padding: 5px 10px; } }
   @media only screen and (max-width: 767px) {
-    .ion-printer, .ion-ios7-paperplane-outline {
+    .ion-printer, .fa-paper-plane {
       font-size: 3em; } }
 
 @media only screen and (min-width: 1200px) {
-  .ion-ios7-paperplane-outline {
+  .ion-ios7-paperplane {
     padding: 10px 20px; } }
 @media only screen and (max-width: 1200px) {
-  .ion-ios7-paperplane-outline {
+  .ion-ios7-paperplane {
     padding: 5px 15px; } }
 @media only screen and (max-width: 980px) {
-  .ion-ios7-paperplane-outline {
+  .ion-ios7-paperplane {
     padding: 5px 10px; } }
 
 .filter-bar {
@@ -455,7 +459,8 @@ ul.filter-list {
       border-bottom-left-radius: 0 !important;
       border-bottom-right-radius: 0 !important;
       background: url(images/handle.png) no-repeat center;
-      border: 0; }
+      border: 0;
+      outline: none; }
     .prospect-box .ui-slider .ui-slider-range {
       background: #00c0ff; }
   .prospect-box .ui-slider-handle {
@@ -957,7 +962,9 @@ body.report {
   margin-top: 30px;
   margin-right: 20px; }
   .tologin a {
-    font-size: 2em; }
+    font-size: 2em;
+    color: #fff !important;
+    text-decoration: none; }
 
 body.calculator {
   color: #4d4d4d; }
@@ -1007,5 +1014,30 @@ body.calculator {
     body.calculator .row2 table tr.data td:first-child {
       text-align: right;
       padding-right: 10px; }
+
+.property-type-bar {
+  background: #eaedf2;
+  text-align: center;
+  height: 10px; }
+  .property-type-bar .cbchoice {
+    position: relative;
+    top: -5px;
+    margin-right: 30px;
+    right: -26px; }
+    .property-type-bar .cbchoice input[type='radio'] {
+      opacity: 0;
+      position: relative;
+      z-index: 9999;
+      cursor: pointer; }
+    .property-type-bar .cbchoice .overlay {
+      border: 1px solid #aaacab;
+      border-radius: 50%;
+      background: #fff;
+      padding: 2px 10px;
+      position: relative;
+      left: -20px;
+      cursor: pointer; }
+    .property-type-bar .cbchoice input[type='radio']:checked + .overlay {
+      background: #1cbae1; }
 
 /*# sourceMappingURL=master.css.map */
