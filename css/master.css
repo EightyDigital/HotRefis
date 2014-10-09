@@ -239,7 +239,6 @@ header .bar1 {
   outline: 0;
   padding: 10px 40px;
   border-radius: 5px;
-  border-bottom-width: 3px;
   border-bottom-style: solid;
   font-size: 1.5em;
   font-family: Arial;
@@ -269,6 +268,11 @@ header .bar1 {
 
 .btn-red:active {
   background: #d1463d; }
+
+.btn-yellow {
+  background: #f7be64;
+  border: 1px solid #f39c11;
+  color: #fff; }
 
 .ion-printer {
   background: #01b9ff;
@@ -413,7 +417,7 @@ ul.filter-list {
     @media only screen and (max-width: 400px) {
       .prospect-box .pb-label {
         margin-bottom: 10px; } }
-    .prospect-box .pb-label i.ionicons {
+    .prospect-box .pb-label i.ionicons, .prospect-box .pb-label i.fa {
       display: block;
       width: 100%;
       font-size: 3em;

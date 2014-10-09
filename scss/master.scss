@@ -368,7 +368,6 @@ header{
   outline: 0;
   padding: 10px 40px;
   border-radius: 5px;
-  border-bottom-width: 3px;
   border-bottom-style: solid;
   font-size: 1.5em;
   font-family: $fontFamily;
@@ -399,6 +398,14 @@ header{
 }
   .btn-red:active{
     background: #d1463d;
+  }
+.btn-yellow{
+  background: #f7be64;
+  border: 1px solid #f39c11;
+  color: #fff;
+}
+  .btn-yellow:active{
+
   }
 .ion-printer{
   background: #01b9ff;
@@ -574,7 +581,7 @@ ul.filter-list{
       margin-bottom: 10px;
     }
 
-    i.ionicons{
+    i.ionicons, i.fa{
       display: block;
       width: 100%;
       font-size: 3em;
