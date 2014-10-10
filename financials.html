@@ -535,7 +535,7 @@
         var mapOptions = {
           zoom: 13,
           center: new google.maps.LatLng(37.774546, -122.433523),
-          mapTypeId: google.maps.MapTypeId.SATELLITE
+          mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
         map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -597,8 +597,8 @@
     <div class="row-fluid">
 
         <div class="span2">
-          <h1 class="title">MILLWATS</h1>
-          <div class="desc">(THERMAL)PER SQUARE METER</div>
+          <h1 class="title">Heat Map</h1>
+          <div class="desc">PER SQUARE METER</div>
 
           <div class="span3">
             <div class="filter40-60"></div>
@@ -636,7 +636,7 @@
 
         <div class="span2 quick-icons">
           <div class="ionicons ion-printer"></div>
-          <div class="ionicons ion-ios7-paperplane-outline"></div>
+          <div class="fa fa-paper-plane"></div>
         </div>
     </div>
     <!-- row-fluid -->
@@ -647,12 +647,12 @@
   <div class="container pagetitle-bar">
     <div class="row-fluid">
       <div class="span3 pl-head">
-        <i class="ionicons ion-document-text"></i> Propspect List: <b>Properties</b>
+        <i class="ionicons ion-document-text"></i> Propspect List: <b>Financials</b>
       </div>
       <div class="span5">&nbsp;</div>
       <div class="span4">
         <button class="btn-gen btn-blue">SAVE LIST</button>
-        <button class="btn-gen btn-red">FINISH</button>
+        <button onclick="location.href = 'prospect-listing.html';" class="btn-gen btn-red">FINISH</button>
       </div>
     </div>
     <!-- row-fluid -->

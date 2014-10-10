@@ -743,6 +743,9 @@ ul.filter-list{
       hr.C{ background: $prospectC; }
       hr.M{ background: $prospectM; }
       hr.Y{ background: $prospectY; }
+      a {
+        color:#555;
+      }
     }
     .check, .star{
       width: 5%;
@@ -1650,7 +1653,7 @@ body.calculator{
 }
 
 .ui-dialog{
-  
+
   padding: 0 !important;
 
   hr{
