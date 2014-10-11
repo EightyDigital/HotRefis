@@ -11,8 +11,8 @@ imports:
 #        result_cache_driver: apc
 #        query_cache_driver: apc
 
-cypress_compass_elephant:
-    register_listener: false
+# cypress_compass_elephant:
+#     register_listener: false
 
 monolog:
     handlers:
