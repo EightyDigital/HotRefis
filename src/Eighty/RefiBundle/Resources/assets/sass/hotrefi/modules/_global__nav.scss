@@ -1,0 +1,33 @@
+.global__nav {
+  background:#063141;
+  ul {
+    overflow:auto;
+    clear:both;
+  }
+  li {
+    float:left;
+  }
+  a {
+    display: block;
+    padding: 25px 15px;
+    text-decoration: none;
+    color:#fff;
+    font-size:em(13px);
+    position:relative;
+    &.active,
+    &:hover,
+    &:focus {
+      background-color:#434e62;
+      &:before {
+        color:#ccc;
+      }
+    }
+    &:before {
+      font-size:em(30px);
+      display: block;
+      float:left;
+      margin: 0 10px 0 0;
+      line-height: 0.5em;
+    }
+  }
+}

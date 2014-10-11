@@ -1,0 +1,4 @@
+services:
+#    eighty_profile.example:
+#        class: Eighty\ProfileBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

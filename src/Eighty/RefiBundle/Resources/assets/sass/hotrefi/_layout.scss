@@ -1,0 +1,30 @@
+/*= Header =*/
+#hd {
+  position:relative;
+  overflow:auto;
+  clear:both;
+  z-index:12;
+  background:$color__brand;
+  h2 {
+    text-align:center;
+    font-size:em(32px);
+    text-transform:uppercase;
+    padding:20px 0;
+    margin:0;
+    color:#fff;
+    font-weight:300;
+    span { font-weight:600; }
+  }
+}
+
+#hd .pgWidth { position:relative; }
+
+
+/*= Body =*/
+#bd {  }
+#bd .pgWidth {  }
+
+/*= Footer =*/
+#ft {  width:100%; text-align:center; }
+#ft .pgWidth { border-top:1px solid #ccc; }
+

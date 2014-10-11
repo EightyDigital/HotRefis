@@ -1,0 +1,8 @@
+eighty_profile:
+    resource: "@EightyProfileBundle/Resources/config/routing.yml"
+    prefix:   /
+
+refi:
+    resource: "@RefiBundle/Resources/config/routing.yml"
+    prefix:   /
+

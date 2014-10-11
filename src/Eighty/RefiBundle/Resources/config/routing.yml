@@ -1,0 +1,9 @@
+refi_homepage:
+    path:     /
+    defaults: { _controller: RefiBundle:Application:index }
+
+login:
+    pattern:   /login
+    defaults:  { _controller: EightyProfileBundle:Security:login }
+login_check:
+    pattern:   /login_check

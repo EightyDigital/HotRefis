@@ -1,0 +1,30 @@
+/*
+   portable Sass library by JJ.
+   https://github.com/jayjamero
+   jayjamero@gmail.com
+*/
+
+//Common Settings - base file(s) only do imports
+
+// RESET: v1.1.3 : http://nicolasgallagher.com/about-normalize-css/
+@import "utility/normalize";
+
+// Framework first - REQ these 3 in all projects
+// 1. Bring in compass
+//@import "compass";
+// 2. Import the utility belt
+@import "utility/belt";
+// 3. Global Variables
+@import "site/variables";
+
+//----------------------------------------------------------------------------
+// smacss : http://smacss.com/book/categorizing
+@import "site/fonts";
+@import "site/effects";
+@import "site/layout";
+@import "site/theme";
+
+
+
+
+

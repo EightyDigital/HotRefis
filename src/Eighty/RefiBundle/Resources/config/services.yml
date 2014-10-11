@@ -1,0 +1,4 @@
+services:
+#    refi.example:
+#        class: Eighty\RefiBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
