@@ -1,0 +1,76 @@
+.heatmap__control {
+  overflow:auto;
+  h2 {
+    font-size:em(32px);
+    font-weight:400;
+    color:#555;
+    margin:15px 0 0 0;
+    text-transform:uppercase;
+  }
+  p {
+    font-size:em(11px);
+    font-weight:400;
+    text-transform:uppercase;
+    color:#555;
+    margin:0 0 5px 0;
+  }
+  .heatmap__control--legend {
+    width:170px;
+    float:left;
+    ul {
+      overflow:auto;
+      clear:both;
+      list-style:none;
+    }
+    li {
+      float:left;
+      margin-right:5px;
+    }
+    .rating {
+      display:block;
+      width: 50px;
+      height: 20px;
+      &.rating--poor {
+        background-color:$rating__poor;
+      }
+      &.rating--avg {
+        background-color:$rating__avg;
+      }
+      &.rating--good {
+        background-color:$rating__good;
+      }
+    }
+    .label {
+      display:block;
+      text-align:center;
+      font-size:11px;
+    }
+  }
+  .heatmap__control--results {
+    width:360px;
+    float:left;
+    overflow:auto;
+    border:1px solid #ccc;
+    margin:25px 25px 0 0;
+    @include radius(5px);
+
+    & > div {
+      width:50%;
+      float:left;
+    }
+    .label {
+      display:block;
+      background: #e9edf0;
+      padding: 8px 20px;
+
+      font-size: em(18px);
+      text-align: center;
+    }
+    .value {
+      display: block;
+      text-align: center;
+      padding: 15px;
+      font-size: em(24px);
+    }
+  }
+}

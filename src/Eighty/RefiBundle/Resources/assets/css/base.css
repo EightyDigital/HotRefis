@@ -603,12 +603,12 @@ body {
   margin-left: 20px;
 }
 
-/* line 60, ../sass/site/_theme.scss */
+/* line 63, ../sass/site/_theme.scss */
 .uppercase {
   text-transform: uppercase;
 }
 
-/* line 62, ../sass/site/_theme.scss */
+/* line 65, ../sass/site/_theme.scss */
 a[ng-click] {
   cursor: pointer;
   text-decoration: underline;

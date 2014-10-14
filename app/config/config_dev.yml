@@ -35,8 +35,21 @@ cypress_compass_elephant:
         transactor_assets:
             path: %kernel.root_dir%/../src/Eighty/RefiBundle/Resources/assets/
 
+# Assetic Configuration
 assetic:
+    debug:          "%kernel.debug%"
     use_controller: "%use_assetic_controller%"
-
+    bundles:        [ RefiBundle ]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        sass:
+            bin: "/usr/bin/sass"
+        compass:
+            bin: "/usr/bin/compass"
+        yui_js:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.8.jar"
+        yui_css:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.8.jar"
 #swiftmailer:
 #    delivery_address: me@example.com

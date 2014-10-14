@@ -6389,7 +6389,6 @@ table {
   overflow: auto;
   clear: both;
   z-index: 12;
-  background: #00c0ff;
 }
 /* line 8, ../sass/hotrefi/_layout.scss */
 #hd h2 {
@@ -6413,13 +6412,13 @@ table {
 
 /*= Body =*/
 /*= Footer =*/
-/* line 28, ../sass/hotrefi/_layout.scss */
+/* line 29, ../sass/hotrefi/_layout.scss */
 #ft {
   width: 100%;
   text-align: center;
 }
 
-/* line 29, ../sass/hotrefi/_layout.scss */
+/* line 30, ../sass/hotrefi/_layout.scss */
 #ft .pgWidth {
   border-top: 1px solid #ccc;
 }
@@ -6428,7 +6427,7 @@ table {
 .hd__auxwrap {
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: 10px;
 }
 /* line 5, ../sass/hotrefi/modules/_hd__auxwrap.scss */
 .hd__auxwrap a {
@@ -6457,18 +6456,37 @@ table {
 /* line 1, ../sass/hotrefi/modules/_global__nav.scss */
 .global__nav {
   background: #063141;
+  overflow: auto;
+  clear: both;
 }
-/* line 3, ../sass/hotrefi/modules/_global__nav.scss */
+/* line 5, ../sass/hotrefi/modules/_global__nav.scss */
+.global__nav .pg__width {
+  position: relative;
+}
+/* line 8, ../sass/hotrefi/modules/_global__nav.scss */
+.global__nav .logo {
+  float: left;
+  display: block;
+  background: url(/bundles/refi/images/logo.png) no-repeat center center;
+  width: 145px;
+  height: 60px;
+  margin: auto 30px auto auto;
+}
+/* line 16, ../sass/hotrefi/modules/_global__nav.scss */
+.global__nav nav {
+  float: left;
+}
+/* line 19, ../sass/hotrefi/modules/_global__nav.scss */
 .global__nav ul {
   overflow: auto;
   clear: both;
 }
-/* line 7, ../sass/hotrefi/modules/_global__nav.scss */
+/* line 23, ../sass/hotrefi/modules/_global__nav.scss */
 .global__nav li {
   float: left;
 }
-/* line 10, ../sass/hotrefi/modules/_global__nav.scss */
-.global__nav a {
+/* line 25, ../sass/hotrefi/modules/_global__nav.scss */
+.global__nav li a {
   display: block;
   padding: 25px 15px;
   text-decoration: none;
@@ -6476,16 +6494,16 @@ table {
   font-size: 1em;
   position: relative;
 }
-/* line 17, ../sass/hotrefi/modules/_global__nav.scss */
-.global__nav a.active, .global__nav a:hover, .global__nav a:focus {
+/* line 32, ../sass/hotrefi/modules/_global__nav.scss */
+.global__nav li a.active, .global__nav li a:hover, .global__nav li a:focus {
   background-color: #434e62;
 }
-/* line 21, ../sass/hotrefi/modules/_global__nav.scss */
-.global__nav a.active:before, .global__nav a:hover:before, .global__nav a:focus:before {
+/* line 36, ../sass/hotrefi/modules/_global__nav.scss */
+.global__nav li a.active:before, .global__nav li a:hover:before, .global__nav li a:focus:before {
   color: #ccc;
 }
-/* line 25, ../sass/hotrefi/modules/_global__nav.scss */
-.global__nav a:before {
+/* line 40, ../sass/hotrefi/modules/_global__nav.scss */
+.global__nav li a:before {
   font-size: 2.30769em;
   display: block;
   float: left;
@@ -6510,4 +6528,127 @@ table {
   .angular-google-map-container {
     position: absolute;
   }
+}
+
+/* line 1, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control {
+  overflow: auto;
+}
+/* line 3, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control h2 {
+  font-size: 2.46154em;
+  font-weight: 400;
+  color: #555;
+  margin: 15px 0 0 0;
+  text-transform: uppercase;
+}
+/* line 10, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control p {
+  font-size: 0.84615em;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #555;
+  margin: 0 0 5px 0;
+}
+/* line 17, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--legend {
+  width: 170px;
+  float: left;
+}
+/* line 20, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--legend ul {
+  overflow: auto;
+  clear: both;
+  list-style: none;
+}
+/* line 25, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--legend li {
+  float: left;
+  margin-right: 5px;
+}
+/* line 29, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--legend .rating {
+  display: block;
+  width: 50px;
+  height: 20px;
+}
+/* line 33, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--legend .rating.rating--poor {
+  background-color: #00d5c3;
+}
+/* line 36, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--legend .rating.rating--avg {
+  background-color: #f3ed7b;
+}
+/* line 39, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--legend .rating.rating--good {
+  background-color: #ee4363;
+}
+/* line 43, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--legend .label {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+}
+/* line 49, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--results {
+  width: 360px;
+  float: left;
+  overflow: auto;
+  border: 1px solid #ccc;
+  margin: 25px 25px 0 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+/* line 57, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--results > div {
+  width: 50%;
+  float: left;
+}
+/* line 61, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--results .label {
+  display: block;
+  background: #e9edf0;
+  padding: 8px 20px;
+  font-size: 1.38462em;
+  text-align: center;
+}
+/* line 69, ../sass/hotrefi/modules/_heatmap__control.scss */
+.heatmap__control .heatmap__control--results .value {
+  display: block;
+  text-align: center;
+  padding: 15px;
+  font-size: 1.84615em;
+}
+
+/* line 1, ../sass/hotrefi/modules/_heatmap__control--slider.scss */
+.heatmap__control--slider {
+  width: 420px;
+  float: left;
+  padding: 25px 0 40px 0;
+  margin: 0 25px;
+  background: url(/bundles/refi/images/heatmap-scale.png) no-repeat bottom center;
+}
+/* line 8, ../sass/hotrefi/modules/_heatmap__control--slider.scss */
+.heatmap__control--slider .ui-slider {
+  background: -webkit-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
+  background: -o-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
+  background: linear-gradient(to right, #00d5c3, #f3ed7b, #ee4363);
+  border: 1px solid #666;
+  border-radius: 0;
+  height: 30px;
+  margin-bottom: 15px;
+  position: relative;
+}
+/* line 18, ../sass/hotrefi/modules/_heatmap__control--slider.scss */
+.heatmap__control--slider .ui-slider-handle {
+  height: 40px;
+  width: 30px;
+  border: 0;
+  position: absolute;
+  top: -5px;
+  margin-left: -15px;
+  background: url(/bundles/refi/images/handle.png) no-repeat center/cover;
 }

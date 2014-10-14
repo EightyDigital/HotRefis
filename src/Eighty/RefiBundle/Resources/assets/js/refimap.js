@@ -1,11 +1,11 @@
 // Issues with twig so need to change start and end tag to {[]}
-var pgApp = angular.module('refis', ['google-maps', 'xeditable', 'highcharts-ng']).config(function($interpolateProvider){
+var refis = angular.module('refis', ['google-maps', 'xeditable', 'highcharts-ng']).config(function($interpolateProvider){
        $interpolateProvider.startSymbol('{[').endSymbol(']}');
    }
 );
 
 // Radius distance
-pgApp.factory('distance__service', function($rootScope) {
+refis.factory('distance__service', function($rootScope) {
   var distance = {};
 
   distance.meters = '';
@@ -24,7 +24,7 @@ pgApp.factory('distance__service', function($rootScope) {
 
 
 // Shared variable for origin point
-pgApp.factory('origin__service', function($rootScope) {
+refis.factory('origin__service', function($rootScope) {
   var origin = {};
 
   // Add this to scope incase value changes
@@ -47,52 +47,154 @@ pgApp.factory('origin__service', function($rootScope) {
 
 });
 
-var map_controller = pgApp.controller('map__controller', function($scope, $http, distance__service, origin__service) {
+
+var slider_controller = refis.controller('heatmap__slider', function($scope, distance__service) {
+  $scope.slider = $( ".heatmap__slider" ).slider({
+    //orientation: "vertical",
+    range: "max",
+    min: 0,
+    max: 100,
+    step: 5,
+    value: 0,
+    slide: function( event, ui ) {
+      //console.log( (ui.value) );
+      $('.heatmap__control--results .value').text( (ui.value) );
+    },
+    // State change we must update step value - more of an inbetween
+    change: function( event, ui ) {
+      //distance__service.prepForBroadcast(-(ui.value));
+    }
+  });
+
+  /* BROADCAST! MAKE THE CHANGES! */
+  // Distance Changed, do something!
+  // $scope.$on('distanceBroadcast', function() {
+  //   console.log("slider cont: "+distance__service.meters);
+  //   //$scope.meters = 'SLIDER CONTROLLER: ' + distance__service.meters;
+  // });
+});
+
+
+var map_controller = refis.controller('map__controller', function($scope, $http, distance__service, origin__service) {
 
   $scope.originMarker = {};
 
   // Map: Create an array of styles.
+  // var styles = [
+  //   {
+  //     stylers: [
+  //       { saturation: -20 }
+  //     ]
+  //   },{
+  //     featureType: "road",
+  //     elementType: "geometry",
+  //     stylers: [
+  //       //{ lightness: 100 },
+  //       { visibility: "simplified" },
+  //       { "saturation": -100 },
+  //       { "lightness": -8 },
+  //       { "gamma": 1.18 }
+  //     ]
+  //   },{
+  //     featureType: "road",
+  //     elementType: "labels"
+  //   }
+  // ];
+
   var styles = [
     {
-      stylers: [
-        { saturation: -20 }
-      ]
-    },{
-      featureType: "road",
-      elementType: "geometry",
-      stylers: [
-        { lightness: 100 },
-        { visibility: "simplified" }
-      ]
-    },{
-      featureType: "road",
-      elementType: "labels"
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+          { "saturation": 0 },
+          { "lightness": 0 },
+          { "gamma": 0 }
+        ]
+    }, {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+          { "saturation": -100 },
+          { "gamma": 1 },
+          { "lightness": -24 }
+        ]
+    }, {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "administrative",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "transit",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+          { "saturation": 0 }
+        ]
+    }, {
+        "featureType": "road",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "administrative",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "landscape",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "poi",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
     }
-  ];
-
-  var heatMapData = [
-    { location: new google.maps.LatLng(1.372312, 103.764122), weight: 100},
-                new google.maps.LatLng(1.32561, 103.837525),
-
-    {location: new google.maps.LatLng(1.3186506, 103.7812757), weight: 100},
-    {location: new google.maps.LatLng(1.325835114, 103.9316646), weight: 100},
-    {location: new google.maps.LatLng(1.32561, 103.837525), weight: 90},
-    new google.maps.LatLng(1.2856911948692, 103.82977982275),
-    {location: new google.maps.LatLng(1.32561, 103.837525), weight: 100},
-
-    {location: new google.maps.LatLng(1.2857484727176, 103.82975128499), weight: 90},
-    {location: new google.maps.LatLng(1.2857199408323, 103.82975128237), weight: 100},
-    new google.maps.LatLng(1.2857197267548, 103.82975128499),
-    {location: new google.maps.LatLng(1.3161729386751, 103.83087515831), weight: 100},
-    new google.maps.LatLng(1.349282, 103.8669025898),
-    {location: new google.maps.LatLng(1.3909770297858, 103.91250733174), weight: 100},
-    {location: new google.maps.LatLng(1.2708745, 103.8133722), weight: 90}
   ];
 
   // Create a new StyledMapType object, passing it the array of styles,
   // as well as the name to be displayed on the map type control.
   var styledMap = new google.maps.StyledMapType(styles,
     {name: "Styled Map"});
+
+  $scope.heatMapData = [
+    { location: new google.maps.LatLng(1.372312, 103.764122), weight: 100},
+    { location: new google.maps.LatLng(1.32561, 103.837525), weight: 100},
+    { location: new google.maps.LatLng(1.32561, 103.837525), weight: 100},
+
+    { location: new google.maps.LatLng(1.2856911948692, 103.82977982275), weight: 100},
+
+    { location: new google.maps.LatLng(1.2857197267548, 103.82975128499), weight: 100},
+
+    { location: new google.maps.LatLng(1.349282, 103.8669025898), weight: 100},
+
+    { location: new google.maps.LatLng(1.32561, 103.837525), weight: 100},
+
+    {location: new google.maps.LatLng(1.3186506, 103.7812757), weight: 100},
+    {location: new google.maps.LatLng(1.325835114, 103.9316646), weight: 100},
+    {location: new google.maps.LatLng(1.32561, 103.837525), weight: 90},
+    {location: new google.maps.LatLng(1.32561, 103.837525), weight: 100},
+
+    {location: new google.maps.LatLng(1.2857484727176, 103.82975128499), weight: 90},
+    {location: new google.maps.LatLng(1.2857199408323, 103.82975128237), weight: 100},
+    {location: new google.maps.LatLng(1.3161729386751, 103.83087515831), weight: 100},
+
+    {location: new google.maps.LatLng(1.3909770297858, 103.91250733174), weight: 100},
+    {location: new google.maps.LatLng(1.2708745, 103.8133722), weight: 90}
+  ];
+
 
   var mapDOMElement = document.getElementById('heatmap'),
   control_state = true,
@@ -134,40 +236,40 @@ var map_controller = pgApp.controller('map__controller', function($scope, $http,
   // get markers was here
 
 
-  $scope.originMarker = new google.maps.Marker({
-      map: $scope.map,
-      position: new google.maps.LatLng(origin__service.latitude, origin__service.longitude),
-      title: origin__service.fullAddress,
-      icon: iconBase + 'schools_maps.png',
-      animation: google.maps.Animation.DROP
+  // $scope.originMarker = new google.maps.Marker({
+  //     map: $scope.map,
+  //     position: new google.maps.LatLng(origin__service.latitude, origin__service.longitude),
+  //     title: origin__service.fullAddress,
+  //     icon: iconBase + 'schools_maps.png',
+  //     animation: google.maps.Animation.DROP
 
-  });
+  // });
 
   $scope.mapCenter = $scope.map.getCenter();
 
-  // Lets create my origin position
-  var createOrigin = function (originMarker){
-    originMarker.content = '<div class="infoWindowContent">Test Content</div>';
+  // // Lets create my origin position
+  // var createOrigin = function (originMarker){
+  //   originMarker.content = '<div class="infoWindowContent">Test Content</div>';
 
-    google.maps.event.addListener(originMarker, 'click', function(){
-        $scope.infoWindow.setContent('<h2>' + originMarker.title + '</h2>');
-        $scope.infoWindow.open($scope.map, originMarker);
-    });
+  //   google.maps.event.addListener(originMarker, 'click', function(){
+  //       $scope.infoWindow.setContent('<h2>' + originMarker.title + '</h2>');
+  //       $scope.infoWindow.open($scope.map, originMarker);
+  //   });
 
-    //$scope.markers.push(originMarker);
-    $scope.originMarker = originMarker;
-    $scope.circle = new google.maps.Circle({
-      map: $scope.map,
-      radius: 3000,    // km in metres
-      strokeColor: '#333',
-      strokeOpacity: 0.4,
-      strokeWeight: 2,
-      fillColor: '#333',
-      fillOpacity: 0.35
-    });
+  //   //$scope.markers.push(originMarker);
+  //   $scope.originMarker = originMarker;
+  //   $scope.circle = new google.maps.Circle({
+  //     map: $scope.map,
+  //     radius: 3000,    // km in metres
+  //     strokeColor: '#333',
+  //     strokeOpacity: 0.4,
+  //     strokeWeight: 2,
+  //     fillColor: '#333',
+  //     fillOpacity: 0.35
+  //   });
 
-    $scope.circle.bindTo('center', $scope.originMarker, 'position');
-  }
+  //   $scope.circle.bindTo('center', $scope.originMarker, 'position');
+  // }
 
   var createRadius = function (marker, meters){
       // Add circle overlay and bind to originMarker
@@ -258,7 +360,7 @@ var map_controller = pgApp.controller('map__controller', function($scope, $http,
   //getMarkers();
 
   // Create the origin
-  createOrigin($scope.originMarker);
+  //createOrigin($scope.originMarker);
 
   /* BROADCAST! MAKE THE CHANGES! */
   // Distance Changed, do something!
@@ -315,7 +417,7 @@ var map_controller = pgApp.controller('map__controller', function($scope, $http,
   // var hmap = $scope.map.getMap(); // add getMap() here to get the map instance
   //   console.log($scope.map);
   var heatmap = new google.maps.visualization.HeatmapLayer({
-    data: heatMapData
+    data: $scope.heatMapData
   });
   heatmap.setMap($scope.map);
 });

@@ -31,8 +31,9 @@
 {% block content %}
 <div ng-controller="map__controller" class="map__container" >
   <div id="heatmap" class="angular-google-map-container"></div>
-
 </div>
+
+{% include "RefiBundle:Application:controls.heatmap.html.twig" %}
 {% endblock content %}
 
 

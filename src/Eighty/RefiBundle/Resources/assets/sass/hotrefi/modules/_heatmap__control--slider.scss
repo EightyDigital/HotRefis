@@ -1,0 +1,28 @@
+.heatmap__control--slider {
+  width:420px;
+  float:left;
+  padding:25px 0 40px 0;
+  margin:0 25px;
+  background:url(#{$images}/heatmap-scale.png) no-repeat bottom center;
+
+  .ui-slider {
+    background: -webkit-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
+    background: -o-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
+    background: linear-gradient(to right, #00d5c3, #f3ed7b, #ee4363);
+    border: 1px solid #666;
+    border-radius: 0;
+    height: 30px;
+    margin-bottom: 15px;
+    position:relative;
+  }
+  .ui-slider-handle {
+    height: 40px;
+    width: 30px;
+    border: 0;
+    position:absolute;
+    top:-5px;
+    margin-left:-15px;
+    background:url(#{$images}/handle.png) no-repeat center/cover;
+  }
+
+}

@@ -60,6 +60,13 @@
     <script>window.jQuery || document.write("<script src=\"{{ asset_url }}\"><\/script>")</script>
   {% endjavascripts %}
 
+  <!-- Jquery UI -->
+  {% javascripts
+    '@RefiBundle/Resources/assets/js/vendor/jquery-ui.min.js'
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+
 
   {# Modernizer CDN || Load from local #}
   <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>

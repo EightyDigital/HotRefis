@@ -1,0 +1,26 @@
+<div class="pg__width">
+  <div class="heatmap__control">
+    <div class="heatmap__control--legend">
+      <h2>Heatmap</h2>
+      <p>Prospect Rating</p>
+      <ul class="rating--colors">
+        <li><span class="rating rating--poor"></span><span class="label">0-40</span></li>
+        <li><span class="rating rating--avg"></span><span class="label">40-60</span></li>
+        <li><span class="rating rating--good"></span><span class="label">60-100</span></li>
+      </ul>
+    </div>
+    <div class="heatmap__control--slider">
+      <div ng-controller="heatmap__slider" class="heatmap__slider--wrap">
+        <div class="heatmap__slider"></div>
+      </div>
+    </div>
+    <div class="heatmap__control--results">
+      <div class="label--wrap">
+        <span class="label">Potential Prospects</span>
+      </div>
+      <div class="value--wrap">
+        <span class="value"></span>
+      </div>
+    </div>
+  </div>
+</div>
