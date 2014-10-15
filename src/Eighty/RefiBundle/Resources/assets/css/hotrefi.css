@@ -6423,14 +6423,13 @@ table {
   border-top: 1px solid #ccc;
 }
 
-/* line 1, ../sass/hotrefi/modules/_hd__auxwrap.scss */
-.hd__auxwrap {
-  position: absolute;
-  right: 20px;
-  top: 10px;
+/* line 1, ../sass/hotrefi/modules/_account__status.scss */
+.account__status {
+  float: right;
+  margin: 10px 10px 0 0;
 }
-/* line 5, ../sass/hotrefi/modules/_hd__auxwrap.scss */
-.hd__auxwrap a {
+/* line 4, ../sass/hotrefi/modules/_account__status.scss */
+.account__status a {
   position: relative;
   display: block;
   color: #fff;
@@ -6442,8 +6441,8 @@ table {
   -o-border-radius: 50%;
   border-radius: 50%;
 }
-/* line 13, ../sass/hotrefi/modules/_hd__auxwrap.scss */
-.hd__auxwrap a:before {
+/* line 12, ../sass/hotrefi/modules/_account__status.scss */
+.account__status a:before {
   font-family: FontAwesome;
   content: "\f007";
   font-size: 2.15385em;
@@ -6451,6 +6450,24 @@ table {
   font-weight: normal;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
+}
+
+/* line 1, ../sass/hotrefi/modules/_status__wrap.scss */
+.status__wrap {
+  float: right;
+  margin: 10px 20px 0 0;
+  text-align: left;
+}
+/* line 5, ../sass/hotrefi/modules/_status__wrap.scss */
+.status__wrap p {
+  margin: 0;
+  color: #fff;
+  font-size: 1.07692em;
+  margin-right: 10px;
+}
+/* line 11, ../sass/hotrefi/modules/_status__wrap.scss */
+.status__wrap .credits {
+  font-weight: 600;
 }
 
 /* line 1, ../sass/hotrefi/modules/_global__nav.scss */

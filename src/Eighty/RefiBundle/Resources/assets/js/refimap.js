@@ -48,7 +48,7 @@ refis.factory('origin__service', function($rootScope) {
 });
 
 
-var slider_controller = refis.controller('heatmap__slider', function($scope, distance__service) {
+var report__crud = refis.controller('heatmap__slider', function($scope, distance__service) {
   $scope.slider = $( ".heatmap__slider" ).slider({
     //orientation: "vertical",
     range: "max",
@@ -138,7 +138,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
         "featureType": "water",
         "elementType": "geometry.fill",
         "stylers": [
-          { "saturation": 0 }
+          { "saturation": -50 }
         ]
     }, {
         "featureType": "road",
