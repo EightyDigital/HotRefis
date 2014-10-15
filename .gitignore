@@ -13,3 +13,4 @@
 .vagrant/
 UPGRADE-*
 UPGRADE.md
+.sass-cache/
