@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Eighty\RefiBundle\Entity\Prospectloan" table="prospectloan">
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="prospectId" type="bigint" column="prospect_id" nullable="true"/>
+    <field name="transactionId" type="bigint" column="transaction_id" nullable="true"/>
+    <field name="loanAmount" type="float" column="loan_amount" precision="10" scale="0" nullable="true"/>
+    <field name="loanDate" type="datetime" column="loan_date" nullable="true"/>
+    <field name="loanBank" type="string" column="loan_bank" length="255" nullable="true"/>
+    <field name="loanTerm" type="integer" column="loan_term" nullable="true"/>
+    <field name="totalPrice" type="float" column="total_price" precision="10" scale="0" nullable="true"/>
+    <field name="interestRate" type="float" column="interest_rate" precision="10" scale="0" nullable="true"/>
+    <field name="otherDebt" type="float" column="other_debt" precision="10" scale="0" nullable="true"/>
+    <field name="selfDeclared" type="boolean" column="self_declared" nullable="true"/>
+    <field name="valid" type="boolean" column="valid" nullable="true"/>
+  </entity>
+</doctrine-mapping>

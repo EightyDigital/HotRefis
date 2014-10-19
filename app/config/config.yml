@@ -74,3 +74,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+parameters:
+    security.encoder.digest.class: Eighty\RefiBundle\Security\MessageDigestPasswordEncoder

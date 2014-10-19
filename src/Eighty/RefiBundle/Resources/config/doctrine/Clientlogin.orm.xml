@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Eighty\RefiBundle\Entity\Clientlogin" table="clientlogin">
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="clientId" type="bigint" column="client_id" nullable="true"/>
+    <field name="loginDate" type="datetime" column="login_date" nullable="true"/>
+    <field name="clientIp" type="string" column="client_ip" length="100" nullable="true"/>
+    <field name="logoffDate" type="datetime" column="logoff_date" nullable="true"/>
+  </entity>
+</doctrine-mapping>

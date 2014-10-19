@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Eighty\RefiBundle\Entity\Property" table="property">
+    <indexes>
+      <index name="propertyname" columns="propertyname"/>
+      <index name="propertyid" columns="propertyid"/>
+      <index name="propertykey" columns="propertykey"/>
+      <index name="postalcode" columns="postalcode"/>
+    </indexes>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="propertyid" type="bigint" column="propertyid" nullable="true"/>
+    <field name="propertyname" type="string" column="propertyname" length="50" nullable="true"/>
+    <field name="typecode" type="string" column="typecode" length="5" nullable="true"/>
+    <field name="typename" type="string" column="typename" length="45" nullable="true"/>
+    <field name="typegroup" type="string" column="typegroup" length="45" nullable="true"/>
+    <field name="developername" type="string" column="developername" length="124" nullable="true"/>
+    <field name="floors" type="string" column="floors" length="30" nullable="true"/>
+    <field name="tenurecode" type="string" column="tenurecode" length="5" nullable="true"/>
+    <field name="completedyear" type="string" column="completedyear" length="10" nullable="true"/>
+    <field name="totalunits" type="string" column="totalunits" length="10" nullable="true"/>
+    <field name="postalcode" type="string" column="postalcode" length="6" nullable="true"/>
+    <field name="streetnumber" type="string" column="streetnumber" length="45" nullable="true"/>
+    <field name="buildingname" type="string" column="buildingname" length="7" nullable="true"/>
+    <field name="description" type="text" column="description" nullable="true"/>
+    <field name="latitude" type="text" column="latitude" nullable="true"/>
+    <field name="longitude" type="text" column="longitude" nullable="true"/>
+    <field name="districtcode" type="string" column="districtcode" length="5" nullable="true"/>
+    <field name="areacode" type="string" column="areacode" length="45" nullable="true"/>
+    <field name="regioncode" type="string" column="regioncode" length="45" nullable="true"/>
+    <field name="fulladdress" type="string" column="fulladdress" length="100" nullable="true"/>
+    <field name="streetname1" type="string" column="streetname1" length="45" nullable="true"/>
+    <field name="countrycode" type="string" column="countrycode" length="45" nullable="true"/>
+    <field name="estatename" type="string" column="estatename" length="45" nullable="true"/>
+    <field name="propertykey" type="string" column="propertykey" length="45" nullable="true"/>
+    <field name="facilitynames" type="string" column="facilitynames" length="300" nullable="true"/>
+    <field name="facilitycodes" type="string" column="facilitycodes" length="300" nullable="true"/>
+    <field name="isprimarybuilding" type="integer" column="isprimarybuilding" nullable="true"/>
+    <field name="issingleunit" type="string" column="issingleunit" length="5" nullable="true"/>
+    <field name="existingfloors" type="string" column="existingfloors" length="1000" nullable="true"/>
+    <field name="existingstacks" type="string" column="existingstacks" length="1000" nullable="true"/>
+    <field name="estateid" type="string" column="estateid" length="45" nullable="true"/>
+    <field name="estatecode" type="string" column="estatecode" length="45" nullable="true"/>
+  </entity>
+</doctrine-mapping>

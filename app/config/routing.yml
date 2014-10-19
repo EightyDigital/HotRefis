@@ -1,8 +1,10 @@
-eighty_profile:
-    resource: "@EightyProfileBundle/Resources/config/routing.yml"
-    prefix:   /
-
 refi:
     resource: "@RefiBundle/Resources/config/routing.yml"
     prefix:   /
 
+index:
+    pattern:   /
+    defaults:  
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /dashboard/
+        permanent: true

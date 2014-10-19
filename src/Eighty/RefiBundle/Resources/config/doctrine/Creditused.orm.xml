@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Eighty\RefiBundle\Entity\Creditused" table="creditused">
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="clientId" type="bigint" column="client_id" nullable="true"/>
+    <field name="date" type="datetime" column="date" nullable="true"/>
+    <field name="creditUsed" type="integer" column="credit_used" nullable="true"/>
+    <field name="smsUsed" type="integer" column="sms_used" nullable="true"/>
+  </entity>
+</doctrine-mapping>

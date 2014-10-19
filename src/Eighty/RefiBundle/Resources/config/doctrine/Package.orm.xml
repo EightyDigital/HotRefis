@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Eighty\RefiBundle\Entity\Package" table="package">
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="packageName" type="string" column="package_name" length="20" nullable="true"/>
+    <field name="packageDesc" type="text" column="package_desc" nullable="true"/>
+    <field name="noSmsMonthly" type="integer" column="no_sms_monthly" nullable="true"/>
+    <field name="noSmsDaily" type="integer" column="no_sms_daily" nullable="true"/>
+    <field name="noCredits" type="integer" column="no_credits" nullable="true"/>
+    <field name="valid" type="boolean" column="valid" nullable="true"/>
+  </entity>
+</doctrine-mapping>
