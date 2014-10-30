@@ -1,0 +1,704 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000351}}
+html, body { margin: 0; padding: 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000356}}
+body { font-family: Arial; background: white; color: #4d4d4d; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000365}}
+.clr { clear: both; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000367}}
+a { text-decoration: none; color: white; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000371}}
+a:hover { color: #cccccc; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000375}}
+img { outline: none; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000379}}
+hr { height: 1px; background: #c8cbd4; border: 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000385}}
+.aligncenter { text-align: center; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000386}}
+.alignleft { text-align: left; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000387}}
+.alignright { text-align: right; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000390}}
+header .bar1 { background-color: #00c0ff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000392}}
+header .bar1 h1 { margin: 0; padding: 20px 0; font-weight: 700; font-size: 2.3em; text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\0000399}}
+header .bar1 h1 a { text-decoration: none; color: #fff !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003108}}
+#the_map #map-canvas { min-width: 100%; height: 300px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003115}}
+.nav_menu { background: #063141; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003118}}
+.nav_menu ul { background: transparent; margin: 0; padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003123}}
+.nav_menu ul li { list-style: none; display: inline-block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003127}}
+.nav_menu ul li a { display: inline-block; padding: 15px 10px 20px; text-decoration: none; font-family: Arial; font-size: .9em; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003127}}
+  .nav_menu ul li a { font-size: 0; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003127}}
+  .nav_menu ul li a { padding: 10px 5px 15px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003140}}
+.nav_menu ul li a:before { display: inline-block; font-size: 2.3em; margin-right: 10px; position: relative; bottom: -5px; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003140}}
+  .nav_menu ul li a:before { font-size: 30px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003150}}
+.nav_menu ul li a.ion-ios7-settings:before { transform: rotate(90deg); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003153}}
+.nav_menu ul li a:hover { background: #434e62; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003155}}
+.nav_menu ul li.current_page a { background: #434e62; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003159}}
+  .nav_menu ul li:nth-child(3) { clear: both; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003164}}
+  .nav_menu ul li:nth-child(3) { clear: both; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003171}}
+.nav_menu ul.breadcrumb li { text-shadow: 0 0 0 !important; color: #fff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003175}}
+.nav_menu ul.breadcrumb li:before { display: inline-block; content: '>'; margin-right: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003180}}
+.nav_menu ul.breadcrumb li:first-child:before { content: ''; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003183}}
+.nav_menu ul.breadcrumb li:first-child a.ion-ios7-home-outline:before { color: #00c1fe; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003190}}
+#Certainty { padding: 20px 0 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003193}}
+#Certainty .pagetitle-bar { margin-bottom: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003197}}
+#Certainty .filterLabel { font-size: .75em; text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003201}}
+#Certainty .filter40-60, #Certainty .filter60-80, #Certainty .filter80-100 { width: 50px; height: 20px; margin: 0 auto; }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003201}}
+  #Certainty .filter40-60, #Certainty .filter60-80, #Certainty .filter80-100 { width: 80%; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003210}}
+#Certainty .filter40-60 { background: #00d5c3; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003213}}
+#Certainty .filter60-80 { background: #f3ed7b; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003216}}
+#Certainty .filter80-100 { background: #ee4363; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003220}}
+  #Certainty .filter40-60, #Certainty .filter60-80, #Certainty .filter80-100 { width: 100%; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003225}}
+#Certainty .pl-head { font-size: 1.1em; color: #4d4d4d; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003229}}
+#Certainty .pl-head i:before { color: white; background: #00baff; padding: 5px 13px; font-size: 1.6em; border-radius: 50%; vertical-align: middle; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003239}}
+#Certainty .title { margin: 0; padding: 0; font-weight: 100; font-size: 2.3em; }
+@media only screen and (max-width: 1200px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003239}}
+  #Certainty .title { font-size: 2em; } }
+@media only screen and (max-width: 980px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003239}}
+  #Certainty .title { font-size: 1.5em; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003252}}
+#Certainty .desc { font-size: .8em; }
+@media only screen and (max-width: 1200px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003252}}
+  #Certainty .desc { font-size: .7em; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003260}}
+#Certainty .certainty-slider { background: -webkit-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363); background: -o-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363); background: linear-gradient(to right, #00d5c3, #f3ed7b, #ee4363); border: 1px solid #666; border-radius: 0; height: 25px; margin-bottom: 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003270}}
+#Certainty .certainty-slider .ui-corner-all { height: 40px; width: 30px; border: 0; background: url(images/handle.png) no-repeat center/cover; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003282}}
+#Certainty .scale img { margin-left: 1px; width: 100%; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003282}}
+  #Certainty .scale img { margin-bottom: 10px; min-width: 100%; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003282}}
+  #Certainty .scale img { margin-bottom: 10px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003296}}
+#Certainty .scale_display { border: 1px solid #a0a7af; background: #fff; border-radius: 5px; }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003296}}
+  #Certainty .scale_display { margin-bottom: 10px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003304}}
+#Certainty .scale_display span { display: inline-block; background: #e9edf0; padding: 8px 20px; border-radius: 5px 0 0 5px; font-size: 1em; text-align: center; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003304}}
+  #Certainty .scale_display span { display: block; border-radius: 5px 5px 0 0; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003304}}
+  #Certainty .scale_display span { display: block; border-radius: 5px 5px 0 0; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003321}}
+#Certainty .scale_display input { display: inline-block; padding: 8px 0; background: none; border-radius: 0; border: 0; outline: 0; color: #4d4d4d; font-size: 1.5em; position: relative; bottom: -5px; -webkit-box-shadow: 0 0 0 0; box-shadow: 0 0 0 0; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003321}}
+  #Certainty .scale_display input { display: block; width: 100%; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003321}}
+  #Certainty .scale_display input { display: block; width: 100%; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003345}}
+#Certainty .scale_details .btn-gen { float: right; margin-top: 20px; padding: 0 10px !important; font-size: 1.1em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003351}}
+#Certainty .scale_details .ion-ios7-loop-strong:before { font-weight: 100; font-size: 1.5em; -ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90deg); padding: 8px 0 13px; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003360}}
+  #Certainty .scale_details button { margin-bottom: 10px; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003365}}
+  #Certainty .scale_details button { margin-bottom: 10px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003370}}
+#Certainty .quick-icons { text-align: right; color: #4d4d4d; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003370}}
+  #Certainty .quick-icons { clear: both; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003370}}
+  #Certainty .quick-icons { clear: both; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003385}}
+.btn-gen { border: 0; outline: 0; padding: 10px 40px; border-radius: 5px; border-bottom-style: solid; font-size: 1.5em; font-family: Arial; font-weight: 100; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003396}}
+.btn-green { background: #00d5c3; border-bottom-color: #01a99c; color: #fff; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003401}}
+.btn-green:active { background: #01a99c; border-bottom-color: #027970; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003405}}
+.btn-lime { background: #aad178 url(images/btn-limebg.gif) repeat-x left top; border: 1px solid #9aca5c; color: #fff; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003410}}
+.btn-lime:active { background: #9aca5c; border-color: #86b14e; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003414}}
+.btn-blue { background: #6ad2eb url(images/btn-bluebg.gif) repeat-x left top; border: 1px solid #019dd6; color: #fff; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003419}}
+.btn-blue:active { background: #009acc; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003422}}
+.btn-red { background: #e14d43 url(images/btn-redbg.gif) repeat-x left top; border: 1px solid #c64037; color: #fff; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003427}}
+.btn-red:active { background: #d1463d; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003430}}
+.btn-yellow { background: #f7be64; border: 1px solid #f39c11; color: #fff; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003438}}
+.ion-printer { background: #01b9ff; color: #fff; border: 1px solid #009ed8; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003443}}
+.fa-paper-plane { background: #f7be64; color: #fff; border: 1px solid #f0a436; padding: 10px 14px 10px 8px !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003449}}
+.ion-printer, .fa-paper-plane { font-size: 2em; border-radius: 50%; padding: 10px 13px; margin: 0 3px 5px 0; cursor: pointer; }
+@media only screen and (max-width: 1200px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003449}}
+  .ion-printer, .fa-paper-plane { font-size: 3em; padding: 5px 10px; } }
+@media only screen and (max-width: 980px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003449}}
+  .ion-printer, .fa-paper-plane { font-size: 1.5em; padding: 5px 10px; } }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003449}}
+  .ion-printer, .fa-paper-plane { font-size: 3em; } }
+
+@media only screen and (min-width: 1200px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003468}}
+  .ion-ios7-paperplane { padding: 10px 20px; } }
+@media only screen and (max-width: 1200px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003468}}
+  .ion-ios7-paperplane { padding: 5px 15px; } }
+@media only screen and (max-width: 980px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003468}}
+  .ion-ios7-paperplane { padding: 5px 10px; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003480}}
+.filter-bar { margin: 0 auto; margin-bottom: 20px; }
+@media only screen and (max-width: 1400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003486}}
+  .filter-bar button { margin-bottom: 10px; font-size: 1.1em; padding: 10px 20px; } }
+@media only screen and (max-width: 980px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003493}}
+  .filter-bar button { margin-bottom: 10px; font-size: .8em; padding: 10px 10px; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003500}}
+  .filter-bar button { margin-bottom: 10px; font-size: 1.3em; padding: 10px 20px; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003508}}
+ul.filter-list { margin: 0; padding: 0; color: #888; float: left; width: 70%; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003508}}
+  ul.filter-list { margin-bottom: 10px; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003508}}
+  ul.filter-list { margin-bottom: 10px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003522}}
+ul.filter-list li { list-style: none; font-family: Arial; font-size: 1em; background: #fff; border: 1px solid #ced0d5; position: relative; padding: 0 10px 0 0; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003522}}
+  ul.filter-list li { font-size: .8em; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003535}}
+ul.filter-list li ul { margin: 0; padding: 0; width: 100%; position: absolute; z-index: 99999; display: none; border: 1px solid #ced0d5; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003544}}
+ul.filter-list li ul li { background: #fff; width: 100%; padding-right: 0; border: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003550}}
+ul.filter-list li ul li a { display: block; width: 100%; color: #111; text-decoration: none; font-family: Arial; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003557}}
+ul.filter-list li ul li a:before { text-align: center; padding: 10px; font-size: 1.3em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003562}}
+ul.filter-list li ul li a:hover:before { color: #57d5fe; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003566}}
+ul.filter-list li ul li:hover { background: #00c0ff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003571}}
+ul.filter-list li:hover ul { display: block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003574}}
+ul.filter-list li:before { font-family: 'FontAwesome'; display: inline-block; margin-right: 10px; padding: 10px; background: #00c0ff; color: #fff; cursor: pointer; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003585}}
+.prospect-box { clear: both; border: 1px solid #ced0d5; border-radius: 5px; padding: 10px; margin-bottom: 10px; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003585}}
+  .prospect-box { width: 90%; margin: 0 auto 10px; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003585}}
+  .prospect-box { width: 90%; margin: 0 auto 10px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003601}}
+.prospect-box .pb-label { text-align: center; font-size: 1.1em; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003601}}
+  .prospect-box .pb-label { margin-bottom: 10px; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003601}}
+  .prospect-box .pb-label { margin-bottom: 10px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003611}}
+.prospect-box .pb-label i.ionicons, .prospect-box .pb-label i.fa { display: block; width: 100%; font-size: 3em; color: #4d4d4d; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003619}}
+.prospect-box .slider_result { border: 1px solid #dae1e9; border-radius: 3px; padding: 5px; margin-bottom: 10px; width: 50%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003627}}
+.prospect-box .property_type_val { border: 1px solid #e9edf2; border-radius: 5px; padding: 0 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003632}}
+.prospect-box .cbchoice { margin-right: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003635}}
+.prospect-box input[type="radio"] { vertical-align: top; margin-right: 3px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003640}}
+.prospect-box .ui-slider { height: 20px; background: #e9edf0; border: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003650}}
+.prospect-box .ui-slider .ui-slider-handle { width: 22px; height: 29px; border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important; background: url(images/handle.png) no-repeat center; border: 0; outline: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003668}}
+.prospect-box .ui-slider .ui-slider-range { background: #00c0ff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003673}}
+.prospect-box .ui-slider-handle { cursor: pointer; }
+@media only screen and (max-width: 980px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003678}}
+  .prospect-box input[readonly] { width: 95%; } }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003683}}
+  .prospect-box input[readonly] { width: 95%; } }
+@media only screen and (max-width: 400px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003688}}
+  .prospect-box input[readonly] { width: 95%; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003696}}
+#Prospect-Table { margin: 0 0 20px 0; padding: 0; width: 100%; border: 1px solid #ced0d5; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003702}}
+#Prospect-Table th, #Prospect-Table td { padding: 8px; text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003706}}
+#Prospect-Table th { font-weight: 100; font-size: 1em; background: #063141; color: #fff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003712}}
+#Prospect-Table th .ion-ios7-reload { font-size: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003715}}
+#Prospect-Table th .fa-angle-left, #Prospect-Table th .fa-angle-right { font-size: 2em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003719}}
+#Prospect-Table .off { color: #686e7c; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003722}}
+#Prospect-Table th.firstcol { background: #c7d4e2; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003726}}
+#Prospect-Table .thleft { float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003727}}
+#Prospect-Table .thright { float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003729}}
+#Prospect-Table .firstcol { width: 3%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003734}}
+#Prospect-Table tbody td { font-size: .85em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003737}}
+#Prospect-Table tbody td hr.C, #Prospect-Table tbody td hr.M, #Prospect-Table tbody td hr.Y { width: 50px; height: 19px; margin: 0 auto; border: 1px solid #ccc; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003743}}
+#Prospect-Table tbody td hr.C { background: #00d5c3; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003744}}
+#Prospect-Table tbody td hr.M { background: #ee4363; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003745}}
+#Prospect-Table tbody td hr.Y { background: #f3ed7b; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003746}}
+#Prospect-Table tbody td a { color: #555; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003750}}
+#Prospect-Table tbody .check, #Prospect-Table tbody .star { width: 5%; color: #545863; cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003755}}
+#Prospect-Table tbody .check i, #Prospect-Table tbody .star i { font-size: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003759}}
+#Prospect-Table tbody .check.on { background: #00c0ff; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003763}}
+#Prospect-Table tbody .star.son { color: white; text-shadow: 0 0 5px #444; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003773}}
+.profile-a h1.coltitle, .profile-b h1.coltitle, .calculator h1.coltitle { font-size: 1.6em; font-weight: 700; color: #444; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003773}}
+  .profile-a h1.coltitle, .profile-b h1.coltitle, .calculator h1.coltitle { text-align: center; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003783}}
+.profile-a .box1, .profile-a .box2, .profile-a .box3, .profile-b .box1, .profile-b .box2, .profile-b .box3, .calculator .box1, .calculator .box2, .calculator .box3 { padding: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003788}}
+.profile-a .row1 .profile-img, .profile-b .row1 .profile-img, .calculator .row1 .profile-img { background: #999; box-shadow: 0 0 0 8px #efefef, 0 0 0 13px #555f78; border-radius: 50%; margin: 25px auto; width: 130px; height: 130px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003800}}
+.profile-a .row2 h3.colsubtitle, .profile-b .row2 h3.colsubtitle, .calculator .row2 h3.colsubtitle { font-size: 1.3em; margin: 50px auto 30px; color: #444; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003800}}
+  .profile-a .row2 h3.colsubtitle, .profile-b .row2 h3.colsubtitle, .calculator .row2 h3.colsubtitle { text-align: center; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003809}}
+.profile-a .row2 .buttons, .profile-b .row2 .buttons, .calculator .row2 .buttons { margin-top: 50px; text-align: right; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003809}}
+  .profile-a .row2 .buttons, .profile-b .row2 .buttons, .calculator .row2 .buttons { margin-right: 20px; margin-bottom: 50px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003817}}
+  .profile-a .row2 .buttons button, .profile-b .row2 .buttons button, .calculator .row2 .buttons button { font-size: .9em; padding: 10px 20px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003823}}
+.profile-a .row2 .buttons button:first-child, .profile-b .row2 .buttons button:first-child, .calculator .row2 .buttons button:first-child { margin-right: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003829}}
+.profile-a .box1, .profile-b .box1, .calculator .box1 { background: #efefef; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003833}}
+.profile-a .box2, .profile-b .box2, .calculator .box2 { background: #ccc; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003837}}
+.profile-a .box3, .profile-b .box3, .calculator .box3 { background: #efefef; color: #444; border: 1px solid #999; border-radius: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003843}}
+.profile-a .box3 .coltitle, .profile-b .box3 .coltitle, .calculator .box3 .coltitle { border-bottom: 1px solid #afafaf; color: #444; margin: 10px 0 !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003855}}
+.profile-a .profile-info, .calculator .profile-info { padding: 30px 0; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003855}}
+  .profile-a .profile-info, .calculator .profile-info { text-align: center; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003862}}
+.profile-a .profile-info .name, .calculator .profile-info .name { margin: 0; padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003866}}
+.profile-a .profile-info .title, .calculator .profile-info .title { margin: 5px 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003869}}
+.profile-a .profile-info .loc, .calculator .profile-info .loc { color: #57d6ff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003872}}
+.profile-a .profile-info .loc i, .calculator .profile-info .loc i { display: inline-block; margin-right: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003876}}
+.profile-a .profile-info .loc i:before, .calculator .profile-info .loc i:before { font-size: 1.5em; position: relative; bottom: -3px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003884}}
+.profile-a .box2, .calculator .box2 { padding-left: 30px; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003884}}
+  .profile-a .box2, .calculator .box2 { padding-left: 150px; } }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003891}}
+  .profile-a .box2 .coltitle, .calculator .box2 .coltitle { text-align: left; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003896}}
+.profile-a .box2 .clr, .calculator .box2 .clr { margin: 0 auto; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003899}}
+.profile-a .box2 label, .profile-a .box2 .text, .calculator .box2 label, .calculator .box2 .text { font-size: 1.1em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003902}}
+.profile-a .box2 label, .calculator .box2 label { width: 40%; float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003906}}
+.profile-a .box2 .text, .calculator .box2 .text { float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003910}}
+.profile-a .box2 .bulleted, .calculator .box2 .bulleted { margin-left: 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003913}}
+.profile-a .box2 .bulleted i, .calculator .box2 .bulleted i { margin-right: 5px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003920}}
+.s1, .s2, .s3 { font-weight: normal; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003923}}
+.s3 { font-size: 2em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003924}}
+.s2 { font-size: 1em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003925}}
+.s1 { font-size: .9em; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003927}}
+.inferred-data { padding: 30px !important; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003927}}
+  .inferred-data { padding-left: 150px !important; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003934}}
+.inferred-data .desc { margin-bottom: 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003937}}
+.inferred-data .desc label { display: block; width: 80% !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003941}}
+.inferred-data .desc label + div { clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003946}}
+.inferred-data img.scale-result { padding: 10px 30px; background: #283349; border-radius: 5px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003953}}
+.prembox { padding-left: 40px !important; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003953}}
+  .prembox { padding-left: 150px !important; margin-bottom: 10px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003961}}
+.prembox .prembox-title { margin-bottom: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003964}}
+.prembox ul { margin: 0; padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003968}}
+.prembox ul li { list-style: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003971}}
+.prembox ul li:before { font-family: "FontAwesome"; content: "\f111"; vertical-align: middle; font-size: .3em; margin-right: 5px; color: #444; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003985}}
+.profile-b .mdetails .s2 { font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003989}}
+.profile-b .mdetails .ionicons { font-size: 1.8em; vertical-align: middle; text-align: center; width: 30px; }
+@media only screen and (max-width: 767px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\00003998}}
+  .profile-b .dim_stab-box3 { width: 95%; margin: 0 auto; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031004}}
+.profile-b .box3 { padding: 20px 30px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031007}}
+.profile-b .box3 .clr { margin: 0 auto; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031010}}
+.profile-b .box3 label, .profile-b .box3 .text { font-size: 1.1em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031013}}
+.profile-b .box3 label { width: 40%; float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031017}}
+.profile-b .box3 .text { float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031021}}
+.profile-b .box3 .bulleted { margin-left: 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031024}}
+.profile-b .box3 .bulleted i { width: 15px; font-size: .9em; vertical-align: middle; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031031}}
+.profile-b .box3 img.scale-result { background: none; border: 0; border-radius: 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031041}}
+body.report { background: #eaedf2; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031044}}
+body.report img { width: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031048}}
+body.report .nav_menu { margin-bottom: 50px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031052}}
+body.report .whitebox { background: #fff; color: #777; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031056}}
+body.report .whitebox .pad { padding: 22px 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031060}}
+body.report .whitebox .head { font-size: 1.8em; border-bottom: 1px solid #f1f1f1; color: #3a4364; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031066}}
+body.report .whitebox .fa-file-text:before { color: #fff; background: #00c0ff; width: 75px; padding: 10px 13px; border-radius: 50%; margin-right: 10px; font-size: 1em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031076}}
+body.report .whitebox .text { padding-left: 75px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031082}}
+body.report .row1, body.report .row2, body.report .row3, body.report .row4, body.report .row5, body.report .row6, body.report .row7 { margin-bottom: 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031088}}
+body.report .row2 .whitebox { color: #394261 !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031092}}
+body.report .row2 .head { border-bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031096}}
+body.report .row2 .cvr-comp { width: 70%; margin: 0 auto; border: 1px solid #f1f1f1; border-width: 1px 0; padding: 20px 0; font-size: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031104}}
+body.report .row2 .cvr-comp strong { display: inline-block; font-size: 1.5em; margin-bottom: 10px; }
+@media only screen and (max-width: 980px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031104}}
+  body.report .row2 .cvr-comp strong { font-size: 1.1em; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031113}}
+body.report .row2 .cvr-comp .from { text-align: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031116}}
+body.report .row2 .cvr-comp .mid { text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031119}}
+body.report .row2 .cvr-comp .to { text-align: left; }
+@media only screen and (max-width: 980px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031124}}
+  body.report .row2 .cvr-comp .from, body.report .row2 .cvr-comp .mid, body.report .row2 .cvr-comp .to { text-align: center; font-size: .9em; margin-bottom: 10px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031132}}
+body.report .row2 .note { padding: 20px 0 40px; font-size: 1.5em; }
+@media only screen and (max-width: 980px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031132}}
+  body.report .row2 .note { font-size: 1em; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031142}}
+body.report .icon-cvr { background: #1dbbe2 url("images/icon-cvr.gif") no-repeat center; width: 31px; height: 29px; padding: 10px 25px; margin-right: 10px; border-radius: 50%; vertical-align: middle; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031153}}
+body.report .row3 table.latest_transaction { width: 100%; color: #fff; border: 1px solid #dce1e7; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031158}}
+body.report .row3 table.latest_transaction th { padding: 10px; font-size: .9em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031163}}
+body.report .row3 table.latest_transaction thead { background: #063141; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031167}}
+body.report .row3 table.latest_transaction thead th span.alignleft { float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031170}}
+body.report .row3 table.latest_transaction thead th span.alignright { float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031173}}
+body.report .row3 table.latest_transaction thead th .fa { font-size: 1.3em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031180}}
+body.report .row3 table.latest_transaction tbody td.wide { width: 12%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031183}}
+body.report .row3 table.latest_transaction tbody td.wide2 { width: 13%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031186}}
+body.report .row3 table.latest_transaction tbody td { color: #666; text-align: center; font-size: .9em; padding: 8px 10px; border-color: #dce1e7; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031200}}
+body.report .row4 center { font-size: 1.5em; font-style: italic; font-weight: 100; line-height: 25px; margin-top: 150px; color: #3a4364; }
+@media only screen and (max-width: 1200px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031200}}
+  body.report .row4 center { margin-top: 80px; } }
+@media only screen and (max-width: 980px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031200}}
+  body.report .row4 center { margin-top: 30px; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031219}}
+body.report .row5 .ion-help-circled:before { color: #fff; background: #00c0ff; padding: 10px 11px; border-radius: 50%; margin-right: 10px; font-size: 1em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031228}}
+body.report .row5 .colText { padding-left: 75px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031231}}
+body.report .row5 .colText p.text { margin: 0 0 10px 0; padding: 0; font-size: 1.2em; font-weight: bold; }
+@media only screen and (max-width: 980px) { @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031231}}
+  body.report .row5 .colText p.text { font-size: .9em; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031242}}
+body.report .row5 .colText .row-fluid { margin: 0; padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031246}}
+body.report .row5 .colText .row-fluid [class*='span'] { min-height: 1px !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031249}}
+body.report .row5 .colText .row-fluid.last { margin-bottom: 30px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031258}}
+body.report .row6 .whitebox .bordered { border: 1px solid #dae1e9; margin-bottom: 30px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031262}}
+body.report .row6 .whitebox .bordered .row-fluid [class*='span'] { min-height: 1px !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031267}}
+body.report .row6 .whitebox .redRow { text-align: center; margin-bottom: 10px; background: #e84c3d; color: #fff; padding: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031275}}
+body.report .row6 .whitebox table.sales-pitch { border: 1px solid #eaedf2; width: 98%; margin: 0 auto 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031280}}
+body.report .row6 .whitebox table.sales-pitch thead { background: #f9fafc; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031283}}
+body.report .row6 .whitebox table.sales-pitch thead th { padding: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031289}}
+body.report .row6 .whitebox table.sales-pitch tbody .pitch-icon { position: relative; margin-right: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031293}}
+body.report .row6 .whitebox table.sales-pitch tbody .pitch-icon:before { background: url("images/sprite-pitches.jpg") no-repeat left top; width: 19px; height: 19px; display: inline-block; content: ''; vertical-align: middle; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031301}}
+body.report .row6 .whitebox table.sales-pitch tbody td { padding: 5px; text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031305}}
+body.report .row6 .whitebox table.sales-pitch tbody td span.tla:before { background-position: 0 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031306}}
+body.report .row6 .whitebox table.sales-pitch tbody td span.mpa:before { background-position: 0 -19px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031307}}
+body.report .row6 .whitebox table.sales-pitch tbody td span.ie:before { background-position: 0 -38px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031308}}
+body.report .row6 .whitebox table.sales-pitch tbody td span.f3y:before { background-position: 0 -57px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031309}}
+body.report .row6 .whitebox table.sales-pitch tbody td span.f5y:before { background-position: 0 -76px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031310}}
+body.report .row6 .whitebox table.sales-pitch tbody td span.f10y:before { background-position: 0 -95px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031311}}
+body.report .row6 .whitebox table.sales-pitch tbody td span.te:before { background-position: 0 -114px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031313}}
+body.report .row6 .whitebox table.sales-pitch tbody td:first-child { text-align: left; width: 20%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031320}}
+body.report .row6 .whitebox .rp-btn button { background: #6ad2eb url(images/btn-bluebg.gif) repeat-x left top; color: #fff; border: 1px solid #1dbbe2; border-radius: 3px; padding: 8px; margin-bottom: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031333}}
+body.report .row7 .rowhead { background: #394263; color: #fff; padding: 5px 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031338}}
+body.report .row7 .main { background: #32323a; color: #fff; margin-bottom: 30px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031343}}
+body.report .row7 .main .bigtext { margin: 0; padding: 0; font-size: 2em; font-weight: 100; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031349}}
+body.report .row7 .main .desc { margin-bottom: 10px; font-size: .9em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031354}}
+body.report .row7 .subtext { font-size: .9em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031357}}
+body.report .row7 .subtext ol { margin-left: 50px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031359}}
+body.report .row7 .subtext ol li { line-height: 25px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031365}}
+body.report .row7 .rightSubtext { margin-top: 30px; font-weight: bold; font-size: 1em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031370}}
+body.report .row7 .rightSubtext div { margin-bottom: 3px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031378}}
+body.report .signature .avatar { background: #593a64; text-align: center; padding: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031383}}
+body.report .signature .avatar i { background: #db4a39; border-radius: 50%; padding: 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031388}}
+body.report .signature .avatar i:before { color: #fff; font-size: 4em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031394}}
+body.report .signature .main { background: none; color: #4d4d4d; border-bottom: 1px dashed #e9edf0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031399}}
+body.report .signature .main .name { margin: 0; padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031405}}
+body.report .signature .others { padding-top: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031408}}
+body.report .signature .others b { color: #4d4d4d; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031413}}
+body.report .signature .bottominfo { text-align: center; background: #32323a; color: #fff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031418}}
+body.report .signature .bottominfo .row-fluid div { padding: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031421}}
+body.report .signature .bottominfo .row-fluid div b { color: #6ad2ed; font-size: 1.1em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031429}}
+body.report .pagetitle { color: #fff; font-size: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031433}}
+body.report .btn-sendreport { margin-bottom: 30px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031439}}
+.btn-fin { margin-bottom: 10px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031443}}
+.tologin { float: right; margin-top: 30px; margin-right: 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031448}}
+.tologin a { font-size: 2em; color: #fff !important; text-decoration: none; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031459}}
+body.calculator { color: #4d4d4d; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031462}}
+body.calculator .pad { padding: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031466}}
+body.calculator .boxhead { font-size: .9em; padding: 5px 10px; border-bottom: 1px solid #999; font-weight: bold; background: #f9fafc; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031473}}
+body.calculator .boxhead i { margin-right: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031479}}
+body.calculator .calcbox .coltitle { border: 1px dashed #eaeef1; border-width: 1px 0; font-size: .9em; padding: 5px 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031486}}
+body.calculator .calcbox .pad label { width: 200px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031489}}
+body.calculator .calcbox .pad label i { margin-right: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031493}}
+body.calculator .calcbox .pad .text { display: inline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031497}}
+body.calculator .calcbox .pad .mt_label { width: 280px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031504}}
+body.calculator .row2 label { margin-right: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031507}}
+body.calculator .row2 input { padding: 3px; margin-bottom: 3px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031513}}
+body.calculator .row2 .proffin label { text-align: right; width: 200px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031519}}
+body.calculator .row2 table { width: 95%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031522}}
+body.calculator .row2 table tr td:first-child { width: 13%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031525}}
+body.calculator .row2 table tr td.head { background: #f9f9f9; width: 10%; font-size: 12px !important; color: #00c0ff; padding: 5px 8px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031534}}
+body.calculator .row2 table tr.data td { padding: 8px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031537}}
+body.calculator .row2 table tr.data td:first-child { text-align: right; padding-right: 10px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031548}}
+.property-type-bar { background: #eaedf2; text-align: center; height: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031553}}
+.property-type-bar .cbchoice { position: relative; top: -5px; margin-right: 30px; right: -26px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031559}}
+.property-type-bar .cbchoice input[type='radio'] { opacity: 0; position: relative; z-index: 9999; cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031565}}
+.property-type-bar .cbchoice .overlay { border: 1px solid #aaacab; border-radius: 50%; background: #fff; padding: 2px 10px; position: relative; left: -20px; cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031574}}
+.property-type-bar .cbchoice input[type='radio']:checked + .overlay { background: #1cbae1; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031581}}
+.indvPros { background: #eaedf2; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031584}}
+.indvPros .btn-gen { font-size: 1em; padding: 10px 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031589}}
+.indvPros .whitebox { background: #fff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031592}}
+.indvPros .whitebox .boxhead { background: #f9fafc; font-size: .9em; border-bottom: 1px solid #e9ecf1; margin: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031599}}
+.indvPros .whitebox .coltitle { border: 1px dashed #ebecf0; border-width: 1px 0; padding: 5px 10px; font-size: 1em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031605}}
+.indvPros .whitebox label { width: 200px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031608}}
+.indvPros .whitebox label i:before { margin-right: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031612}}
+.indvPros .whitebox .text { display: inline-block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031619}}
+.indvPros .propspect-equity { margin-bottom: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031622}}
+.indvPros .propspect-equity .desc { border-bottom: 1px dashed #ebecf0; padding: 10px 30px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031626}}
+.indvPros .propspect-equity .desc:last-child { border: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031630}}
+.indvPros .propspect-rating { margin-bottom: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031633}}
+.indvPros .propspect-rating .span12 { text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031636}}
+.indvPros .propspect-rating img { width: 80%; margin: 0 auto; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031644}}
+.modal_wrap { display: none; position: fixed; z-index: 9; background: rgba(255, 255, 255, 0.7); min-width: 100%; min-height: 100%; top: 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031655}}
+.ui-dialog { padding: 0 !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031659}}
+.ui-dialog hr { margin: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031663}}
+.ui-dialog .ui-dialog-titlebar { background: #f9fafc; border: 0; border-bottom: 1px solid #eaedf2; border-radius: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031669}}
+.ui-dialog .ui-dialog-content { padding: 0 !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031674}}
+.ui-dialog .form-wrapper form { margin: 0; padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031678}}
+.ui-dialog .form-wrapper form .fields-wrap { padding: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031681}}
+.ui-dialog .form-wrapper form .fields-wrap div { border: 1px solid #ccc; border-radius: 5px; margin-bottom: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031686}}
+.ui-dialog .form-wrapper form .fields-wrap div input { border: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031692}}
+.ui-dialog .form-wrapper form i:before { font-size: 2em; min-width: 50px; padding: 5px 10px; text-align: center; vertical-align: middle; border-right: 1px solid #ccc; margin-right: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031702}}
+.ui-dialog .form-wrapper form .modal-buttons { border: 0; border-radius: 0; background: #f9fafc; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jayjamero\/Development\/EightyDigital\/vagrant\/www\/HotRefis\/scss\/master\.scss}line{font-family:\000031707}}
+.ui-dialog .form-wrapper form .modal-buttons .btn-gen { padding: 5px 15px; }

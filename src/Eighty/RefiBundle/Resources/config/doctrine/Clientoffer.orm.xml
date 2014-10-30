@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Eighty\RefiBundle\Entity\Clientoffer" table="clientoffer">
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="clientId" type="bigint" column="client_id" nullable="true"/>
+    <field name="prospectId" type="bigint" column="prospect_id" nullable="true"/>
+    <field name="offerParams" type="text" column="offer_params" nullable="true"/>
+    <field name="status" type="string" column="status" length="20" nullable="true"/>
+    <field name="responseParams" type="text" column="response_params" nullable="true"/>
+  </entity>
+</doctrine-mapping>

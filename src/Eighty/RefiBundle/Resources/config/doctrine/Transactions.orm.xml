@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Eighty\RefiBundle\Entity\Transactions" table="transactions">
+    <indexes>
+      <index name="propertykey" columns="propertykey"/>
+      <index name="contractyear" columns="contractyear"/>
+      <index name="contractdate" columns="contractdate"/>
+      <index name="districtcode" columns="districtcode"/>
+      <index name="postalcode" columns="postalcode"/>
+      <index name="urakey" columns="urakey"/>
+      <index name="propertytypecode" columns="propertytypecode"/>
+      <index name="contractmonth" columns="contractmonth"/>
+      <index name="propertyname" columns="propertyname"/>
+      <index name="areafloorsqft" columns="areafloorsqft,propertyname"/>
+      <index name="bedrooms" columns="bedrooms"/>
+    </indexes>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="urakey" type="string" column="urakey" length="50" nullable="true"/>
+    <field name="units" type="integer" column="units" nullable="true"/>
+    <field name="areafloorsqm" type="string" column="areafloorsqm" length="10" nullable="true"/>
+    <field name="areafloorsqft" type="string" column="areafloorsqft" length="10" nullable="true"/>
+    <field name="arealandsqm" type="string" column="arealandsqm" length="10" nullable="true"/>
+    <field name="arealandsqft" type="string" column="arealandsqft" length="10" nullable="true"/>
+    <field name="areatype" type="string" column="areatype" length="45" nullable="true"/>
+    <field name="price" type="float" column="price" precision="10" scale="0" nullable="true"/>
+    <field name="psmfloor" type="integer" column="psmfloor" nullable="true"/>
+    <field name="psffloor" type="integer" column="psffloor" nullable="true"/>
+    <field name="psmland" type="string" column="psmland" length="10" nullable="true"/>
+    <field name="psfland" type="string" column="psfland" length="10" nullable="true"/>
+    <field name="contractdate" type="string" column="contractdate" length="10" nullable="true"/>
+    <field name="contractyear" type="integer" column="contractyear" nullable="true"/>
+    <field name="contractmonth" type="integer" column="contractmonth" nullable="true"/>
+    <field name="contractquarter" type="integer" column="contractquarter" nullable="true"/>
+    <field name="propertytypetext" type="string" column="propertytypetext" length="45" nullable="true"/>
+    <field name="propertyname" type="string" column="propertyname" length="60" nullable="true"/>
+    <field name="propertytypecode" type="string" column="propertytypecode" length="5" nullable="true"/>
+    <field name="completedyear" type="string" column="completedyear" length="4" nullable="true"/>
+    <field name="saletype" type="string" column="saletype" length="45" nullable="true"/>
+    <field name="purchaser" type="string" column="purchaser" length="45" nullable="true"/>
+    <field name="districtcode" type="string" column="districtcode" length="45" nullable="true"/>
+    <field name="sector" type="string" column="sector" length="5" nullable="true"/>
+    <field name="postalcode" type="string" column="postalcode" length="6" nullable="true"/>
+    <field name="estateid" type="string" column="estateid" length="45" nullable="true"/>
+    <field name="estatename" type="string" column="estatename" length="45" nullable="true"/>
+    <field name="estatecode" type="string" column="estatecode" length="45" nullable="true"/>
+    <field name="streetname1" type="string" column="streetname1" length="60" nullable="true"/>
+    <field name="streetname2" type="string" column="streetname2" length="60" nullable="true"/>
+    <field name="streetnumber" type="string" column="streetnumber" length="45" nullable="true"/>
+    <field name="floor" type="string" column="floor" length="10" nullable="true"/>
+    <field name="stack" type="string" column="stack" length="10" nullable="true"/>
+    <field name="enbloc" type="integer" column="enbloc" nullable="true"/>
+    <field name="tenurecode" type="string" column="tenurecode" length="5" nullable="true"/>
+    <field name="tenureyears" type="string" column="tenureyears" length="10" nullable="true"/>
+    <field name="tenureexpirydate" type="string" column="tenureexpirydate" length="10" nullable="true"/>
+    <field name="bedrooms" type="integer" column="bedrooms" nullable="true"/>
+    <field name="bathrooms" type="string" column="bathrooms" length="5" nullable="true"/>
+    <field name="propertykey" type="string" column="propertykey" length="45" nullable="true"/>
+    <field name="longitude" type="float" column="longitude" precision="10" scale="0" nullable="true"/>
+    <field name="latitude" type="float" column="latitude" precision="10" scale="0" nullable="true"/>
+    <field name="unitnumber" type="string" column="unitnumber" length="10" nullable="true"/>
+    <field name="currencysign" type="string" column="currencysign" length="3" nullable="true"/>
+    <field name="currencycode" type="string" column="currencycode" length="3" nullable="true"/>
+    <field name="transactionkey" type="string" column="transactionkey" length="80" nullable="true"/>
+    <field name="newprice" type="float" column="newprice" precision="10" scale="0" nullable="true"/>
+    <field name="flattypename" type="string" column="flatTypeName" length="40" nullable="true"/>
+    <field name="flatmodelcode" type="string" column="flatModelCode" length="20" nullable="true"/>
+  </entity>
+</doctrine-mapping>

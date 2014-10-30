@@ -1,3 +1,0 @@
-# eighty_profile_homepage:
-#     path:     /hello/{name}
-#     defaults: { _controller: EightyProfileBundle:Default:index }

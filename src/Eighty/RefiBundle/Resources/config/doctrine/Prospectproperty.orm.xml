@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Eighty\RefiBundle\Entity\Prospectproperty" table="prospectproperty">
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="prospectId" type="bigint" column="prospect_id" nullable="true"/>
+    <field name="salesId" type="bigint" column="sales_id" nullable="true"/>
+    <field name="status" type="string" column="status" length="255" nullable="true"/>
+  </entity>
+</doctrine-mapping>
