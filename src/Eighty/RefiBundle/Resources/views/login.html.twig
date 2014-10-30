@@ -19,6 +19,7 @@
 
     {% stylesheets filter="?yui_css"
       "@RefiBundle/Resources/assets/css/base.css"
+      "@RefiBundle/Resources/assets/css/vendor/bootstrap/bootstrap.min.css"
       "@RefiBundle/Resources/assets/css/login.css"
       %}
       <link rel="stylesheet" href="{{ asset_url }}" />
@@ -71,20 +72,6 @@
   {#<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.min.js"></script>#}
 
 
-  {# Under SHHHCORE! #}
-  {% javascripts
-    '@RefiBundle/Resources/assets/js/vendor/lodash.min.js'
-  %}
-     <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
-
-  {# ANGULARRRRGH Maps #}
-  <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
-  {% javascripts
-    '@RefiBundle/Resources/assets/js/vendor/angular-google-maps.min.js'
-  %}
-     <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
 
 </head>
 
@@ -107,12 +94,15 @@
 
   {% block javascripts %}
     {% javascripts filter="?yui_js"
+      "@RefiBundle/Resources/assets/js/vendor/bootstrap.min.js"
       "@RefiBundle/Resources/assets/js/plugins.js"
-      "@RefiBundle/Resources/assets/js/main.js"
+      "@RefiBundle/Resources/assets/js/login.plugins.js"
+      "@RefiBundle/Resources/assets/js/login.js"
       %}
       <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
   {% endblock javascripts %}
 
+        <script>$(function(){ Login.init(); });</script>
 </body>
 </html>

@@ -13,4 +13,9 @@ class ApplicationController extends Controller
         return $this->render('RefiBundle:Application:index.html.twig');
         //, array('name' => $name)
     }
+    public function loginAction()
+    {
+        return $this->render('RefiBundle:Login:index.html.twig');
+        //, array('name' => $name)
+    }
 }

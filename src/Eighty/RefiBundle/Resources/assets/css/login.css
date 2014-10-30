@@ -521,3 +521,83 @@ table {
    https://github.com/jayjamero
    jayjamero@gmail.com
 */
+/* line 2, ../sass/login/_layout.scss */
+body {
+  background: #333;
+}
+
+/* line 5, ../sass/login/_layout.scss */
+.login__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  line-height: 0;
+  height: 400px;
+  width: 100%;
+  display: block;
+  background: url(/bundles/refi/images/login_header.jpg) no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* line 18, ../sass/login/_layout.scss */
+.login__container {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@media screen and (min-width: 480px) {
+  /* line 18, ../sass/login/_layout.scss */
+  .login__container {
+    width: 480px;
+    margin: 40px auto;
+  }
+}
+/* line 26, ../sass/login/_layout.scss */
+.login__container .login-title {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  padding: 20px;
+}
+/* line 30, ../sass/login/_layout.scss */
+.login__container .login-title h1 {
+  text-indent: -1000px;
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  background: url(/bundles/refi/images/logo.png) no-repeat center center;
+  width: 145px;
+  height: 60px;
+  margin: auto auto auto auto;
+}
+/* line 41, ../sass/login/_layout.scss */
+.login__container .login-title p {
+  margin: 0;
+  color: #fff;
+}
+/* line 46, ../sass/login/_layout.scss */
+.login__container .main__form {
+  padding: 20px;
+  background-color: #fff;
+}
+/* line 50, ../sass/login/_layout.scss */
+.login__container .form-group {
+  margin: 0;
+  padding: 15px 0;
+  border: none;
+  border-bottom: 1px dashed #eaedf1;
+}
+/* line 55, ../sass/login/_layout.scss */
+.login__container .form-group.no-border {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* line 62, ../sass/login/_layout.scss */
+.display-none {
+  display: none;
+}
