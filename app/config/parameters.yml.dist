@@ -2,9 +2,9 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     hotrefis.fortytu.com
     database_port:     ~
-    database_name:     appuser
-    database_user:     p@ssw0rd
-    database_password: ~
+    database_name:     hotrefis
+    database_user:     appuser
+    database_password: p@ssw0rd
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
