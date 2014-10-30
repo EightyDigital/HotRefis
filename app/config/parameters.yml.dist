@@ -1,9 +1,9 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     127.0.0.1
+    database_host:     hotrefis.fortytu.com
     database_port:     ~
-    database_name:     symfony
-    database_user:     root
+    database_name:     appuser
+    database_user:     p@ssw0rd
     database_password: ~
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"

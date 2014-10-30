@@ -1,4 +1,4 @@
-{% extends "RefiBundle::tempBaseLogin.html.twig" %}
+{% extends "RefiBundle::login.html.twig" %}
 
 {% block header %}
 <h2>Header Login</h2>
@@ -22,11 +22,6 @@
 
     <!-- Login Block -->
     <div class="block push-bit main__form">
-      {% if error %}
-        <div class="login__error">
-          {{ error.message|replace({"Bad credentials": "Wrong Email / Password combination." })}}
-        </div>
-      {% endif %}
       <!-- Login Form -->
       <form action="/hotrefis/professions.html" method="get" id="form-login" class="form-horizontal form-bordered form-control-borderless">
         <div class="form-group">
@@ -197,3 +192,4 @@
   {{ parent() }}
   <h2>Footer</h2>
 {% endblock footer %}
+
