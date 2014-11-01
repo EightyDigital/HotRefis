@@ -77,3 +77,5 @@ swiftmailer:
 
 parameters:
     security.encoder.digest.class: Eighty\RefiBundle\Security\MessageDigestPasswordEncoder
+    security.login.handler.class: Eighty\RefiBundle\Security\LoginSuccessHandler
+    security.logout.handler.class: Eighty\RefiBundle\Security\LogoutSuccessHandler

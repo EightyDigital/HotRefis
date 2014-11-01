@@ -1,4 +1,8 @@
 services:
-#    refi.example:
-#        class: Eighty\RefiBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    security.login.handler:
+        class:  %security.login.handler.class%
+        arguments:  [@router, @security.context, @doctrine.orm.entity_manager]
+
+    security.logout.handler:
+        class:  %security.logout.handler.class%
+        arguments:  [@router, @security.context, @doctrine.orm.entity_manager]

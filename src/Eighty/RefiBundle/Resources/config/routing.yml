@@ -15,3 +15,11 @@ refi_register:
 refi_homepage:
     pattern: /dashboard/
     defaults: { _controller: RefiBundle:Application:index }
+
+API_filter:
+    pattern: /api/filter/
+    defaults: { _controller: RefiBundle:Application:filter }
+
+API_shortlist:
+    pattern: /api/shortlist/
+    defaults: { _controller: RefiBundle:Application:shortlist }
