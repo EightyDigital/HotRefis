@@ -15,3 +15,7 @@ refi_register:
 refi_homepage:
     pattern: /dashboard/
     defaults: { _controller: RefiBundle:Application:index }
+
+API_filter:
+    pattern: /api/filter/
+    defaults: { _controller: RefiBundle:Application:filter }

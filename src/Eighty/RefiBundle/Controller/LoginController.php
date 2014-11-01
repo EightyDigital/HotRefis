@@ -25,10 +25,10 @@ class LoginController extends Controller
 			$error = $request->attributes->get(
 				SecurityContext::AUTHENTICATION_ERROR
 			);
-		} else {
+        } else {
 			$error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
 			$session->remove(SecurityContext::AUTHENTICATION_ERROR);
-		}
+        }
 
 
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
