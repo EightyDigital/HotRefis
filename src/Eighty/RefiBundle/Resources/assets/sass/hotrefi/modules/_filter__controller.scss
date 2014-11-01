@@ -1,0 +1,28 @@
+.filter__controller {
+  border-top:1px solid #ccc;
+  margin:25px 0;
+  padding:25px 0;
+  .filter__controller--header {
+    clear:both;
+  }
+  .active__filter {
+    padding:0 5px 0 0;
+    font-size:em(16px);
+    font-weight:300;
+    margin:0 0 15px 0;
+    span {
+      font-weight:400;
+    }
+    i {
+      margin:0 5px 0 0;
+      &:before {
+        color: white;
+        background: #00baff;
+        padding: 5px 13px;
+        font-size: 25px;
+        vertical-align: middle;
+        @include radius(50%);
+      }
+    }
+  }
+}

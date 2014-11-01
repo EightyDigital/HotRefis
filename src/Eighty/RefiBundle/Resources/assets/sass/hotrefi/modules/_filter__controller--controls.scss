@@ -1,0 +1,74 @@
+.filter__controller--controls {
+  clear:both;
+  width:40%;
+  .prospect--box {
+  }
+
+
+  .filter__controls--label {
+    text-align:center;
+    font-size:16px;
+    font-weight:300;
+    float:left;
+    &:before{
+      display: block;
+      width: 100%;
+      font-size: 46px;
+      color: #4d4d4d;
+    }
+  }
+  .slider__wrap {
+    float:left;
+    width:75%;
+    margin:20px 20px;
+  }
+  .ui-slider{
+    position:relative;
+    height: 20px;
+    background: #ccc;
+    border: 0;
+    .ui-slider-handle{
+      width: 22px;
+      height: 29px;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      background:url(#{$images}/handle.png) no-repeat center/cover;
+      border: 0;
+      outline: none;
+      cursor: pointer;
+      position: absolute;
+      z-index: 2;
+      -ms-touch-action: none;
+      touch-action: none;
+      top: -.3em;
+      margin-left: -.6em;
+      .val {
+        position:absolute;
+        top: -1.5em;
+
+      }
+      &.min__slider {
+        .val {
+          left:0;
+        }
+      }
+      &.max__slider {
+        .val {
+          right:0;
+          top:auto;
+          bottom:-1.5em;
+        }
+      }
+    }
+    .ui-slider-range{
+      background: $color__brand--secondary;
+      height: 100%;
+      position: absolute;
+      z-index: 1;
+      font-size: .7em;
+      display: block;
+      border: 0;
+      background-position: 0 0;
+    }
+  }
+}

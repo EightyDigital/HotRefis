@@ -11,5 +11,16 @@
 // Document Ready!
 $(function(){
   console.log('Ive loaded');
-
+  siteBindings.filter__dropdown();
 });
+
+var siteBindings = {
+  filter__dropdown: function() {
+    $('.filter__controller--dropdown > a').mouseover(function(){
+      $('.filter__controller--dropdown ul').show();
+    });
+    $('.filter__controller--dropdown').mouseleave(function(){
+      $('.filter__controller--dropdown ul').hide();
+    });
+  }
+}

@@ -1,7 +1,7 @@
 // Issues with twig so need to change start and end tag to {[]}
-var refis = angular.module('refis', ['google-maps', 'xeditable', 'highcharts-ng']).config(function($interpolateProvider){
-       $interpolateProvider.startSymbol('{[').endSymbol(']}');
-   }
+var refis = angular.module('refis', ['google-maps', 'xeditable', 'highcharts-ng', 'ui.slider']).config(function($interpolateProvider){
+    $interpolateProvider.startSymbol('{[').endSymbol(']}');
+  }
 );
 
 // Radius distance
@@ -73,7 +73,28 @@ var report__crud = refis.controller('heatmap__slider', function($scope, distance
   //   //$scope.meters = 'SLIDER CONTROLLER: ' + distance__service.meters;
   // });
 });
-
+var filter_controller = refis.controller('filter_controller', function($scope, $log) {
+  $scope.slider = $( ".financials__income" ).slider({
+    range: true,
+    min: 0,
+    max: 10000000,
+    step: 10000,
+    values: [ 0, 10000000 ],
+    slide: function( event, ui ) {
+      //console.log( (ui.value) );
+    },
+    // State change we must update step value - more of an inbetween
+    change: function( event, ui ) {
+      $( ".financials__income .min__slider" ).html("<span class='val'>"+ui.values[0]+"</span>");
+      $( ".financials__income .max__slider" ).html("<span class='val'>"+ui.values[1]+"</span>");
+      //distance__service.prepForBroadcast(-(ui.value));
+    },
+    create: function( event, ui ) {
+      $( ".financials__income .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
+      $( ".financials__income .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>10000000</span>");
+    }
+  });
+});
 
 var map_controller = refis.controller('map__controller', function($scope, $http, distance__service, origin__service) {
 
