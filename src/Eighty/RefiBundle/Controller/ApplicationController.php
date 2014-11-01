@@ -14,12 +14,7 @@ class ApplicationController extends Controller
         return $this->render('RefiBundle:Application:index.html.twig');
         //, array('name' => $name)
     }
-    public function loginAction()
-    {
-        return $this->render('RefiBundle:Login:index.html.twig');
-        //, array('name' => $name)
-    }
-
+    
     public function filterAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -48,5 +43,11 @@ class ApplicationController extends Controller
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
+    }
+
+    public function shortlistAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $postdata = $request->request->all();
     }
 }
