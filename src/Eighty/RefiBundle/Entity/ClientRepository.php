@@ -32,19 +32,4 @@ class ClientRepository extends EntityRepository
 					)
 			->execute();
 	}
-
-	public function shortlistCredit($postdata)
-	{
-		return $this->getEntityManager()
-			->createQuery(
-				'SELECT t
-					FROM RefiBundle:Transactions t
-					JOIN RefiBundle:Prospectproperty pp
-					WITH t.id = pp.salesId
-					WHERE pp.prospectId = :ppId
-				'
-			)
-			->setParameter('ppId', $id)
-			->getArrayResult();
-	}
 }

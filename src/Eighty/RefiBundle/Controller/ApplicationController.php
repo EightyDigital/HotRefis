@@ -2,6 +2,8 @@
 
 namespace Eighty\RefiBundle\Controller;
 
+use Eighty\RefiBundle\Entity\Prospectlist;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -167,10 +169,73 @@ class ApplicationController extends Controller
 
         return $response;
     }
-
-    public function shortlistAction(Request $request)
+	
+	/*-------------------------------------------------/
+	|	route: <domain>/api/shortlist/save
+	|	postdata:
+	|		- prospectlist : e.g. [1,2,3,4]
+	--------------------------------------------------*/
+    public function shortlistSaveAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $postdata = $request->request->all();
+		
+		$user = $this->get('security.context')->getToken()->getUser();
+		$userId = $user->getId();
+		
+		if(isset($postdata['prospectlist'])) {
+			$list_data = explode(',', $postdata['prospectlist']);
+			$clientlist = $em->getRepository('RefiBundle:Clientlist')->findOneBy(array('clientId' => $userId));
+			
+			foreach($list_data as $val) {
+				$prospectlist = new Prospectlist();
+				$prospectlist->setClientlistId($clientlist->getId());
+				$prospectlist->setProspectId($val);
+				$prospectlist->setDateAssigned(new \DateTime('today'));
+				$em->persist($prospectlist);
+				$em->flush();
+			}			
+		}
+		
+		$msg = array('status' => 'ok');
+		
+		$response = new Response(json_encode($msg));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+	
+	/*-------------------------------------------------/
+	|	route: <domain>/api/shortlist/retrieve
+	|	postdata:
+	|		- xxxx
+	--------------------------------------------------*/
+	public function shortlistRetrieveAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $postdata = $request->request->all();
+		
+		$user = $this->get('security.context')->getToken()->getUser();
+		$userId = $user->getId();
+		
+		$clientlist = $em->getRepository('RefiBundle:Clientlist')->findOneBy(array('clientId' => $userId));
+		$prospectlist = $em->getRepository('RefiBundle:Prospectlist')->findBy(array('clientlistId' => $clientlist->getId()));
+				
+		foreach($prospectlist as $val) {
+			$repository = $em
+				->getRepository('RefiBundle:Prospect');
+			
+			$query = $repository->createQueryBuilder('p')
+				->where('p.id = :pid')
+				->setParameter('pid', $val->getProspectId())
+				->getQuery();
+			$prospect_list_temp = $query->getArrayResult();
+			$prospect_list[] = (isset($prospect_list_temp[0]) ? $prospect_list_temp[0] : array());
+		}
+		
+		$response = new Response(json_encode($prospect_list));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 }
