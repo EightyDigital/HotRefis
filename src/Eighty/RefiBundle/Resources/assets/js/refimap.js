@@ -429,7 +429,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   $scope.geoLocations = [];
   // Get latitudes/longitudes
   $http({
-    url: '/'+"listing.json",
+    url: '/'+"web/listing.json",
     method: "GET"
   }).success(function (data) {
     $.each(data.listings, function(i, item) {
