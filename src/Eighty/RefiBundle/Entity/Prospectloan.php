@@ -88,6 +88,13 @@ class Prospectloan
      * @ORM\Column(name="valid", type="boolean", nullable=true)
      */
     private $valid;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="ltv", type="integer", nullable=true)
+     */
+    private $ltv;
 
     /**
      * @var integer
@@ -351,6 +358,29 @@ class Prospectloan
     public function getValid()
     {
         return $this->valid;
+    }
+	
+	/**
+     * Set ltv
+     *
+     * @param integer $ltv
+     * @return Prospectloan
+     */
+    public function setLtv($ltv)
+    {
+        $this->ltv = $ltv;
+
+        return $this;
+    }
+
+    /**
+     * Get ltv
+     *
+     * @return integer 
+     */
+    public function getLtv()
+    {
+        return $this->ltv;
     }
 
     /**

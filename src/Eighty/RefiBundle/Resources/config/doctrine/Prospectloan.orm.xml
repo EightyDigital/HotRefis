@@ -15,5 +15,6 @@
     <field name="otherDebt" type="float" column="other_debt" precision="10" scale="0" nullable="true"/>
     <field name="selfDeclared" type="boolean" column="self_declared" nullable="true"/>
     <field name="valid" type="boolean" column="valid" nullable="true"/>
+	<field name="ltv" type="integer" column="ltv" nullable="true"/>
   </entity>
 </doctrine-mapping>

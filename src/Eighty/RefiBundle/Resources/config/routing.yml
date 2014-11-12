@@ -43,9 +43,13 @@ refi_prospect:
     defaults: { _controller: RefiBundle:Application:prospect }
 
 
-API_filter:
-    pattern: /api/filter/
-    defaults: { _controller: RefiBundle:Application:filter }
+API_filter_property:
+    pattern: /api/filter/property/
+    defaults: { _controller: RefiBundle:Application:filterProperty }
+
+API_filter_finance:
+    pattern: /api/filter/finance/
+    defaults: { _controller: RefiBundle:Application:filterFinance }
 
 API_shortlist:
     pattern: /api/shortlist/
