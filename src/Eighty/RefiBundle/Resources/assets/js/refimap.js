@@ -542,7 +542,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   //   console.log($scope.map);
   var heatmap = new google.maps.visualization.HeatmapLayer({
     data: $scope.heatMapData,
-    radius: 350,
+    radius: 125,
     dissipating: true
   });
   heatmap.setMap($scope.map);
