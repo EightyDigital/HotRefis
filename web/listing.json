@@ -1,0 +1,2925 @@
+{
+    "total": 152231,
+    "page": 1,
+    "limit": 10,
+    "totalPages": 15224,
+    "currency": "SGD",
+    "searchCriteriaText": "",
+    "humanizedParams": [],
+    "metas": {
+        "title": "Singapore Property Listing, Home Search, Singapore Real Estate | PropertyGuru",
+        "description": "Singapore Property Listing - Singapore real estate property investment from PropertyGuru. Extensive home search, Singapore property investment options for commercial &amp; residential purpose - page 1",
+        "keywords": "property For Sale, Singapore properties, Singapore property listing, Singapore real estate, Property investment, home search"
+    },
+    "listings": [
+        {
+            "id": 18078724,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "60 Lorong 4 Toa Payoh",
+            "localizedDescription": null,
+            "price": {
+                "value": 800,
+                "pretty": "SGD 800 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 5.333333333,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": "NEG",
+                    "text": "Negotiable",
+                    "pretty": "Negotiable"
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": -1,
+                    "text": "Room Rental"
+                },
+                "bathrooms": {
+                    "value": null,
+                    "text": null
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 150,
+                        "text": "150 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 13.935456,
+                        "text": "14 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 5.3333333333333,
+                        "text": "SGD 5.33 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 57.407522222452,
+                        "text": "SGD 57.41 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-07-08 15:12:46",
+                    "unix": 1404803566
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 12:26:56",
+                    "unix": 1415593616
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18078724?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18078724?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18078724",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18078724"
+                }
+            },
+            "_user": null,
+            "qualityScore": 72,
+            "event": null,
+            "agent": {
+                "id": 282676,
+                "name": "Kylene Koh",
+                "mobile": "+6596857784"
+            },
+            "agency": {
+                "id": 4257,
+                "name": "Real Centre Group Pte Ltd",
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 8299,
+                "typeCode": "HDB",
+                "typeText": "HDB Apartment",
+                "typeGroup": "H",
+                "tenureCode": "L99",
+                "tenureText": "99-year Leasehold",
+                "topMonth": null,
+                "topYear": null
+            },
+            "propertyUnit": {
+                "furnishingCode": null,
+                "furnishingText": null
+            },
+            "location": {
+                "latitude": 1.33632523,
+                "longitude": 103.8506676,
+                "fullAddress": "60 Lorong 4 Toa Payoh"
+            },
+            "media": {
+                "cover": {
+                    "V150": "https://sg1-cdn.pgimgs.com/property/8299/PPHO.3125549.V150.jpg",
+                    "V550": "https://sg1-cdn.pgimgs.com/property/8299/PPHO.3125549.V550.jpg"
+                }
+            }
+        },
+        {
+            "id": 18436634,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": true,
+            "localizedTitle": "Balmy Court",
+            "localizedDescription": null,
+            "price": {
+                "value": 850,
+                "pretty": "SGD 850 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 3.953488372,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": "NEG",
+                    "text": "Negotiable",
+                    "pretty": "Negotiable"
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 6,
+                    "text": "6 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 2,
+                    "text": "2 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 215,
+                        "text": "215 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 19.9741536,
+                        "text": "20 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 3.953488372093,
+                        "text": "SGD 3.95 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 42.554994670713,
+                        "text": "SGD 42.55 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-10-10 14:53:42",
+                    "unix": 1412924022
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 12:26:56",
+                    "unix": 1415593616
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18436634?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18436634?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18436634",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18436634"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 282676,
+                "name": "Richard Goh (R000859E)",
+                "mobile": "+6596955559"
+            },
+            "agency": {
+                "id": 4257,
+                "name": "Real Centre Group Pte Ltd",
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 1780,
+                "typeCode": "CONDO",
+                "typeText": "Condominium",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 1,
+                "topYear": 1998
+            },
+            "propertyUnit": {
+                "furnishingCode": null,
+                "furnishingText": null
+            },
+            "location": {
+                "latitude": 1.314019,
+                "longitude": 103.884676,
+                "fullAddress": "6 Lorong 27A Geylang"
+            },
+            "media": {
+                "cover": {
+                    "V150": "https://sg2-cdn.pgimgs.com/listing/18436634/UPHO.50320409.V150.jpg",
+                    "V550": "https://sg1-cdn.pgimgs.com/listing/18436634/UPHO.50320409.V550.jpg"
+                }
+            }
+        },
+        {
+            "id": 17965345,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "SALE",
+            "typeText": "For Sale",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "980B Buangkok Crescent",
+            "localizedDescription": null,
+            "price": {
+                "value": 420000,
+                "pretty": "SGD 420,000",
+                "periodCode": null,
+                "pricePerArea": {
+                    "value": 433.88429752,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": "NEG",
+                    "text": "Negotiable",
+                    "pretty": "Negotiable"
+                },
+                "valuation": 0,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 3,
+                    "text": "3 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 2,
+                    "text": "2 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 968,
+                        "text": "968 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 89.93014272,
+                        "text": "90 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 433.88429752066,
+                        "text": "SGD 433.88 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 4670.2917097294,
+                        "text": "SGD 4,670.29 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-06-13 13:02:50",
+                    "unix": 1402635770
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 12:26:56",
+                    "unix": 1415593616
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/17965345?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/17965345?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/17965345",
+                    "desktop": "http://www.propertyguru.com.sg/listing/17965345"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 282676,
+                "name": "Richard Goh (R000859E)",
+                "mobile": "+6596955559"
+            },
+            "agency": {
+                "id": 4257,
+                "name": "Real Centre Group Pte Ltd",
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 4112,
+                "typeCode": "HDB",
+                "typeText": "HDB Apartment",
+                "typeGroup": "H",
+                "tenureCode": "L99",
+                "tenureText": "99-year Leasehold",
+                "topMonth": null,
+                "topYear": null
+            },
+            "propertyUnit": {
+                "furnishingCode": null,
+                "furnishingText": null
+            },
+            "location": {
+                "latitude": 1.379752459,
+                "longitude": 103.8810601,
+                "fullAddress": "980B Buangkok Crescent"
+            },
+            "media": {
+                "cover": {
+                    "V150": "https://sg2-cdn.pgimgs.com/listing/17965345/UPHO.47874460.V150.jpg",
+                    "V550": "https://sg1-cdn.pgimgs.com/listing/17965345/UPHO.47874460.V550.jpg"
+                }
+            }
+        },
+        {
+            "id": 18476105,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "The Cape",
+            "localizedDescription": null,
+            "price": {
+                "value": 3200,
+                "pretty": "SGD 3,200 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 5.507745266,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": null,
+                    "text": null,
+                    "pretty": null
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 1,
+                    "text": "1 Bedroom"
+                },
+                "bathrooms": {
+                    "value": 1,
+                    "text": "1 Bathroom"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 581,
+                        "text": "581 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 53.97666624,
+                        "text": "54 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 5.5077452667814,
+                        "text": "SGD 5.51 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 59.284876649692,
+                        "text": "SGD 59.28 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-10-23 15:15:57",
+                    "unix": 1414048557
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 12:26:56",
+                    "unix": 1415593616
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18476105?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18476105?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18476105",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18476105"
+                }
+            },
+            "_user": null,
+            "qualityScore": 96,
+            "event": null,
+            "agent": {
+                "id": 277796,
+                "name": "Benjamin Fan",
+                "mobile": "+06598211043"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 21078,
+                "typeCode": "APT",
+                "typeText": "Apartment",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 12,
+                "topYear": 2015
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.300445,
+                "longitude": 103.90106,
+                "fullAddress": "25 Amber Road"
+            },
+            "media": {
+                "cover": {
+                    "V150": "https://sg1-cdn.pgimgs.com/listing/18476105/UPHO.50354354.V150.jpg",
+                    "V550": "https://sg1-cdn.pgimgs.com/listing/18476105/UPHO.50354354.V550.jpg"
+                }
+            }
+        },
+        {
+            "id": 18476117,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": true,
+            "localizedTitle": "The Cape",
+            "localizedDescription": null,
+            "price": {
+                "value": 3800,
+                "pretty": "SGD 3,800 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 6.540447504,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": "NEG",
+                    "text": "Negotiable",
+                    "pretty": "Negotiable"
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 1,
+                    "text": "1 Bedroom"
+                },
+                "bathrooms": {
+                    "value": 1,
+                    "text": "1 Bathroom"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 581,
+                        "text": "581 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 53.97666624,
+                        "text": "54 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 6.5404475043029,
+                        "text": "SGD 6.54 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 70.400791021509,
+                        "text": "SGD 70.40 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-10-23 15:18:01",
+                    "unix": 1414048681
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 12:26:56",
+                    "unix": 1415593616
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18476117?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18476117?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18476117",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18476117"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 277796,
+                "name": "Benjamin Fan",
+                "mobile": "+06598211043"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 21078,
+                "typeCode": "APT",
+                "typeText": "Apartment",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 12,
+                "topYear": 2015
+            },
+            "propertyUnit": {
+                "furnishingCode": "FULL",
+                "furnishingText": "Fully Furnished"
+            },
+            "location": {
+                "latitude": 1.300445,
+                "longitude": 103.90106,
+                "fullAddress": "25 Amber Road"
+            },
+            "media": {
+                "cover": {
+                    "V150": "https://sg1-cdn.pgimgs.com/listing/18476117/UPHO.50354374.V150.jpg",
+                    "V550": "https://sg1-cdn.pgimgs.com/listing/18476117/UPHO.50354374.V550.jpg"
+                }
+            }
+        },
+        {
+            "id": 18297453,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": true,
+            "localizedTitle": "Waterfront Gold",
+            "localizedDescription": null,
+            "price": {
+                "value": 3500,
+                "pretty": "SGD 3,500 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 3.317535545,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": "NEG",
+                    "text": "Negotiable",
+                    "pretty": "Negotiable"
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 3,
+                    "text": "3 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 2,
+                    "text": "2 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 1055,
+                        "text": "1055 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 98.0127072,
+                        "text": "98 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 3.3175355450237,
+                        "text": "SGD 3.32 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 35.709655410885,
+                        "text": "SGD 35.71 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-08-28 11:40:27",
+                    "unix": 1409197227
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 12:26:56",
+                    "unix": 1415593616
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18297453?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18297453?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18297453",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18297453"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 282757,
+                "name": "Lawrence Tay (R005414G) Sales Director",
+                "mobile": "+6598421114"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 2663,
+                "typeCode": "CONDO",
+                "typeText": "Condominium",
+                "typeGroup": "N",
+                "tenureCode": "L99",
+                "tenureText": "99-year Leasehold",
+                "topMonth": 12,
+                "topYear": 2016
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.3377863,
+                "longitude": 103.9303141,
+                "fullAddress": "750 Bedok Reservoir Road"
+            },
+            "media": {
+                "cover": {
+                    "V550": "https://sg1-cdn.pgimgs.com/listing/18297453/UPHO.49127682.V550.jpg",
+                    "V150": "https://sg1-cdn.pgimgs.com/listing/18297453/UPHO.49127682.V150.jpg"
+                }
+            }
+        },
+        {
+            "id": 18218605,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "SALE",
+            "typeText": "For Sale",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "696 Hougang Street 61",
+            "localizedDescription": null,
+            "price": {
+                "value": 410000,
+                "pretty": "SGD 410,000",
+                "periodCode": null,
+                "pricePerArea": {
+                    "value": 366.398570151,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": "NEG",
+                    "text": "Negotiable",
+                    "pretty": "Negotiable"
+                },
+                "valuation": 0,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 3,
+                    "text": "3 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 2,
+                    "text": "2 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 1119,
+                        "text": "1119 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 103.95850176,
+                        "text": "104 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 366.39857015192,
+                        "text": "SGD 366.40 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 3943.8813859258,
+                        "text": "SGD 3,943.88 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-08-07 15:46:21",
+                    "unix": 1407397581
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 12:26:56",
+                    "unix": 1415593616
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18218605?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18218605?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18218605",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18218605"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 282676,
+                "name": "Richard Goh (R000859E)",
+                "mobile": "+6596955559"
+            },
+            "agency": {
+                "id": 4257,
+                "name": "Real Centre Group Pte Ltd",
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 6817,
+                "typeCode": "HDB",
+                "typeText": "HDB Apartment",
+                "typeGroup": "H",
+                "tenureCode": "L99",
+                "tenureText": "99-year Leasehold",
+                "topMonth": null,
+                "topYear": null
+            },
+            "propertyUnit": {
+                "furnishingCode": null,
+                "furnishingText": null
+            },
+            "location": {
+                "latitude": 1.375914403,
+                "longitude": 103.8877047,
+                "fullAddress": "696 Hougang Street 61"
+            },
+            "media": {
+                "cover": {
+                    "V550": "https://sg2-cdn.pgimgs.com/listing/18218605/UPHO.48738809.V550.jpg",
+                    "V150": "https://sg2-cdn.pgimgs.com/listing/18218605/UPHO.48738809.V150.jpg"
+                }
+            }
+        },
+        {
+            "id": 18441583,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "One Shenton",
+            "localizedDescription": null,
+            "price": {
+                "value": 5700,
+                "pretty": "SGD 5,700 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 4.722452361,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": "NEG",
+                    "text": "Negotiable",
+                    "pretty": "Negotiable"
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 2,
+                    "text": "2 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": null,
+                    "text": null
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 1207,
+                        "text": "1207 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 112.13396928,
+                        "text": "112 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 4.7224523612262,
+                        "text": "SGD 4.72 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 50.832054163418,
+                        "text": "SGD 50.83 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-10-12 15:49:49",
+                    "unix": 1413100189
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 12:26:56",
+                    "unix": 1415593616
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18441583?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18441583?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18441583",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18441583"
+                }
+            },
+            "_user": null,
+            "qualityScore": 93,
+            "event": null,
+            "agent": {
+                "id": 282757,
+                "name": "Shawn Lee (R051631J)",
+                "mobile": "+6586875000"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 135,
+                "typeCode": "APT",
+                "typeText": "Apartment",
+                "typeGroup": "N",
+                "tenureCode": "L99",
+                "tenureText": "99-year Leasehold",
+                "topMonth": 9,
+                "topYear": 2011
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.279328,
+                "longitude": 103.850506,
+                "fullAddress": "1 Shenton Way"
+            },
+            "media": {
+                "cover": {
+                    "V550": "https://sg2-cdn.pgimgs.com/listing/18441583/UPHO.50091983.V550.jpg",
+                    "V150": "https://sg2-cdn.pgimgs.com/listing/18441583/UPHO.50091983.V150.jpg"
+                }
+            }
+        },
+        {
+            "id": 18442127,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": true,
+            "localizedTitle": "The Cape",
+            "localizedDescription": null,
+            "price": {
+                "value": 3400,
+                "pretty": "SGD 3,400 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 5.954465849,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": "NEG",
+                    "text": "Negotiable",
+                    "pretty": "Negotiable"
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 1,
+                    "text": "1 Bedroom"
+                },
+                "bathrooms": {
+                    "value": 1,
+                    "text": "1 Bathroom"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 571,
+                        "text": "571 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 53.04763584,
+                        "text": "53 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 5.954465849387,
+                        "text": "SGD 5.95 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 64.093336982159,
+                        "text": "SGD 64.09 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-10-12 21:11:13",
+                    "unix": 1413119473
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 12:26:56",
+                    "unix": 1415593616
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18442127?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18442127?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18442127",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18442127"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 277796,
+                "name": "Benjamin Fan",
+                "mobile": "+06598211043"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 21078,
+                "typeCode": "APT",
+                "typeText": "Apartment",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 12,
+                "topYear": 2015
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.300445,
+                "longitude": 103.90106,
+                "fullAddress": "25 Amber Road"
+            },
+            "media": {
+                "cover": {
+                    "V550": "https://sg2-cdn.pgimgs.com/listing/18442127/UPHO.50096745.V550.jpg",
+                    "V150": "https://sg2-cdn.pgimgs.com/listing/18442127/UPHO.50096745.V150.jpg"
+                }
+            }
+        },
+        {
+            "id": 18402449,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": true,
+            "localizedTitle": "The Cape",
+            "localizedDescription": null,
+            "price": {
+                "value": 3700,
+                "pretty": "SGD 3,700 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 6.479859894,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": "NEG",
+                    "text": "Negotiable",
+                    "pretty": "Negotiable"
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 1,
+                    "text": "1 Bedroom"
+                },
+                "bathrooms": {
+                    "value": 1,
+                    "text": "1 Bathroom"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 571,
+                        "text": "571 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 53.04763584,
+                        "text": "53 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 6.4798598949212,
+                        "text": "SGD 6.48 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 69.748631421762,
+                        "text": "SGD 69.75 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-09-28 19:52:43",
+                    "unix": 1411905163
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 12:26:56",
+                    "unix": 1415593616
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18402449?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18402449?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18402449",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18402449"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 277796,
+                "name": "Benjamin Fan",
+                "mobile": "+06598211043"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 21078,
+                "typeCode": "APT",
+                "typeText": "Apartment",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 12,
+                "topYear": 2015
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.300445,
+                "longitude": 103.90106,
+                "fullAddress": "25 Amber Road"
+            },
+            "media": {
+                "cover": {
+                    "V550": "https://sg1-cdn.pgimgs.com/listing/18402449/UPHO.49805299.V550.jpg",
+                    "V150": "https://sg1-cdn.pgimgs.com/listing/18402449/UPHO.49805299.V150.jpg"
+                }
+            }
+        },
+
+
+
+
+
+
+
+        {
+            "id": 18114695,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "Park Infinia at Wee Nam",
+            "localizedDescription": null,
+            "price": {
+                "value": 4800,
+                "pretty": "SGD 4,800 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 4.8,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": null,
+                    "text": null,
+                    "pretty": null
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 2,
+                    "text": "2 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 2,
+                    "text": "2 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 1000,
+                        "text": "1000 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 92.90304,
+                        "text": "93 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 4.8,
+                        "text": "SGD 4.80 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 51.666770000207,
+                        "text": "SGD 51.67 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-07-15 11:10:58",
+                    "unix": 1405393858
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 15:58:32",
+                    "unix": 1415606312
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18114695?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18114695?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18114695",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18114695"
+                }
+            },
+            "_user": null,
+            "qualityScore": 90,
+            "event": null,
+            "agent": {
+                "id": 202803,
+                "name": "Jacqueline lee(R009069j)",
+                "mobile": "+6597917998"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 67,
+                "typeCode": "CONDO",
+                "typeText": "Condominium",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 1,
+                "topYear": 2008
+            },
+            "propertyUnit": {
+                "furnishingCode": null,
+                "furnishingText": null
+            },
+            "location": {
+                "latitude": 1.313923,
+                "longitude": 103.843079,
+                "fullAddress": "2 Lincoln Road"
+            },
+            "media": {
+                "cover": {
+                    "V550": "https://sg1-cdn.pgimgs.com/property/67/PPHO.9772464.V550.jpg",
+                    "V150": "https://sg1-cdn.pgimgs.com/property/67/PPHO.9772464.V150.jpg"
+                }
+            }
+        },
+        {
+            "id": 18487179,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": true,
+            "localizedTitle": "WaterScape @ Cavenagh",
+            "localizedDescription": null,
+            "price": {
+                "value": 3500,
+                "pretty": "SGD 3,500 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 6.024096385,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": null,
+                    "text": null,
+                    "pretty": null
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 1,
+                    "text": "1 Bedroom"
+                },
+                "bathrooms": {
+                    "value": 1,
+                    "text": "1 Bathroom"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 581,
+                        "text": "581 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 53.97666624,
+                        "text": "54 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 6.0240963855422,
+                        "text": "SGD 6.02 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 64.842833835601,
+                        "text": "SGD 64.84 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-10-26 14:03:59",
+                    "unix": 1414303439
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 15:58:32",
+                    "unix": 1415606312
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18487179?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18487179?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18487179",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18487179"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 202803,
+                "name": "Jacqueline Lee (R009069J)",
+                "mobile": "+6597917998"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 2604,
+                "typeCode": "APT",
+                "typeText": "Apartment",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 12,
+                "topYear": 2014
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.303889,
+                "longitude": 103.840872,
+                "fullAddress": "65-65A Cavenagh Road"
+            },
+            "media": {
+                "cover": {
+                    "V550": "https://sg2-cdn.pgimgs.com/property/2604/PPHO.2078744.V550.jpg",
+                    "V150": "https://sg1-cdn.pgimgs.com/property/2604/PPHO.2078744.V150.jpg"
+                }
+            }
+        },
+        {
+            "id": 18337931,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": "2YR",
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "Binjai Crest",
+            "localizedDescription": null,
+            "price": {
+                "value": 7200,
+                "pretty": "SGD 7,200 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 1.894736842,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": null,
+                    "text": null,
+                    "pretty": null
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 5,
+                    "text": "5 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 5,
+                    "text": "5 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 3800,
+                        "text": "3800 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 353.031552,
+                        "text": "353 sqm"
+                    }
+                ],
+                "landArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 3800,
+                        "text": "3800 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 353.031552,
+                        "text": "353 sqm"
+                    }
+                ],
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 1.8947368421053,
+                        "text": "SGD 1.89 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 20.394777631661,
+                        "text": "SGD 20.39 psm"
+                    }
+                ],
+                "landArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 1.8947368421053,
+                        "text": "SGD 1.89 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 20.394777631661,
+                        "text": "SGD 20.39 psm"
+                    }
+                ]
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-09-08 23:13:02",
+                    "unix": 1410189182
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 15:58:32",
+                    "unix": 1415606312
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18337931?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18337931?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18337931",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18337931"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 282718,
+                "name": "KRIS ANG â˜…â˜…â˜…â˜…â˜…â˜… (R044187F)",
+                "mobile": "+6592229919"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 569,
+                "typeCode": "CLUS",
+                "typeText": "Cluster House",
+                "typeGroup": "N",
+                "tenureCode": "L99",
+                "tenureText": "99-year Leasehold",
+                "topMonth": 12,
+                "topYear": 2004
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.344826,
+                "longitude": 103.788188,
+                "fullAddress": "0 Jalan Kampong Chantek"
+            },
+            "media": {
+                "cover": {
+                    "V550": "https://sg1-cdn.pgimgs.com/listing/18337931/UPHO.49350006.V550.jpg",
+                    "V150": "https://sg1-cdn.pgimgs.com/listing/18337931/UPHO.49350006.V150.jpg"
+                }
+            }
+        },
+        {
+            "id": 18260996,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": "2YR",
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "Grange Residences",
+            "localizedDescription": null,
+            "price": {
+                "value": 13800,
+                "pretty": "SGD 13,800 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 5.342624854,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": null,
+                    "text": null,
+                    "pretty": null
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 4,
+                    "text": "4 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 4,
+                    "text": "4 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 2583,
+                        "text": "2583 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 239.96855232,
+                        "text": "240 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 5.34262485482,
+                        "text": "SGD 5.34 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 57.507535327369,
+                        "text": "SGD 57.51 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-08-18 23:26:21",
+                    "unix": 1408375581
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 15:58:31",
+                    "unix": 1415606311
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18260996?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18260996?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18260996",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18260996"
+                }
+            },
+            "_user": null,
+            "qualityScore": 98,
+            "event": null,
+            "agent": {
+                "id": 282718,
+                "name": "KRIS ANG â˜…â˜…â˜…â˜…â˜…â˜… (R044187F)",
+                "mobile": "+6592229919"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 329,
+                "typeCode": "CONDO",
+                "typeText": "Condominium",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 12,
+                "topYear": 2004
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.304251,
+                "longitude": 103.822467,
+                "fullAddress": "247 Tanglin Road"
+            },
+            "media": {
+                "cover": {
+                    "V550": "https://sg1-cdn.pgimgs.com/listing/18260996/UPHO.49148059.V550.jpg",
+                    "V150": "https://sg2-cdn.pgimgs.com/listing/18260996/UPHO.49148059.V150.jpg"
+                }
+            }
+        },
+        {
+            "id": 18539533,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": true,
+            "localizedTitle": "The Cosmopolitan",
+            "localizedDescription": null,
+            "price": {
+                "value": 7800,
+                "pretty": "SGD 7,800 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 5.575411007,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": null,
+                    "text": null,
+                    "pretty": null
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 3,
+                    "text": "3 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 3,
+                    "text": "3 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 1399,
+                        "text": "1399 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 129.97135296,
+                        "text": "130 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 5.5754110078628,
+                        "text": "SGD 5.58 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 60.013224624972,
+                        "text": "SGD 60.01 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-11-07 18:27:23",
+                    "unix": 1415356043
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 15:58:31",
+                    "unix": 1415606311
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18539533?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18539533?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18539533",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18539533"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 202803,
+                "name": "Jacqueline lee (R009069J)",
+                "mobile": "+6597917998"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 81,
+                "typeCode": "CONDO",
+                "typeText": "Condominium",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 3,
+                "topYear": 2008
+            },
+            "propertyUnit": {
+                "furnishingCode": "FULL",
+                "furnishingText": "Fully Furnished"
+            },
+            "location": {
+                "latitude": 1.295672,
+                "longitude": 103.832227,
+                "fullAddress": "200, 202 Kim Seng Road"
+            },
+            "media": {
+                "cover": {
+                    "V150": "https://sg2-cdn.pgimgs.com/property/81/PPHO.7344.V150.jpg",
+                    "V550": "https://sg1-cdn.pgimgs.com/property/81/PPHO.7344.V550.jpg"
+                }
+            }
+        },
+        {
+            "id": 18360367,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": "2YR",
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "Parkway View",
+            "localizedDescription": null,
+            "price": {
+                "value": 4500,
+                "pretty": "SGD 4,500 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 3.23974082,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": null,
+                    "text": null,
+                    "pretty": null
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 3,
+                    "text": "3 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 3,
+                    "text": "3 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 1389,
+                        "text": "1389 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 129.04232256,
+                        "text": "129 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 3.2397408207343,
+                        "text": "SGD 3.24 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 34.872279967742,
+                        "text": "SGD 34.87 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-09-15 17:14:44",
+                    "unix": 1410772484
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 15:58:31",
+                    "unix": 1415606311
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18360367?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18360367?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18360367",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18360367"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 282718,
+                "name": "KRIS ANG â˜…â˜…â˜…â˜…â˜…â˜… (R044187F)",
+                "mobile": "+6592229919"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 2279,
+                "typeCode": "CONDO",
+                "typeText": "Condominium",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 1,
+                "topYear": 1992
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.302848,
+                "longitude": 103.904104,
+                "fullAddress": "39 Marine Parade Road"
+            },
+            "media": {
+                "cover": {
+                    "V150": "https://sg1-cdn.pgimgs.com/listing/18360367/UPHO.49509407.V150.jpg",
+                    "V550": "https://sg1-cdn.pgimgs.com/listing/18360367/UPHO.49509407.V550.jpg"
+                }
+            }
+        },
+        {
+            "id": 18477108,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": "2YR",
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "The Cairnhill",
+            "localizedDescription": null,
+            "price": {
+                "value": 7000,
+                "pretty": "SGD 7,000 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 2.510760401,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": null,
+                    "text": null,
+                    "pretty": null
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 4,
+                    "text": "4 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 4,
+                    "text": "4 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 2788,
+                        "text": "2788 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 259.01367552,
+                        "text": "259 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 2.5107604017217,
+                        "text": "SGD 2.51 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 27.025600041954,
+                        "text": "SGD 27.03 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-10-23 19:23:05",
+                    "unix": 1414063385
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 15:58:31",
+                    "unix": 1415606311
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18477108?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18477108?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18477108",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18477108"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 282718,
+                "name": "KRIS ANG â˜…â˜…â˜…â˜…â˜…â˜… (R044187F)",
+                "mobile": "+6592229919"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 2486,
+                "typeCode": "CONDO",
+                "typeText": "Condominium",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 12,
+                "topYear": 1984
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.306538,
+                "longitude": 103.839412,
+                "fullAddress": "4 Cairnhill Rise"
+            },
+            "media": {
+                "cover": {
+                    "V150": "https://sg2-cdn.pgimgs.com/listing/18477108/UPHO.50359309.V150.jpg",
+                    "V550": "https://sg1-cdn.pgimgs.com/listing/18477108/UPHO.50359309.V550.jpg"
+                }
+            }
+        },
+        {
+            "id": 18447171,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": "FL",
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "CAMPUS 1A - 1A Short Street (D07) Student Hostel -",
+            "localizedDescription": null,
+            "price": {
+                "value": 350,
+                "pretty": "SGD 350 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 1.4,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": "GUI",
+                    "text": "Guide Price",
+                    "pretty": "Guide Price"
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": -1,
+                    "text": "Room Rental"
+                },
+                "bathrooms": {
+                    "value": 1,
+                    "text": "1 Bathroom"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 250,
+                        "text": "250 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 23.22576,
+                        "text": "23 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 1.4,
+                        "text": "SGD 1.40 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 15.069474583394,
+                        "text": "SGD 15.07 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-10-14 16:26:25",
+                    "unix": 1413275185
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 15:58:31",
+                    "unix": 1415606311
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18447171?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18447171?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18447171",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18447171"
+                }
+            },
+            "_user": null,
+            "qualityScore": 96,
+            "event": null,
+            "agent": {
+                "id": 282642,
+                "name": "Sam Chin (R008856D)",
+                "mobile": "+6591860486"
+            },
+            "agency": {
+                "id": 10254,
+                "name": "SLP SCOTIA PTE LTD",
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": null,
+                "typeCode": "APT",
+                "typeText": "Apartment",
+                "typeGroup": "N",
+                "tenureCode": null,
+                "tenureText": null,
+                "topMonth": null,
+                "topYear": null
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.302799,
+                "longitude": 103.850434,
+                "fullAddress": ""
+            },
+            "media": {
+                "cover": {
+                    "V150": "https://sg2-cdn.pgimgs.com/listing/18447171/UPHO.50136523.V150.jpg",
+                    "V550": "https://sg2-cdn.pgimgs.com/listing/18447171/UPHO.50136523.V550.jpg"
+                }
+            }
+        },
+        {
+            "id": 17585745,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "SALE",
+            "typeText": "For Sale",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": false,
+            "localizedTitle": "Skyline 360",
+            "localizedDescription": null,
+            "price": {
+                "value": 13000000,
+                "pretty": "SGD 13,000,000",
+                "periodCode": null,
+                "pricePerArea": {
+                    "value": 1992.948030047,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": null,
+                    "text": null,
+                    "pretty": null
+                },
+                "valuation": 0,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 5,
+                    "text": "5 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 4,
+                    "text": "4 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 6523,
+                        "text": "6523 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 606.00652992,
+                        "text": "606 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 1992.9480300475,
+                        "text": "SGD 1,992.95 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 21451.91406059,
+                        "text": "SGD 21,451.91 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-04-01 18:34:17",
+                    "unix": 1396348457
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 15:58:31",
+                    "unix": 1415606311
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/17585745?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/17585745?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/17585745",
+                    "desktop": "http://www.propertyguru.com.sg/listing/17585745"
+                }
+            },
+            "_user": null,
+            "qualityScore": 81,
+            "event": null,
+            "agent": {
+                "id": 202803,
+                "name": "Jacqueline lee (R009069J)",
+                "mobile": "+6597917998"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 2573,
+                "typeCode": "CONDO",
+                "typeText": "Condominium",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 6,
+                "topYear": 2013
+            },
+            "propertyUnit": {
+                "furnishingCode": null,
+                "furnishingText": null
+            },
+            "location": {
+                "latitude": 1.29682,
+                "longitude": 103.836822,
+                "fullAddress": "70 St Thomas Walk"
+            },
+            "media": {
+                "cover": {
+                    "V550": "https://sg1-cdn.pgimgs.com/property/2573/PPHO.17015200.V550.jpg",
+                    "V150": "https://sg2-cdn.pgimgs.com/property/2573/PPHO.17015200.V150.jpg"
+                }
+            }
+        },
+        {
+            "id": 18539350,
+            "statusCode": "ACT",
+            "sourceCode": null,
+            "typeCode": "RENT",
+            "typeText": "For Rent",
+            "subTypeCode": null,
+            "leaseTermCode": null,
+            "featureCode": null,
+            "accountTypeCode": "CORPORATE",
+            "isPremiumAccount": true,
+            "isPropertySpecialistListing": false,
+            "isMobilePropertySpotlightListing": false,
+            "isFeaturedListing": false,
+            "isTransactorListing": false,
+            "hasFloorplans": true,
+            "localizedTitle": "VIVA",
+            "localizedDescription": null,
+            "price": {
+                "value": 5700,
+                "pretty": "SGD 5,700 / month",
+                "periodCode": "MONTH",
+                "pricePerArea": {
+                    "value": 5.949895615,
+                    "unit": "sqft",
+                    "reference": "floorArea"
+                },
+                "type": {
+                    "code": null,
+                    "text": null,
+                    "pretty": null
+                },
+                "valuation": null,
+                "completed": null,
+                "currency": "SGD"
+            },
+            "sizes": {
+                "bedrooms": {
+                    "value": 2,
+                    "text": "2 Bedrooms"
+                },
+                "bathrooms": {
+                    "value": 2,
+                    "text": "2 Bathrooms"
+                },
+                "extrarooms": {
+                    "value": null,
+                    "text": null
+                },
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 958,
+                        "text": "958 sqft"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 89.00111232,
+                        "text": "89 sqm"
+                    }
+                ],
+                "landArea": null,
+                "floorX": null,
+                "floorY": null,
+                "landX": null,
+                "landY": null
+            },
+            "pricePerArea": {
+                "floorArea": [
+                    {
+                        "unit": "sqft",
+                        "value": 5.9498956158664,
+                        "text": "SGD 5.95 psf"
+                    },
+                    {
+                        "unit": "sqm",
+                        "value": 64.04414339796,
+                        "text": "SGD 64.04 psm"
+                    }
+                ],
+                "landArea": null
+            },
+            "dates": {
+                "timezone": "Asia/Singapore",
+                "firstPosted": {
+                    "date": "2014-11-07 17:44:39",
+                    "unix": 1415353479
+                },
+                "lastPosted": {
+                    "date": "2014-11-10 15:58:31",
+                    "unix": 1415606311
+                },
+                "expiry": {
+                    "date": "2014-12-12 00:00:00",
+                    "unix": 1418313600
+                }
+            },
+            "urls": {
+                "listing": {
+                    "api": "https://api.propertyguru.com/v1/listings/18539350?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "internal": "http://listing.guruestate.com/v1/listings/18539350?page=1&limit=10&property_type_group%5B0%5D=N&property_type_group%5B1%5D=L&property_type_group%5B2%5D=H",
+                    "mobile": "http://m.propertyguru.com.sg/listing/18539350",
+                    "desktop": "http://www.propertyguru.com.sg/listing/18539350"
+                }
+            },
+            "_user": null,
+            "qualityScore": 100,
+            "event": null,
+            "agent": {
+                "id": 202803,
+                "name": "Jacqueline lee (R009069J)",
+                "mobile": "+6597917998"
+            },
+            "agency": {
+                "id": null,
+                "name": null,
+                "ceaLicenseNumber": null
+            },
+            "property": {
+                "id": 1561,
+                "typeCode": "CONDO",
+                "typeText": "Condominium",
+                "typeGroup": "N",
+                "tenureCode": "F",
+                "tenureText": "Freehold",
+                "topMonth": 1,
+                "topYear": 2013
+            },
+            "propertyUnit": {
+                "furnishingCode": "PART",
+                "furnishingText": "Partially Furnished"
+            },
+            "location": {
+                "latitude": 1.314426,
+                "longitude": 103.84484,
+                "fullAddress": "2 Suffolk Walk"
+            },
+            "media": {
+                "cover": {
+                    "V150": "https://sg2-cdn.pgimgs.com/property/1561/PPHO.581918.V150.jpg",
+                    "V550": "https://sg2-cdn.pgimgs.com/property/1561/PPHO.581918.V550.jpg"
+                }
+            }
+        }
+    ]
+}

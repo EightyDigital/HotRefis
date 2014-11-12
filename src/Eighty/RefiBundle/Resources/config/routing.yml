@@ -16,6 +16,33 @@ refi_homepage:
     pattern: /dashboard/
     defaults: { _controller: RefiBundle:Application:index }
 
+
+refi_add:
+    pattern: /add/
+    defaults: { _controller: RefiBundle:Application:add }
+
+
+refi_list:
+    pattern: /list/
+    defaults: { _controller: RefiBundle:Application:list }
+
+
+refi_calculator:
+    pattern: /calculator/
+    defaults: { _controller: RefiBundle:Application:calculator }
+
+
+refi_report:
+    pattern: /report/
+    defaults: { _controller: RefiBundle:Application:report }
+
+
+
+refi_prospect:
+    pattern: /prospect/
+    defaults: { _controller: RefiBundle:Application:prospect }
+
+
 API_filter:
     pattern: /api/filter/
     defaults: { _controller: RefiBundle:Application:filter }

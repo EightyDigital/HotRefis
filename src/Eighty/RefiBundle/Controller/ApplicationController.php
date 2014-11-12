@@ -14,7 +14,36 @@ class ApplicationController extends Controller
         return $this->render('RefiBundle:Application:index.html.twig');
         //, array('name' => $name)
     }
-    
+
+    public function addAction()
+    {
+        return $this->render('RefiBundle:Application:add.html.twig');
+        //, array('name' => $name)
+    }
+    public function listAction()
+    {
+        return $this->render('RefiBundle:Application:list.html.twig');
+        //, array('name' => $name)
+    }
+
+    public function calculatorAction()
+    {
+        return $this->render('RefiBundle:Application:calculator.html.twig');
+        //, array('name' => $name)
+    }
+
+    public function reportAction()
+    {
+        return $this->render('RefiBundle:Application:report.html.twig');
+        //, array('name' => $name)
+    }
+
+    public function prospectAction()
+    {
+        return $this->render('RefiBundle:Application:prospect.html.twig');
+        //, array('name' => $name)
+    }
+
     public function filterAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -29,7 +58,7 @@ class ApplicationController extends Controller
         if (!isset($postdata['age_max'])) $postdata['age_max'] = 99;
         if (!isset($postdata['limit'])) $postdata['limit'] = 1000;
         if (!isset($postdata['offset'])) $postdata['offset'] = 0;
-        
+
         $prospect_data = $em->getRepository('RefiBundle:Prospect')->filterProspects($postdata);
 
         $n = 0;
@@ -38,7 +67,7 @@ class ApplicationController extends Controller
             $main_data[$n]['properties'] = $em->getRepository('RefiBundle:Prospect')->fetchTransactionsByProspectId($row['id']);
             $n++;
         }
-        
+
         $response = new Response(json_encode($main_data));
         $response->headers->set('Content-Type', 'application/json');
 

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sliderDemoApp" id="top">
+<head>
+  <meta name="viewport" content="width=1400">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>HotRefis: Report</title>
+
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+
+  <link rel="stylesheet" href="css/master.css">
+
+  <!-- Stylesheets -->
+  <!-- Bootstrap is included in its original form, unaltered -->
+  <link rel="stylesheet" href="loginAndwidgets/css/bootstrap.min.css">
+
+  <!-- Related styles of various icon packs and plugins -->
+  <link rel="stylesheet" href="loginAndwidgets/css/plugins.css">
+
+  <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+  <link rel="stylesheet" href="loginAndwidgets/css/main.css">
+
+  <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+
+  <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+  <link rel="stylesheet" href="loginAndwidgets/css/themes.css">
+  <!-- END Stylesheets -->
+
+  <script src="loginAndwidgets/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+  <script>
+  $(function(){
+    $( "#dialog" ).dialog({ autoOpen: false });
+
+    $(".btn-sendreport").click(function(event){
+      $( ".modal_wrap" ).css({display: "block"});
+      $( "#dialog" ).dialog("open");
+      $( "#dialog" ).css({display: 'block'});
+    });
+
+    $(".ui-dialog-titlebar-close").click(function(){
+      $( ".modal_wrap" ).css({display: "none"});
+    });
+
+  });
+
+  </script>
+
+</head>
+<body class="report">
+<div ng-include src="'header.html'"></div>
+
+<!-- menu  -->
+<div class="nav_menu">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span12">
+        <h3 class="pagetitle">REPORT PREVIEW</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- \menu  -->
+
+<div class="container">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="alignright">
+        <button class="btn-red btn-gen btn-sendreport">SAVE AND SEND</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- row 1: property details + map   -->
+<div class="container row1">
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="whitebox">
+        <div class="head pad">
+          <i class="fa fa-file-text"></i>Property <strong>Details</strong>
+        </div>
+        <div class="pad text">
+          <p>2,239 sqft/208 sqm (built-up)</p>
+          <p>921 Bukit Timah Road, 589624 Clement Park / Upper Bukit</p>
+          <p>Timah, Newton / Bt. Timah (D11,21)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="span6">
+      <div class="whitebox">
+
+        <div id="map-canvas" style="width: 100%; height: 210px;"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+            <script>
+        var map;
+        function initialize() {
+          var mapOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng(-34.397, 150.644)
+          };
+          map = new google.maps.Map(document.getElementById('map-canvas'),
+              mapOptions);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+            </script>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- \row 1: property details + map   -->
+<!-- row 2: Property Current Value Range -->
+<div class="container row2">
+  <div class="row-fluid">
+    <div class="span12 whitebox">
+      <div class="head pad aligncenter"><i class="icon-cvr"></i>Property <strong>Currency Value Range</strong></div>
+
+      <div class="cvr-comp">
+        <div class="span4 from">
+            <strong>S$ 1,260,000</strong><br>
+            S$ 998 pst
+        </div>
+        <div class="span4 mid">
+          <strong>To</strong>
+        </div>
+        <div class="span4 to">
+          <strong>S$ 1,400,000</strong><br>
+          S$ 1,113 pst
+        </div>
+        <div class="clr"></div>
+      </div>
+      <!-- cvr-comp  -->
+      <p class="note aligncenter">Comparable Transactions used in the Valuation Assessment</p>
+    </div>
+    <!-- whitebox -->
+  </div>
+</div>
+<!-- \row 2: Property Current Value Range -->
+
+<!-- row 3: Latest Transaction Condominium -->
+<div class="container row3">
+  <div class="row-fluid">
+    <div class="span12 whitebox">
+      <div class="pad">
+        <table class="latest_transaction" border="1">
+          <thead>
+            <th colspan="12">
+              <span class="alignleft">Latest Transaction <strong>Condominium</strong></span>
+              <span class="alignright">1-50 of 300</span>
+            </th>
+            <th width="4%"><i class="fa fa-angle-left"></i></th>
+            <th width="4%"><i class="fa fa-angle-right"></i></th>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="wide2">Elit minim delenit</td>
+              <td class="wide2">Lobortis vulputate</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper.com</td>
+              <td>ullamcorper.com</td>
+              <td>123</td>
+              <td>ullamcorper.com</td>
+              <td>Yes</td>
+              <td>123</td>
+              <td colspan="3" class="wide">Today, 10:15 PM</td>
+            </tr>
+            <tr>
+              <td class="wide2">Elit minim delenit</td>
+              <td class="wide2">Lobortis vulputate</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper.com</td>
+              <td>ullamcorper.com</td>
+              <td>123</td>
+              <td>ullamcorper.com</td>
+              <td>Yes</td>
+              <td>123</td>
+              <td colspan="3" class="wide">Today, 10:15 PM</td>
+            </tr>
+            <tr>
+              <td class="wide2">Elit minim delenit</td>
+              <td class="wide2">Lobortis vulputate</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper.com</td>
+              <td>ullamcorper.com</td>
+              <td>123</td>
+              <td>ullamcorper.com</td>
+              <td>Yes</td>
+              <td>123</td>
+              <td colspan="3" class="wide">Today, 10:15 PM</td>
+            </tr>
+            <tr>
+              <td class="wide2">Elit minim delenit</td>
+              <td class="wide2">Lobortis vulputate</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper.com</td>
+              <td>ullamcorper.com</td>
+              <td>123</td>
+              <td>ullamcorper.com</td>
+              <td>Yes</td>
+              <td>123</td>
+              <td colspan="3" class="wide">Today, 10:15 PM</td>
+            </tr>
+            <tr>
+              <td class="wide2">Elit minim delenit</td>
+              <td class="wide2">Lobortis vulputate</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper.com</td>
+              <td>ullamcorper.com</td>
+              <td>123</td>
+              <td>ullamcorper.com</td>
+              <td>Yes</td>
+              <td>123</td>
+              <td colspan="3" class="wide">Today, 10:15 PM</td>
+            </tr>
+            <tr>
+              <td class="wide2">Elit minim delenit</td>
+              <td class="wide2">Lobortis vulputate</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper.com</td>
+              <td>ullamcorper.com</td>
+              <td>123</td>
+              <td>ullamcorper.com</td>
+              <td>Yes</td>
+              <td>123</td>
+              <td colspan="3" class="wide">Today, 10:15 PM</td>
+            </tr>
+            <tr>
+              <td class="wide2">Elit minim delenit</td>
+              <td class="wide2">Lobortis vulputate</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper.com</td>
+              <td>ullamcorper.com</td>
+              <td>123</td>
+              <td>ullamcorper.com</td>
+              <td>Yes</td>
+              <td>123</td>
+              <td colspan="3" class="wide">Today, 10:15 PM</td>
+            </tr>
+            <tr>
+              <td class="wide2">Elit minim delenit</td>
+              <td class="wide2">Lobortis vulputate</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper</td>
+              <td>ullamcorper.com</td>
+              <td>ullamcorper.com</td>
+              <td>123</td>
+              <td>ullamcorper.com</td>
+              <td>Yes</td>
+              <td>123</td>
+              <td colspan="3" class="wide">Today, 10:15 PM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- \row-fluid -->
+</div>
+<!-- \row 3: Latest Transaction Condominium -->
+
+<!-- row 4 : Property Graph  -->
+<div class="container row4">
+  <div class="row-fluid whitebox">
+    <div class="span5 pad">
+      <center>How your Property has grown<br> compare to the average in the District</center>
+    </div>
+    <div class="span7 pad the_graph">
+      <script src="loginAndwidgets/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
+      <!-- Classic Chart Block -->
+      <div class="block full">
+          <!-- Classic Chart Title -->
+          <div class="block-title">
+              <h2><strong>Classic</strong> Chart</h2>
+          </div>
+          <!-- END Classic Chart Title -->
+
+          <!-- Classic Chart Content -->
+          <!-- Flot Charts (initialized in js/pages/compCharts.js), for more examples you can check out http://www.flotcharts.org/ -->
+          <div id="chart-classic" class="chart"></div>
+          <!-- END Classic Chart Content -->
+      </div>
+      <!-- END Classic Chart Block -->
+    </div>
+  </div>
+</div>
+<!-- \row 4 : Property Graph  -->
+
+<!-- row 5 -->
+<div class="container row5">
+  <div class="row-fluid whitebox">
+    <div class="span12">
+
+      <div class="head pad">
+        <i class="ionicons ion-help-circled"></i> How your Property can <strong>Save You More</strong>
+      </div>
+
+      <div class="row-fluid pad colText">
+        <div class="span12">
+          <p class="text">With Your property valuation, there may be a large opportunity to save more on your mortgage.</p>
+
+          <p class="text">Example:</p>
+          <div class="row-fluid">
+            <div class="span6">If you had a debt of $520,000</div>
+              <div class="span6">($500,000 round it)</div>
+          </div>
+          <div class="row-fluid">
+            <div class="span6">and had a loan over 30 years with approx.</div>
+              <div class="span6">25 years remaining</div>
+          </div>
+          <div class="row-fluid last">
+            <div class="span6">And your current interest rate was</div>
+              <div class="span6">3% next two years, 4% after that</div>
+          </div>
+
+          <p class="text">You could potentially refinance and save $46,000 in just five years.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- \row 5 -->
+
+<!-- row 6 -->
+<div class="container row6">
+  <div class="row-fluid whitebox">
+    <div class="pad">
+      <div class="span7">
+        <div class="bordered">
+          <img src="/tempAssets/css/images/sales_pitch.jpg" alt="">
+
+          <div class="row-fluid pad">
+            <div class="span6">
+              <div class="row-fluid">
+                <div class="span6">Property Price:</div>
+                <div class="span6">S$ 650,000.00</div>
+              </div>
+              <div class="row-fluid">
+                <div class="span6">Age:</div>
+                <div class="span6">35</div>
+              </div>
+            </div>
+            <div class="span6">
+              <div class="row-fluid">
+                <div class="span6">Loan Amount:</div>
+                <div class="span6">S$ 500,000.00</div>
+              </div>
+              <div class="row-fluid">
+                <div class="span6">Loan Period:</div>
+                <div class="span6">25</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-fluid">
+            <div class="span12 redRow">
+              You can Reduce your Monthly repayment by <br>SGD299.29
+            </div>
+          </div>
+
+          <div class="row-fluid">
+            <div class="span12">
+              <table class="sales-pitch" border="1">
+                <thead>
+                  <th width='15%'></th>
+                  <th width='5%'></th>
+                  <th width='9%'>CURRENT</th>
+                  <th width='9%'>HSBC</th>
+                  <th width='9%'>SAVINGS</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="pitch-icon tla"></span>Total Loan Amount:</td>
+                    <td>S$</td>
+                    <td>500,000.00</td>
+                    <td>200,000.00</td>
+                    <td>50,000.00</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pitch-icon mpa"></span>Monthly Payment Amount:</td>
+                    <td>S$</td>
+                    <td>23,000.00</td>
+                    <td>23,000.00</td>
+                    <td>3,000.00</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pitch-icon ie"></span>Interest Expenses:</td>
+                    <td>S$</td>
+                    <td>3,000.00</td>
+                    <td>2,000.00</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pitch-icon f3y"></span>First 3 years:</td>
+                    <td>S$</td>
+                    <td>900,000.00</td>
+                    <td>700,000.00</td>
+                    <td>100,000.00</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pitch-icon f5y"></span>First 5 years:</td>
+                    <td>S$</td>
+                    <td>400,000.00</td>
+                    <td>200,000.00</td>
+                    <td>100,000.00</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pitch-icon f10y"></span>First 10 years:</td>
+                    <td>S$</td>
+                    <td>50,000.00</td>
+                    <td>10,000.00</td>
+                    <td>10,000.00</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pitch-icon te"></span>Total Exprenses:</td>
+                    <td>S$</td>
+                    <td>90,000.00</td>
+                    <td>40,000.00</td>
+                    <td>30,000.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+        <!-- bordered  -->
+
+        <div class="alignright rp-btn">
+          <button>Click here to View How</button>
+        </div>
+
+        <div class="clr"></div>
+      </div>
+
+
+
+      <div class="span5 bordered">
+        <img src="/tempAssets/css/images/interest_expenses.jpg" alt="">
+
+        <img src="/tempAssets/css/images/ie-graph.jpg" alt="">
+        &nbsp;
+        <div class="clr"></div>
+      </div>
+    </div>
+    <div class="clr"></div>
+  </div>
+</div>
+<!-- \row 6 -->
+
+<!-- row7  -->
+<div class="container row7">
+  <div class="row-fluid">
+
+    <div class="span8 whitebox">
+      <div class="main pad">
+        <h3 class="bigtext">Singapore Mortgage Brokers</h3>
+        <div class="desc">The Leading Independent Morgage Consultancy in Singapore</div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span7">
+          <div class="pad">
+            <div class="subtext">
+              <p>Singapore Mortgage Brokers (SMB) is the premier independent and trusted real estate finance consultancy in Singapore
+                 specializing in commercial and residential property finance.</p>
+              <p>SMB maintains active relationships with major international and local lending banks and finance companies.</p>
+              <p>Our clients hail from Singapore and many other countries around the world including, Hong Kong, UK, US, Germany, and Australia.</p>
+              <p>The main countries of focus are Singapore and Malaysia. SMB also advises clients needing financing in certain locations in
+                Thailand HK, UK, Australia, Dubai and the US.</p>
+              <p><strong>Consulting Services provided:</strong></p>
+              <ol>
+                <li>Mortgage lending</li>
+                <li>Mortgage insurance</li>
+                <li>Commercial real estate finance</li>
+                <li>Individual and company succession planing where real estate is one of the components</li>
+                <li>Business brokerage where real estate is one of the components</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="span5 pad">
+          <img src="css/images/smb.jpg" alt="">
+          <div class="alignright rightSubtext">
+            <div>SMB Mortgage Brokers Pte Ltd</div>
+            <div>80 Raffles Place</div>
+            <div>Level 36, UOB Plaza 1</div>
+            <div>Singapore 048624</div>
+            <div>Tel: +65 6248 4831</div>
+            <div>Fax: +65 6248 4531</div>
+            <div>smb@singaporemortgagebrokers.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="span4 whitebox">
+
+      <div class="signature">
+        <div class="avatar">
+          <i class="ionicons ion-android-social-user"></i>
+        </div>
+        <div class="profile">
+          <div class="main pad">
+            <h3 class="name">Grace Reed</h3>
+            <div class="title">Agent Broker</div>
+          </div>
+          <!-- main -->
+          <div class="others pad">
+            <div><b>Email: </b>info@smb.com</div>
+            <div><b>Phone: </b>1234 5678</div>
+            <div><b>Age: </b>32</div>
+            <div><b>Address: </b>Dolor duis dolor in aliquam enim ex dolor</div>
+            <div><b>Company: </b>SMB</div>
+            <div><b>Years as a broker: </b>7 years</div>
+          </div>
+          <!-- others -->
+          <div class="bottominfo">
+            <div class="row-fluid">
+              <div class="span4">
+                <div>
+                  <b>58</b>
+                  <div>Projects</div>
+                </div>
+              </div>
+              <div class="span4">
+                <div>
+                  <b>40</b>
+                  <div>Clients</div>
+                </div>
+              </div>
+              <div class="span4">
+                <div>
+                  <b>15.3k</b>
+                  <div>Followers</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- bottominfo -->
+        </div>
+      </div>
+      <!-- signature -->
+    </div>
+
+
+  </div>/tempAssets/
+</div>
+<!-- \row7  -->
+
+  <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <script src='js/slider.js'></script>
+
+  <script src='js/slider.mod.js'></script>
+
+  <!-- Bootstrap.js, Jquery plugins and Custom JS code -->
+  <script src="loginAndwidgets/js/vendor/bootstrap.min.js"></script>
+  <script src="loginAndwidgets/js/plugins.js"></script>
+  <script src="loginAndwidgets/js/app.js"></script>
+
+  <!-- tables -->
+  <script src="loginAndwidgets/js/pages/tablesDatatables.js"></script>
+  <script>$(function(){ TablesDatatables.init(); });</script>
+
+  <!-- charts -->
+  <script src="loginAndwidgets/js/pages/compCharts.js"></script>
+  <script>$(function(){ CompCharts.init(); });</script>
+
+
+<div class="modal_wrap"></div>
+<div id="dialog" title="SEND REPORT">
+  <div class="form-wrapper">
+    <form action="#" method='get'>
+      <div class="fields-wrap">
+        <div><i class="ionicons ion-ios7-person"></i><input type="text" placeholder="First Name"></div>
+        <div><i class="ionicons ion-ios7-person"></i><input type="text" placeholder="Last Name"></div>
+        <div><i class="ionicons ion-ios7-email-outline"></i><input type="text" placeholder="Email Address"></div>
+        <div><i class="ionicons ion-iphone"></i><input type="text" placeholder="Mobile"></div>
+      </div>
+
+      <hr>
+
+      <div class="fields-wrap">
+        <label>Send Email <input type="checkbox" checked></label>
+        <label>Send SMS <input type="checkbox"></label>
+      </div>
+
+      <div class="modal-buttons fields-wrap">
+        <button class="btn-gen btn-blue">Submit</button>
+        <button class="btn-gen btn-yellow">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

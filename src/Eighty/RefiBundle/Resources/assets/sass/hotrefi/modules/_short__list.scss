@@ -1,0 +1,78 @@
+.short__list {
+  overflow:auto;
+  clear:both;
+  border: 1px solid #ced0d5;
+  @include radius(5px);
+
+  ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
+  .header {
+    background: $color__brand--secondary;
+    color:#fff;
+    text-align:center;
+    margin:0;
+    padding:10px 0;
+    text-transform:uppercase;
+    font-weight:300;
+    font-size:18px;
+    @include radius(5px 5px 0 0);
+
+  }
+  .property--list {
+    padding:5px 10px;
+    & > li {
+      border-bottom:1px solid #ccc;
+      margin:10px 0 0 0;
+      padding:0 0 10px 0;
+    }
+  }
+  .property--prospects {
+    font-size:13px;
+  }
+  .property--price {
+    padding:10px 0;
+    .value {
+      font-size:16px;
+      font-weight:600;
+
+    }
+  }
+
+  .property--duration {
+    clear:both;
+    padding:10px 0;
+    ul {
+      padding:0 0 0 2px;
+      overflow:auto;
+    }
+    li {
+      float:left;
+      margin-right:10px;
+    }
+  }
+  .item__include {
+    float:left;
+    margin:10px;
+  }
+  .short__list--item {
+    overflow:hidden;
+    padding:6px 0;
+    margin-left:20px;
+    h2 {
+      font-size:16px;
+    }
+  }
+  .short__list--footer {
+    overflow:auto;
+    clear:both;
+    .total {
+      float:right;
+      text-align:right;
+      margin:10px 10px 10px 10px;
+    }
+  }
+}

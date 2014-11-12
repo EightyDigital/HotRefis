@@ -1,36 +1,156 @@
-<div class="filter__controller">
+<div class="filter__controller" ng-controller="filter__controller" ng-init="tab = 1; filterVals.current = 'Property'; ">
   <div class="pg__width">
-    <div class="filter__controller--header">
-      <h2 class="active__filter"><i class="ionicons ion-document-text"></i>Filtering by: <span>Financials</span></h2>
-      <div class="filter__controller--dropdown">
-        <a class="fa fa-bars" href="#">Prospect Filter</a>
-        <ul>
+    <div class="filter__controller--header">      <div class="filter__controller--dropdown">
+        <a class="ionicons ion-ios7-home " href="" ng-class="{active:tab===1}" ng-click="tab = 1; $event.preventDefault(); $event.stopPropagation(); filterVals.current = 'Property'; " preventDefault>Property Filters</a>
+
+        <a class="ionicons ion-stats-bars" href="" ng-class="{active:tab===2}" ng-click="tab = 2; $event.preventDefault(); $event.stopPropagation(); filterVals.current = 'Financial'; " preventDefault>Finance Filters</a>
+{#         <ul>
           <li><a href="property.html" class="ionicons ion-ios7-location-outline">Property</a></li>
           <li><a href="financials.html" class="active ionicons ion-stats-bars">Financial</a></li>
           <li><a href="professions.html" class="ionicons ion-briefcase">Professions</a></li>
-        </ul>
+        </ul> #}
+
       </div>
+
+    </div>
+    <h2 class="active__filter"><i class="ionicons ion-document-text"></i><span>{[ filterVals.current ]}</span> Filters</h2>
+
+    <div class="filter__wrap">
+      <div class="filter__wrap--inside">
+
+        <!-- PROPERTY FILTERS -->
+        <div class="filter__controller--controls" ng-show="tab === 1">
+          <div class="prospect--box">
+            <div class="filter__controls--label ionicons ion-location">
+              Property Value
+            </div>
+            <div class="slider__wrap">
+              <div class="property__value" ng-model="filterVals.property__value"></div>
+
+            </div>
+            <div class="clr"></div>
+          </div>
+
+
+          <div class="prospect--box">
+            <div class="filter__controls--label ionicons ion-ios7-copy-outline">
+              LTV
+            </div>
+            <div class="slider__wrap">
+              <div class="property__ltv" ng-model="filterVals.property__ltv"></div>
+
+            </div>
+            <div class="clr"></div>
+          </div>
+
+
+
+          <div class="prospect--box">
+            <div class="filter__controls--label ionicons ion-calendar">
+              Loan Age (years)
+            </div>
+            <div class="slider__wrap">
+              <div class="property__loanAge" ng-model="filterVals.property__loanAge"></div>
+
+            </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+        <!-- END PROPERTY FILTERS -->
+
+        <!-- FINANCIAL FILTERS -->
+        <div class="filter__controller--controls" ng-show="tab === 2">
+          <div class="prospect--box">
+            <div class="filter__controls--label ionicons ion-cash">
+              Income PA
+            </div>
+            <div class="slider__wrap">
+
+              <div class="financials__income" ng-model="filterVals.financials__income"></div>
+
+            </div>
+            <div class="clr"></div>
+          </div>
+
+          <div class="prospect--box">
+            <div class="filter__controls--label ionicons ion-home ">
+              Property Owned
+            </div>
+            <div class="slider__wrap">
+
+              <div class="financials__property" ng-model="filterVals.financials__property"></div>
+
+            </div>
+            <div class="clr"></div>
+          </div>
+
+
+          <div class="prospect--box">
+            <div class="filter__controls--label ionicons ion-ios7-timer-outline">
+              Ages (years)
+            </div>
+            <div class="slider__wrap">
+
+              <div class="financials__age" ng-model="filterVals.financials__age"></div>
+
+            </div>
+            <div class="clr"></div>
+          </div>
+
+
+
+          <div class="prospect--box">
+            <div class="filter__controls--label ionicons ionicons ion-android-note">
+              Assets
+            </div>
+            <div class="slider__wrap">
+
+              <div class="financials__assets" ng-model="filterVals.financials__assets"></div>
+
+            </div>
+            <div class="clr"></div>
+          </div>
+
+
+
+          <div class="prospect--box">
+            <div class="filter__controls--label ionicons ion-arrow-graph-up-right">
+              Debt
+            </div>
+            <div class="slider__wrap">
+
+              <div class="financials__debt" ng-model="filterVals.financials__debt"></div>
+
+            </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+        <!-- END FINANCIAL FILTERS -->
+
+      </div>
+
+
     </div>
 
-    <div class="filter__controller--controls">
-      <div class="prospect--box" ng-controller="filter_controller">
-        <div class="filter__controls--label ionicons ionicons ion-cash">
-          Income PA
-        </div>
-        <div class="slider__wrap">
-
-          <div class="financials__income" ng-model="filterVals.financials__income"></div>
-
-        </div>
-        <div class="clr"></div>
-      </div>
-    </div>
     <div class="filter__controller--list">
+      <div class="filter__controller--list--inside">
+        <div class="short__list">
+          <h2 class="header">Property Shortlist</h2>
+          <ul class="property--list">
+            <li>
+              <h2>Empty</h2>
+            </li>
+          </ul>
+          <div class="short__list--footer">
 
+            <div class="total">
+              <span class="label">Total: </span>
+              <span class="value">$0</span>
+            </div>
+          </div>
 
-      <div class="filter__aux">
-
+        </div>
+        <div class="filter__aux">
+          <a class="ionicons ion-ios7-cart" href="/list">Checkout</a>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
