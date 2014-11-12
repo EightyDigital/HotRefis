@@ -43,7 +43,14 @@ class ApplicationController extends Controller
         return $this->render('RefiBundle:Application:prospect.html.twig');
         //, array('name' => $name)
     }
-
+	
+	/*-------------------------------------------------/
+	|	route: <domain>/api/filter/property
+	|	postdata:
+	|		- property_value_min; property_value_max;
+	|		- ltv_min; ltv_max;
+	|		- loan_age_min; loan_age_max;
+	--------------------------------------------------*/
     public function filterPropertyAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -102,6 +109,11 @@ class ApplicationController extends Controller
         return $response;
     }
 	
+	/*-------------------------------------------------/
+	|	route: <domain>/api/filter/finance
+	|	postdata:
+	|		- xxxx [under development]
+	--------------------------------------------------*/
 	public function filterFinanceAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -130,23 +142,23 @@ class ApplicationController extends Controller
 			
 			$good = false;
 			if(isset($val['prospectloan'][0])) {
-				if($val['prospectloan'][0]['ltv'] >= $postdata['ltv_min'] && $val['prospectloan'][0]['ltv'] <= $postdata['ltv_max']) {
-					$good = true;
-				} else {
-					$good = false;
-				}
+				// if($val['prospectloan'][0]['ltv'] >= $postdata['ltv_min'] && $val['prospectloan'][0]['ltv'] <= $postdata['ltv_max']) {
+					// $good = true;
+				// } else {
+					// $good = false;
+				// }
 				
-				$from = $val['prospectloan'][0]['loanDate'];
-				$to = new \DateTime('today');
-				$loan_age = $from->diff($to)->y;
+				// $from = $val['prospectloan'][0]['loanDate'];
+				// $to = new \DateTime('today');
+				// $loan_age = $from->diff($to)->y;
 				
-				if($loan_age >= $postdata['loan_age_min'] && $loan_age <= $postdata['loan_age_max']) {
-					$good = true;
-				} else {
-					$good = false;
-				}
+				// if($loan_age >= $postdata['loan_age_min'] && $loan_age <= $postdata['loan_age_max']) {
+					// $good = true;
+				// } else {
+					// $good = false;
+				// }
 				
-				if($good == true) $district[$val['districtcode']][$val['sector']][] = $val;
+				// if($good == true) $district[$val['districtcode']][$val['sector']][] = $val;
 			}
 		}
 		
