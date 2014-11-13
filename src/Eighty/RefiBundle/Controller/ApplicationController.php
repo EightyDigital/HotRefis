@@ -107,8 +107,6 @@ class ApplicationController extends Controller
 			}
 		}
 		
-		print_r($district); exit();
-		
 		$response = new Response(json_encode($district));
         $response->headers->set('Content-Type', 'application/json');
 
