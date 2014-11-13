@@ -73,10 +73,12 @@ class ApplicationController extends Controller
 		$district = array();
 		foreach($property_data as $val) {
 			$val['prospect'] = $em->getRepository('RefiBundle:Transactions')->fetchProspectByTransactionsId($val['id']);
-			$val['prospectloan'] = $em->getRepository('RefiBundle:Transactions')->fetchLoanByTransactionsId($val['id']);
+			if(isset($val['prospect'][0])) $val['prospect'] = $val['prospect'][0];
+			$val['prospect']['prospectloan'] = $em->getRepository('RefiBundle:Transactions')->fetchLoanByTransactionsId($val['id']);
 			
 			$good = false;
-			if(isset($val['prospectloan'][0])) {
+			if(isset($val['prospect']['prospectloan'][0])) {
+				$val['prospect']['prospectloan'] = $val['prospect']['prospectloan'][0];
 				if(($val['price'] >= $postdata['property_value_min'] && $val['price'] <= $postdata['property_value_max']) ||
 					($val['newprice'] >= $postdata['property_value_min'] && $val['newprice'] <= $postdata['property_value_max'])
 				   ) {
@@ -85,13 +87,13 @@ class ApplicationController extends Controller
 					$good = false;
 				}
 				
-				if($val['prospectloan'][0]['ltv'] >= $postdata['ltv_min'] && $val['prospectloan'][0]['ltv'] <= $postdata['ltv_max']) {
+				if($val['prospect']['prospectloan']['ltv'] >= $postdata['ltv_min'] && $val['prospect']['prospectloan']['ltv'] <= $postdata['ltv_max']) {
 					$good = true;
 				} else {
 					$good = false;
 				}
 				
-				$from = $val['prospectloan'][0]['loanDate'];
+				$from = $val['prospect']['prospectloan']['loanDate'];
 				$to = new \DateTime('today');
 				$loan_age = $from->diff($to)->y;
 				
@@ -104,6 +106,8 @@ class ApplicationController extends Controller
 				if($good == true) $district[$val['districtcode']][$val['sector']][] = $val;
 			}
 		}
+		
+		print_r($district); exit();
 		
 		$response = new Response(json_encode($district));
         $response->headers->set('Content-Type', 'application/json');
