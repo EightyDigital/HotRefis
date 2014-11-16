@@ -11,7 +11,7 @@ refis.factory('prospect__service', function($rootScope) {
   //prospects.heatmap_score = '';
 
   prospects.prepForBroadcast = function(value) {
-    this = value;
+    prospects = value;
     this.broadcastItem();
   };
 
@@ -48,7 +48,7 @@ refis.factory('origin__service', function($rootScope) {
 });
 
 
-var report__crud = refis.controller('heatmap__slider', function($scope, distance__service) {
+var report__crud = refis.controller('heatmap__slider', function($scope, prospect__service) {
   $scope.slider = $( ".heatmap__slider" ).slider({
     //orientation: "vertical",
     range: "max",
@@ -407,6 +407,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   responsePromise.error(function(data, status, headers, config) {
       alert("Could not fetch prospects, contact FortyTu");
   });
+  console.log('gogogo');
   console.log($scope.prospects);
   $scope.heatMapData = [
     { location: new google.maps.LatLng(1.33632523, 103.8506676), weight: 0.5 },
@@ -438,15 +439,15 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
   $scope.geoLocations = [];
   // Get latitudes/longitudes
-  $http({
-    url: '/'+"web/listing.json",
-    method: "GET"
-  }).success(function (data) {
-    $.each(data.listings, function(i, item) {
-      $scope.geoLocations.push(item.location);
-      createMarker(item.location)
-    });
-  });
+  // $http({
+  //   url: '/'+"web/listing.json",
+  //   method: "GET"
+  // }).success(function (data) {
+  //   $.each(data.listings, function(i, item) {
+  //     $scope.geoLocations.push(item.location);
+  //     createMarker(item.location)
+  //   });
+  // });
   //console.log($scope.geoLocations);
   var mapDOMElement = document.getElementById('heatmap'),
   control_state = true,
@@ -504,15 +505,15 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
         $scope.infoWindow.setContent('<h2>' + marker.title + '</h2><a href="/add">Add to ShortList</a>');
         $scope.infoWindow.open($scope.map, marker);
     });
-    console.log(marker);
+    //console.log(marker);
     //marker.setMap(map);
     $scope.markers.push(marker);
   }
 
   // Push Json Markers
   var pushMarkers = function(geolocations){
-    console.log('derp');
-    console.log($scope.geoLocations.length);
+    //console.log('derp');
+    //console.log($scope.geoLocations.length);
     for (i = 0; i < $scope.geoLocations.length; i++){
       createMarker($scope.geoLocations[i]);
     }
