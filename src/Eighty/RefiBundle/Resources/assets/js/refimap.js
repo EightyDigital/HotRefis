@@ -5,21 +5,21 @@ var refis = angular.module('refis', ['google-maps', 'xeditable', 'highcharts-ng'
 );
 
 // Radius distance
-refis.factory('distance__service', function($rootScope) {
-  var distance = {};
+refis.factory('prospect__service', function($rootScope) {
+  var prospects = {};
 
-  distance.meters = '';
+  //prospects.heatmap_score = '';
 
-  distance.prepForBroadcast = function(value) {
-    this.meters = value;
+  prospects.prepForBroadcast = function(value) {
+    this = value;
     this.broadcastItem();
   };
 
-  distance.broadcastItem = function() {
-    $rootScope.$broadcast('distanceBroadcast');
+  prospects.broadcastItem = function() {
+    $rootScope.$broadcast('prospectsBroadcast');
   };
 
-  return distance;
+  return prospects;
 });
 
 
@@ -304,7 +304,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
 });
 
-var map_controller = refis.controller('map__controller', function($scope, $http, distance__service, origin__service) {
+var map_controller = refis.controller('map__controller', function($scope, $http, prospect__service, origin__service) {
 
   $scope.originMarker = {};
 
@@ -398,6 +398,16 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   var styledMap = new google.maps.StyledMapType(styles,
     {name: "Styled Map"});
 
+
+  var responsePromise = $http.get("/api/filter/property");
+  $scope.prospects = {};
+  responsePromise.success(function(data, status, headers, config) {
+      $scope.prospects = data;
+  });
+  responsePromise.error(function(data, status, headers, config) {
+      alert("Could not fetch prospects, contact FortyTu");
+  });
+  console.log($scope.prospects);
   $scope.heatMapData = [
     { location: new google.maps.LatLng(1.33632523, 103.8506676), weight: 0.5 },
     { location: new google.maps.LatLng(1.314019, 103.884676), weight: 1 },
