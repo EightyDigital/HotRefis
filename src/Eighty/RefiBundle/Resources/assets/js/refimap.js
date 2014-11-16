@@ -4,14 +4,14 @@ var refis = angular.module('refis', ['google-maps', 'xeditable', 'highcharts-ng'
   }
 );
 
-// Radius distance
+// Prospect Service
 refis.factory('prospect__service', function($rootScope) {
   var prospects = {};
 
-  //prospects.heatmap_score = '';
+  prospects.list = [];
 
   prospects.prepForBroadcast = function(value) {
-    prospects = value;
+    prospects.list = value;
     this.broadcastItem();
   };
 
@@ -402,13 +402,15 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   var responsePromise = $http.get("/api/filter/property");
   $scope.prospects = {};
   responsePromise.success(function(data, status, headers, config) {
-      $scope.prospects = data;
+    $scope.prospects = data;
+    console.log($scope.prospects);
+    setMapData();
   });
   responsePromise.error(function(data, status, headers, config) {
       alert("Could not fetch prospects, contact FortyTu");
   });
+
   console.log('gogogo');
-  console.log($scope.prospects);
   $scope.heatMapData = [
     { location: new google.maps.LatLng(1.33632523, 103.8506676), weight: 0.5 },
     { location: new google.maps.LatLng(1.314019, 103.884676), weight: 1 },
@@ -508,6 +510,11 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     //console.log(marker);
     //marker.setMap(map);
     $scope.markers.push(marker);
+  }
+
+  // Push Json Markers
+  var setMapData = function(){
+    console.log('Map Data: '+$scope.prospects);
   }
 
   // Push Json Markers
