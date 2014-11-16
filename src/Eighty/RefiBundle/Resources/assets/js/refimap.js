@@ -5,21 +5,21 @@ var refis = angular.module('refis', ['google-maps', 'xeditable', 'highcharts-ng'
 );
 
 // Radius distance
-refis.factory('distance__service', function($rootScope) {
-  var distance = {};
+refis.factory('prospect__service', function($rootScope) {
+  var prospects = {};
 
-  distance.meters = '';
+  //prospects.heatmap_score = '';
 
-  distance.prepForBroadcast = function(value) {
-    this.meters = value;
+  prospects.prepForBroadcast = function(value) {
+    prospects = value;
     this.broadcastItem();
   };
 
-  distance.broadcastItem = function() {
-    $rootScope.$broadcast('distanceBroadcast');
+  prospects.broadcastItem = function() {
+    $rootScope.$broadcast('prospectsBroadcast');
   };
 
-  return distance;
+  return prospects;
 });
 
 
@@ -48,7 +48,7 @@ refis.factory('origin__service', function($rootScope) {
 });
 
 
-var report__crud = refis.controller('heatmap__slider', function($scope, distance__service) {
+var report__crud = refis.controller('heatmap__slider', function($scope, prospect__service) {
   $scope.slider = $( ".heatmap__slider" ).slider({
     //orientation: "vertical",
     range: "max",
@@ -304,7 +304,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
 });
 
-var map_controller = refis.controller('map__controller', function($scope, $http, distance__service, origin__service) {
+var map_controller = refis.controller('map__controller', function($scope, $http, prospect__service, origin__service) {
 
   $scope.originMarker = {};
 
@@ -398,6 +398,17 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   var styledMap = new google.maps.StyledMapType(styles,
     {name: "Styled Map"});
 
+
+  var responsePromise = $http.get("/api/filter/property");
+  $scope.prospects = {};
+  responsePromise.success(function(data, status, headers, config) {
+      $scope.prospects = data;
+  });
+  responsePromise.error(function(data, status, headers, config) {
+      alert("Could not fetch prospects, contact FortyTu");
+  });
+  console.log('gogogo');
+  console.log($scope.prospects);
   $scope.heatMapData = [
     { location: new google.maps.LatLng(1.33632523, 103.8506676), weight: 0.5 },
     { location: new google.maps.LatLng(1.314019, 103.884676), weight: 1 },
@@ -428,15 +439,15 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
   $scope.geoLocations = [];
   // Get latitudes/longitudes
-  $http({
-    url: '/'+"web/listing.json",
-    method: "GET"
-  }).success(function (data) {
-    $.each(data.listings, function(i, item) {
-      $scope.geoLocations.push(item.location);
-      createMarker(item.location)
-    });
-  });
+  // $http({
+  //   url: '/'+"web/listing.json",
+  //   method: "GET"
+  // }).success(function (data) {
+  //   $.each(data.listings, function(i, item) {
+  //     $scope.geoLocations.push(item.location);
+  //     createMarker(item.location)
+  //   });
+  // });
   //console.log($scope.geoLocations);
   var mapDOMElement = document.getElementById('heatmap'),
   control_state = true,
@@ -494,15 +505,15 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
         $scope.infoWindow.setContent('<h2>' + marker.title + '</h2><a href="/add">Add to ShortList</a>');
         $scope.infoWindow.open($scope.map, marker);
     });
-    console.log(marker);
+    //console.log(marker);
     //marker.setMap(map);
     $scope.markers.push(marker);
   }
 
   // Push Json Markers
   var pushMarkers = function(geolocations){
-    console.log('derp');
-    console.log($scope.geoLocations.length);
+    //console.log('derp');
+    //console.log($scope.geoLocations.length);
     for (i = 0; i < $scope.geoLocations.length; i++){
       createMarker($scope.geoLocations[i]);
     }
