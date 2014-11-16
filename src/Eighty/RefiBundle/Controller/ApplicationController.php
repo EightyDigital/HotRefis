@@ -185,10 +185,6 @@ class ApplicationController extends Controller
 		
 		$session->set('loaded_properties', $loaded_properties);
 		
-		print_r($loaded_properties); 
-		print_r($district);
-		print_r($property_data); exit();
-						
 		$response = new Response(json_encode($district));
         $response->headers->set('Content-Type', 'application/json');
 
