@@ -12,9 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class TransactionsRepository extends EntityRepository
 {
-	public function filterProspects($postdata)
+	public function filterProspects($postdata, $loaded_properties)
 	{
 		$offset = rand(0,250000);
+		$loaded_properties = implode(',', $loaded_properties);
 		
 		return $this->getEntityManager()
 			->createQuery(
@@ -35,8 +36,10 @@ class TransactionsRepository extends EntityRepository
 					FROM RefiBundle:Prospectloan pl
 					JOIN RefiBundle:Transactions t
 					WITH t.id = pl.transactionId
+					WHERE t.id NOT IN (:loaded_properties)
 				'
 			)
+			->setParameter('loaded_properties', $loaded_properties)
 			->setMaxResults($postdata['limit'])
         	->setFirstResult($offset)
 			->getArrayResult();

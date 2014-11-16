@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ApplicationController extends Controller
 {
@@ -66,7 +67,13 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function filterPropertyAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+		$session = new Session();
+		$loaded_properties = array();
+		
+		if($session->has('loaded_properties'))
+			$loaded_properties = $session->get('loaded_properties');
+
+		$em = $this->getDoctrine()->getManager();
         $postdata = $request->request->all();
         
         if (!isset($postdata['property_value_min'])) $postdata['property_value_min'] = 0;
@@ -95,7 +102,7 @@ class ApplicationController extends Controller
 		        
 		if (!isset($postdata['limit'])) $postdata['limit'] = 15;
 		
-        $property_data = $em->getRepository('RefiBundle:Transactions')->filterProspects($postdata);
+        $property_data = $em->getRepository('RefiBundle:Transactions')->filterProspects($postdata, $loaded_properties);
 		
 		$district = array();
 		foreach($property_data as $val) {
@@ -141,7 +148,10 @@ class ApplicationController extends Controller
 			
 			$val['heatmap_score'] = (int) (($score / 8) * 100);
 			$district[$val['districtcode']][$val['sector']][] = $val;
+			$loaded_properties[] = $val['id'];
 		}
+		
+		$session->set('loaded_properties', $loaded_properties);
 				
 		$response = new Response(json_encode($district));
         $response->headers->set('Content-Type', 'application/json');
