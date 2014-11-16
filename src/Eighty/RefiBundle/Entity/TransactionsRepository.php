@@ -21,7 +21,8 @@ class TransactionsRepository extends EntityRepository
 				'SELECT t.id, 
 						t.urakey, 
 						t.units, 
-						t.price, 
+						t.price,
+						t.newprice,						
 						t.propertyname, 
 						t.propertytypetext, 
 						t.districtcode, 
@@ -73,6 +74,24 @@ class TransactionsRepository extends EntityRepository
 				'
 			)
 			->setParameter('tId', $tid)
+			->setParameter('pId', $pid)
+			->getArrayResult();
+	}
+	
+	public function fetchAssetsByProspectId($pid)
+	{
+		return $this->getEntityManager()
+			->createQuery(
+				'SELECT 
+					  COUNT(pl.transactionId) as count_tid,
+					  SUM(t.newprice) as sum_nprice
+					FROM
+					  RefiBundle:Prospectloan pl 
+					JOIN RefiBundle:Transactions t 
+					WITH pl.transactionId = t.id
+					WHERE pl.prospectId = :pId
+				'
+			)
 			->setParameter('pId', $pid)
 			->getArrayResult();
 	}

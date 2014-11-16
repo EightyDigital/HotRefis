@@ -60,124 +60,84 @@ class ApplicationController extends Controller
         
         if (!isset($postdata['property_value_min'])) $postdata['property_value_min'] = 0;
         if (!isset($postdata['property_value_max'])) $postdata['property_value_max'] = 10000000;
+				
         if (!isset($postdata['ltv_min'])) $postdata['ltv_min'] = 0;
         if (!isset($postdata['ltv_max'])) $postdata['ltv_max'] = 100;
+				
         if (!isset($postdata['loan_age_min'])) $postdata['loan_age_min'] = 0;
         if (!isset($postdata['loan_age_max'])) $postdata['loan_age_max'] = 10;
-        
+		
+		if (!isset($postdata['income_min'])) $postdata['income_min'] = 0;
+        if (!isset($postdata['income_max'])) $postdata['income_max'] = 5000000;
+		
+        if (!isset($postdata['property_owned_min'])) $postdata['property_owned_min'] = 0;
+        if (!isset($postdata['property_owned_max'])) $postdata['property_owned_max'] = 10;
+		
+        if (!isset($postdata['age_min'])) $postdata['age_min'] = 18;
+        if (!isset($postdata['age_max'])) $postdata['age_max'] = 70;
+		
+		if (!isset($postdata['assets_min'])) $postdata['assets_min'] = 0;
+        if (!isset($postdata['assets_max'])) $postdata['assets_max'] = 10000000;
+		
+		if (!isset($postdata['debt_min'])) $postdata['debt_min'] = 0;
+        if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 5000000;
+		        
 		if (!isset($postdata['limit'])) $postdata['limit'] = 15;
 		
         $property_data = $em->getRepository('RefiBundle:Transactions')->filterProspects($postdata);
 		
 		$district = array();
 		foreach($property_data as $val) {
+			$val['newprice'] = round($val['newprice'], 2);
 			$val['prospect'] = $em->getRepository('RefiBundle:Transactions')->fetchProspectByTransactionsId($val['id']);
-			if(isset($val['prospect'][0])) {
-				$val['prospect'] = $val['prospect'][0];
-				$val_prospect_id = $val['prospect']['id'];
-			} else {
-				$val_prospect_id = 0;
-			}
+			$val['prospect'] = $val['prospect'][0];
+			
+			$val_prospect_id = $val['prospect']['id'];
+			
 			$val['prospect']['prospectloan'] = $em->getRepository('RefiBundle:Transactions')->fetchLoanByTransactionsAndProspectId($val['id'], $val_prospect_id);
+			$val['prospect']['prospectloan'] = $val['prospect']['prospectloan'][0];
 			
-			$good = false;
-			if(isset($val['prospect']['prospectloan'][0])) {
-				$val['prospect']['prospectloan'] = $val['prospect']['prospectloan'][0];
+			$score = 0;
 				
-				if(($val['price'] >= $postdata['property_value_min'] && $val['price'] <= $postdata['property_value_max']) ||
-					($val['newprice'] >= $postdata['property_value_min'] && $val['newprice'] <= $postdata['property_value_max'])
-				   ) {
-					$good = true;
-				} else {
-					$good = false;
-				}
-				
-				if($val['prospect']['prospectloan']['ltv'] >= $postdata['ltv_min'] && $val['prospect']['prospectloan']['ltv'] <= $postdata['ltv_max']) {
-					$good = true;
-				} else {
-					$good = false;
-				}
-				
-				$from = $val['prospect']['prospectloan']['loanDate'];
-				$to = new \DateTime('today');
-				$loan_age = $from->diff($to)->y;
-				
-				if($loan_age >= $postdata['loan_age_min'] && $loan_age <= $postdata['loan_age_max']) {
-					$good = true;
-				} else {
-					$good = false;
-				}
-				
-				if($good == true) $district[$val['districtcode']][$val['sector']][] = $val;
-			}
+			if(($val['price'] >= $postdata['property_value_min'] && $val['price'] <= $postdata['property_value_max']) || ($val['newprice'] >= $postdata['property_value_min'] && $val['newprice'] <= $postdata['property_value_max']))
+				$score++;
+			
+			if($val['prospect']['prospectloan']['ltv'] >= $postdata['ltv_min'] && $val['prospect']['prospectloan']['ltv'] <= $postdata['ltv_max'])
+				$score++;
+			
+			$from = $val['prospect']['prospectloan']['loanDate'];
+			$to = new \DateTime('today');
+			$loan_age = $from->diff($to)->y;
+			
+			if($loan_age >= $postdata['loan_age_min'] && $loan_age <= $postdata['loan_age_max'])
+				$score++;
+							
+			if($val['prospect']['derivedIncome'] >= $postdata['income_min'] && $val['prospect']['derivedIncome'] <= $postdata['income_max'])
+				$score++;
+			
+			$property_owned = $em->getRepository('RefiBundle:Transactions')->fetchAssetsByProspectId($val_prospect_id);
+			if($property_owned[0]['count_tid'] >= $postdata['property_owned_min'] && $property_owned[0]['count_tid'] <= $postdata['property_owned_max'])
+				$score++;
+			if($property_owned[0]['sum_nprice'] >= $postdata['assets_min'] && $property_owned[0]['sum_nprice'] <= $postdata['assets_max'])
+				$score++;
+			
+			if($val['prospect']['age'] >= $postdata['age_min'] && $val['prospect']['age'] <= $postdata['age_max'])
+				$score++;
+			
+			$debt = ($val['prospect']['prospectloan']['ltv'] / 100) * $val['price'];
+			if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max'])
+				$score++;
+			
+			$val['heatmap_score'] = (int) (($score / 8) * 100);
+			$district[$val['districtcode']][$val['sector']][] = $val;
 		}
-		//exit();
 				
 		$response = new Response(json_encode($district));
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
     }
-	
-	/*-------------------------------------------------/
-	|	route: <domain>/api/filter/finance
-	|	postdata:
-	|		- xxxx [under development]
-	--------------------------------------------------*/
-	public function filterFinanceAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $postdata = $request->request->all();
-        
-        if (!isset($postdata['income_min'])) $postdata['income_min'] = 0;
-        if (!isset($postdata['income_max'])) $postdata['income_max'] = 5000000;
-        if (!isset($postdata['property_owned_min'])) $postdata['property_owned_min'] = 0;
-        if (!isset($postdata['property_owned_max'])) $postdata['property_owned_max'] = 10;
-        if (!isset($postdata['age_min'])) $postdata['age_min'] = 18;
-        if (!isset($postdata['age_max'])) $postdata['age_max'] = 70;
-		if (!isset($postdata['assets_min'])) $postdata['assets_min'] = 0;
-        if (!isset($postdata['assets_max'])) $postdata['assets_max'] = 10000000;
-		if (!isset($postdata['debt_min'])) $postdata['debt_min'] = 0;
-        if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 5000000;
 		
-		if (!isset($postdata['limit'])) $postdata['limit'] = 10;
-		if (!isset($postdata['offset'])) $postdata['offset'] = 'dev_test_data'; //just for test data
-        
-        $property_data = $em->getRepository('RefiBundle:Transactions')->filterProspects($postdata);
-		
-		$district = array();
-		foreach($property_data as $val) {
-			$val['prospect'] = $em->getRepository('RefiBundle:Transactions')->fetchProspectByTransactionsId($val['id']);
-			$val['prospectloan'] = $em->getRepository('RefiBundle:Transactions')->fetchLoanByTransactionsId($val['id']);
-			
-			$good = false;
-			if(isset($val['prospectloan'][0])) {
-				// if($val['prospectloan'][0]['ltv'] >= $postdata['ltv_min'] && $val['prospectloan'][0]['ltv'] <= $postdata['ltv_max']) {
-					// $good = true;
-				// } else {
-					// $good = false;
-				// }
-				
-				// $from = $val['prospectloan'][0]['loanDate'];
-				// $to = new \DateTime('today');
-				// $loan_age = $from->diff($to)->y;
-				
-				// if($loan_age >= $postdata['loan_age_min'] && $loan_age <= $postdata['loan_age_max']) {
-					// $good = true;
-				// } else {
-					// $good = false;
-				// }
-				
-				// if($good == true) $district[$val['districtcode']][$val['sector']][] = $val;
-			}
-		}
-		
-		$response = new Response(json_encode($district));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
-    }
-	
 	/*-------------------------------------------------/
 	|	route: <domain>/api/shortlist/save
 	|	postdata:
