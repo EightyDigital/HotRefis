@@ -50,13 +50,16 @@ class ApplicationController extends Controller
 			$min = round(($val['derivedIncome'] - $quarter), 0);
 			$max = round(($val['derivedIncome'] + $quarter), 0);
 			$prospect_list[$key]['income_range'] = "$" . number_format(round($min, (0 - (strlen((string) $min) - 1)))) . " - " . "$" . number_format(round($max, (0 - (strlen((string) $max) - 1))));
+			
+			$prospect_list[$key]['index'] = $key + 1;
+			
 		}
 		
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
 			$prospect_list, 
-			$this->get('request')->query->get('offset', 1), 
-			10,
+			$this->get('request')->query->get('prospect_list', 1), 
+			3,
 			array('pageParameterName' => 'prospect_list')
 		);
 		
@@ -181,7 +184,11 @@ class ApplicationController extends Controller
 		}
 		
 		$session->set('loaded_properties', $loaded_properties);
-				
+		
+		print_r($loaded_properties); 
+		print_r($district);
+		print_r($property_data); exit();
+						
 		$response = new Response(json_encode($district));
         $response->headers->set('Content-Type', 'application/json');
 

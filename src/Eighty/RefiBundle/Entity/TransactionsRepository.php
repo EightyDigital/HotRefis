@@ -14,7 +14,7 @@ class TransactionsRepository extends EntityRepository
 {
 	public function filterProspects($postdata, $loaded_properties)
 	{
-		$offset = rand(0,250000);
+		$offset = rand(0,99000);
 		$loaded_properties = implode(',', $loaded_properties);
 		
 		return $this->getEntityManager()
