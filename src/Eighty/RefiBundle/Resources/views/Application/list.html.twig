@@ -24,7 +24,7 @@ text-transform: uppercase;">Prospect List</h2>
       <table id="Prospect-Table" border="1" ng-app="tablemod">
         <thead>
           <th colspan='12'>
-            <span class="thleft">Prospects for <span style="font-weight:400;">25 Amber Road</span></span>
+            <span class="thleft"><!-- Prospects for <span style="font-weight:400;">25 Amber Road</span> --></span>
             <span class="thright">1-50 of 300</span>
           </th>
           <th width="4%"><a href="#"><i class='fa fa-angle-left'></i></a></th>
@@ -43,42 +43,19 @@ text-transform: uppercase;">Prospect List</h2>
             <td style="background:#063141;" colspan='7' width="10%"><a href="#"  style="color:#fff; text-transform:uppercase; font-size:14px;">Notes</a></td>
           </tr>
 
-
-          <tr>
-            <td><input type="checkbox" name="prospect" value="1"></td>
-            <td><a href="/prospect/">1</a></td>
-            <td><a href="/prospect/">Lawyer</a></td>
-            <td><a href="/prospect/">$50,000 - $100,000</a></td>
+		{% for list in prospect_list %}
+		  <tr>
+            <td><input type="checkbox" disabled="disabled" name="prospect_engaged[{{ list.prospectId }}]" value="{{ list.engaged }}"></td>
+            <td><a href="/prospect/">{{ loop.index }}</a></td>
+            <td><a href="/prospect/">{{ list.profession }}</a></td>
+            <td><a href="/prospect/">{{ list.income_range }}</a></td>
             <td><a href="/prospect/"><hr class="M"></a></td>
-            <td><a href="/prospect/">3</a></td>
-            <td><a href="/prospect/">Not Contacted</a></td>
-            <td colspan='7' width="30%"><a href="#">This prospect is looking to refinance</a></td>
+            <td><a href="/prospect/">{{ list.property_owned }}</a></td>
+            <td><a href="/prospect/">{% if list.status == 1 %}Contacted{% else %}Not Contacted{% endif %}</a></td>
+            <td colspan='7' width="30%"><a href="#">{{ list.note }}</a></td>
           </tr>
-
-
-          <tr>
-            <td><input type="checkbox" name="prospect" value="1"></td>
-            <td><a href="/prospect/">2</a></td>
-            <td><a href="/prospect/">Nurse</a></td>
-            <td><a href="/prospect/">$30,000 - $50,000</a></td>
-            <td><a href="/prospect/"><hr class="M"></a></td>
-            <td><a href="/prospect/">1</a></td>
-            <td><a href="/prospect/">Not Contacted</a></td>
-            <td colspan='7' width="30%"><a href="#">Contact this prospect after christmas</a></td>
-          </tr>
-
-
-          <tr>
-            <td><input type="checkbox" name="prospect" value="1" checked="checked"></td>
-            <td><a href="/prospect/">3</a></td>
-            <td><a href="/prospect/">Doctor</a></td>
-            <td><a href="/prospect/">$150,000 - $200,000</a></td>
-            <td><a href="/prospect/"><hr class="M"></a></td>
-            <td><a href="/prospect/">4</a></td>
-            <td><a href="/prospect/">Not Contacted</a></td>
-            <td colspan='7' width="30%"><a href="#">Owns overseas property</a></td>
-          </tr>
-
+		{% endfor %}
+		
         </tbody>
       </table>
       <a class="ionicons ion-navigate blast--prospect" href="/calculator" style="">Blast Prospects</a>

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Eighty\RefiBundle\Entity\Prospectlist" table="prospectlist">
+  <entity name="Eighty\RefiBundle\Entity\Prospectlist" table="prospectlist" repository-class="Eighty\RefiBundle\Entity\ProspectlistRepository">
     <id name="id" type="bigint" column="id">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="clientlistId" type="bigint" column="clientlist_id" nullable="true"/>
     <field name="prospectId" type="bigint" column="prospect_id" nullable="true"/>
+	<field name="score" type="bigint" column="score" nullable="true"/>
     <field name="note" type="text" column="note" nullable="true"/>
     <field name="engaged" type="boolean" column="engaged" nullable="true"/>
     <field name="dateEngaged" type="datetime" column="date_engaged" nullable="true"/>
     <field name="dateAssigned" type="datetime" column="date_assigned" nullable="true"/>
+	<field name="status" type="bigint" column="status" nullable="true"/>
   </entity>
 </doctrine-mapping>

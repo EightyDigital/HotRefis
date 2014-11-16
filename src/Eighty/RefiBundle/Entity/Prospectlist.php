@@ -25,6 +25,13 @@ class Prospectlist
      * @ORM\Column(name="prospect_id", type="bigint", nullable=true)
      */
     private $prospectId;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="score", type="bigint", nullable=true)
+     */
+    private $score;
 
     /**
      * @var string
@@ -53,6 +60,13 @@ class Prospectlist
      * @ORM\Column(name="date_assigned", type="datetime", nullable=true)
      */
     private $dateAssigned;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="bigint", nullable=true)
+     */
+    private $status;
 
     /**
      * @var integer
@@ -109,6 +123,29 @@ class Prospectlist
     public function getProspectId()
     {
         return $this->prospectId;
+    }
+	
+	/**
+     * Set score
+     *
+     * @param integer $score
+     * @return Prospectlist
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer 
+     */
+    public function getScore()
+    {
+        return $this->score;
     }
 
     /**
@@ -201,6 +238,29 @@ class Prospectlist
     public function getDateAssigned()
     {
         return $this->dateAssigned;
+    }
+	
+	/**
+     * Set status
+     *
+     * @param integer $status
+     * @return Prospectlist
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**

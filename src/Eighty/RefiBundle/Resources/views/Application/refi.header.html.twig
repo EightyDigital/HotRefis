@@ -17,8 +17,8 @@
 
     <div class="hd__auxwrap">
       <div class="status__wrap">
-        <p>Jay Jamero</p>
-        <p><span class="credits">10</span> credits</p>
+        <p>{% if name is defined %}{{ name }}{% endif %}</p>
+        <p><span class="credits">{% if credits is defined %}{{ credits }}{% endif %}</span> credits</p>
       </div>
 
       <div class="account__status">

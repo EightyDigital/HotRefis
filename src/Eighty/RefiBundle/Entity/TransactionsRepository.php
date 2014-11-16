@@ -12,16 +12,34 @@ use Doctrine\ORM\EntityRepository;
  */
 class TransactionsRepository extends EntityRepository
 {
-	public function filterProspects($postdata)
+	public function filterProspects($postdata, $loaded_properties)
 	{
-		$offset = (($postdata['offset'] == 'random') ? rand(0,677420) : 0);
+		$offset = rand(0,250000);
+		$loaded_properties = implode(',', $loaded_properties);
 		
 		return $this->getEntityManager()
 			->createQuery(
-				'SELECT t
-					FROM RefiBundle:Transactions t
+				'SELECT t.id, 
+						t.urakey, 
+						t.units, 
+						t.price,
+						t.newprice,						
+						t.propertyname, 
+						t.propertytypetext, 
+						t.districtcode, 
+						t.sector, 
+						t.streetnumber,
+						t.streetname1,
+						t.postalcode, 
+						t.longitude, 
+						t.latitude
+					FROM RefiBundle:Prospectloan pl
+					JOIN RefiBundle:Transactions t
+					WITH t.id = pl.transactionId
+					WHERE t.id NOT IN (:loaded_properties)
 				'
 			)
+			->setParameter('loaded_properties', $loaded_properties)
 			->setMaxResults($postdata['limit'])
         	->setFirstResult($offset)
 			->getArrayResult();
@@ -31,7 +49,10 @@ class TransactionsRepository extends EntityRepository
 	{
 		return $this->getEntityManager()
 			->createQuery(
-				'SELECT p
+				'SELECT p.id,
+						p.amicusPersonId,
+						p.age,
+						p.derivedIncome
 					FROM RefiBundle:Prospect p
 					LEFT JOIN RefiBundle:Prospectproperty pp
 					WITH p.id = pp.prospectId  
@@ -42,18 +63,39 @@ class TransactionsRepository extends EntityRepository
 			->getArrayResult();
 	}
 	
-	public function fetchLoanByTransactionsId($id)
+	public function fetchLoanByTransactionsAndProspectId($tid, $pid)
 	{
 		return $this->getEntityManager()
 			->createQuery(
-				'SELECT pl
+				'SELECT pl.prospectId,
+						pl.loanAmount,
+						pl.ltv,
+						pl.loanDate
 					FROM RefiBundle:Prospectloan pl
-					LEFT JOIN RefiBundle:Transactions t
-					WITH t.id = pl.transactionId  
-					WHERE t.id = :tId
+					WHERE pl.transactionId = :tId
+					AND pl.prospectId = :pId
 				'
 			)
-			->setParameter('tId', $id)
+			->setParameter('tId', $tid)
+			->setParameter('pId', $pid)
+			->getArrayResult();
+	}
+	
+	public function fetchAssetsByProspectId($pid)
+	{
+		return $this->getEntityManager()
+			->createQuery(
+				'SELECT 
+					  COUNT(pl.transactionId) as count_tid,
+					  SUM(t.newprice) as sum_nprice
+					FROM
+					  RefiBundle:Prospectloan pl 
+					JOIN RefiBundle:Transactions t 
+					WITH pl.transactionId = t.id
+					WHERE pl.prospectId = :pId
+				'
+			)
+			->setParameter('pId', $pid)
 			->getArrayResult();
 	}
 }
