@@ -55,11 +55,15 @@ class ApplicationController extends Controller
 			
 		}
 		
+		$total_rows = count($prospect_list);
+		$current_max_row = ($total_rows > 50) ? $this->get('request')->query->get('prospect_list', 1) * 50 : $total_rows;
+		$current_min_row = ($total_rows > 50) ? $current_max_row - 49 : 1;
+		
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
 			$prospect_list, 
 			$this->get('request')->query->get('prospect_list', 1), 
-			3,
+			50,
 			array('pageParameterName' => 'prospect_list')
 		);
 		
@@ -68,6 +72,9 @@ class ApplicationController extends Controller
 				'name' => $usr->getFullname(),
 				'credits' => $credits,
 				'prospect_list' => $pagination,
+				'total_rows' => $total_rows,
+				'current_max_row' => $current_max_row,
+				'current_min_row' => $current_min_row,
 			)
 		);
     }
@@ -180,6 +187,8 @@ class ApplicationController extends Controller
 			
 			$val['prospect']['heatmap_score'] = (int) (($score / 8) * 100);
 			$district[$val['districtcode']][$val['sector']][] = $val;
+			$district[$val['districtcode']]['longitude'] = $val['longitude'];
+			$district[$val['districtcode']]['latitude'] = $val['latitude'];
 			$loaded_properties[] = $val['id'];
 		}
 		
