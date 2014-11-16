@@ -175,7 +175,7 @@ class ApplicationController extends Controller
 			if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max'])
 				$score++;
 			
-			$val['heatmap_score'] = (int) (($score / 8) * 100);
+			$val['prospect']['heatmap_score'] = (int) (($score / 8) * 100);
 			$district[$val['districtcode']][$val['sector']][] = $val;
 			$loaded_properties[] = $val['id'];
 		}
