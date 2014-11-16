@@ -46,7 +46,7 @@ text-transform: uppercase;">Prospect List</h2>
 		{% for list in prospect_list %}
 		  <tr>
             <td><input type="checkbox" disabled="disabled" name="prospect_engaged[{{ list.prospectId }}]" value="{{ list.engaged }}"></td>
-            <td><a href="/prospect/">{{ loop.index }}</a></td>
+            <td><a href="/prospect/">{{ list.index }}</a></td>
             <td><a href="/prospect/">{{ list.profession }}</a></td>
             <td><a href="/prospect/">{{ list.income_range }}</a></td>
             <td><a href="/prospect/"><hr class="M"></a></td>
@@ -59,7 +59,7 @@ text-transform: uppercase;">Prospect List</h2>
         </tbody>
       </table>
       <a class="ionicons ion-navigate blast--prospect" href="/calculator" style="">Blast Prospects</a>
-
+	  {{ knp_pagination_render(prospect_list) }}
 
     </div>
   </div>
