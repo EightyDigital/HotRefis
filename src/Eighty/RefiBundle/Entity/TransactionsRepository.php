@@ -14,12 +14,26 @@ class TransactionsRepository extends EntityRepository
 {
 	public function filterProspects($postdata)
 	{
-		$offset = (($postdata['offset'] == 'random') ? rand(0,677420) : 0);
+		$offset = rand(0,250000);
 		
 		return $this->getEntityManager()
 			->createQuery(
-				'SELECT t
-					FROM RefiBundle:Transactions t
+				'SELECT t.id, 
+						t.urakey, 
+						t.units, 
+						t.price, 
+						t.propertyname, 
+						t.propertytypetext, 
+						t.districtcode, 
+						t.sector, 
+						t.streetnumber,
+						t.streetname1,
+						t.postalcode, 
+						t.longitude, 
+						t.latitude
+					FROM RefiBundle:Prospectloan pl
+					JOIN RefiBundle:Transactions t
+					WITH t.id = pl.transactionId
 				'
 			)
 			->setMaxResults($postdata['limit'])
@@ -31,7 +45,10 @@ class TransactionsRepository extends EntityRepository
 	{
 		return $this->getEntityManager()
 			->createQuery(
-				'SELECT p
+				'SELECT p.id,
+						p.amicusPersonId,
+						p.age,
+						p.derivedIncome
 					FROM RefiBundle:Prospect p
 					LEFT JOIN RefiBundle:Prospectproperty pp
 					WITH p.id = pp.prospectId  
@@ -42,18 +59,21 @@ class TransactionsRepository extends EntityRepository
 			->getArrayResult();
 	}
 	
-	public function fetchLoanByTransactionsId($id)
+	public function fetchLoanByTransactionsAndProspectId($tid, $pid)
 	{
 		return $this->getEntityManager()
 			->createQuery(
-				'SELECT pl
+				'SELECT pl.prospectId,
+						pl.loanAmount,
+						pl.ltv,
+						pl.loanDate
 					FROM RefiBundle:Prospectloan pl
-					LEFT JOIN RefiBundle:Transactions t
-					WITH t.id = pl.transactionId  
-					WHERE t.id = :tId
+					WHERE pl.transactionId = :tId
+					AND pl.prospectId = :pId
 				'
 			)
-			->setParameter('tId', $id)
+			->setParameter('tId', $tid)
+			->setParameter('pId', $pid)
 			->getArrayResult();
 	}
 }

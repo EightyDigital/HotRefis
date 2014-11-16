@@ -44,17 +44,17 @@ refi_prospect:
 
 
 API_filter_property:
-    pattern: /api/filter/property/
+    pattern: /api/filter/property
     defaults: { _controller: RefiBundle:Application:filterProperty }
 
 API_filter_finance:
-    pattern: /api/filter/finance/
+    pattern: /api/filter/finance
     defaults: { _controller: RefiBundle:Application:filterFinance }
 
 API_shortlist_save:
-    pattern: /api/shortlist/save/
+    pattern: /api/shortlist/save
     defaults: { _controller: RefiBundle:Application:shortlistSave }
 
 API_shortlist_retrieve:
-    pattern: /api/shortlist/retrieve/
+    pattern: /api/shortlist/retrieve
     defaults: { _controller: RefiBundle:Application:shortlistRetrieve }
