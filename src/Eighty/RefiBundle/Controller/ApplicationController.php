@@ -24,7 +24,7 @@ class ApplicationController extends Controller
         return $this->render('RefiBundle:Application:index.html.twig',
 			array(
 				'name' => $usr->getFullname(),
-				'credits' => $credits
+				'credits' => $credits,
 			)
 		);
     }
@@ -36,8 +36,37 @@ class ApplicationController extends Controller
     }
     public function listAction()
     {
-        return $this->render('RefiBundle:Application:list.html.twig');
-        //, array('name' => $name)
+		$em = $this->getDoctrine()->getManager();
+		$usr = $this->get('security.context')->getToken()->getUser();
+		$id = $usr->getId();
+		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
+		
+		$prospect_list = $em->getRepository('RefiBundle:Prospectlist')->getProspectList($id);
+		foreach($prospect_list as $key => $val) {
+			$property_owned = $em->getRepository('RefiBundle:Transactions')->fetchAssetsByProspectId($val['prospectId']);
+			$prospect_list[$key]['property_owned'] = (isset($property_owned[0]['count_tid']) ? $property_owned[0]['count_tid'] : 0);
+			
+			$quarter = $val['derivedIncome'] * 0.25;
+			$min = round(($val['derivedIncome'] - $quarter), 0);
+			$max = round(($val['derivedIncome'] + $quarter), 0);
+			$prospect_list[$key]['income_range'] = "$" . number_format(round($min, (0 - (strlen((string) $min) - 1)))) . " - " . "$" . number_format(round($max, (0 - (strlen((string) $max) - 1))));
+		}
+		
+		$paginator = $this->get('knp_paginator');
+		$pagination = $paginator->paginate(
+			$prospect_list, 
+			$this->get('request')->query->get('offset', 1), 
+			10,
+			array('pageParameterName' => 'prospect_list')
+		);
+		
+		return $this->render('RefiBundle:Application:list.html.twig',
+			array(
+				'name' => $usr->getFullname(),
+				'credits' => $credits,
+				'prospect_list' => $pagination,
+			)
+		);
     }
 
     public function calculatorAction()

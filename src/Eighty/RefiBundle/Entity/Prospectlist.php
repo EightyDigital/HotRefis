@@ -60,6 +60,13 @@ class Prospectlist
      * @ORM\Column(name="date_assigned", type="datetime", nullable=true)
      */
     private $dateAssigned;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="bigint", nullable=true)
+     */
+    private $status;
 
     /**
      * @var integer
@@ -231,6 +238,29 @@ class Prospectlist
     public function getDateAssigned()
     {
         return $this->dateAssigned;
+    }
+	
+	/**
+     * Set status
+     *
+     * @param integer $status
+     * @return Prospectlist
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
