@@ -3,6 +3,7 @@
 namespace Eighty\RefiBundle\Controller;
 
 use Eighty\RefiBundle\Entity\Prospectlist;
+use Eighty\RefiBundle\Entity\Creditused;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,8 +14,18 @@ class ApplicationController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('RefiBundle:Application:index.html.twig');
-        //, array('name' => $name)
+		$em = $this->getDoctrine()->getManager();
+		$usr = $this->get('security.context')->getToken()->getUser();
+		$id = $usr->getId();
+		
+		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
+		
+        return $this->render('RefiBundle:Application:index.html.twig',
+			array(
+				'name' => $usr->getFullname(),
+				'credits' => $credits
+			)
+		);
     }
 
     public function addAction()
@@ -141,7 +152,7 @@ class ApplicationController extends Controller
 	/*-------------------------------------------------/
 	|	route: <domain>/api/shortlist/save
 	|	postdata:
-	|		- prospectlist : e.g. [1,2,3,4]
+	|		- prospectlist : e.g. {"546678":100,"546679":66}
 	--------------------------------------------------*/
     public function shortlistSaveAction(Request $request)
     {
@@ -151,21 +162,42 @@ class ApplicationController extends Controller
 		$user = $this->get('security.context')->getToken()->getUser();
 		$userId = $user->getId();
 		
+		$status = 'fail';
+		$message = 'Nothing to checkout.';
+		
 		if(isset($postdata['prospectlist'])) {
-			$list_data = explode(',', $postdata['prospectlist']);
+			$list_data = json_decode(stripslashes($_POST['prospectlist']));
 			$clientlist = $em->getRepository('RefiBundle:Clientlist')->findOneBy(array('clientId' => $userId));
 			
-			foreach($list_data as $val) {
-				$prospectlist = new Prospectlist();
-				$prospectlist->setClientlistId($clientlist->getId());
-				$prospectlist->setProspectId($val);
-				$prospectlist->setDateAssigned(new \DateTime('today'));
-				$em->persist($prospectlist);
-				$em->flush();
-			}			
+			$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($userId);
+			$need_credits = count($list_data) * 3;
+			
+			if(($credits - $need_credits) >= 0) {
+				foreach($list_data as $key => $val) {
+					$prospectlist = new Prospectlist();
+					$prospectlist->setClientlistId($clientlist->getId());
+					$prospectlist->setProspectId($key);
+					$prospectlist->setScore($val);
+					$prospectlist->setDateAssigned(new \DateTime('today'));
+					$em->persist($prospectlist);
+					$em->flush();
+					
+					$creditused = new Creditused();
+					$creditused->setClientId($userId);
+					$creditused->setDate(new \DateTime('today'));
+					$creditused->setCreditUsed(3);
+					$em->persist($creditused);
+					$em->flush();
+				}
+				$status = 'ok';
+				$message = 'Checked out!';
+			} else {
+				$status = 'fail';
+				$message = 'Not enough credits!';
+			}				
 		}
 		
-		$msg = array('status' => 'ok');
+		$msg = array('status' => $status, 'message' => $message);
 		
 		$response = new Response(json_encode($msg));
         $response->headers->set('Content-Type', 'application/json');

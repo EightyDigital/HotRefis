@@ -25,6 +25,13 @@ class Prospectlist
      * @ORM\Column(name="prospect_id", type="bigint", nullable=true)
      */
     private $prospectId;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="score", type="bigint", nullable=true)
+     */
+    private $score;
 
     /**
      * @var string
@@ -109,6 +116,29 @@ class Prospectlist
     public function getProspectId()
     {
         return $this->prospectId;
+    }
+	
+	/**
+     * Set score
+     *
+     * @param integer $score
+     * @return Prospectlist
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer 
+     */
+    public function getScore()
+    {
+        return $this->score;
     }
 
     /**
