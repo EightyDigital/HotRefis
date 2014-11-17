@@ -16,7 +16,6 @@ refis.factory('list__service', function($rootScope) {
   list.prospectCount = 0;
 
   list.prepForBroadcast = function(value) {
-    console.log('pushing!');
     list.maindata.push(value);
     this.broadcastItem();
   };
@@ -74,7 +73,7 @@ refis.factory('heatmap__service', function($rootScope) {
 
 });
 
-var report__crud = refis.controller('heatmap__slider', function($scope, list__service) {
+var heatmap_slider = refis.controller('heatmap__slider', function($scope, list__service) {
   $scope.slider = $( ".heatmap__slider" ).slider({
     //orientation: "vertical",
     range: "max",
@@ -332,8 +331,6 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
 var map_controller = refis.controller('map__controller', function($scope, $http, list__service, heatmap__service, district__service, refiCache) {
 
-  $scope.originMarker = {};
-
   var styles = [
     {
         "featureType": "road.highway",
@@ -413,8 +410,6 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
       var responsePromise = $http.post("/api/filter/property", { cache: refiCache } );
       responsePromise.success(function(data, status, headers, config) {
         list__service.prepForBroadcast(data);
-        setMapData();
-        createHeatMap();
         ++i;
         makeCall(i, length);
       });
@@ -466,7 +461,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     keyboardShortcuts: control_state,
     clickableLabels: control_state,
     disableDoubleClickZoom: false,
-    center: new google.maps.LatLng(district__service.latitude, district__service.longitude),
+    center: new google.maps.LatLng(1.32008, 103.81984),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
@@ -565,6 +560,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   // remove heatmaps
   var refreshHeatMap = function(){
     $scope.heatmap.setMap(null);
+
     createHeatMap();
   }
   var createHeatMap = function(){
@@ -586,35 +582,36 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     var gradient = [
       'rgba(0, 213, 195, 0)',
       'rgba(0, 213, 195, 0.5)',
-      'rgba(55, 219, 173, 0.2)',
-      'rgba(55, 219, 173, 0.45)',
+      'rgba(55, 219, 173, 0.25)',
+      'rgba(55, 219, 173, 0.55)',
 
       'rgba(97, 224, 159, 0.2)',
-      'rgba(97, 224, 159, 0.45)',
+      'rgba(97, 224, 159, 0.55)',
 
       'rgba(143, 230, 145, 0.2)',
-      'rgba(143, 230, 145, 0.45)',
+      'rgba(143, 230, 145, 0.55)',
 
       'rgba(195, 235, 130, 0.2)',
-      'rgba(195, 235, 130, 0.45)',
+      'rgba(195, 235, 130, 0.55)',
 
       'rgba(243, 237, 123, 0.2)',
-      'rgba(243, 237, 123, 0.5)',
+      'rgba(243, 237, 123, 0.55)',
 
       'rgba(240, 203, 112, 0.2)',
-      'rgba(240, 203, 112, 0.45)',
+      'rgba(240, 203, 112, 0.55)',
 
       'rgba(238, 164, 105, 0.2)',
-      'rgba(238, 164, 105, 0.45)',
+      'rgba(238, 164, 105, 0.55)',
 
       'rgba(236, 127, 100, 0.2)',
-      'rgba(236, 127, 100, 0.45)',
+      'rgba(236, 127, 100, 0.55)',
 
       'rgba(235, 90, 96, 0.2)',
-      'rgba(235, 90, 96, 0.45)',
+      'rgba(235, 90, 96, 0.55)',
 
-      'rgba(238, 67, 99, 0.2)',
-      'rgba(238, 67, 99, 0.5)'
+      'rgba(238, 67, 99, 0.4)',
+      'rgba(238, 67, 99, 0.65)',
+      'rgba(238, 67, 99, 0.85)'
     ];
 
     $scope.heatMapData = [];
@@ -645,9 +642,8 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   $scope.$on('maindataBroadcast', function() {
     console.log("Change in main data: "+list__service.districts);
     //console.log("geoLocs: "+$scope.geolocations);
-
-    //setMapData();
-    //refreshHeatMap();
+    setMapData();
+    refreshHeatMap();
   });
 
 
