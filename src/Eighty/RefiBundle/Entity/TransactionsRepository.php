@@ -21,21 +21,17 @@ class TransactionsRepository extends EntityRepository
 			->createQuery(
 				'SELECT t.id, 
 						t.urakey, 
-						t.units, 
 						t.price,
+						t.sector,
 						t.newprice,						
-						t.propertyname, 
-						t.propertytypetext, 
-						t.districtcode, 
-						t.sector, 
-						t.streetnumber,
-						t.streetname1,
-						t.postalcode, 
-						t.longitude, 
-						t.latitude
+						t.districtcode,
+						pr.longitude,
+						pr.latitude
 					FROM RefiBundle:Prospectloan pl
 					JOIN RefiBundle:Transactions t
-					WITH t.id = pl.transactionId
+						WITH t.id = pl.transactionId
+					JOIN RefiBundle:Postalregion pr
+						WITH t.districtcode = pr.regionCode
 					WHERE t.id NOT IN (:loaded_properties)
 				'
 			)
@@ -50,7 +46,6 @@ class TransactionsRepository extends EntityRepository
 		return $this->getEntityManager()
 			->createQuery(
 				'SELECT p.id,
-						p.amicusPersonId,
 						p.age,
 						p.derivedIncome
 					FROM RefiBundle:Prospect p
@@ -67,8 +62,7 @@ class TransactionsRepository extends EntityRepository
 	{
 		return $this->getEntityManager()
 			->createQuery(
-				'SELECT pl.prospectId,
-						pl.loanAmount,
+				'SELECT pl.loanAmount,
 						pl.ltv,
 						pl.loanDate
 					FROM RefiBundle:Prospectloan pl

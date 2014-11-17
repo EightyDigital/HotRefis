@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Eighty\RefiBundle\Entity\Postalregion" table="postalregion">
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="regionType" type="string" column="region_type" length="10" nullable="true"/>
+    <field name="regionCode" type="string" column="region_code" length="4" nullable="true"/>
+    <field name="longitude" type="float" column="longitude" precision="10" scale="0" nullable="true"/>
+    <field name="latitude" type="float" column="latitude" precision="10" scale="0" nullable="true"/>
+    <field name="minTemp" type="float" column="min_temp" precision="10" scale="0" nullable="true"/>
+    <field name="maxTemp" type="float" column="max_temp" precision="10" scale="0" nullable="true"/>
+  </entity>
+</doctrine-mapping>

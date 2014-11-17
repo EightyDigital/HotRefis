@@ -113,7 +113,7 @@ class ApplicationController extends Controller
 			$loaded_properties = $session->get('loaded_properties');
 
 		$em = $this->getDoctrine()->getManager();
-        $postdata = $request->request->all();
+        $postdata = $request->query->all();
         
         if (!isset($postdata['property_value_min'])) $postdata['property_value_min'] = 0;
         if (!isset($postdata['property_value_max'])) $postdata['property_value_max'] = 10000000;
@@ -186,9 +186,16 @@ class ApplicationController extends Controller
 				$score++;
 			
 			$val['prospect']['heatmap_score'] = (int) (($score / 8) * 100);
-			$district[$val['districtcode']][$val['sector']][] = $val;
+			$val['prospect']['transaction_id'] = $val['id'];
+			
+			//new implementation
 			$district[$val['districtcode']]['longitude'] = $val['longitude'];
 			$district[$val['districtcode']]['latitude'] = $val['latitude'];
+			$district[$val['districtcode']][$val['urakey']][] = $val['prospect'];
+			
+			// $district[$val['districtcode']][$val['sector']][] = $val;
+			// $district[$val['districtcode']]['longitude'] = $val['longitude'];
+			// $district[$val['districtcode']]['latitude'] = $val['latitude'];
 			$loaded_properties[] = $val['id'];
 		}
 		
