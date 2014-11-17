@@ -456,7 +456,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     }
   }
 
-  makeCall(0, 20);
+  makeCall(0, 15);
 
   // var responsePromise = $http.post("/api/filter/property");
 
@@ -528,14 +528,14 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     var marker = new google.maps.Marker({
         map: $scope.map,
         position: new google.maps.LatLng(location.latitude, location.longitude),
-        title: location.propertyname,
+        title: "District",
         animation: google.maps.Animation.DROP
     });
 
-    marker.content = '<div class="address"><span class="streetname">'+location.streetname1+'</span>&nbsp;<span class="streetnum">'+location.streetnumber+'</span></div>';
+    //marker.content = '<div class="address"><span class="streetname">'+location.streetname1+'</span>&nbsp;<span class="streetnum">'+location.streetnumber+'</span></div>';
 
     google.maps.event.addListener(marker, 'click', function(){
-        $scope.infoWindow.setContent('<h2>' + marker.title + '</h2>'+marker.content+'<div class="addShort"><a href="/add">Add to ShortList</a></div>');
+        $scope.infoWindow.setContent('<h2>' + marker.title + '</h2><div class="addShort"><a href="/add">Add to ShortList</a></div>');
         $scope.infoWindow.open($scope.map, marker);
     });
     //console.log(marker);
@@ -552,10 +552,11 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
     $.each($scope.geolocations, function(a, districtList) {
       $.each(districtList, function(b, districts) {
+        createMarker(districts);
         $.each(districts, function(c, postalSector) {
+          //createMarker(postalSector[i]);
+          //console.log(c + ':' + postalSector[c]);
           for(var i = 0; i < postalSector.length; i++){
-            //createMarker(postalSector[i]);
-
             heatmap__service.prepForBroadcast(postalSector[i].latitude, postalSector[i].longitude, postalSector[i].prospect.heatmap_score);
           }
         });
