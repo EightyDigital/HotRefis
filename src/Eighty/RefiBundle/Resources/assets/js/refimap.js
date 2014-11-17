@@ -494,7 +494,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     scaleControl: control_state,
     streetViewControl: control_state,
     overviewMapControl: control_state,
-    scrollwheel: control_state,
+    scrollwheel: false,
     keyboardShortcuts: control_state,
     clickableLabels: control_state,
     disableDoubleClickZoom: false,
@@ -618,6 +618,21 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
   // remove heatmaps
   var createHeatMap = function(){
+    var gradient = [
+      'rgba(0, 213, 195, 0)',
+      'rgba(0, 213, 195, 0.35)',
+      'rgba(0, 213, 195, 0.45)',
+      'rgba(0, 213, 195, 0.55)',
+      'rgba(243, 237, 123,0.1)',
+      'rgba(243, 237, 123,0.35)',
+      'rgba(243, 237, 123,0.45)',
+      'rgba(243, 237, 123,0.55)',
+      'rgba(238, 67, 99, 0.1)',
+      'rgba(238, 67, 99, 0.25)',
+      'rgba(238, 67, 99, 0.35)',
+      'rgba(238, 67, 99, 0.45)',
+      'rgba(238, 67, 99, 0.55)'
+    ];
     $scope.heatMapData = [];
     $.each(heatmap__service.locations, function(a, condoLocation) {
       //console.log("a: "+a+" | location lat: "+location.latitude+"location long: "+location.longitude+" location score"+location.weight);
@@ -625,7 +640,8 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     });
     $scope.heatmap = new google.maps.visualization.HeatmapLayer({
       data: $scope.heatMapData,
-      radius: 25,
+      radius: 100,
+      gradient: gradient,
       dissipating: true
     });
     $scope.heatmap.setMap($scope.map);
