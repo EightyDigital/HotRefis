@@ -194,11 +194,13 @@ class ApplicationController extends Controller
 									
 			//newer implementation
 			$sector[$val['sector']]['name'] = "Temporary Sector Name";
-			$sector[$val['sector']]['longitude'] = $val['longitude'];
-			$sector[$val['sector']]['latitude'] = $val['latitude'];
+			$sector[$val['sector']]['longitude'] = $val['pr_longitude'];
+			$sector[$val['sector']]['latitude'] = $val['pr_latitude'];
 			$sector[$val['sector']]['sector_score'] = 100;
 			$sector[$val['sector']]['total_prospects'] = 345;
 			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = 100;
+			$sector[$val['sector']]['properties'][$val['urakey']]['longitude'] = $val['longitude'];
+			$sector[$val['sector']]['properties'][$val['urakey']]['latitude'] = $val['latitude'];
 			$sector[$val['sector']]['properties'][$val['urakey']][] = $temp_data['prospect'];
 			
 			//new implementation

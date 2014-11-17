@@ -48,9 +48,11 @@ class TransactionsRepository extends EntityRepository
 						t.urakey, 
 						t.price,
 						t.sector,
-						t.newprice,						
-						pr.longitude,
-						pr.latitude
+						t.newprice,
+						t.longitude,
+						t.latitude,
+						pr.longitude as pr_longitude,
+						pr.latitude as pr_latitude
 					FROM RefiBundle:Prospectloan pl
 					JOIN RefiBundle:Transactions t
 						WITH t.id = pl.transactionId
