@@ -197,6 +197,7 @@ class ApplicationController extends Controller
 			$sector[$val['sector']]['longitude'] = $val['longitude'];
 			$sector[$val['sector']]['latitude'] = $val['latitude'];
 			$sector[$val['sector']]['sector_score'] = 100;
+			$sector[$val['sector']]['total_prospects'] = 345;
 			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = 100;
 			$sector[$val['sector']]['properties'][$val['urakey']][] = $temp_data['prospect'];
 			
