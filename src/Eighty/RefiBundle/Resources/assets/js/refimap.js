@@ -4,11 +4,16 @@ var refis = angular.module('refis', ['google-maps', 'xeditable', 'highcharts-ng'
   }
 );
 
+refis.factory('refiCache', function ($cacheFactory) {
+  return $cacheFactory('myCache');
+});
+
 // Prospect Service
 refis.factory('list__service', function($rootScope) {
   var list = {name: "DistrictList", maindata: []};
 
   list.maindata = [];
+  list.prospectCount = 0;
 
   list.prepForBroadcast = function(value) {
     console.log('pushing!');
@@ -58,6 +63,9 @@ refis.factory('heatmap__service', function($rootScope) {
   heatmap.prepForBroadcast = function(latitude_value, longitude_value, score_value) {
     heatmap.locations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
   };
+  heatmap.clear = function() {
+    heatmap.locations = [];
+  };
   heatmap.broadcastItem = function() {
     $rootScope.$broadcast('heatmapBroadcast');
   };
@@ -66,47 +74,6 @@ refis.factory('heatmap__service', function($rootScope) {
 
 });
 
-
-refis.factory('myService', function($http) {
-  var myService = {
-    get: function() {
-      var datas = [];
-
-      var i=0;
-      var length = 4;
-      makeCall(i, length, datas);
-      return datas;
-    }
-  }
-
-  function makeCall(i, length, datas) {
-    if (i < length) {
-      var responsePromise = $http.post("/api/filter/property");
-
-      responsePromise.success(function(data, status, headers, config) {
-        //$scope.maindata = data;
-        datas.push = data+i;
-        console.log(data+i);
-        ++i;
-        makeCall(i, length, datas);
-      });
-      responsePromise.error(function(data, status, headers, config) {
-        alert("Could not fetch prospects, contact FortyTu");
-      });
-
-      // $http.post('/api/filter/property').then(function(resp) {
-      //   datas[i] = resp.data+i;
-      //   console.log(resp);
-      //   ++i;
-      //   makeCall(i, length, datas);
-      // });
-
-
-    }
-  }
-
-  return myService;
-});
 var report__crud = refis.controller('heatmap__slider', function($scope, list__service) {
   $scope.slider = $( ".heatmap__slider" ).slider({
     //orientation: "vertical",
@@ -166,12 +133,12 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".property__value .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
       //console.log( (ui.value) );
     },
-    // State change we must update step value - more of an inbetween
-    // change: function( event, ui ) {
-    //   $( ".property__value .min__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[0], { symbol: "$",  format: "%s%v" })+"</span>");
-    //   $( ".property__value .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
-    //   //distance__service.prepForBroadcast(-(ui.value));
-    // },
+    //State change we must update step value - more of an inbetween
+    change: function( event, ui ) {
+      //$( ".property__value .min__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[0], { symbol: "$",  format: "%s%v" })+"</span>");
+      //$( ".property__value .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
+      //distance__service.prepForBroadcast(-(ui.value));
+    },
     create: function( event, ui ) {
       $( ".property__value .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".property__value .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(10000000, { symbol: "$",  format: "%s%v" })+"</span>");
@@ -363,7 +330,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
 });
 
-var map_controller = refis.controller('map__controller', function($scope, $http, list__service, heatmap__service, district__service, myService) {
+var map_controller = refis.controller('map__controller', function($scope, $http, list__service, heatmap__service, district__service, refiCache) {
 
   $scope.originMarker = {};
 
@@ -439,12 +406,13 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   $scope.maindata = {};
   $scope.heatMapData = [];
   $scope.geoLocations = [];
+  $scope.prospectCount = 0;
 
-  var makeCall = function(i, length) {
+  var makeCall = function(i, length, params) {
     if (i < length) {
-      var responsePromise = $http.post("/api/filter/property");
+      var responsePromise = $http.post("/api/filter/property", { cache: refiCache } );
       responsePromise.success(function(data, status, headers, config) {
-        $scope.maindata = data;
+        list__service.prepForBroadcast(data);
         setMapData();
         createHeatMap();
         ++i;
@@ -529,6 +497,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
         map: $scope.map,
         position: new google.maps.LatLng(location.latitude, location.longitude),
         title: "District",
+        icon: iconBase + 'placemark_circle.png',
         animation: google.maps.Animation.DROP
     });
 
@@ -545,30 +514,19 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
   // Push Json Markers
   var setMapData = function(){
-    console.log('Map Data: '+$scope.maindata);
-    list__service.prepForBroadcast($scope.maindata);
     $scope.geolocations = list__service.maindata;
     //console.log($scope.geolocations);
-
     $.each($scope.geolocations, function(a, districtList) {
       $.each(districtList, function(b, districts) {
         createMarker(districts);
         $.each(districts, function(c, postalSector) {
-          //createMarker(postalSector[i]);
-          //console.log(c + ':' + postalSector[c]);
           for(var i = 0; i < postalSector.length; i++){
+            console.log('prospectCount: '+postalSector[i].prospect);
             heatmap__service.prepForBroadcast(postalSector[i].latitude, postalSector[i].longitude, postalSector[i].prospect.heatmap_score);
           }
         });
       });
     });
-    // for (var district in $scope.geolocations) {
-    //   for (var postalSector in district) {
-    //     for (var condo in postalSector) {
-    //       console.log(postalSector)
-    //     }
-    //   }
-    // }
   }
 
   // Push Json Markers
@@ -604,22 +562,13 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     google.maps.event.trigger(selectedMarker, 'click');
   }
 
-  $scope.deleteListing = function (id) {
-    var listing = $scope.listings[id];
-    if (listing != -1) {
-      $scope.geolocations = [];
-      $scope.listings.splice(id, 1);
-      $.each($scope.listings, function(i, item) {
-        $scope.geoLocations.push(item.location);
-      });
-      clearMarkers();
-      pushMarkers($scope.geoLocations);
-    }
-  }
-
   // remove heatmaps
+  var refreshHeatMap = function(){
+    $scope.heatmap.setMap(null);
+    createHeatMap();
+  }
   var createHeatMap = function(){
-    var gradient = [
+    var gradient2 = [
       'rgba(0, 213, 195, 0)',
       'rgba(0, 213, 195, 0.35)',
       'rgba(0, 213, 195, 0.45)',
@@ -634,6 +583,40 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
       'rgba(238, 67, 99, 0.45)',
       'rgba(238, 67, 99, 0.55)'
     ];
+    var gradient = [
+      'rgba(0, 213, 195, 0)',
+      'rgba(0, 213, 195, 0.5)',
+      'rgba(55, 219, 173, 0.2)',
+      'rgba(55, 219, 173, 0.45)',
+
+      'rgba(97, 224, 159, 0.2)',
+      'rgba(97, 224, 159, 0.45)',
+
+      'rgba(143, 230, 145, 0.2)',
+      'rgba(143, 230, 145, 0.45)',
+
+      'rgba(195, 235, 130, 0.2)',
+      'rgba(195, 235, 130, 0.45)',
+
+      'rgba(243, 237, 123, 0.2)',
+      'rgba(243, 237, 123, 0.5)',
+
+      'rgba(240, 203, 112, 0.2)',
+      'rgba(240, 203, 112, 0.45)',
+
+      'rgba(238, 164, 105, 0.2)',
+      'rgba(238, 164, 105, 0.45)',
+
+      'rgba(236, 127, 100, 0.2)',
+      'rgba(236, 127, 100, 0.45)',
+
+      'rgba(235, 90, 96, 0.2)',
+      'rgba(235, 90, 96, 0.45)',
+
+      'rgba(238, 67, 99, 0.2)',
+      'rgba(238, 67, 99, 0.5)'
+    ];
+
     $scope.heatMapData = [];
     $.each(heatmap__service.locations, function(a, condoLocation) {
       //console.log("a: "+a+" | location lat: "+location.latitude+"location long: "+location.longitude+" location score"+location.weight);
@@ -641,7 +624,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     });
     $scope.heatmap = new google.maps.visualization.HeatmapLayer({
       data: $scope.heatMapData,
-      radius: 100,
+      radius: 75,
       gradient: gradient,
       dissipating: true
     });
@@ -655,46 +638,23 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     $scope.map.setCenter($scope.mapCenter);
   });
 
-  // var hmap = $scope.map.getMap(); // add getMap() here to get the map instance
-  //   console.log($scope.map);
-
   createHeatMap();
-
-  //pushMarkers($scope.geoLocations);
 
   /* BROADCAST! MAKE THE CHANGES! */
   // List Changed, do something!
-  $scope.$on('prospectBroadcast', function() {
-    //$scope.markers = [];
-    console.log("Change in distance detected meters: "+list__service.districts);
-    clearMarkers();
-    console.log("geoLocs: "+$scope.geolocations);
+  $scope.$on('maindataBroadcast', function() {
+    console.log("Change in main data: "+list__service.districts);
+    //console.log("geoLocs: "+$scope.geolocations);
 
-    //createOrigin($scope.originMarker);
-
-    //createRadius($scope.originMarker,distance__service.meters);
-
-    // Get New markers
-    // getMarkers(distance__service.meters);
-    // $scope.map.setCenter($scope.mapCenter);
+    //setMapData();
+    //refreshHeatMap();
   });
 
 
   /* BROADCAST! MAKE THE CHANGES! */
   // heatmap Changed, do something!
   $scope.$on('heatmapBroadcast', function() {
-    //$scope.markers = [];
     console.log("Change in heatmap detected: ");
-    refreshHeatMap();
-    //console.log("geoLocs: "+$scope.geolocations);
-
-    //createOrigin($scope.originMarker);
-
-    //createRadius($scope.originMarker,distance__service.meters);
-
-    // Get New markers
-    // getMarkers(distance__service.meters);
-    // $scope.map.setCenter($scope.mapCenter);
   });
 
 });
