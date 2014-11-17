@@ -1,5 +1,5 @@
 // Issues with twig so need to change start and end tag to {[]}
-var refis = angular.module('refis', ['google-maps', 'xeditable', 'highcharts-ng', 'ui.slider']).config(function($interpolateProvider){
+var refis = angular.module('refis', ['google-maps', 'xeditable', 'highcharts-ng', 'ui.slider', 'angular-loading-bar']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[').endSymbol(']}');
   }
 );
@@ -67,6 +67,46 @@ refis.factory('heatmap__service', function($rootScope) {
 });
 
 
+refis.factory('myService', function($http) {
+  var myService = {
+    get: function() {
+      var datas = [];
+
+      var i=0;
+      var length = 4;
+      makeCall(i, length, datas);
+      return datas;
+    }
+  }
+
+  function makeCall(i, length, datas) {
+    if (i < length) {
+      var responsePromise = $http.post("/api/filter/property");
+
+      responsePromise.success(function(data, status, headers, config) {
+        //$scope.maindata = data;
+        datas.push = data+i;
+        console.log(data+i);
+        ++i;
+        makeCall(i, length, datas);
+      });
+      responsePromise.error(function(data, status, headers, config) {
+        alert("Could not fetch prospects, contact FortyTu");
+      });
+
+      // $http.post('/api/filter/property').then(function(resp) {
+      //   datas[i] = resp.data+i;
+      //   console.log(resp);
+      //   ++i;
+      //   makeCall(i, length, datas);
+      // });
+
+
+    }
+  }
+
+  return myService;
+});
 var report__crud = refis.controller('heatmap__slider', function($scope, list__service) {
   $scope.slider = $( ".heatmap__slider" ).slider({
     //orientation: "vertical",
@@ -323,7 +363,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
 });
 
-var map_controller = refis.controller('map__controller', function($scope, $http, list__service, heatmap__service, district__service) {
+var map_controller = refis.controller('map__controller', function($scope, $http, list__service, heatmap__service, district__service, myService) {
 
   $scope.originMarker = {};
 
@@ -396,21 +436,41 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     {name: "Styled Map"});
 
 
-  var responsePromise = $http.get("/api/filter/property?limit=10000");
   $scope.maindata = {};
   $scope.heatMapData = [];
-  var loopCount =
-    responsePromise.success(function(data, status, headers, config) {
-      $scope.maindata = data;
-      //sconsole.log($scope.prospects);
-      setMapData();
-      createHeatMap();
-    });
-    responsePromise.error(function(data, status, headers, config) {
-        alert("Could not fetch prospects, contact FortyTu");
-    });
-
   $scope.geoLocations = [];
+
+  var makeCall = function(i, length) {
+    if (i < length) {
+      var responsePromise = $http.post("/api/filter/property");
+      responsePromise.success(function(data, status, headers, config) {
+        $scope.maindata = data;
+        setMapData();
+        createHeatMap();
+        ++i;
+        makeCall(i, length);
+      });
+      responsePromise.error(function(data, status, headers, config) {
+        alert("Could not fetch prospects, contact FortyTu");
+      });
+    }
+  }
+
+  makeCall(0, 20);
+
+  // var responsePromise = $http.post("/api/filter/property");
+
+  // responsePromise.success(function(data, status, headers, config) {
+  //   $scope.maindata = data;
+  //   //sconsole.log($scope.prospects);
+  //   setMapData();
+  //   createHeatMap();
+  // });
+  // responsePromise.error(function(data, status, headers, config) {
+  //     alert("Could not fetch prospects, contact FortyTu");
+  // });
+
+
   // Get latitudes/longitudes
   // $http({
   //   url: '/'+"web/listing.json",
@@ -494,7 +554,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
       $.each(districtList, function(b, districts) {
         $.each(districts, function(c, postalSector) {
           for(var i = 0; i < postalSector.length; i++){
-            createMarker(postalSector[i]);
+            //createMarker(postalSector[i]);
 
             heatmap__service.prepForBroadcast(postalSector[i].latitude, postalSector[i].longitude, postalSector[i].prospect.heatmap_score);
           }
@@ -565,7 +625,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     });
     $scope.heatmap = new google.maps.visualization.HeatmapLayer({
       data: $scope.heatMapData,
-      radius: 50,
+      radius: 25,
       dissipating: true
     });
     $scope.heatmap.setMap($scope.map);
