@@ -12,11 +12,36 @@ use Doctrine\ORM\EntityRepository;
  */
 class TransactionsRepository extends EntityRepository
 {
-	public function filterProspects($postdata, $loaded_properties)
-	{
-		$offset = rand(0,99000);
-		$loaded_properties = implode(',', $loaded_properties);
+	// public function filterProspects($postdata, $loaded_properties)
+	// {
+		// $offset = rand(0,99000);
+		// $loaded_properties = implode(',', $loaded_properties);
 		
+		// return $this->getEntityManager()
+			// ->createQuery(
+				// 'SELECT t.id, 
+						// t.urakey, 
+						// t.price,
+						// t.sector,
+						// t.newprice,						
+						// pr.longitude,
+						// pr.latitude
+					// FROM RefiBundle:Prospectloan pl
+					// JOIN RefiBundle:Transactions t
+						// WITH t.id = pl.transactionId
+					// JOIN RefiBundle:Postalregion pr
+						// WITH t.sector = pr.regionCode
+					// WHERE t.id NOT IN (:loaded_properties)
+				// '
+			// )
+			// ->setParameter('loaded_properties', $loaded_properties)
+			// ->setMaxResults($postdata['limit'])
+        	// ->setFirstResult($offset)
+			// ->getArrayResult();
+	// }
+	
+	public function filterProspects($postdata)
+	{
 		return $this->getEntityManager()
 			->createQuery(
 				'SELECT t.id, 
@@ -24,20 +49,18 @@ class TransactionsRepository extends EntityRepository
 						t.price,
 						t.sector,
 						t.newprice,						
-						t.districtcode,
 						pr.longitude,
 						pr.latitude
 					FROM RefiBundle:Prospectloan pl
 					JOIN RefiBundle:Transactions t
 						WITH t.id = pl.transactionId
 					JOIN RefiBundle:Postalregion pr
-						WITH t.districtcode = pr.regionCode
-					WHERE t.id NOT IN (:loaded_properties)
+						WITH t.sector = pr.regionCode
+					ORDER BY t.sector ASC
 				'
 			)
-			->setParameter('loaded_properties', $loaded_properties)
 			->setMaxResults($postdata['limit'])
-        	->setFirstResult($offset)
+        	->setFirstResult($postdata['offset'])
 			->getArrayResult();
 	}
 

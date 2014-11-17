@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
+//use Symfony\Component\HttpFoundation\Session\Session;
 
 class ApplicationController extends Controller
 {
@@ -106,11 +106,11 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function filterPropertyAction(Request $request)
     {
-		$session = new Session();
-		$loaded_properties = array();
+		//$session = new Session();
+		//$loaded_properties = array();
 		
-		if($session->has('loaded_properties'))
-			$loaded_properties = $session->get('loaded_properties');
+		//if($session->has('loaded_properties'))
+		//	$loaded_properties = $session->get('loaded_properties');
 
 		$em = $this->getDoctrine()->getManager();
         $postdata = $request->query->all();
@@ -140,10 +140,14 @@ class ApplicationController extends Controller
         if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 5000000;
 		        
 		if (!isset($postdata['limit'])) $postdata['limit'] = 15;
+		if (!isset($postdata['offset'])) $postdata['offset'] = 1;
 		
-        $property_data = $em->getRepository('RefiBundle:Transactions')->filterProspects($postdata, $loaded_properties);
+        // $property_data = $em->getRepository('RefiBundle:Transactions')->filterProspects($postdata, $loaded_properties);
+		$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspects($postdata);
 		
-		$district = array();
+		// $district = array();
+		$sector = array();
+		$temp_data = array();
 		foreach($property_data as $val) {
 			$val['newprice'] = round($val['newprice'], 2);
 			$val['prospect'] = $em->getRepository('RefiBundle:Transactions')->fetchProspectByTransactionsId($val['id']);
@@ -185,23 +189,32 @@ class ApplicationController extends Controller
 			if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max'])
 				$score++;
 			
-			$val['prospect']['heatmap_score'] = (int) (($score / 8) * 100);
-			$val['prospect']['transaction_id'] = $val['id'];
+			$temp_data['prospect']['prospect_id'] = $val['prospect']['id'];
+			$temp_data['prospect']['prospect_score'] = (int) (($score / 8) * 100);
+									
+			//newer implementation
+			$sector[$val['sector']]['name'] = "Temporary Sector Name";
+			$sector[$val['sector']]['longitude'] = $val['longitude'];
+			$sector[$val['sector']]['latitude'] = $val['latitude'];
+			$sector[$val['sector']]['sector_score'] = 100;
+			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = 100;
+			$sector[$val['sector']]['properties'][$val['urakey']][] = $temp_data['prospect'];
 			
 			//new implementation
-			$district[$val['districtcode']]['longitude'] = $val['longitude'];
-			$district[$val['districtcode']]['latitude'] = $val['latitude'];
-			$district[$val['districtcode']][$val['urakey']][] = $val['prospect'];
+			// $val['prospect']['heatmap_score'] = (int) (($score / 8) * 100);
+			// $district[$val['districtcode']]['longitude'] = $val['longitude'];
+			// $district[$val['districtcode']]['latitude'] = $val['latitude'];
+			// $district[$val['districtcode']][$val['urakey']][] = $val['prospect'];
 			
 			// $district[$val['districtcode']][$val['sector']][] = $val;
 			// $district[$val['districtcode']]['longitude'] = $val['longitude'];
 			// $district[$val['districtcode']]['latitude'] = $val['latitude'];
-			$loaded_properties[] = $val['id'];
+			// $loaded_properties[] = $val['id'];
 		}
 		
-		$session->set('loaded_properties', $loaded_properties);
+		// $session->set('loaded_properties', $loaded_properties);
 		
-		$response = new Response(json_encode($district));
+		$response = new Response(json_encode($sector));
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
