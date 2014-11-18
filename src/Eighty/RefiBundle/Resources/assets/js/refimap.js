@@ -16,6 +16,7 @@ refis.factory('list__service', function($rootScope) {
   list.prospectCount = 0;
 
   list.prepForBroadcast = function(value) {
+    list.maindata = [];
     list.maindata.push(value);
     this.broadcastItem();
   };
@@ -632,7 +633,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
     $scope.heatMapData = [];
     $.each(heatmap__service.locations, function(a, condoLocation) {
-      //$scope.heatMapData.push({ location: new google.maps.LatLng(condoLocation.latitude, condoLocation.longitude), weight: condoLocation.weight} );
+      $scope.heatMapData.push({ location: new google.maps.LatLng(condoLocation.latitude, condoLocation.longitude), weight: condoLocation.weight} );
     });
     $scope.heatmap = new google.maps.visualization.HeatmapLayer({
       data: $scope.heatMapData,
@@ -667,14 +668,17 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   // heatmap Changed, do something!
   $scope.$on('heatmapBroadcast', function() {
     $scope.map = map__service.google;
-    console.log("Change in heatmap detected: ");
     refreshHeatMap();
+    console.log("Change in heatmap detected: ");
+
   });
   // google maps Changed, do something!
   $scope.$on('mapBroadcast', function() {
     $scope.map = map__service.google;
     $scope.map.mapTypes.set('map_style', map__service.styledMap);
     $scope.map.setMapTypeId('map_style');
+    console.log("Change in map detected: ");
+
   });
 
 });
