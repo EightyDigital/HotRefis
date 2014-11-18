@@ -186,9 +186,9 @@ class ApplicationController extends Controller
 			$sector[$val['sector']]['sector_score'] = round($temp[$val['sector']]['score'] / $temp[$val['sector']]['count'], 0);
 			$sector[$val['sector']]['total_sector_prospects'] = $temp[$val['sector']]['num_prospects'];
 			
-			$sector[$val['sector']]['3_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 3, 2);
-			$sector[$val['sector']]['6_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 2.5, 2);
-			$sector[$val['sector']]['12_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 2, 2);
+			$sector[$val['sector']]['3_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 3, 0);
+			$sector[$val['sector']]['6_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 2.5, 0);
+			$sector[$val['sector']]['12_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 2, 0);
 			
 			$sector[$val['sector']]['checked_out'] = 0;
 			
@@ -205,14 +205,16 @@ class ApplicationController extends Controller
     }
 	
 	/*-------------------------------------------------/
-	|	route: <domain>/api/shortlist/save
+	|	route: <domain>/api/shortlist/checkout
 	|	postdata:
 	|		- prospectlist : e.g. {"546678":100,"546679":66}
 	--------------------------------------------------*/
-    public function shortlistSaveAction(Request $request)
+    public function shortlistCheckoutAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $postdata = $request->request->all();
+		
+		print_r(json_decode($postdata['prospectlist'])); exit();
 		
 		$user = $this->get('security.context')->getToken()->getUser();
 		$userId = $user->getId();
@@ -223,15 +225,16 @@ class ApplicationController extends Controller
 		if(isset($postdata['prospectlist'])) {
 			$list_data = json_decode(stripslashes($_POST['prospectlist']));
 			$clientlist = $em->getRepository('RefiBundle:Clientlist')->findOneBy(array('clientId' => $userId));
-			
 			$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($userId);
-			$need_credits = count($list_data) * 3;
+			
+			$need_credits = count($list_data) * 3; //temporary
 			
 			if(($credits - $need_credits) >= 0) {
 				foreach($list_data as $key => $val) {
 					$prospectlist = new Prospectlist();
 					$prospectlist->setClientlistId($clientlist->getId());
 					$prospectlist->setProspectId($key);
+					$prospectlist->setUrakey
 					$prospectlist->setScore($val);
 					$prospectlist->setDateAssigned(new \DateTime('today'));
 					$em->persist($prospectlist);
