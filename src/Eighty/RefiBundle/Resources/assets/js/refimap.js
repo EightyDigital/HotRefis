@@ -29,6 +29,118 @@ refis.factory('list__service', function($rootScope) {
 
 
 // Check for update on district
+refis.factory('map__service', function($rootScope) {
+  var map = {};
+
+  // Default
+  map.mapDOMElement = document.getElementById('heatmap');
+  map.control_state = true;
+  map.iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+  map.mapOptions = {
+    zoom: 12,
+    draggable: map.control_state,
+    panControl: map.control_state,
+    zoomControl: map.control_state,
+    mapTypeControl: map.control_state,
+    scaleControl: map.control_state,
+    streetViewControl: map.control_state,
+    overviewMapControl: map.control_state,
+    scrollwheel: false,
+    keyboardShortcuts: map.control_state,
+    clickableLabels: map.control_state,
+    disableDoubleClickZoom: false,
+    center: new google.maps.LatLng(1.32008, 103.81984),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    mapTypeControlOptions: {
+      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+    }
+  };
+
+
+  map.styles = [
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+          { "saturation": 0 },
+          { "lightness": 0 },
+          { "gamma": 0 }
+        ]
+    }, {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+          { "saturation": -100 },
+          { "gamma": 1 },
+          { "lightness": -24 }
+        ]
+    }, {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "administrative",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "transit",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+          { "saturation": -50 }
+        ]
+    }, {
+        "featureType": "road",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "administrative",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "landscape",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+        "featureType": "poi",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+    }, {
+    }
+  ];
+
+  // Create a new StyledMapType object, passing it the array of styles,
+  // as well as the name to be displayed on the map type control.
+  map.styledMap = new google.maps.StyledMapType(map.styles,
+    {name: "Styled Map"});
+
+  map.google = new google.maps.Map(map.mapDOMElement, map.mapOptions);
+
+  map.prepForBroadcast = function() {
+    this.broadcastItem();
+  };
+
+  map.broadcastItem = function() {
+    $rootScope.$broadcast('mapBroadcast');
+  };
+
+  return map;
+
+});
+
+
+// Check for update on district
 refis.factory('district__service', function($rootScope) {
   var origin = {};
 
@@ -56,12 +168,34 @@ refis.factory('district__service', function($rootScope) {
 
 // Heatmap (based from main data)
 refis.factory('heatmap__service', function($rootScope) {
-  var heatmap = { name:"HeatmapLocations", locations: [] };
+  var heatmap = { name:"HeatmapLocations", locations: [], results: [] };
   heatmap.locations = [];
+  var filterableLocations = [];
+  heatmap.results =[];
 
   heatmap.prepForBroadcast = function(latitude_value, longitude_value, score_value) {
     heatmap.locations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
+    filterableLocations = heatmap.locations;
+    this.broadcastItem();
   };
+  heatmap.filterScore = function(value){
+    //filterableLocations = heatmap.locations;
+    //filterableLocations;
+    heatmap.results  = [];
+    for(var i = 0; i < filterableLocations.length; i++ ){
+      if(value <= filterableLocations[i].weight){
+        heatmap.results.push(filterableLocations[i]);
+        console.log("pushing: "+filterableLocations[i]);
+        //console.log("show- value: "+value+" <= heatpoint: "+filterableLocations[i].weight);
+      }
+      //console.dir(filterableLocations[i]);
+    }
+    console.log(heatmap.results.length);
+
+    // $.each(heatmap.Locations, function(a, heatpoint) {
+    // });
+  }
+
   heatmap.clear = function() {
     heatmap.locations = [];
   };
@@ -73,7 +207,7 @@ refis.factory('heatmap__service', function($rootScope) {
 
 });
 
-var heatmap_slider = refis.controller('heatmap__slider', function($scope, list__service) {
+var heatmap_slider = refis.controller('heatmap__slider', function($scope, heatmap__service) {
   $scope.slider = $( ".heatmap__slider" ).slider({
     //orientation: "vertical",
     range: "max",
@@ -92,22 +226,18 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, list__
     },
     // State change we must update step value - more of an inbetween
     change: function( event, ui ) {
+      heatmap__service.filterScore((ui.value));
       //distance__service.prepForBroadcast(-(ui.value));
     },
     create: function( event, ui ) {
       $('.heatmap__control--results .value').text( accounting.formatNumber(100000) );
     }
   });
-
-  /* BROADCAST! MAKE THE CHANGES! */
-  // Distance Changed, do something!
-  // $scope.$on('distanceBroadcast', function() {
-  //   console.log("slider cont: "+distance__service.meters);
-  //   //$scope.meters = 'SLIDER CONTROLLER: ' + distance__service.meters;
-  // });
 });
 
-var filter_controller = refis.controller('filter__controller', function($scope, $log) {
+
+
+var filter_controller = refis.controller('filter__controller', function($scope, $log, $http, list__service) {
 
 
   // this.tab = 1;
@@ -137,10 +267,28 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       //$( ".property__value .min__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[0], { symbol: "$",  format: "%s%v" })+"</span>");
       //$( ".property__value .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
       //distance__service.prepForBroadcast(-(ui.value));
+      //fetch(ui.values[0],ui.values[1]);
+      $( ".filter__slider" ).slider({ disabled: true });
+      //fetching
+      console.log("fetching min: "+ui.values[0]+" | max: "+ui.values[1])
+      var responsePromise = $http.get("/api/filter/property?limit=200&income_min="+ui.values[0]+"&income_max="+ui.values[1]);
+      responsePromise.success(function(data, status, headers, config) {
+        config.cache = true;
+        list__service.prepForBroadcast(data);
+        $( ".filter__slider" ).slider({ disabled: false });
+
+      });
+      responsePromise.error(function(data, status, headers, config) {
+        alert("Could not fetch prospects, contact FortyTu");
+        $( ".filter__slider" ).slider({ disabled: false });
+
+      });
     },
     create: function( event, ui ) {
       $( ".property__value .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".property__value .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(10000000, { symbol: "$",  format: "%s%v" })+"</span>");
+    },
+    fetch: function(min, max) {
     }
   });
 
@@ -329,76 +477,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
 });
 
-var map_controller = refis.controller('map__controller', function($scope, $http, list__service, heatmap__service, district__service, refiCache) {
-
-  var styles = [
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [
-          { "saturation": 0 },
-          { "lightness": 0 },
-          { "gamma": 0 }
-        ]
-    }, {
-        "featureType": "road.arterial",
-        "elementType": "geometry",
-        "stylers": [
-          { "saturation": -100 },
-          { "gamma": 1 },
-          { "lightness": -24 }
-        ]
-    }, {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [
-          { "saturation": -100 }
-        ]
-    }, {
-        "featureType": "administrative",
-        "stylers": [
-          { "saturation": -100 }
-        ]
-    }, {
-        "featureType": "transit",
-        "stylers": [
-          { "saturation": -100 }
-        ]
-    }, {
-        "featureType": "water",
-        "elementType": "geometry.fill",
-        "stylers": [
-          { "saturation": -50 }
-        ]
-    }, {
-        "featureType": "road",
-        "stylers": [
-          { "saturation": -100 }
-        ]
-    }, {
-        "featureType": "administrative",
-        "stylers": [
-          { "saturation": -100 }
-        ]
-    }, {
-        "featureType": "landscape",
-        "stylers": [
-          { "saturation": -100 }
-        ]
-    }, {
-        "featureType": "poi",
-        "stylers": [
-          { "saturation": -100 }
-        ]
-    }, {
-    }
-  ];
-
-  // Create a new StyledMapType object, passing it the array of styles,
-  // as well as the name to be displayed on the map type control.
-  var styledMap = new google.maps.StyledMapType(styles,
-    {name: "Styled Map"});
-
+var map_controller = refis.controller('map__controller', function($scope, $http, list__service, heatmap__service, district__service, map__service) {
 
   $scope.maindata = {};
   $scope.heatMapData = [];
@@ -407,9 +486,12 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
   var makeCall = function(i, length, params) {
     if (i < length) {
-      var responsePromise = $http.post("/api/filter/property", { cache: refiCache } );
+      var responsePromise = $http.get("/api/filter/property?limit=200" );
       responsePromise.success(function(data, status, headers, config) {
+        //console.log(data);
+        config.cache = true;
         list__service.prepForBroadcast(data);
+
         ++i;
         makeCall(i, length);
       });
@@ -419,58 +501,11 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     }
   }
 
-  makeCall(0, 15);
-
-  // var responsePromise = $http.post("/api/filter/property");
-
-  // responsePromise.success(function(data, status, headers, config) {
-  //   $scope.maindata = data;
-  //   //sconsole.log($scope.prospects);
-  //   setMapData();
-  //   createHeatMap();
-  // });
-  // responsePromise.error(function(data, status, headers, config) {
-  //     alert("Could not fetch prospects, contact FortyTu");
-  // });
-
-
-  // Get latitudes/longitudes
-  // $http({
-  //   url: '/'+"web/listing.json",
-  //   method: "GET"
-  // }).success(function (data) {
-  //   $.each(data.listings, function(i, item) {
-  //     $scope.geoLocations.push(item.location);
-  //     createMarker(item.location)
-  //   });
-  // });
-  //console.log($scope.geoLocations);
-  var mapDOMElement = document.getElementById('heatmap'),
-  control_state = true,
-  iconBase = 'https://maps.google.com/mapfiles/kml/shapes/',
-  mapOptions = {
-    zoom: 12,
-    draggable: control_state,
-    panControl: control_state,
-    zoomControl: control_state,
-    mapTypeControl: control_state,
-    scaleControl: control_state,
-    streetViewControl: control_state,
-    overviewMapControl: control_state,
-    scrollwheel: false,
-    keyboardShortcuts: control_state,
-    clickableLabels: control_state,
-    disableDoubleClickZoom: false,
-    center: new google.maps.LatLng(1.32008, 103.81984),
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    mapTypeControlOptions: {
-      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-    }
-  };
+  makeCall(0, 1);
 
   // Create a new 'Map' instance
-  $scope.map = new google.maps.Map(mapDOMElement, mapOptions);
-  $scope.map.mapTypes.set('map_style', styledMap);
+  $scope.map= map__service.google;
+  $scope.map.mapTypes.set('map_style', map__service.styledMap);
   $scope.map.setMapTypeId('map_style');
 
   // Create my marker bin!
@@ -485,6 +520,8 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   // get markers was here
 
   $scope.mapCenter = $scope.map.getCenter();
+
+
 
   // Generic Constructor for markers
   var createMarker = function (location){
@@ -510,15 +547,20 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   // Push Json Markers
   var setMapData = function(){
     $scope.geolocations = list__service.maindata;
-    //console.log($scope.geolocations);
-    $.each($scope.geolocations, function(a, districtList) {
-      $.each(districtList, function(b, districts) {
-        createMarker(districts);
-        $.each(districts, function(c, postalSector) {
-          for(var i = 0; i < postalSector.length; i++){
-            console.log('prospectCount: '+postalSector[i].prospect);
-            heatmap__service.prepForBroadcast(postalSector[i].latitude, postalSector[i].longitude, postalSector[i].prospect.heatmap_score);
-          }
+    // All Sectors
+    // console.log($scope.geolocations);
+    $.each($scope.geolocations, function(a, sectorList) {
+      // Sector by Sector
+      // console.log(sectorList);
+      $.each(sectorList, function(b, condoList) {
+        // Individual Condo Info
+        // console.log(condoList.properties);
+        $.each(condoList.properties, function(b, condo) {
+          //console.log('condo: '+condo.latitude);
+          $.each(condo.prospects, function(c, prospect) {
+            //console.log(prospect.heatmap_score);
+            heatmap__service.prepForBroadcast(condo.latitude, condo.longitude, prospect.prospect_score);
+          });
         });
       });
     });
@@ -560,10 +602,9 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   // remove heatmaps
   var refreshHeatMap = function(){
     $scope.heatmap.setMap(null);
-
-    createHeatMap();
+    createHeatMap($scope.map);
   }
-  var createHeatMap = function(){
+  var createHeatMap = function(scopeMap){
     var gradient2 = [
       'rgba(0, 213, 195, 0)',
       'rgba(0, 213, 195, 0.35)',
@@ -616,7 +657,6 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
     $scope.heatMapData = [];
     $.each(heatmap__service.locations, function(a, condoLocation) {
-      //console.log("a: "+a+" | location lat: "+location.latitude+"location long: "+location.longitude+" location score"+location.weight);
       $scope.heatMapData.push({ location: new google.maps.LatLng(condoLocation.latitude, condoLocation.longitude), weight: condoLocation.weight} );
     });
     $scope.heatmap = new google.maps.visualization.HeatmapLayer({
@@ -625,8 +665,11 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
       gradient: gradient,
       dissipating: true
     });
-    $scope.heatmap.setMap($scope.map);
+    $scope.heatmap.setMap(scopeMap);
   }
+
+  // Create initial Heatmap
+  createHeatMap($scope.map);
 
 
 
@@ -635,22 +678,28 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     $scope.map.setCenter($scope.mapCenter);
   });
 
-  createHeatMap();
 
   /* BROADCAST! MAKE THE CHANGES! */
   // List Changed, do something!
   $scope.$on('maindataBroadcast', function() {
-    console.log("Change in main data: "+list__service.districts);
+    $scope.map = map__service.google;
+    console.log("Change in main data: "+list__service.maindata);
     //console.log("geoLocs: "+$scope.geolocations);
     setMapData();
     refreshHeatMap();
   });
 
-
-  /* BROADCAST! MAKE THE CHANGES! */
   // heatmap Changed, do something!
   $scope.$on('heatmapBroadcast', function() {
+    $scope.map = map__service.google;
     console.log("Change in heatmap detected: ");
+    refreshHeatMap();
+  });
+  // google maps Changed, do something!
+  $scope.$on('mapBroadcast', function() {
+    $scope.map = map__service.google;
+    $scope.map.mapTypes.set('map_style', map__service.styledMap);
+    $scope.map.setMapTypeId('map_style');
   });
 
 });
@@ -662,3 +711,18 @@ refis.directive('preventDefault', function() {
         });
     }
 })
+
+
+// refis.filter('myFilter', function () {
+//   return function (items, search) {
+//     var result = [];
+//     angular.forEach(items, function (value, key) {
+//       angular.forEach(value, function (value2, key2) {
+//         if (value2 === search) {
+//           result.push(value2);
+//         }
+//       })
+//     });
+//     return result;
+//   }
+// });
