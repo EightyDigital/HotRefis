@@ -173,9 +173,12 @@ refis.factory('heatmap__service', function($rootScope) {
   var filterableLocations = [];
   heatmap.results =[];
 
-  heatmap.prepForBroadcast = function(latitude_value, longitude_value, score_value) {
-    heatmap.locations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
-    filterableLocations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
+  heatmap.prepForBroadcast = function(value) {
+    heatmap.locations = value;
+    filterableLocations = value;
+    console.log(value);
+    //heatmap.locations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
+    //filterableLocations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
     this.broadcastItem();
   };
   heatmap.filterScore = function(value){
@@ -251,7 +254,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".filter__slider" ).slider({ disabled: true });
       //fetching
       console.log("fetching min: "+ui.values[0]+" | max: "+ui.values[1])
-      var responsePromise = $http.get("/api/filter/property?limit=200&property_value_min="+ui.values[0]+"&property_value_max="+ui.values[1]);
+      var responsePromise = $http.get("/api/filter/property?property_value_min="+ui.values[0]+"&property_value_max="+ui.values[1]);
       responsePromise.success(function(data, status, headers, config) {
         config.cache = true;
         list__service.prepForBroadcast(data);
@@ -462,7 +465,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
   var makeCall = function(i, length, params) {
     if (i < length) {
-      var responsePromise = $http.get("/api/filter/property?limit=200" );
+      var responsePromise = $http.get("/api/filter/property" );
       responsePromise.success(function(data, status, headers, config) {
         //console.log(data);
         config.cache = true;
@@ -505,10 +508,10 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
         map: $scope.map,
         position: new google.maps.LatLng(location.latitude, location.longitude),
         title: "District",
-        icon: iconBase + 'placemark_circle.png',
+        icon: map__service.iconBase + 'placemark_circle.png',
         animation: google.maps.Animation.DROP
     });
-
+    console.log(location);
     //marker.content = '<div class="address"><span class="streetname">'+location.streetname1+'</span>&nbsp;<span class="streetnum">'+location.streetnumber+'</span></div>';
 
     google.maps.event.addListener(marker, 'click', function(){
@@ -518,28 +521,6 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     //console.log(marker);
     //marker.setMap(map);
     $scope.markers.push(marker);
-  }
-
-  // Push Json Markers
-  var setMapData = function(){
-    $scope.geolocations = list__service.maindata;
-    // All Sectors
-    // console.log($scope.geolocations);
-    $.each($scope.geolocations, function(a, sectorList) {
-      // Sector by Sector
-      // console.log(sectorList);
-      $.each(sectorList, function(b, condoList) {
-        // Individual Condo Info
-        // console.log(condoList.properties);
-        $.each(condoList.properties, function(b, condo) {
-          //console.log('condo: '+condo.latitude);
-          $.each(condo.prospects, function(c, prospect) {
-            //console.log(prospect.heatmap_score);
-            heatmap__service.prepForBroadcast(condo.latitude, condo.longitude, condo.property_score);
-          });
-        });
-      });
-    });
   }
 
   // Push Json Markers
@@ -570,6 +551,29 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   }
 
 
+  // Push Json Markers
+  var setMapData = function(){
+    $scope.geolocations = list__service.maindata;
+    $scope.heatdata = [];
+    // All Sectors
+    // console.log($scope.geolocations);
+    $.each($scope.geolocations, function(a, sectorList) {
+      // Sector by Sector
+      // console.log(sectorList);
+      $.each(sectorList, function(b, condoList) {
+        createMarker(condoList);
+
+        // Individual Condo Info
+        // console.log(condoList.properties);
+        $.each(condoList.properties, function(b, condo) {
+          console.log('condo propscore: '+condo.property_score);
+          $scope.heatdata.push({latitude: condo.latitude, longitude: condo.longitude, weight: condo.property_score});
+        });
+      });
+    });
+    heatmap__service.prepForBroadcast($scope.heatdata);
+  }
+
   $scope.openInfoWindow = function(e, selectedMarker){
     e.preventDefault();
     google.maps.event.trigger(selectedMarker, 'click');
@@ -598,35 +602,34 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     ];
     var gradient = [
       'rgba(0, 213, 195, 0)',
-      'rgba(0, 213, 195, 0.5)',
-      'rgba(55, 219, 173, 0.25)',
-      'rgba(55, 219, 173, 0.55)',
+      'rgba(0, 213, 195, 0.45)',
+      'rgba(55, 219, 173, 0.75)',
 
-      'rgba(97, 224, 159, 0.2)',
-      'rgba(97, 224, 159, 0.55)',
+      'rgba(97, 224, 159, 1)',
+      'rgba(97, 224, 159, 0.75)',
 
-      'rgba(143, 230, 145, 0.2)',
-      'rgba(143, 230, 145, 0.55)',
+      'rgba(143, 230, 145, 1)',
+      'rgba(143, 230, 145, 0.75)',
 
-      'rgba(195, 235, 130, 0.2)',
-      'rgba(195, 235, 130, 0.55)',
+      'rgba(195, 235, 130, 1)',
+      'rgba(195, 235, 130, 0.75)',
 
-      'rgba(243, 237, 123, 0.2)',
-      'rgba(243, 237, 123, 0.55)',
+      'rgba(243, 237, 123, 1)',
+      'rgba(243, 237, 123, 0.75)',
 
-      'rgba(240, 203, 112, 0.2)',
-      'rgba(240, 203, 112, 0.55)',
+      'rgba(240, 203, 112, 1)',
+      'rgba(240, 203, 112, 0.75)',
 
-      'rgba(238, 164, 105, 0.2)',
-      'rgba(238, 164, 105, 0.55)',
+      'rgba(238, 164, 105, 1)',
+      'rgba(238, 164, 105, 0.75)',
 
-      'rgba(236, 127, 100, 0.2)',
-      'rgba(236, 127, 100, 0.55)',
+      'rgba(236, 127, 100, 1)',
+      'rgba(236, 127, 100, 0.75)',
 
-      'rgba(235, 90, 96, 0.2)',
-      'rgba(235, 90, 96, 0.55)',
+      'rgba(235, 90, 96, 1)',
+      'rgba(235, 90, 96, 0.75)',
 
-      'rgba(238, 67, 99, 0.4)',
+      'rgba(238, 67, 99, 1)',
       'rgba(238, 67, 99, 0.65)',
       'rgba(238, 67, 99, 0.85)'
     ];
@@ -637,9 +640,10 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     });
     $scope.heatmap = new google.maps.visualization.HeatmapLayer({
       data: $scope.heatMapData,
-      radius: 75,
+      radius: 20,
       gradient: gradient,
-      dissipating: true
+      dissipating: true,
+      maxIntensity: 100
     });
     $scope.heatmap.setMap(scopeMap);
   }
