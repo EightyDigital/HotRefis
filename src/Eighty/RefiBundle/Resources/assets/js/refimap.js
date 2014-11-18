@@ -535,7 +535,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
           //console.log('condo: '+condo.latitude);
           $.each(condo.prospects, function(c, prospect) {
             //console.log(prospect.heatmap_score);
-            heatmap__service.prepForBroadcast(condo.latitude, condo.longitude, prospect.prospect_score);
+            heatmap__service.prepForBroadcast(condo.latitude, condo.longitude, condo.property_score);
           });
         });
       });
