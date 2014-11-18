@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\Response;
-//use Symfony\Component\HttpFoundation\Session\Session;
+
 
 class ApplicationController extends Controller
 {
@@ -103,6 +103,11 @@ class ApplicationController extends Controller
 	|		- property_value_min; property_value_max;
 	|		- ltv_min; ltv_max;
 	|		- loan_age_min; loan_age_max;
+	|		- income_min; income_max;
+	|		- property_owned_min; property_owned_max;
+	|		- age_min; age_max;
+	|		- assets_min; assets_max;
+	|		- debt_min; debt_max;
 	--------------------------------------------------*/
     public function filterPropertyAction(Request $request)
     {
@@ -207,14 +212,12 @@ class ApplicationController extends Controller
 	/*-------------------------------------------------/
 	|	route: <domain>/api/shortlist/checkout
 	|	postdata:
-	|		- prospectlist : e.g. {"546678":100,"546679":66}
+	|		- prospectlist : json_encode of filter API
 	--------------------------------------------------*/
     public function shortlistCheckoutAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $postdata = $request->request->all();
-		
-		print_r(json_decode($postdata['prospectlist'])); exit();
 		
 		$user = $this->get('security.context')->getToken()->getUser();
 		$userId = $user->getId();
@@ -228,25 +231,44 @@ class ApplicationController extends Controller
 			$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($userId);
 			
 			$need_credits = count($list_data) * 3; //temporary
+			$batchSize = 20;
 			
 			if(($credits - $need_credits) >= 0) {
 				foreach($list_data as $key => $val) {
-					$prospectlist = new Prospectlist();
-					$prospectlist->setClientlistId($clientlist->getId());
-					$prospectlist->setProspectId($key);
-					$prospectlist->setUrakey
-					$prospectlist->setScore($val);
-					$prospectlist->setDateAssigned(new \DateTime('today'));
-					$em->persist($prospectlist);
-					$em->flush();
+					foreach($val->properties as $pkey => $pval) {
+						$prospect_ids = $em->getRepository('RefiBundle:Prospect')->fetchProspectIdsByUrakeyAndSector($pkey, $val->sector_code);
+						$i = 1;
+						foreach($prospect_ids as $prospect_val) {
+							$prospectlist = new Prospectlist();
+							$prospectlist->setClientlistId($clientlist->getId());
+							$prospectlist->setProspectId($prospect_val['prospectId']);
+							$prospectlist->setUrakey($pkey);
+							$prospectlist->setScore($pval->property_score);
+							$prospectlist->setDateAssigned(new \DateTime('today'));
+							$prospectlist->setEngaged(0);
+							$prospectlist->setStatus(0);
+							$em->persist($prospectlist);
+							
+							if (($i % $batchSize) == 0) {
+								$em->flush();
+								$em->clear();
+							}
+							
+							$i++;
+						}
+					}
 					
-					$creditused = new Creditused();
-					$creditused->setClientId($userId);
-					$creditused->setDate(new \DateTime('today'));
-					$creditused->setCreditUsed(3);
-					$em->persist($creditused);
-					$em->flush();
+					// $creditused = new Creditused();
+					// $creditused->setClientId($userId);
+					// $creditused->setDate(new \DateTime('today'));
+					// $creditused->setCreditUsed(3);
+					// $em->persist($creditused);
+					// $em->flush();
 				}
+				
+				$em->flush();
+				$em->clear();
+								
 				$status = 'ok';
 				$message = 'Checked out!';
 			} else {
@@ -263,37 +285,4 @@ class ApplicationController extends Controller
         return $response;
     }
 	
-	/*-------------------------------------------------/
-	|	route: <domain>/api/shortlist/retrieve
-	|	postdata:
-	|		- xxxx
-	--------------------------------------------------*/
-	public function shortlistRetrieveAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $postdata = $request->request->all();
-		
-		$user = $this->get('security.context')->getToken()->getUser();
-		$userId = $user->getId();
-		
-		$clientlist = $em->getRepository('RefiBundle:Clientlist')->findOneBy(array('clientId' => $userId));
-		$prospectlist = $em->getRepository('RefiBundle:Prospectlist')->findBy(array('clientlistId' => $clientlist->getId()));
-				
-		foreach($prospectlist as $val) {
-			$repository = $em
-				->getRepository('RefiBundle:Prospect');
-			
-			$query = $repository->createQueryBuilder('p')
-				->where('p.id = :pid')
-				->setParameter('pid', $val->getProspectId())
-				->getQuery();
-			$prospect_list_temp = $query->getArrayResult();
-			$prospect_list[] = (isset($prospect_list_temp[0]) ? $prospect_list_temp[0] : array());
-		}
-		
-		$response = new Response(json_encode($prospect_list));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
-    }
 }
