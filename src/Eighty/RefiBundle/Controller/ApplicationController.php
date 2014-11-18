@@ -184,6 +184,10 @@ class ApplicationController extends Controller
 			$sector[$val['sector']]['latitude'] = $val['pr_lat'];
 			$sector[$val['sector']]['sector_score'] = round($temp[$val['sector']]['score'] / $temp[$val['sector']]['count'], 0);
 			$sector[$val['sector']]['total_sector_prospects'] = $temp[$val['sector']]['num_prospects'];
+			
+			$sector[$val['sector']]['3_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 3, 2);
+			$sector[$val['sector']]['6_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 2.5, 2);
+			$sector[$val['sector']]['12_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 2, 2);
 						
 			$sector[$val['sector']]['properties'][$val['urakey']]['longitude'] = $val['longitude'];
 			$sector[$val['sector']]['properties'][$val['urakey']]['latitude'] = $val['latitude'];
