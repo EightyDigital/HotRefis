@@ -161,7 +161,6 @@ refis.factory('district__service', function($rootScope) {
   };
 
   return origin;
-
 });
 
 
@@ -175,30 +174,24 @@ refis.factory('heatmap__service', function($rootScope) {
 
   heatmap.prepForBroadcast = function(latitude_value, longitude_value, score_value) {
     heatmap.locations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
-    filterableLocations = heatmap.locations;
+    filterableLocations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
     this.broadcastItem();
   };
   heatmap.filterScore = function(value){
-    //filterableLocations = heatmap.locations;
-    //filterableLocations;
     heatmap.results  = [];
     for(var i = 0; i < filterableLocations.length; i++ ){
       if(value <= filterableLocations[i].weight){
         heatmap.results.push(filterableLocations[i]);
         console.log("pushing: "+filterableLocations[i]);
-        //console.log("show- value: "+value+" <= heatpoint: "+filterableLocations[i].weight);
       }
-      //console.dir(filterableLocations[i]);
     }
     console.log(heatmap.results.length);
-
-    // $.each(heatmap.Locations, function(a, heatpoint) {
-    // });
-  }
+  };
 
   heatmap.clear = function() {
     heatmap.locations = [];
   };
+
   heatmap.broadcastItem = function() {
     $rootScope.$broadcast('heatmapBroadcast');
   };
@@ -209,14 +202,12 @@ refis.factory('heatmap__service', function($rootScope) {
 
 var heatmap_slider = refis.controller('heatmap__slider', function($scope, heatmap__service) {
   $scope.slider = $( ".heatmap__slider" ).slider({
-    //orientation: "vertical",
     range: "max",
     min: 0,
     max: 100,
     step: 5,
     value: 0,
     slide: function( event, ui ) {
-      //console.log( (ui.value) );
       var tempVal = ui.value*500;
       var newVal = 100000 - tempVal
       $('.heatmap__control--results .value').text( accounting.formatNumber( newVal ) );
@@ -227,7 +218,6 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, heatma
     // State change we must update step value - more of an inbetween
     change: function( event, ui ) {
       heatmap__service.filterScore((ui.value));
-      //distance__service.prepForBroadcast(-(ui.value));
     },
     create: function( event, ui ) {
       $('.heatmap__control--results .value').text( accounting.formatNumber(100000) );
@@ -238,16 +228,6 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, heatma
 
 
 var filter_controller = refis.controller('filter__controller', function($scope, $log, $http, list__service) {
-
-
-  // this.tab = 1;
-  // this.selectTab = function (setTab){
-  //   this.tab = setTab;
-  // };
-  // this.isSelected = function(checkTab) {
-  //   return this.tab === checkTab;
-  // };
-
   // PROPERTY SLIDERS
   // Property Value
   $scope.slider = $( ".property__value" ).slider({
@@ -257,7 +237,6 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     step: 10000,
     values: [ 0, 10000000 ],
     slide: function( event, ui ) {
-
       $( ".property__value .min__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[0], { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".property__value .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
       //console.log( (ui.value) );
@@ -271,7 +250,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".filter__slider" ).slider({ disabled: true });
       //fetching
       console.log("fetching min: "+ui.values[0]+" | max: "+ui.values[1])
-      var responsePromise = $http.get("/api/filter/property?limit=200&income_min="+ui.values[0]+"&income_max="+ui.values[1]);
+      var responsePromise = $http.get("/api/filter/property?limit=200&property_value_min="+ui.values[0]+"&property_value_max="+ui.values[1]);
       responsePromise.success(function(data, status, headers, config) {
         config.cache = true;
         list__service.prepForBroadcast(data);
@@ -317,7 +296,6 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     }
   });
 
-
   // Property Loan Age
   $scope.slider = $( ".property__loanAge" ).slider({
     range: true,
@@ -342,8 +320,6 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".property__loanAge .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>10+</span>");
     }
   });
-
-
 
   // FINANCIAL SLIDERS
   // Income
@@ -445,7 +421,6 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".financials__assets .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(10000000, { symbol: "$",  format: "%s%v" })+"</span>");
     }
   });
-
 
   // Debt
   $scope.slider = $( ".financials__debt" ).slider({
@@ -657,7 +632,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
     $scope.heatMapData = [];
     $.each(heatmap__service.locations, function(a, condoLocation) {
-      $scope.heatMapData.push({ location: new google.maps.LatLng(condoLocation.latitude, condoLocation.longitude), weight: condoLocation.weight} );
+      //$scope.heatMapData.push({ location: new google.maps.LatLng(condoLocation.latitude, condoLocation.longitude), weight: condoLocation.weight} );
     });
     $scope.heatmap = new google.maps.visualization.HeatmapLayer({
       data: $scope.heatMapData,
@@ -686,7 +661,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     console.log("Change in main data: "+list__service.maindata);
     //console.log("geoLocs: "+$scope.geolocations);
     setMapData();
-    refreshHeatMap();
+    //refreshHeatMap();
   });
 
   // heatmap Changed, do something!

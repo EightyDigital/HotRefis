@@ -39,6 +39,22 @@
     height: 20px;
     background: #ccc;
     border: 0;
+    &.ui-slider-disabled {
+      &:before {
+        content:"Loading";
+        position:absolute;
+        width:100%;
+        text-align:center;
+        z-index:999;
+        left:0;
+        top:0;
+        background:#fff;
+        color:#555;
+      }
+      .ui-slider-handle{
+        background:none;
+      }
+    }
     .ui-slider-handle{
       width: 22px;
       height: 29px;

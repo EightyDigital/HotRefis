@@ -7001,7 +7001,23 @@ table {
   background: #ccc;
   border: 0;
 }
-/* line 42, ../sass/hotrefi/modules/_filter__controller--controls.scss */
+/* line 43, ../sass/hotrefi/modules/_filter__controller--controls.scss */
+.filter__controller--controls .ui-slider.ui-slider-disabled:before {
+  content: "Loading";
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  background: #fff;
+  color: #555;
+}
+/* line 54, ../sass/hotrefi/modules/_filter__controller--controls.scss */
+.filter__controller--controls .ui-slider.ui-slider-disabled .ui-slider-handle {
+  background: none;
+}
+/* line 58, ../sass/hotrefi/modules/_filter__controller--controls.scss */
 .filter__controller--controls .ui-slider .ui-slider-handle {
   width: 22px;
   height: 29px;
@@ -7018,25 +7034,25 @@ table {
   top: -.3em;
   margin-left: -.6em;
 }
-/* line 57, ../sass/hotrefi/modules/_filter__controller--controls.scss */
+/* line 73, ../sass/hotrefi/modules/_filter__controller--controls.scss */
 .filter__controller--controls .ui-slider .ui-slider-handle .val {
   position: absolute;
   top: -1.5em;
   display: block;
   min-width: 60px;
 }
-/* line 65, ../sass/hotrefi/modules/_filter__controller--controls.scss */
+/* line 81, ../sass/hotrefi/modules/_filter__controller--controls.scss */
 .filter__controller--controls .ui-slider .ui-slider-handle.min__slider .val {
   left: 0;
 }
-/* line 70, ../sass/hotrefi/modules/_filter__controller--controls.scss */
+/* line 86, ../sass/hotrefi/modules/_filter__controller--controls.scss */
 .filter__controller--controls .ui-slider .ui-slider-handle.max__slider .val {
   right: 0;
   top: auto;
   bottom: -1.5em;
   text-align: right;
 }
-/* line 78, ../sass/hotrefi/modules/_filter__controller--controls.scss */
+/* line 94, ../sass/hotrefi/modules/_filter__controller--controls.scss */
 .filter__controller--controls .ui-slider .ui-slider-range {
   background: #063141;
   height: 100%;
