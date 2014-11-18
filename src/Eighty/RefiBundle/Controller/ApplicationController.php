@@ -180,6 +180,7 @@ class ApplicationController extends Controller
 				$temp[$val['sector']]['score'] = (int) (($score / 8) * 100);
 						
 			$sector[$val['sector']]['name'] = "Temporary Sector Name";
+			$sector[$val['sector']]['sector_code'] = $val['sector'];
 			$sector[$val['sector']]['longitude'] = $val['pr_long'];
 			$sector[$val['sector']]['latitude'] = $val['pr_lat'];
 			$sector[$val['sector']]['sector_score'] = round($temp[$val['sector']]['score'] / $temp[$val['sector']]['count'], 0);
@@ -188,7 +189,9 @@ class ApplicationController extends Controller
 			$sector[$val['sector']]['3_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 3, 2);
 			$sector[$val['sector']]['6_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 2.5, 2);
 			$sector[$val['sector']]['12_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 2, 2);
-						
+			
+			$sector[$val['sector']]['checked_out'] = 0;
+			
 			$sector[$val['sector']]['properties'][$val['urakey']]['longitude'] = $val['longitude'];
 			$sector[$val['sector']]['properties'][$val['urakey']]['latitude'] = $val['latitude'];
 			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = (int) (($score / 8) * 100);
