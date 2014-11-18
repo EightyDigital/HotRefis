@@ -19,6 +19,7 @@ refis.factory('list__service', function($rootScope) {
     list.maindata = [];
     list.maindata.push(value);
     this.broadcastItem();
+    console.log("maindata contains: "+_.keys(list.maindata).length);
   };
 
   list.broadcastItem = function() {
@@ -176,7 +177,7 @@ refis.factory('heatmap__service', function($rootScope) {
   heatmap.prepForBroadcast = function(value) {
     heatmap.locations = value;
     filterableLocations = value;
-    console.log(value);
+    //console.log(value);
     //heatmap.locations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
     //filterableLocations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
     this.broadcastItem();
@@ -201,6 +202,33 @@ refis.factory('heatmap__service', function($rootScope) {
   };
 
   return heatmap;
+
+});
+
+
+
+// Heatmap (based from main data)
+refis.factory('api__service', function($rootScope, $http, list__service) {
+  var api = { };
+
+  api.filterBroadcast = function(values) {
+    var responsePromise = $http.get("/api/filter/property", { params: values  });
+    responsePromise.success(function(data, status, headers, config) {
+      list__service.prepForBroadcast(data);
+      $( ".filter__slider" ).slider({ disabled: false });
+    });
+    responsePromise.error(function(data, status, headers, config) {
+      alert("Could not fetch prospects, contact FortyTu");
+      $( ".filter__slider" ).slider({ disabled: false });
+    });
+    this.broadcastItem();
+  };
+
+  api.broadcastItem = function() {
+    $rootScope.$broadcast('apiBroadcast');
+  };
+
+  return api;
 
 });
 
@@ -231,7 +259,7 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, heatma
 
 
 
-var filter_controller = refis.controller('filter__controller', function($scope, $log, $http, list__service) {
+var filter_controller = refis.controller('filter__controller', function($scope, $log, $http, list__service, api__service) {
   // PROPERTY SLIDERS
   // Property Value
   $scope.slider = $( ".property__value" ).slider({
@@ -247,25 +275,10 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     },
     //State change we must update step value - more of an inbetween
     change: function( event, ui ) {
-      //$( ".property__value .min__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[0], { symbol: "$",  format: "%s%v" })+"</span>");
-      //$( ".property__value .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
-      //distance__service.prepForBroadcast(-(ui.value));
-      //fetch(ui.values[0],ui.values[1]);
       $( ".filter__slider" ).slider({ disabled: true });
       //fetching
-      console.log("fetching min: "+ui.values[0]+" | max: "+ui.values[1])
-      var responsePromise = $http.get("/api/filter/property?property_value_min="+ui.values[0]+"&property_value_max="+ui.values[1]);
-      responsePromise.success(function(data, status, headers, config) {
-        config.cache = true;
-        list__service.prepForBroadcast(data);
-        $( ".filter__slider" ).slider({ disabled: false });
+      api__service.filterBroadcast( { property_value_min: ui.values[0], property_value_max: ui.values[1] } );
 
-      });
-      responsePromise.error(function(data, status, headers, config) {
-        alert("Could not fetch prospects, contact FortyTu");
-        $( ".filter__slider" ).slider({ disabled: false });
-
-      });
     },
     create: function( event, ui ) {
       $( ".property__value .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
@@ -288,12 +301,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".property__ltv .max__slider" ).html("<span class='val'>"+ui.values[1]+"%</span>");
       //console.log( (ui.value) );
     },
-    // State change we must update step value - more of an inbetween
-    // change: function( event, ui ) {
-    //   $( ".property__ltv .min__slider" ).html("<span class='val'>"+ui.values[0]+"%</span>");
-    //   $( ".property__ltv .max__slider" ).html("<span class='val'>"+ui.values[1]+"%</span>");
-    //   //distance__service.prepForBroadcast(-(ui.value));
-    // },
+    //State change we must update step value - more of an inbetween
+    change: function( event, ui ) {
+      $( ".filter__slider" ).slider({ disabled: true });
+      //fetching
+      api__service.filterBroadcast( { ltv_min: ui.values[0], ltv_max: ui.values[1] } );
+
+    },
     create: function( event, ui ) {
       $( ".property__ltv .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>0%</span>");
       $( ".property__ltv .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>100%</span>");
@@ -313,12 +327,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".property__loanAge .max__slider" ).html("<span class='val'>"+ui.values[1]+"</span>");
       //console.log( (ui.value) );
     },
-    // State change we must update step value - more of an inbetween
-    // change: function( event, ui ) {
-    //   $( ".property__loanAge .min__slider" ).html("<span class='val'>"+ui.values[0]+"</span>");
-    //   $( ".property__loanAge .max__slider" ).html("<span class='val'>"+ui.values[1]+"</span>");
-    //   //distance__service.prepForBroadcast(-(ui.value));
-    // },
+    //State change we must update step value - more of an inbetween
+    change: function( event, ui ) {
+      $( ".filter__slider" ).slider({ disabled: true });
+      //fetching
+      api__service.filterBroadcast( { loan_age_min: ui.values[0], loan_age_max: ui.values[1] } );
+
+    },
     create: function( event, ui ) {
       $( ".property__loanAge .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
       $( ".property__loanAge .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>10+</span>");
@@ -339,12 +354,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".financials__income .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
       //console.log( (ui.value) );
     },
-    // State change we must update step value - more of an inbetween
-    // change: function( event, ui ) {
-    //   $( ".financials__income .min__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[0], { symbol: "$",  format: "%s%v" })+"</span>");
-    //   $( ".financials__income .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
-    //   //distance__service.prepForBroadcast(-(ui.value));
-    // },
+    //State change we must update step value - more of an inbetween
+    change: function( event, ui ) {
+      $( ".filter__slider" ).slider({ disabled: true });
+      //fetching
+      api__service.filterBroadcast( { income_min: ui.values[0], income_max: ui.values[1] } );
+
+    },
     create: function( event, ui ) {
       $( ".financials__income .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".financials__income .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(5000000, { symbol: "$",  format: "%s%v" })+"</span>");
@@ -364,12 +380,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".financials__property .max__slider" ).html("<span class='val'>"+ui.values[1]+"</span>");
       //console.log( (ui.value) );
     },
-    // State change we must update step value - more of an inbetween
-    // change: function( event, ui ) {
-    //   $( ".financials__property .min__slider" ).html("<span class='val'>"+ui.values[0]+"</span>");
-    //   $( ".financials__property .max__slider" ).html("<span class='val'>"+ui.values[1]+"</span>");
-    //   //distance__service.prepForBroadcast(-(ui.value));
-    // },
+    //State change we must update step value - more of an inbetween
+    change: function( event, ui ) {
+      $( ".filter__slider" ).slider({ disabled: true });
+      //fetching
+      api__service.filterBroadcast( { property_owned_min: ui.values[0], property_owned_max: ui.values[1] } );
+
+    },
     create: function( event, ui ) {
       $( ".financials__property .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
       $( ".financials__property .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>10</span>");
@@ -389,12 +406,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".financials__age .max__slider" ).html("<span class='val'>"+ui.values[1]+"</span>");
       //console.log( (ui.value) );
     },
-    // State change we must update step value - more of an inbetween
-    // change: function( event, ui ) {
-    //   $( ".financials__age .min__slider" ).html("<span class='val'>"+ui.values[0]+" years</span>");
-    //   $( ".financials__age .max__slider" ).html("<span class='val'>"+ui.values[1]+" years</span>");
-    //   //distance__service.prepForBroadcast(-(ui.value));
-    // },
+    //State change we must update step value - more of an inbetween
+    change: function( event, ui ) {
+      $( ".filter__slider" ).slider({ disabled: true });
+      //fetching
+      api__service.filterBroadcast( { age_min: ui.values[0], age_max: ui.values[1] } );
+
+    },
     create: function( event, ui ) {
       $( ".financials__age .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>18 years</span>");
       $( ".financials__age .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>70 years+</span>");
@@ -414,12 +432,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".financials__assets .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
       //console.log( (ui.value) );
     },
-    // State change we must update step value - more of an inbetween
-    // change: function( event, ui ) {
-    //   $( ".financials__assets .min__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[0], { symbol: "$",  format: "%s%v" })+"</span>");
-    //   $( ".financials__assets .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
-    //   //distance__service.prepForBroadcast(-(ui.value));
-    // },
+    //State change we must update step value - more of an inbetween
+    change: function( event, ui ) {
+      $( ".filter__slider" ).slider({ disabled: true });
+      //fetching
+      api__service.filterBroadcast( { assets_min: ui.values[0], assets_max: ui.values[1] } );
+
+    },
     create: function( event, ui ) {
       $( ".financials__assets .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".financials__assets .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(10000000, { symbol: "$",  format: "%s%v" })+"</span>");
@@ -439,12 +458,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       $( ".financials__debt .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
       //console.log( (ui.value) );
     },
-    // State change we must update step value - more of an inbetween
-    // change: function( event, ui ) {
-    //   $( ".financials__debt .min__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[0], { symbol: "$",  format: "%s%v" })+"</span>");
-    //   $( ".financials__debt .max__slider" ).html("<span class='val'>"+accounting.formatMoney(ui.values[1], { symbol: "$",  format: "%s%v" })+"</span>");
-    //   //distance__service.prepForBroadcast(-(ui.value));
-    // },
+    //State change we must update step value - more of an inbetween
+    change: function( event, ui ) {
+      $( ".filter__slider" ).slider({ disabled: true });
+      //fetching
+      api__service.filterBroadcast( { debt_min: ui.values[0], debt_max: ui.values[1] } );
+
+    },
     create: function( event, ui ) {
       $( ".financials__debt .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".financials__debt .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(5000000, { symbol: "$",  format: "%s%v" })+"</span>");
@@ -456,31 +476,33 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
 });
 
-var map_controller = refis.controller('map__controller', function($scope, $http, list__service, heatmap__service, district__service, map__service) {
+var map_controller = refis.controller('map__controller', function($scope, $http, list__service, heatmap__service, district__service, map__service, api__service) {
 
   $scope.maindata = {};
   $scope.heatMapData = [];
   $scope.geoLocations = [];
   $scope.prospectCount = 0;
 
-  var makeCall = function(i, length, params) {
-    if (i < length) {
-      var responsePromise = $http.get("/api/filter/property" );
-      responsePromise.success(function(data, status, headers, config) {
-        //console.log(data);
-        config.cache = true;
-        list__service.prepForBroadcast(data);
+  api__service.filterBroadcast();
 
-        ++i;
-        makeCall(i, length);
-      });
-      responsePromise.error(function(data, status, headers, config) {
-        alert("Could not fetch prospects, contact FortyTu");
-      });
-    }
-  }
+  // var makeCall = function(i, length, params) {
+  //   if (i < length) {
+  //     var responsePromise = $http.get("/api/filter/property" );
+  //     responsePromise.success(function(data, status, headers, config) {
+  //       //console.log(data);
+  //       config.cache = true;
+  //       list__service.prepForBroadcast(data);
 
-  makeCall(0, 1);
+  //       ++i;
+  //       makeCall(i, length);
+  //     });
+  //     responsePromise.error(function(data, status, headers, config) {
+  //       alert("Could not fetch prospects, contact FortyTu");
+  //     });
+  //   }
+  // }
+
+  // makeCall(0, 3);
 
   // Create a new 'Map' instance
   $scope.map= map__service.google;
@@ -507,15 +529,15 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     var marker = new google.maps.Marker({
         map: $scope.map,
         position: new google.maps.LatLng(location.latitude, location.longitude),
-        title: "District",
+        title: location.sector_code,
         icon: map__service.iconBase + 'placemark_circle.png',
         animation: google.maps.Animation.DROP
     });
-    console.log(location);
-    //marker.content = '<div class="address"><span class="streetname">'+location.streetname1+'</span>&nbsp;<span class="streetnum">'+location.streetnumber+'</span></div>';
+    //console.log(location);
+    marker.content = '<div class="address"><div class="streetname"><span>'+location.name+'</span></div>&nbsp;<div class="score">Sector Score: <span>'+location.sector_score+'</span></div><div class="prospects">Prospects: <span>'+location.total_sector_prospects+'</span></div></div>';
 
     google.maps.event.addListener(marker, 'click', function(){
-        $scope.infoWindow.setContent('<h2>' + marker.title + '</h2><div class="addShort"><a href="/add">Add to ShortList</a></div>');
+        $scope.infoWindow.setContent('<h2>Postal Sector: ' + marker.title + '</h2>'+ marker.content +'<br/><div class="addShort"><a href="/add">Add to ShortList</a></div>');
         $scope.infoWindow.open($scope.map, marker);
     });
     //console.log(marker);
@@ -566,7 +588,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
         // Individual Condo Info
         // console.log(condoList.properties);
         $.each(condoList.properties, function(b, condo) {
-          console.log('condo propscore: '+condo.property_score);
+          //console.log('condo propscore: '+condo.property_score);
           $scope.heatdata.push({latitude: condo.latitude, longitude: condo.longitude, weight: condo.property_score});
         });
       });
@@ -602,34 +624,35 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     ];
     var gradient = [
       'rgba(0, 213, 195, 0)',
-      'rgba(0, 213, 195, 0.45)',
-      'rgba(55, 219, 173, 0.75)',
+      'rgba(0, 213, 195, 0.5)',
+      'rgba(55, 219, 173, 0.25)',
+      'rgba(55, 219, 173, 0.55)',
 
-      'rgba(97, 224, 159, 1)',
-      'rgba(97, 224, 159, 0.75)',
+      'rgba(97, 224, 159, 0.2)',
+      'rgba(97, 224, 159, 0.55)',
 
-      'rgba(143, 230, 145, 1)',
-      'rgba(143, 230, 145, 0.75)',
+      'rgba(143, 230, 145, 0.2)',
+      'rgba(143, 230, 145, 0.55)',
 
-      'rgba(195, 235, 130, 1)',
-      'rgba(195, 235, 130, 0.75)',
+      'rgba(195, 235, 130, 0.2)',
+      'rgba(195, 235, 130, 0.55)',
 
-      'rgba(243, 237, 123, 1)',
-      'rgba(243, 237, 123, 0.75)',
+      'rgba(243, 237, 123, 0.2)',
+      'rgba(243, 237, 123, 0.55)',
 
-      'rgba(240, 203, 112, 1)',
-      'rgba(240, 203, 112, 0.75)',
+      'rgba(240, 203, 112, 0.2)',
+      'rgba(240, 203, 112, 0.55)',
 
-      'rgba(238, 164, 105, 1)',
-      'rgba(238, 164, 105, 0.75)',
+      'rgba(238, 164, 105, 0.2)',
+      'rgba(238, 164, 105, 0.55)',
 
-      'rgba(236, 127, 100, 1)',
-      'rgba(236, 127, 100, 0.75)',
+      'rgba(236, 127, 100, 0.2)',
+      'rgba(236, 127, 100, 0.55)',
 
-      'rgba(235, 90, 96, 1)',
-      'rgba(235, 90, 96, 0.75)',
+      'rgba(235, 90, 96, 0.2)',
+      'rgba(235, 90, 96, 0.55)',
 
-      'rgba(238, 67, 99, 1)',
+      'rgba(238, 67, 99, 0.4)',
       'rgba(238, 67, 99, 0.65)',
       'rgba(238, 67, 99, 0.85)'
     ];
@@ -640,10 +663,11 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     });
     $scope.heatmap = new google.maps.visualization.HeatmapLayer({
       data: $scope.heatMapData,
-      radius: 20,
+      radius: 50,
       gradient: gradient,
       dissipating: true,
-      maxIntensity: 100
+      maxIntensity: 100,
+      opacity: 0.5
     });
     $scope.heatmap.setMap(scopeMap);
   }
@@ -663,7 +687,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   // List Changed, do something!
   $scope.$on('maindataBroadcast', function() {
     $scope.map = map__service.google;
-    console.log("Change in main data: "+list__service.maindata);
+    console.dir("Change in main data: "+list__service.maindata);
     //console.log("geoLocs: "+$scope.geolocations);
     setMapData();
     //refreshHeatMap();
