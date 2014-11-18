@@ -66,6 +66,12 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        dql:
+            datetime_functions:
+                # ...
+                strtodate: DoctrineExtensions\Query\Mysql\StrToDate
+                dateformat: DoctrineExtensions\Query\Mysql\DateFormat
+                timestampdiff: DoctrineExtensions\Query\Mysql\TimestampDiff
 
 # Swiftmailer Configuration
 swiftmailer:

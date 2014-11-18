@@ -40,6 +40,43 @@ class TransactionsRepository extends EntityRepository
 			// ->getArrayResult();
 	// }
 	
+	// TEST //
+	public function filterSectors()
+	{
+		return $this->getEntityManager()
+			->createQuery(
+				'SELECT 
+					  t.urakey,
+					  COUNT(t.id) as num_prospects,
+					  t.longitude,
+					  t.latitude,
+					  t.sector,
+					  pr.longitude AS pr_long,
+					  pr.latitude AS pr_lat,
+					  AVG(t.price) AS average_price,
+					  AVG(t.newprice) AS average_newprice,
+					  AVG(p.age) AS average_prospect_age,
+					  AVG(p.derivedIncome) AS average_income,
+					  AVG(pl.loanAmount) AS average_loan,
+					  AVG(pl.ltv) AS average_ltv,
+					  AVG(
+						timestampdiff(YEAR, pl.loanDate, CURRENT_DATE())
+					  ) AS average_loan_age
+					FROM RefiBundle:Prospectloan pl
+					JOIN RefiBundle:Transactions t
+						WITH t.id = pl.transactionId
+					JOIN RefiBundle:Postalregion pr
+						WITH t.sector = pr.regionCode
+					JOIN RefiBundle:Prospect p
+						WITH p.id = pl.prospectId
+					GROUP BY t.urakey
+					ORDER BY t.sector ASC
+				'
+			)
+			->getArrayResult();
+	}
+	// TEST END //
+	
 	public function filterProspects($postdata)
 	{
 		return $this->getEntityManager()
