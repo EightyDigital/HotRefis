@@ -106,12 +106,6 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function filterPropertyAction(Request $request)
     {
-		//$session = new Session();
-		//$loaded_properties = array();
-		
-		//if($session->has('loaded_properties'))
-		//	$loaded_properties = $session->get('loaded_properties');
-
 		$em = $this->getDoctrine()->getManager();
         $postdata = $request->query->all();
         
@@ -139,90 +133,70 @@ class ApplicationController extends Controller
 		if (!isset($postdata['debt_min'])) $postdata['debt_min'] = 0;
         if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 5000000;
 		        
-		if (!isset($postdata['limit'])) $postdata['limit'] = 15;
-		if (!isset($postdata['offset'])) $postdata['offset'] = 1;
+		$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectors();
 		
-        // $property_data = $em->getRepository('RefiBundle:Transactions')->filterProspects($postdata, $loaded_properties);
-		$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspects($postdata);
-		
-		// $district = array();
 		$sector = array();
-		$temp_data = array();
 		foreach($property_data as $val) {
-			$val['newprice'] = round($val['newprice'], 2);
-			$val['prospect'] = $em->getRepository('RefiBundle:Transactions')->fetchProspectByTransactionsId($val['id']);
-			$val['prospect'] = $val['prospect'][0];
-			
-			$val_prospect_id = $val['prospect']['id'];
-			
-			$val['prospect']['prospectloan'] = $em->getRepository('RefiBundle:Transactions')->fetchLoanByTransactionsAndProspectId($val['id'], $val_prospect_id);
-			$val['prospect']['prospectloan'] = $val['prospect']['prospectloan'][0];
-			
 			$score = 0;
 				
-			if(($val['price'] >= $postdata['property_value_min'] && $val['price'] <= $postdata['property_value_max']) || ($val['newprice'] >= $postdata['property_value_min'] && $val['newprice'] <= $postdata['property_value_max']))
+			if(($val['average_price'] >= $postdata['property_value_min'] && $val['average_price'] <= $postdata['property_value_max']) || ($val['average_newprice'] >= $postdata['property_value_min'] && $val['average_newprice'] <= $postdata['property_value_max']))
 				$score++;
 			
-			if($val['prospect']['prospectloan']['ltv'] >= $postdata['ltv_min'] && $val['prospect']['prospectloan']['ltv'] <= $postdata['ltv_max'])
+			if($val['average_ltv'] >= $postdata['ltv_min'] && $val['average_ltv'] <= $postdata['ltv_max'])
 				$score++;
 			
-			$from = $val['prospect']['prospectloan']['loanDate'];
-			$to = new \DateTime('today');
-			$loan_age = $from->diff($to)->y;
-			
-			if($loan_age >= $postdata['loan_age_min'] && $loan_age <= $postdata['loan_age_max'])
+			if($val['average_loan_age'] >= $postdata['loan_age_min'] && $val['average_loan_age'] <= $postdata['loan_age_max'])
 				$score++;
 							
-			if($val['prospect']['derivedIncome'] >= $postdata['income_min'] && $val['prospect']['derivedIncome'] <= $postdata['income_max'])
+			if($val['average_income'] >= $postdata['income_min'] && $val['average_income'] <= $postdata['income_max'])
 				$score++;
 			
-			$property_owned = $em->getRepository('RefiBundle:Transactions')->fetchAssetsByProspectId($val_prospect_id);
-			if($property_owned[0]['count_tid'] >= $postdata['property_owned_min'] && $property_owned[0]['count_tid'] <= $postdata['property_owned_max'])
+			if(isset($temp[$val['sector']]['num_prospects']))
+				$temp[$val['sector']]['num_prospects'] += $val['num_prospects'];
+			else
+				$temp[$val['sector']]['num_prospects'] = $val['num_prospects'];
+			
+			if(isset($temp[$val['sector']]['count']))
+				$temp[$val['sector']]['count']++;
+			else
+				$temp[$val['sector']]['count'] = 1;
+				
+			$temp[$val['sector']]['avg_properties_owned'] = ($temp[$val['sector']]['count'] / $temp[$val['sector']]['num_prospects']) * 100;
+			if($temp[$val['sector']]['avg_properties_owned'] >= $postdata['property_owned_min'] && $temp[$val['sector']]['avg_properties_owned'] <= $postdata['property_owned_max'])
 				$score++;
-			if($property_owned[0]['sum_nprice'] >= $postdata['assets_min'] && $property_owned[0]['sum_nprice'] <= $postdata['assets_max'])
+			if(($temp[$val['sector']]['avg_properties_owned'] * $val['average_newprice']) >= $postdata['assets_min'] && ($temp[$val['sector']]['avg_properties_owned'] * $val['average_newprice']) <= $postdata['assets_max'])
 				$score++;
 			
-			if($val['prospect']['age'] >= $postdata['age_min'] && $val['prospect']['age'] <= $postdata['age_max'])
+			if($val['average_prospect_age'] >= $postdata['age_min'] && $val['average_prospect_age'] <= $postdata['age_max'])
 				$score++;
 			
-			$debt = ($val['prospect']['prospectloan']['ltv'] / 100) * $val['price'];
+			$debt = ($val['average_ltv'] / 100) * $val['average_price'];
 			if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max'])
 				$score++;
 			
-			$temp_data['prospect']['prospect_id'] = $val['prospect']['id'];
-			$temp_data['prospect']['prospect_score'] = (int) (($score / 8) * 100);
-									
-			//newer implementation
+			if(isset($temp[$val['sector']]['score']))
+				$temp[$val['sector']]['score'] += (int) (($score / 8) * 100);
+			else
+				$temp[$val['sector']]['score'] = (int) (($score / 8) * 100);
+						
 			$sector[$val['sector']]['name'] = "Temporary Sector Name";
-			$sector[$val['sector']]['longitude'] = $val['pr_longitude'];
-			$sector[$val['sector']]['latitude'] = $val['pr_latitude'];
-			$sector[$val['sector']]['sector_score'] = 100;
-			$sector[$val['sector']]['total_prospects'] = 345;
+			$sector[$val['sector']]['longitude'] = $val['pr_long'];
+			$sector[$val['sector']]['latitude'] = $val['pr_lat'];
+			$sector[$val['sector']]['sector_score'] = round($temp[$val['sector']]['score'] / $temp[$val['sector']]['count'], 0);
+			$sector[$val['sector']]['total_sector_prospects'] = $temp[$val['sector']]['num_prospects'];
+						
 			$sector[$val['sector']]['properties'][$val['urakey']]['longitude'] = $val['longitude'];
 			$sector[$val['sector']]['properties'][$val['urakey']]['latitude'] = $val['latitude'];
-			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = 100;
-			$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][] = $temp_data['prospect'];
-			
-			//new implementation
-			// $val['prospect']['heatmap_score'] = (int) (($score / 8) * 100);
-			// $district[$val['districtcode']]['longitude'] = $val['longitude'];
-			// $district[$val['districtcode']]['latitude'] = $val['latitude'];
-			// $district[$val['districtcode']][$val['urakey']][] = $val['prospect'];
-			
-			// $district[$val['districtcode']][$val['sector']][] = $val;
-			// $district[$val['districtcode']]['longitude'] = $val['longitude'];
-			// $district[$val['districtcode']]['latitude'] = $val['latitude'];
-			// $loaded_properties[] = $val['id'];
+			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = (int) (($score / 8) * 100);
+			$sector[$val['sector']]['properties'][$val['urakey']]['total_property_prospects'] = $val['num_prospects'];
 		}
-		
-		// $session->set('loaded_properties', $loaded_properties);
 		
 		$response = new Response(json_encode($sector));
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
     }
-		
+	
 	/*-------------------------------------------------/
 	|	route: <domain>/api/shortlist/save
 	|	postdata:

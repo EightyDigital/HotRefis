@@ -4,8 +4,34 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7a3aed37824af180232e409433796f87",
+    "hash": "fd64efcb2bdb5c1952804d23d5d3a19d",
     "packages": [
+        {
+            "name": "beberlei/DoctrineExtensions",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beberlei/DoctrineExtensions.git",
+                "reference": "5e4ec9c3ec3434151e1c73144b4ab87ae30aefbc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/5e4ec9c3ec3434151e1c73144b4ab87ae30aefbc",
+                "reference": "5e4ec9c3ec3434151e1c73144b4ab87ae30aefbc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "DoctrineExtensions": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2013-12-20 22:02:19"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.1",
@@ -1779,6 +1805,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "knplabs/knp-components": 20,
+        "beberlei/doctrineextensions": 20,
         "cypresslab/compass-elephant-bundle": 20
     },
     "prefer-stable": true,
