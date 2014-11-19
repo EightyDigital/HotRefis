@@ -12,33 +12,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProspectRepository extends EntityRepository
 {
-	public function filterProspects($postdata)
+	public function fetchProspectIdsByUrakeyAndSector($urakey, $sector)
 	{
 		$parameters = array(
-				'minIncome' => $postdata['income_min'],
-				'maxIncome' => $postdata['income_max'],
-				'minDcode' => $postdata['dcode_min'],
-				'maxDcode' => $postdata['dcode_max'],
-				'minAge' => $postdata['age_min'],
-				'maxAge' => $postdata['age_max'],
+				'urakey' => $urakey,
+				'sector' => $sector
 			);
 
 		return $this->getEntityManager()
 			->createQuery(
-				'SELECT p
-					FROM RefiBundle:Prospect p
-					WHERE p.derivedIncome >= :minIncome
-						AND p.derivedIncome <= :maxIncome
-						AND p.districtcode >= :minDcode
-						AND p.districtcode <= :maxDcode
-						AND p.age >= :minAge
-						AND p.age <= :maxAge
+				'SELECT DISTINCT(pl.prospectId) AS prospectId
+					FROM RefiBundle:Prospectloan pl
+					JOIN RefiBundle:Transactions t
+						WITH pl.transactionId = t.id
+					WHERE t.urakey = :urakey
+						AND t.sector = :sector
 				'
 			)
 			->setParameters($parameters)
-			->setMaxResults($postdata['limit'])
-        	->setFirstResult($postdata['offset'])
-			->getArrayResult();
+			->getResult();
 	}
 
 	public function fetchTransactionsByProspectId($id)

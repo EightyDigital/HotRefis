@@ -27,6 +27,13 @@ class Prospectlist
     private $prospectId;
 	
 	/**
+     * @var string
+     *
+     * @ORM\Column(name="urakey", type="text", nullable=true)
+     */
+    private $urakey;
+	
+	/**
      * @var integer
      *
      * @ORM\Column(name="score", type="bigint", nullable=true)
@@ -123,6 +130,29 @@ class Prospectlist
     public function getProspectId()
     {
         return $this->prospectId;
+    }
+	
+	/**
+     * Set urakey
+     *
+     * @param string $urakey
+     * @return Prospectlist
+     */
+    public function setUrakey($urakey)
+    {
+        $this->urakey = $urakey;
+
+        return $this;
+    }
+
+    /**
+     * Get urakey
+     *
+     * @return string 
+     */
+    public function getUrakey()
+    {
+        return $this->urakey;
     }
 	
 	/**

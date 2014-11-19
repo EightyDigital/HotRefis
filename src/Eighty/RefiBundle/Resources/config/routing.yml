@@ -47,9 +47,9 @@ API_filter_property:
     pattern: /api/filter/property
     defaults: { _controller: RefiBundle:Application:filterProperty }
 
-API_shortlist_save:
-    pattern: /api/shortlist/save
-    defaults: { _controller: RefiBundle:Application:shortlistSave }
+API_shortlist_checkout:
+    pattern: /api/shortlist/checkout
+    defaults: { _controller: RefiBundle:Application:shortlistCheckout }
 
 API_shortlist_retrieve:
     pattern: /api/shortlist/retrieve
