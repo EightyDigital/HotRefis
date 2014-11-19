@@ -19,7 +19,7 @@ refis.factory('list__service', function($rootScope) {
     list.maindata = [];
     list.maindata.push(value);
     this.broadcastItem();
-    console.log("maindata contains: "+_.keys(list.maindata).length);
+    //console.log("maindata contains: "+_.keys(list.maindata).length);
   };
 
   list.broadcastItem = function() {
@@ -174,10 +174,81 @@ refis.factory('heatmap__service', function($rootScope) {
   var filterableLocations = [];
   heatmap.results =[];
 
+  heatmap.gradient2 = [
+    'rgba(0, 213, 195, 0)',
+    'rgba(0, 213, 195, 0.35)',
+    'rgba(0, 213, 195, 0.45)',
+    'rgba(0, 213, 195, 0.55)',
+    'rgba(243, 237, 123,0.1)',
+    'rgba(243, 237, 123,0.35)',
+    'rgba(243, 237, 123,0.45)',
+    'rgba(243, 237, 123,0.55)',
+    'rgba(238, 67, 99, 0.1)',
+    'rgba(238, 67, 99, 0.25)',
+    'rgba(238, 67, 99, 0.35)',
+    'rgba(238, 67, 99, 0.45)',
+    'rgba(238, 67, 99, 0.55)'
+  ];
+  heatmap.gradient = [
+    'rgba(0, 213, 195, 0)',
+    'rgba(0, 213, 195, 0.5)',
+    'rgba(55, 219, 173, 0.25)',
+    'rgba(55, 219, 173, 0.55)',
+
+    'rgba(97, 224, 159, 0.2)',
+    'rgba(97, 224, 159, 0.55)',
+
+    'rgba(143, 230, 145, 0.2)',
+    'rgba(143, 230, 145, 0.55)',
+
+    'rgba(195, 235, 130, 0.2)',
+    'rgba(195, 235, 130, 0.55)',
+
+    'rgba(243, 237, 123, 0.2)',
+    'rgba(243, 237, 123, 0.55)',
+
+    'rgba(240, 203, 112, 0.2)',
+    'rgba(240, 203, 112, 0.55)',
+
+    'rgba(238, 164, 105, 0.2)',
+    'rgba(238, 164, 105, 0.55)',
+
+    'rgba(236, 127, 100, 0.2)',
+    'rgba(236, 127, 100, 0.55)',
+
+    'rgba(235, 90, 96, 0.2)',
+    'rgba(235, 90, 96, 0.55)',
+
+    'rgba(238, 67, 99, 0.4)',
+    'rgba(238, 67, 99, 0.65)',
+    'rgba(238, 67, 99, 0.85)'
+  ];
+
+
+  // heatmap.createHeatMap = function(heatMap, scopeMap){
+  //   console.log('creating heatmap');
+
+  //   $scope.heatMapData = [];
+  //   $.each(heatmap__service.locations, function(a, condoLocation) {
+  //     $scope.heatMapData.push({ location: new google.maps.LatLng(condoLocation.latitude, condoLocation.longitude), weight: condoLocation.weight} );
+  //   });
+  //   $scope.heatmap = new google.maps.visualization.HeatmapLayer({
+  //     data: $scope.heatMapData,
+  //     radius: 50,
+  //     gradient: heatmap__service.gradient,
+  //     dissipating: true,
+  //     maxIntensity: 100,
+  //     opacity: 0.5
+  //   });
+  //   $scope.heatmap.setMap(scopeMap);
+  // };
+
+
   heatmap.prepForBroadcast = function(value) {
+    heatmap.locations = [];
     heatmap.locations = value;
     filterableLocations = value;
-    //console.log(value);
+    console.log(value);
     //heatmap.locations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
     //filterableLocations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
     this.broadcastItem();
@@ -261,6 +332,31 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, heatma
 
 var filter_controller = refis.controller('filter__controller', function($scope, $log, $http, list__service, api__service) {
   // PROPERTY SLIDERS
+  $scope.property_value_min = 0;
+  $scope.property_value_max = 10000000;
+
+  $scope.ltv_min = 0;
+  $scope.ltv_max = 100;
+
+  $scope.loan_age_min = 0;
+  $scope.loan_age_max = 10;
+
+  $scope.income_min = 0;
+  $scope.income_max = 5000000;
+
+  $scope.property_owned_min = 0;
+  $scope.property_owned_max = 10;
+
+  $scope.age_min = 18;
+  $scope.age_max = 70;
+
+  $scope.assets_min = 0;
+  $scope.assets_max = 10000000;
+
+  $scope.debt_min = 0;
+  $scope.debt_max = 5000000;
+
+
   // Property Value
   $scope.slider = $( ".property__value" ).slider({
     range: true,
@@ -275,9 +371,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     },
     //State change we must update step value - more of an inbetween
     change: function( event, ui ) {
-      $( ".filter__slider" ).slider({ disabled: true });
+      $scope.property_value_min = ui.values[0];
+      $scope.property_value_max = ui.values[1];
+
+      //disable all sliders
+      //$( ".filter__slider" ).slider({ disabled: true });
       //fetching
-      api__service.filterBroadcast( { property_value_min: ui.values[0], property_value_max: ui.values[1] } );
+      //api__service.filterBroadcast( { property_value_min: ui.values[0], property_value_max: ui.values[1], ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
 
     },
     create: function( event, ui ) {
@@ -303,9 +403,12 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     },
     //State change we must update step value - more of an inbetween
     change: function( event, ui ) {
-      $( ".filter__slider" ).slider({ disabled: true });
+      $scope.ltv_min = ui.values[0];
+      $scope.ltv_max = ui.values[1];
+
+      //$( ".filter__slider" ).slider({ disabled: true });
       //fetching
-      api__service.filterBroadcast( { ltv_min: ui.values[0], ltv_max: ui.values[1] } );
+      //api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
 
     },
     create: function( event, ui ) {
@@ -329,9 +432,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     },
     //State change we must update step value - more of an inbetween
     change: function( event, ui ) {
-      $( ".filter__slider" ).slider({ disabled: true });
+
+      $scope.loan_age_min = ui.values[0];
+      $scope.loan_age_max = ui.values[1];
+
+      //$( ".filter__slider" ).slider({ disabled: true });
       //fetching
-      api__service.filterBroadcast( { loan_age_min: ui.values[0], loan_age_max: ui.values[1] } );
+      //api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
 
     },
     create: function( event, ui ) {
@@ -356,9 +463,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     },
     //State change we must update step value - more of an inbetween
     change: function( event, ui ) {
-      $( ".filter__slider" ).slider({ disabled: true });
+
+      $scope.income_min = ui.values[0];
+      $scope.income_max = ui.values[1];
+
+      //$( ".filter__slider" ).slider({ disabled: true });
       //fetching
-      api__service.filterBroadcast( { income_min: ui.values[0], income_max: ui.values[1] } );
+      //api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
 
     },
     create: function( event, ui ) {
@@ -382,9 +493,12 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     },
     //State change we must update step value - more of an inbetween
     change: function( event, ui ) {
-      $( ".filter__slider" ).slider({ disabled: true });
+      $scope.property_owned_min = ui.values[0];
+      $scope.property_owned_max = ui.values[1];
+
+      //$( ".filter__slider" ).slider({ disabled: true });
       //fetching
-      api__service.filterBroadcast( { property_owned_min: ui.values[0], property_owned_max: ui.values[1] } );
+      //api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
 
     },
     create: function( event, ui ) {
@@ -402,15 +516,18 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     values: [ 18, 70 ],
     slide: function( event, ui ) {
 
+      $scope.age_min = ui.values[0];
+      $scope.age_max = ui.values[1];
+
       $( ".financials__age .min__slider" ).html("<span class='val'>"+ui.values[0]+"</span>");
       $( ".financials__age .max__slider" ).html("<span class='val'>"+ui.values[1]+"</span>");
       //console.log( (ui.value) );
     },
     //State change we must update step value - more of an inbetween
     change: function( event, ui ) {
-      $( ".filter__slider" ).slider({ disabled: true });
+      //$( ".filter__slider" ).slider({ disabled: true });
       //fetching
-      api__service.filterBroadcast( { age_min: ui.values[0], age_max: ui.values[1] } );
+      //api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
 
     },
     create: function( event, ui ) {
@@ -434,9 +551,12 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     },
     //State change we must update step value - more of an inbetween
     change: function( event, ui ) {
-      $( ".filter__slider" ).slider({ disabled: true });
+      $scope.assets_min = ui.values[0];
+      $scope.assets_max = ui.values[1];
+
+      //$( ".filter__slider" ).slider({ disabled: true });
       //fetching
-      api__service.filterBroadcast( { assets_min: ui.values[0], assets_max: ui.values[1] } );
+      //api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
 
     },
     create: function( event, ui ) {
@@ -460,9 +580,12 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
     },
     //State change we must update step value - more of an inbetween
     change: function( event, ui ) {
-      $( ".filter__slider" ).slider({ disabled: true });
+      $scope.debt_min = ui.values[0];
+      $scope.debt_max = ui.values[1];
+
+      //$( ".filter__slider" ).slider({ disabled: true });
       //fetching
-      api__service.filterBroadcast( { debt_min: ui.values[0], debt_max: ui.values[1] } );
+      //api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
 
     },
     create: function( event, ui ) {
@@ -473,7 +596,9 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
   // Price selection
   $scope.duration = '10,000';
-
+  $scope.applyFilters = function () {
+    api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
+  }
 });
 
 var map_controller = refis.controller('map__controller', function($scope, $http, list__service, heatmap__service, district__service, map__service, api__service) {
@@ -484,25 +609,6 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   $scope.prospectCount = 0;
 
   api__service.filterBroadcast();
-
-  // var makeCall = function(i, length, params) {
-  //   if (i < length) {
-  //     var responsePromise = $http.get("/api/filter/property" );
-  //     responsePromise.success(function(data, status, headers, config) {
-  //       //console.log(data);
-  //       config.cache = true;
-  //       list__service.prepForBroadcast(data);
-
-  //       ++i;
-  //       makeCall(i, length);
-  //     });
-  //     responsePromise.error(function(data, status, headers, config) {
-  //       alert("Could not fetch prospects, contact FortyTu");
-  //     });
-  //   }
-  // }
-
-  // makeCall(0, 3);
 
   // Create a new 'Map' instance
   $scope.map= map__service.google;
@@ -607,64 +713,17 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     createHeatMap($scope.map);
   }
   var createHeatMap = function(scopeMap){
-    var gradient2 = [
-      'rgba(0, 213, 195, 0)',
-      'rgba(0, 213, 195, 0.35)',
-      'rgba(0, 213, 195, 0.45)',
-      'rgba(0, 213, 195, 0.55)',
-      'rgba(243, 237, 123,0.1)',
-      'rgba(243, 237, 123,0.35)',
-      'rgba(243, 237, 123,0.45)',
-      'rgba(243, 237, 123,0.55)',
-      'rgba(238, 67, 99, 0.1)',
-      'rgba(238, 67, 99, 0.25)',
-      'rgba(238, 67, 99, 0.35)',
-      'rgba(238, 67, 99, 0.45)',
-      'rgba(238, 67, 99, 0.55)'
-    ];
-    var gradient = [
-      'rgba(0, 213, 195, 0)',
-      'rgba(0, 213, 195, 0.5)',
-      'rgba(55, 219, 173, 0.25)',
-      'rgba(55, 219, 173, 0.55)',
-
-      'rgba(97, 224, 159, 0.2)',
-      'rgba(97, 224, 159, 0.55)',
-
-      'rgba(143, 230, 145, 0.2)',
-      'rgba(143, 230, 145, 0.55)',
-
-      'rgba(195, 235, 130, 0.2)',
-      'rgba(195, 235, 130, 0.55)',
-
-      'rgba(243, 237, 123, 0.2)',
-      'rgba(243, 237, 123, 0.55)',
-
-      'rgba(240, 203, 112, 0.2)',
-      'rgba(240, 203, 112, 0.55)',
-
-      'rgba(238, 164, 105, 0.2)',
-      'rgba(238, 164, 105, 0.55)',
-
-      'rgba(236, 127, 100, 0.2)',
-      'rgba(236, 127, 100, 0.55)',
-
-      'rgba(235, 90, 96, 0.2)',
-      'rgba(235, 90, 96, 0.55)',
-
-      'rgba(238, 67, 99, 0.4)',
-      'rgba(238, 67, 99, 0.65)',
-      'rgba(238, 67, 99, 0.85)'
-    ];
+    console.log('creating heatmap');
 
     $scope.heatMapData = [];
     $.each(heatmap__service.locations, function(a, condoLocation) {
       $scope.heatMapData.push({ location: new google.maps.LatLng(condoLocation.latitude, condoLocation.longitude), weight: condoLocation.weight} );
     });
+    console.log("length: "+heatmap__service.locations.length);
     $scope.heatmap = new google.maps.visualization.HeatmapLayer({
       data: $scope.heatMapData,
       radius: 50,
-      gradient: gradient,
+      gradient: heatmap__service.gradient,
       dissipating: true,
       maxIntensity: 100,
       opacity: 0.5
@@ -696,7 +755,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   // heatmap Changed, do something!
   $scope.$on('heatmapBroadcast', function() {
     $scope.map = map__service.google;
-    refreshHeatMap();
+    //refreshHeatMap();
     console.log("Change in heatmap detected: ");
 
   });

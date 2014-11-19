@@ -6856,6 +6856,32 @@ table {
   -o-border-radius: 50%;
   border-radius: 50%;
 }
+/* line 29, ../sass/hotrefi/modules/_filter__controller.scss */
+.filter__controller .filter__aux {
+  text-align: right;
+  clear: both;
+  margin: 0 0px 10px 10px;
+}
+/* line 34, ../sass/hotrefi/modules/_filter__controller.scss */
+.filter__controller .filter__aux a {
+  display: inline-block;
+  padding: 10px 15px 12px 40px;
+  background: #00c0ff;
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  position: relative;
+  margin: 0 0 25px 0;
+}
+/* line 43, ../sass/hotrefi/modules/_filter__controller.scss */
+.filter__controller .filter__aux a:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 22px;
+  padding: 10px;
+  margin-right: 5px;
+}
 
 /* line 1, ../sass/hotrefi/modules/_filter__controller--dropdown.scss */
 .filter__controller--dropdown {
