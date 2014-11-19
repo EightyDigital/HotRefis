@@ -39,7 +39,7 @@ refis.factory('map__service', function($rootScope) {
   map.control_state = true;
   map.iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
   map.mapOptions = {
-    zoom: 12,
+    zoom: 13,
     draggable: map.control_state,
     panControl: map.control_state,
     zoomControl: map.control_state,
@@ -168,11 +168,12 @@ refis.factory('district__service', function($rootScope) {
 
 
 // Heatmap (based from main data)
-refis.factory('heatmap__service', function($rootScope) {
-  var heatmap = { name:"HeatmapLocations", locations: [], results: [] };
+refis.factory('heatmap__service', function($rootScope, map__service) {
+  var heatmap = { name:"HeatmapLocations", locations: [], results: []};
   heatmap.locations = [];
+  heatmap.results = [];
+
   var filterableLocations = [];
-  heatmap.results =[];
 
   heatmap.gradient2 = [
     'rgba(0, 213, 195, 0)',
@@ -223,32 +224,44 @@ refis.factory('heatmap__service', function($rootScope) {
     'rgba(238, 67, 99, 0.65)',
     'rgba(238, 67, 99, 0.85)'
   ];
+  heatmap.radius = 35;
+  // heatmap.dataArray = new google.maps.MVCArray(heatmap.locations);
 
+  // heatmap.heatmapObj = new google.maps.visualization.HeatmapLayer({
+  //   data: heatmap.dataArray,
+  //   radius: 50,
+  //   gradient: heatmap.gradient2,
+  //   dissipating: true,
+  //   maxIntensity: 100,
+  //   opacity: 0.5
+  // });
 
-  // heatmap.createHeatMap = function(heatMap, scopeMap){
-  //   console.log('creating heatmap');
+  heatmap.createHeatmap = function(){
+    console.log('creating heatmap');
 
-  //   $scope.heatMapData = [];
-  //   $.each(heatmap__service.locations, function(a, condoLocation) {
-  //     $scope.heatMapData.push({ location: new google.maps.LatLng(condoLocation.latitude, condoLocation.longitude), weight: condoLocation.weight} );
-  //   });
-  //   $scope.heatmap = new google.maps.visualization.HeatmapLayer({
-  //     data: $scope.heatMapData,
-  //     radius: 50,
-  //     gradient: heatmap__service.gradient,
-  //     dissipating: true,
-  //     maxIntensity: 100,
-  //     opacity: 0.5
-  //   });
-  //   $scope.heatmap.setMap(scopeMap);
-  // };
+    // heatmap.heatmapObj = new google.maps.visualization.HeatmapLayer({
+    //   data: heatmap.locations,
+    //   radius: 50,
+    //   gradient: heatmap.gradient,
+    //   dissipating: true,
+    //   maxIntensity: 100,
+    //   opacity: 0.5
+    // });
+
+    //heatmap.heatmapObj.data = heatmap.locations;
+
+    //heatmap.heatmapObj.setMap(map__service.google);
+  };
 
 
   heatmap.prepForBroadcast = function(value) {
-    heatmap.locations = [];
     heatmap.locations = value;
     filterableLocations = value;
-    console.log(value);
+
+    // for(var i = 0; i < heatmap.locations.length; i++ ){
+    //    heatmap.dataArray.push(heatmap.locations[i]);
+    // }
+    //console.log(value);
     //heatmap.locations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
     //filterableLocations.push({latitude: latitude_value, longitude: longitude_value, weight: score_value });
     this.broadcastItem();
@@ -287,12 +300,13 @@ refis.factory('api__service', function($rootScope, $http, list__service) {
     responsePromise.success(function(data, status, headers, config) {
       list__service.prepForBroadcast(data);
       $( ".filter__slider" ).slider({ disabled: false });
+      api.broadcastItem();
     });
     responsePromise.error(function(data, status, headers, config) {
       alert("Could not fetch prospects, contact FortyTu");
       $( ".filter__slider" ).slider({ disabled: false });
+      api.broadcastItem();
     });
-    this.broadcastItem();
   };
 
   api.broadcastItem = function() {
@@ -607,13 +621,21 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   $scope.heatMapData = [];
   $scope.geoLocations = [];
   $scope.prospectCount = 0;
-
+  $scope.pointArray = [];
   api__service.filterBroadcast();
 
+  $scope.heatmap = new google.maps.visualization.HeatmapLayer({
+    data: $scope.heatMapData,
+    radius: heatmap__service.radius,
+    gradient: heatmap__service.gradient,
+    dissipating: true,
+    maxIntensity: 50,
+    opacity: 0.5
+  });
+
   // Create a new 'Map' instance
-  $scope.map= map__service.google;
-  $scope.map.mapTypes.set('map_style', map__service.styledMap);
-  $scope.map.setMapTypeId('map_style');
+  map__service.google.mapTypes.set('map_style', map__service.styledMap);
+  map__service.google.setMapTypeId('map_style');
 
   // Create my marker bin!
   $scope.markers = [];
@@ -626,25 +648,25 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
   // get markers was here
 
-  $scope.mapCenter = $scope.map.getCenter();
+  $scope.mapCenter = map__service.google.getCenter();
 
 
 
   // Generic Constructor for markers
   var createMarker = function (location){
     var marker = new google.maps.Marker({
-        map: $scope.map,
+        map: map__service.google,
         position: new google.maps.LatLng(location.latitude, location.longitude),
         title: location.sector_code,
         icon: map__service.iconBase + 'placemark_circle.png',
         animation: google.maps.Animation.DROP
     });
     //console.log(location);
-    marker.content = '<div class="address"><div class="streetname"><span>'+location.name+'</span></div>&nbsp;<div class="score">Sector Score: <span>'+location.sector_score+'</span></div><div class="prospects">Prospects: <span>'+location.total_sector_prospects+'</span></div></div>';
+    marker.content = '<div class="address"><div class="streetname"><span>'+location.name+'</span></div>&nbsp;<div class="score">Potential: <span>'+location.sector_score+'%</span></div><div class="prospects">Prospects: <span>'+location.total_sector_prospects+'</span></div></div>';
 
     google.maps.event.addListener(marker, 'click', function(){
         $scope.infoWindow.setContent('<h2>Postal Sector: ' + marker.title + '</h2>'+ marker.content +'<br/><div class="addShort"><a href="/add">Add to ShortList</a></div>');
-        $scope.infoWindow.open($scope.map, marker);
+        $scope.infoWindow.open(map__service.google, marker);
     });
     //console.log(marker);
     //marker.setMap(map);
@@ -683,6 +705,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   var setMapData = function(){
     $scope.geolocations = list__service.maindata;
     $scope.heatdata = [];
+    clearMarkers();
     // All Sectors
     // console.log($scope.geolocations);
     $.each($scope.geolocations, function(a, sectorList) {
@@ -709,32 +732,30 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
   // remove heatmaps
   var refreshHeatMap = function(){
-    $scope.heatmap.setMap(null);
-    createHeatMap($scope.map);
-  }
-  var createHeatMap = function(scopeMap){
-    console.log('creating heatmap');
+    // heatmap__service.heatmapObj.setMap(null);
+
+    // heatmap__service.createHeatmap();
+    // console.log(heatmap__service.heatmapObj);
+
+    // heatmap__service.heatmapObj.setMap(map__service.google);
 
     $scope.heatMapData = [];
     $.each(heatmap__service.locations, function(a, condoLocation) {
       $scope.heatMapData.push({ location: new google.maps.LatLng(condoLocation.latitude, condoLocation.longitude), weight: condoLocation.weight} );
     });
-    console.log("length: "+heatmap__service.locations.length);
-    $scope.heatmap = new google.maps.visualization.HeatmapLayer({
-      data: $scope.heatMapData,
-      radius: 50,
-      gradient: heatmap__service.gradient,
-      dissipating: true,
-      maxIntensity: 100,
-      opacity: 0.5
-    });
-    $scope.heatmap.setMap(scopeMap);
+
+    //$scope.pointArray = [];
+    //$scope.pointArray = new google.maps.MVCArray($scope.heatMapData);
+
+    $scope.heatmap.data = $scope.heatMapData;
+    console.log($scope.heatmap.data);
+
+    $scope.heatmap.setMap(null);
+    $scope.heatmap.setMap(map__service.google);
   }
 
   // Create initial Heatmap
-  createHeatMap($scope.map);
-
-
+  //heatmap__service.createHeatmap($scope.map);
 
   google.maps.event.addDomListener(window, "resize", function() {
     // Here you set the center of the map based on your "mapCenter" variable
@@ -745,50 +766,36 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   /* BROADCAST! MAKE THE CHANGES! */
   // List Changed, do something!
   $scope.$on('maindataBroadcast', function() {
-    $scope.map = map__service.google;
-    console.dir("Change in main data: "+list__service.maindata);
+    //$scope.map = map__service.google;
+    console.log("Change in main data");
     //console.log("geoLocs: "+$scope.geolocations);
     setMapData();
     //refreshHeatMap();
   });
 
   // heatmap Changed, do something!
-  $scope.$on('heatmapBroadcast', function() {
-    $scope.map = map__service.google;
-    //refreshHeatMap();
-    console.log("Change in heatmap detected: ");
+  $scope.$on('apiBroadcast', function() {
+    //$scope.map = map__service.google;
+    refreshHeatMap();
+    console.log("Change in heatmap detected");
 
   });
   // google maps Changed, do something!
   $scope.$on('mapBroadcast', function() {
-    $scope.map = map__service.google;
-    $scope.map.mapTypes.set('map_style', map__service.styledMap);
-    $scope.map.setMapTypeId('map_style');
-    console.log("Change in map detected: ");
-
+    //$scope.map = map__service.google;
+    map__service.google.mapTypes.set('map_style', map__service.styledMap);
+    map__service.google.setMapTypeId('map_style');
+    console.log("Change in map detected");
   });
 
 });
 
 refis.directive('preventDefault', function() {
-    return function(scope, element, attrs) {
-        $(element).click(function(event) {
-            event.preventDefault();
-        });
-    }
+  return function(scope, element, attrs) {
+    $(element).click(function(event) {
+      event.preventDefault();
+    });
+  }
 })
 
 
-// refis.filter('myFilter', function () {
-//   return function (items, search) {
-//     var result = [];
-//     angular.forEach(items, function (value, key) {
-//       angular.forEach(value, function (value2, key2) {
-//         if (value2 === search) {
-//           result.push(value2);
-//         }
-//       })
-//     });
-//     return result;
-//   }
-// });
