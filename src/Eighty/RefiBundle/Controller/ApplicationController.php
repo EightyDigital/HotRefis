@@ -56,14 +56,14 @@ class ApplicationController extends Controller
 		}
 		
 		$total_rows = count($prospect_list);
-		$current_max_row = ($total_rows > 50) ? $this->get('request')->query->get('prospect_list', 1) * 50 : $total_rows;
-		$current_min_row = ($total_rows > 50) ? $current_max_row - 49 : 1;
+		$current_max_row = ($total_rows > 25) ? $this->get('request')->query->get('prospect_list', 1) * 25 : $total_rows;
+		$current_min_row = ($total_rows > 25) ? $current_max_row - 24 : 1;
 		
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
 			$prospect_list, 
 			$this->get('request')->query->get('prospect_list', 1), 
-			50,
+			25,
 			array('pageParameterName' => 'prospect_list')
 		);
 		
