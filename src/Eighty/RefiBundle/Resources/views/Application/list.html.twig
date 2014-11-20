@@ -21,13 +21,14 @@ font-weight: 400;
 color: #555;
 margin: 15px  0;
 text-transform: uppercase;">Prospect List</h2>
-      <table id="Prospect-Table" border="1" ng-app="tablemod">
+      {% for list in prospect_list %}
+	  <table id="Prospect-Table" border="1" ng-app="tablemod">
         <thead>
           <th colspan='12'>
-            <span class="thleft">Prospects for <span style="font-weight:400;">25 Amber Road</span></span>
-            <span class="thright">{{ current_min_row }}-{{ current_max_row }} of {{ total_rows }}</span>
+            <span class="thleft">Prospects for <span style="font-weight:400;">{{ list.condo }}</span></span>
+            <span class="thright">{{ list.current_min_row }}-{{ list.current_max_row }} of {{ list.total_rows }}</span>
           </th>
-          {{ knp_pagination_render(prospect_list) }}
+          {{ knp_pagination_render(list.pagination) }}
         </thead>
         <tbody>
 
@@ -42,21 +43,22 @@ text-transform: uppercase;">Prospect List</h2>
             <td style="background:#063141;" colspan='7' width="10%"><a href="#"  style="color:#fff; text-transform:uppercase; font-size:14px;">Notes</a></td>
           </tr>
 
-		{% for list in prospect_list %}
+		{% for prospect in list.pagination %}
 		  <tr>
-            <td><input type="checkbox" disabled="disabled" name="prospect_engaged[{{ list.prospectId }}]" value="{{ list.engaged }}"></td>
-            <td><a href="/prospect/">{{ list.index }}</a></td>
-            <td><a href="/prospect/">{{ list.profession }}</a></td>
-            <td><a href="/prospect/">{{ list.income_range }}</a></td>
+            <td><input type="checkbox" disabled="disabled" name="prospect_engaged[{{ prospect.prospectId }}]" value="{{ prospect.engaged }}"></td>
+            <td><a href="/prospect/">{{ prospect.index }}</a></td>
+            <td><a href="/prospect/">{{ prospect.profession }}</a></td>
+            <td><a href="/prospect/">{{ prospect.income_range }}</a></td>
             <td><a href="/prospect/"><hr class="M"></a></td>
-            <td><a href="/prospect/">{{ list.property_owned }}</a></td>
-            <td><a href="/prospect/">{% if list.status == 1 %}Contacted{% else %}Not Contacted{% endif %}</a></td>
-            <td colspan='7' width="30%"><a href="#">{{ list.note }}</a></td>
+            <td><a href="/prospect/">{{ prospect.property_owned }}</a></td>
+            <td><a href="/prospect/">{% if prospect.status == 1 %}Contacted{% else %}Not Contacted{% endif %}</a></td>
+            <td colspan='7' width="30%"><a href="#">{{ prospect.note }}</a></td>
           </tr>
 		{% endfor %}
 		
         </tbody>
       </table>
+	  {% endfor %}
       <a class="ionicons ion-navigate blast--prospect" href="/calculator" style="">Blast Prospects</a>
 	  
     </div>

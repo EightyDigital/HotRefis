@@ -25,6 +25,13 @@ class Postalregion
      * @ORM\Column(name="region_code", type="string", length=4, nullable=true)
      */
     private $regionCode;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
+     */
+    private $name;
 
     /**
      * @var float
@@ -109,6 +116,29 @@ class Postalregion
     public function getRegionCode()
     {
         return $this->regionCode;
+    }
+	
+	/**
+     * Set name
+     *
+     * @param string $name
+     * @return Postalregion
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**

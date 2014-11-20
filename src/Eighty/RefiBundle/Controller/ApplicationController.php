@@ -39,42 +39,42 @@ class ApplicationController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$usr = $this->get('security.context')->getToken()->getUser();
 		$id = $usr->getId();
+		$paginator = $this->get('knp_paginator');
+			
 		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
 		
-		$prospect_list = $em->getRepository('RefiBundle:Prospectlist')->getProspectList($id);
-		foreach($prospect_list as $key => $val) {
-			$property_owned = $em->getRepository('RefiBundle:Transactions')->fetchAssetsByProspectId($val['prospectId']);
-			$prospect_list[$key]['property_owned'] = (isset($property_owned[0]['count_tid']) ? $property_owned[0]['count_tid'] : 0);
+		$condo = $em->getRepository('RefiBundle:Prospectlist')->getUrakeyByClient($id);
+		$prospect_list = array();
+		foreach($condo as $ckey => $val) {
+			$prospect_list[$ckey]['condo'] = $val['urakey'];
+			$prospect_list[$ckey]['prospects'] = $em->getRepository('RefiBundle:Prospectlist')->getProspectList($id, $val['urakey']);
+			foreach($prospect_list[$ckey]['prospects'] as $key => $pval) {
+				$quarter = $pval['derivedIncome'] * 0.25;
+				$min = round(($pval['derivedIncome'] - $quarter), 0);
+				$max = round(($pval['derivedIncome'] + $quarter), 0);
+				$prospect_list[$ckey]['prospects'][$key]['income_range'] = "$" . number_format(round($min, (0 - (strlen((string) $min) - 1)))) . " - " . "$" . number_format(round($max, (0 - (strlen((string) $max) - 1))));
+				
+				$prospect_list[$ckey]['prospects'][$key]['index'] = $key + 1;
+			}
 			
-			$quarter = $val['derivedIncome'] * 0.25;
-			$min = round(($val['derivedIncome'] - $quarter), 0);
-			$max = round(($val['derivedIncome'] + $quarter), 0);
-			$prospect_list[$key]['income_range'] = "$" . number_format(round($min, (0 - (strlen((string) $min) - 1)))) . " - " . "$" . number_format(round($max, (0 - (strlen((string) $max) - 1))));
+			$prospect_list[$ckey]['total_rows'] = $total_rows = count($prospect_list[$ckey]['prospects']);
+			$prospect_list[$ckey]['current_max_row'] = $current_max_row = ($total_rows > 10) ? $this->get('request')->query->get('prospect_list_'.$ckey, 1) * 10 : $total_rows;
+			$prospect_list[$ckey]['current_min_row'] = $current_min_row = ($total_rows > 10) ? $current_max_row - 9 : 1;
 			
-			$prospect_list[$key]['index'] = $key + 1;
+			$prospect_list[$ckey]['pagination'] = $pagination = $paginator->paginate(
+				$prospect_list[$ckey]['prospects'], 
+				$this->get('request')->query->get('prospect_list_'.$ckey, 1), 
+				10,
+				array('pageParameterName' => 'prospect_list_'.$ckey)
+			);
 			
 		}
-		
-		$total_rows = count($prospect_list);
-		$current_max_row = ($total_rows > 25) ? $this->get('request')->query->get('prospect_list', 1) * 25 : $total_rows;
-		$current_min_row = ($total_rows > 25) ? $current_max_row - 24 : 1;
-		
-		$paginator = $this->get('knp_paginator');
-		$pagination = $paginator->paginate(
-			$prospect_list, 
-			$this->get('request')->query->get('prospect_list', 1), 
-			25,
-			array('pageParameterName' => 'prospect_list')
-		);
 		
 		return $this->render('RefiBundle:Application:list.html.twig',
 			array(
 				'name' => $usr->getFullname(),
 				'credits' => $credits,
-				'prospect_list' => $pagination,
-				'total_rows' => $total_rows,
-				'current_max_row' => $current_max_row,
-				'current_min_row' => $current_min_row,
+				'prospect_list' => $prospect_list,
 			)
 		);
     }
@@ -184,7 +184,7 @@ class ApplicationController extends Controller
 			else
 				$temp[$val['sector']]['score'] = (int) (($score / 8) * 100);
 						
-			$sector[$val['sector']]['name'] = "Temporary Sector Name";
+			$sector[$val['sector']]['name'] = !empty($val['sector_name']) ? $val['sector_name'] : "Temporary Sector Name";
 			$sector[$val['sector']]['sector_code'] = $val['sector'];
 			$sector[$val['sector']]['longitude'] = $val['pr_long'];
 			$sector[$val['sector']]['latitude'] = $val['pr_lat'];

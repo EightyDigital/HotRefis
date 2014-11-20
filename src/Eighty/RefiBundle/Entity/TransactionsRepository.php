@@ -24,6 +24,7 @@ class TransactionsRepository extends EntityRepository
 					  t.sector,
 					  pr.longitude AS pr_long,
 					  pr.latitude AS pr_lat,
+					  pr.name AS sector_name,
 					  AVG(t.price) AS average_price,
 					  AVG(t.newprice) AS average_newprice,
 					  AVG(p.age) AS average_prospect_age,

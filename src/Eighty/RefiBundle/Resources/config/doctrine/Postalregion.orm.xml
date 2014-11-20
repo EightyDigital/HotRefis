@@ -6,6 +6,7 @@
     </id>
     <field name="regionType" type="string" column="region_type" length="10" nullable="true"/>
     <field name="regionCode" type="string" column="region_code" length="4" nullable="true"/>
+	<field name="name" type="string" column="name" length="4" nullable="true"/>
     <field name="longitude" type="float" column="longitude" precision="10" scale="0" nullable="true"/>
     <field name="latitude" type="float" column="latitude" precision="10" scale="0" nullable="true"/>
     <field name="minTemp" type="float" column="min_temp" precision="10" scale="0" nullable="true"/>

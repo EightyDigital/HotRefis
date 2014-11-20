@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProspectlistRepository extends EntityRepository
 {
-	public function getProspectList($id)
+	public function getProspectList($id, $key)
 	{
 		return $this->getEntityManager()
 			->createQuery(
@@ -21,12 +21,35 @@ class ProspectlistRepository extends EntityRepository
 						p.profession,
 						p.derivedIncome,
 						pl.score,
+						COUNT(plo.transactionId) AS property_owned,
 						pl.status,
 						pl.note
 					FROM RefiBundle:Prospectlist pl
 					JOIN RefiBundle:Prospect p
 						WITH pl.prospectId = p.id
+					JOIN RefiBundle:Prospectloan plo
+						WITH pl.prospectId = plo.prospectId
 					JOIN RefiBundle:Clientlist cl
+						WITH cl.id = pl.clientlistId
+					WHERE cl.clientId = :uId
+					AND pl.urakey = :uKey
+					GROUP BY pl.prospectId
+				'
+			)
+			->setParameter('uId', $id)
+			->setParameter('uKey', $key)
+			->getArrayResult();
+	}
+	
+	public function getUrakeyByClient($id)
+	{
+		return $this->getEntityManager()
+			->createQuery(
+				'SELECT DISTINCT 
+					  (pl.urakey) AS urakey
+					FROM
+					  RefiBundle:Prospectlist pl 
+					  JOIN RefiBundle:Clientlist cl 
 						WITH cl.id = pl.clientlistId
 					WHERE cl.clientId = :uId
 				'
