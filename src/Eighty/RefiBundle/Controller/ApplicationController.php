@@ -18,7 +18,6 @@ class ApplicationController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$usr = $this->get('security.context')->getToken()->getUser();
 		$id = $usr->getId();
-		
 		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
 		
         return $this->render('RefiBundle:Application:index.html.twig',
@@ -29,20 +28,14 @@ class ApplicationController extends Controller
 		);
     }
 
-    public function addAction()
-    {
-        return $this->render('RefiBundle:Application:add.html.twig');
-        //, array('name' => $name)
-    }
     public function listAction()
     {
 		$em = $this->getDoctrine()->getManager();
 		$usr = $this->get('security.context')->getToken()->getUser();
 		$id = $usr->getId();
-		$paginator = $this->get('knp_paginator');
-			
 		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
 		
+		$paginator = $this->get('knp_paginator');
 		$condo = $em->getRepository('RefiBundle:Prospectlist')->getUrakeyByClient($id);
 		$prospect_list = array();
 		foreach($condo as $ckey => $val) {
@@ -78,6 +71,27 @@ class ApplicationController extends Controller
 			)
 		);
     }
+	
+	public function prospectAction()
+    {
+		$em = $this->getDoctrine()->getManager();
+		$usr = $this->get('security.context')->getToken()->getUser();
+		$id = $usr->getId();
+		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
+				
+        return $this->render('RefiBundle:Application:prospect.html.twig',
+			array(
+				'name' => $usr->getFullname(),
+				'credits' => $credits,
+			)
+		);
+    }
+	
+	public function addAction()
+    {
+        return $this->render('RefiBundle:Application:add.html.twig');
+        //, array('name' => $name)
+    }
 
     public function calculatorAction()
     {
@@ -90,12 +104,7 @@ class ApplicationController extends Controller
         return $this->render('RefiBundle:Application:report.html.twig');
         //, array('name' => $name)
     }
-
-    public function prospectAction()
-    {
-        return $this->render('RefiBundle:Application:prospect.html.twig');
-        //, array('name' => $name)
-    }
+   
 	
 	/*-------------------------------------------------/
 	|	route: <domain>/api/filter/property
