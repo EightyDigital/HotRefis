@@ -25,12 +25,12 @@ class TransactionsRepository extends EntityRepository
 					  pr.longitude AS pr_long,
 					  pr.latitude AS pr_lat,
 					  pr.name AS sector_name,
-					  AVG(t.price) AS average_price,
-					  AVG(t.newprice) AS average_newprice,
-					  AVG(p.age) AS average_prospect_age,
-					  AVG(p.derivedIncome) AS average_income,
-					  AVG(pl.loanAmount) AS average_loan,
-					  AVG(pl.ltv) AS average_ltv,
+					  round(AVG(t.price), 2) AS average_price,
+					  round(AVG(t.newprice), 2) AS average_newprice,
+					  round(AVG(p.age)) AS average_prospect_age,
+					  round(AVG(p.derivedIncome), 2) AS average_income,
+					  round(AVG(pl.loanAmount), 2) AS average_loan,
+					  round(AVG(pl.ltv)) AS average_ltv,
 					  AVG(
 						timestampdiff(YEAR, pl.loanDate, CURRENT_DATE())
 					  ) AS average_loan_age

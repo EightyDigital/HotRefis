@@ -72,6 +72,7 @@ doctrine:
                 strtodate: DoctrineExtensions\Query\Mysql\StrToDate
                 dateformat: DoctrineExtensions\Query\Mysql\DateFormat
                 timestampdiff: DoctrineExtensions\Query\Mysql\TimestampDiff
+                round: DoctrineExtensions\Query\Mysql\Round
 
 # Swiftmailer Configuration
 swiftmailer:
