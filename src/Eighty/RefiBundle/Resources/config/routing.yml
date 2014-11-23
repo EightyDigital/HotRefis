@@ -47,6 +47,10 @@ API_filter_property:
     pattern: /api/filter/property
     defaults: { _controller: RefiBundle:Application:filterProperty }
 
+API_filter_prospect:
+    pattern: /api/filter/prospect
+    defaults: { _controller: RefiBundle:Application:filterProspect }
+
 API_shortlist_checkout:
     pattern: /api/shortlist/checkout
     defaults: { _controller: RefiBundle:Application:shortlistCheckout }

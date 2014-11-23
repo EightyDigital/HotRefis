@@ -104,10 +104,33 @@ class ApplicationController extends Controller
         return $this->render('RefiBundle:Application:report.html.twig');
         //, array('name' => $name)
     }
-   
 	
 	/*-------------------------------------------------/
 	|	route: <domain>/api/filter/property
+	|	postdata: none;
+	--------------------------------------------------*/
+	public function filterPropertyAction(Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectors();
+		
+		$sector = array();
+		foreach($property_data as $val) {
+			$sector[$val['sector']]['name'] = !empty($val['sector_name']) ? $val['sector_name'] : "Temporary Sector Name";
+			$sector[$val['sector']]['sector_code'] = $val['sector'];
+			$sector[$val['sector']]['longitude'] = $val['pr_long'];
+			$sector[$val['sector']]['latitude'] = $val['pr_lat'];
+			$sector[$val['sector']]['total_sector_prospects'] = $val['num_prospects'];
+		}
+		
+		$response = new Response(json_encode($sector));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+	}   
+	
+	/*-------------------------------------------------/
+	|	route: <domain>/api/filter/prospect
 	|	postdata:
 	|		- property_value_min; property_value_max;
 	|		- ltv_min; ltv_max;
@@ -118,9 +141,11 @@ class ApplicationController extends Controller
 	|		- assets_min; assets_max;
 	|		- debt_min; debt_max;
 	--------------------------------------------------*/
-    public function filterPropertyAction(Request $request)
+    public function filterProspectAction(Request $request)
     {
 		$em = $this->getDoctrine()->getManager();
+		$usr = $this->get('security.context')->getToken()->getUser();
+		$id = $usr->getId();
         $postdata = $request->query->all();
         
         if (!isset($postdata['property_value_min'])) $postdata['property_value_min'] = 0;
@@ -148,9 +173,14 @@ class ApplicationController extends Controller
         if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 5000000;
 		
 		if (!isset($postdata['rating'])) $postdata['rating'] = 0;
-		        
-		$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectors();
+		if (!isset($postdata['sector'])) $postdata['sector'] = 0;
 		
+		if ($postdata['sector'] == 0) {
+			$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspectsBySector(0, $id);
+		} else {
+			$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspectsBySector(1, $postdata['sector']);
+		}
+				
 		$sector = array();
 		foreach($property_data as $val) {
 			$score = 0;
@@ -167,24 +197,10 @@ class ApplicationController extends Controller
 			if($val['average_income'] >= $postdata['income_min'] && $val['average_income'] <= $postdata['income_max'])
 				$score++;
 			
-			if(isset($temp[$val['sector']]['num_prospects'])) {
-				$temp[$val['sector']]['num_prospects'] += $val['num_prospects'];
-				$temp[$val['sector']]['property_count']++;
-			} else {
-				$temp[$val['sector']]['num_prospects'] = $val['num_prospects'];
-				$temp[$val['sector']]['property_count'] = 1;
-			}
-			
-			if(isset($temp[$val['sector']]['count']))
-				$temp[$val['sector']]['count']++;
-			else
-				$temp[$val['sector']]['count'] = 1;
-				
-			$temp[$val['sector']]['avg_properties_owned'] = ($temp[$val['sector']]['count'] / $temp[$val['sector']]['num_prospects']) * 100;
-			if($temp[$val['sector']]['avg_properties_owned'] >= $postdata['property_owned_min'] && $temp[$val['sector']]['avg_properties_owned'] <= $postdata['property_owned_max'])
+			if($val['average_assets_owned'] >= $postdata['property_owned_min'] && $val['average_assets_owned'] <= $postdata['property_owned_max'])
 				$score++;
-			if(($temp[$val['sector']]['avg_properties_owned'] * $val['average_newprice']) >= $postdata['assets_min'] && ($temp[$val['sector']]['avg_properties_owned'] * $val['average_newprice']) <= $postdata['assets_max'])
-				$score++;
+			if(($val['average_assets_owned'] * $val['average_newprice']) >= $postdata['assets_min'] && ($val['average_assets_owned'] * $val['average_newprice']) <= $postdata['assets_max'])
+				$score++;	
 			
 			if($val['average_prospect_age'] >= $postdata['age_min'] && $val['average_prospect_age'] <= $postdata['age_max'])
 				$score++;
@@ -194,41 +210,55 @@ class ApplicationController extends Controller
 				$score++;
 			
 			$temp_score = (int) (($score / 8) * 100);
-			$ctr = 0;
 			
-			if(isset($temp[$val['sector']]['in_rating'])) {
+			if(isset($temp[$val['urakey']]['num_prospects']))
+				$temp[$val['urakey']]['num_prospects'] += 1;
+			else
+				$temp[$val['urakey']]['num_prospects'] = 1;
+				
+			if(isset($temp[$val['urakey']]['rating_count'])) {
 				if($temp_score >= $postdata['rating']) {
-					$temp[$val['sector']]['in_rating']++;
-					$temp[$val['sector']]['in_rating_prospects'] += $val['num_prospects'];
-					$ctr = 1;
+					$temp[$val['urakey']]['rating_count']++;
 				}
 			} else {
-				$temp[$val['sector']]['in_rating'] = 0;
-				$temp[$val['sector']]['in_rating_prospects'] = 0;
 				if($temp_score >= $postdata['rating']) {
-					$temp[$val['sector']]['in_rating'] = 1;
-					$temp[$val['sector']]['in_rating_prospects'] = $val['num_prospects'];
-					$ctr = 1;
+					$temp[$val['urakey']]['rating_count'] = 1;
+				} else {
+					$temp[$val['urakey']]['rating_count'] = 0;
 				}
 			}
 			
-			$temp_sector_score = (int) (($temp[$val['sector']]['in_rating'] / $temp[$val['sector']]['property_count']) * 100);
+			if(isset($temp[$val['sector']])) {
+				if($temp_score >= $postdata['rating']) {
+					$temp[$val['sector']]++;
+				}
+			} else {
+				if($temp_score >= $postdata['rating']) {
+					$temp[$val['sector']] = 1;
+				} else {
+					$temp[$val['sector']] = 0;
+				}
+			}
 			
+			$temp_property_score = round(($temp[$val['urakey']]['rating_count'] / $temp[$val['urakey']]['num_prospects']) * 100, 0);
+			
+			if(isset($temp_sector_score[$val['sector']])) {
+				$temp_sector_score[$val['sector']] += $temp_property_score;
+			} else {
+				$temp_sector_score[$val['sector']] = $temp_property_score;
+			}
+									
 			$sector[$val['sector']]['name'] = !empty($val['sector_name']) ? $val['sector_name'] : "Temporary Sector Name";
 			$sector[$val['sector']]['sector_code'] = $val['sector'];
 			$sector[$val['sector']]['longitude'] = $val['pr_long'];
 			$sector[$val['sector']]['latitude'] = $val['pr_lat'];
-			$sector[$val['sector']]['sector_score'] = round($temp_sector_score);
-			$sector[$val['sector']]['total_sector_prospects'] = $temp[$val['sector']]['in_rating_prospects'];
-			
-			$sector[$val['sector']]['3_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 3, 0);
-			$sector[$val['sector']]['6_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 2.5, 0);
-			$sector[$val['sector']]['12_months'] = round($sector[$val['sector']]['total_sector_prospects'] * 2, 0);
+			$sector[$val['sector']]['sector_score'] = round($temp_sector_score[$val['sector']] / $temp[$val['sector']], 0);
+			$sector[$val['sector']]['total_sector_prospects'] = $temp[$val['sector']];
 			
 			$sector[$val['sector']]['properties'][$val['urakey']]['longitude'] = $val['longitude'];
 			$sector[$val['sector']]['properties'][$val['urakey']]['latitude'] = $val['latitude'];
-			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = (int) (($score / 8) * 100);
-			$sector[$val['sector']]['properties'][$val['urakey']]['total_property_prospects'] = $val['num_prospects'];
+			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = $temp_property_score;
+			$sector[$val['sector']]['properties'][$val['urakey']]['total_property_prospects'] = $temp[$val['urakey']]['rating_count'];
 		}
 		
 		$response = new Response(json_encode($sector));
