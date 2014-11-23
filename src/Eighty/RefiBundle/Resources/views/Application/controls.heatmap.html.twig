@@ -1,9 +1,10 @@
 <div class="pg__width">
   <div class="heatmap__control">
     <div class="heatmap__control--legend">
-      <h2>Heatmap</h2>
-      <p>Prospect Rating</p>
-      <ul class="rating--colors">
+      <h2>Certainty</h2>
+      <p class="sub__heading">Matching Prospects</p>
+      <p class="value__wrap">Greater than <span class="value"></span></p>
+{#       <ul class="rating--colors">
         <li>
           <span class="rating rating--poor"></span><span class="label">0-40</span>
         </li>
@@ -13,11 +14,13 @@
         <li>
           <span class="rating rating--good"></span><span class="label">60-100</span>
         </li>
-      </ul>
+      </ul> #}
     </div>
     <div class="heatmap__control--slider">
       <div ng-controller="heatmap__slider" class="heatmap__slider--wrap">
+        <a ng-click="sliderDown()" class="control down"></a>
         <div class="heatmap__slider"></div>
+        <a ng-click="sliderUp()" class="control up"></a>
       </div>
     </div>
     <div class="heatmap__control--results">
@@ -27,6 +30,9 @@
       <div class="value--wrap">
         <span class="value"></span>
       </div>
+    </div>
+    <div class="heatmap__control--refresh">
+        <a class="ionicons ion-ios7-loop-strong" ng-click="applyFilters()" href="#">Refresh</a>
     </div>
   </div>
 </div>

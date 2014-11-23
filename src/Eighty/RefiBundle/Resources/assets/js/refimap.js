@@ -346,10 +346,10 @@ refis.factory('api__service', function($rootScope, $http, list__service) {
 
 var heatmap_slider = refis.controller('heatmap__slider', function($scope, heatmap__service) {
   $scope.slider = $( ".heatmap__slider" ).slider({
-    range: "max",
+    range: "min",
     min: 0,
     max: 100,
-    step: 5,
+    step: 2,
     value: 0,
     slide: function( event, ui ) {
       // var tempVal = ui.value*500;
@@ -358,6 +358,7 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, heatma
       // if(ui.value == 0){
       //   $('.heatmap__control--results .value').text( accounting.formatNumber(100000) );
       // }
+      console.log(ui.value);
     },
     // State change we must update step value - more of an inbetween
     change: function( event, ui ) {
@@ -367,6 +368,28 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, heatma
       //$('.heatmap__control--results .value').text( accounting.formatNumber(100000) );
     }
   });
+  $scope.sliderDown = function(){
+    // Stop default behaviour and only use the following:
+
+    // Grab the object first and set our values
+    var s = $scope.slider,
+      val = s.slider("option","value"), step = s.slider("option", "step");
+
+    // Increase the step value
+    s.slider("value", val-step);
+
+  }
+  $scope.sliderUp = function(){
+    // Grab the object first and set our values
+    var s = $scope.slider,
+      val = s.slider("option","value"), step = s.slider("option", "step");
+
+    // Increase the step value
+    s.slider("value", val+step);
+
+  }
+
+
 });
 
 
