@@ -294,10 +294,10 @@ class ApplicationController extends Controller
 		$message = 'Nothing to checkout.';
 		
 		if (!isset($postdata['sectors'])) $postdata['sectors'] = 0;
-		if (!isset($postdata['validity'])) $postdata['validity'] = 3;
-		
+				
 		if($postdata['sectors'] !== 0) {
 			$sectors = json_decode($postdata['sectors']);
+			
 			$sector_list = $em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($userId);
 			$temp_sectors = array();
 			
@@ -316,12 +316,12 @@ class ApplicationController extends Controller
 					if(($sector_count + $ctr) == 3) {
 						break;
 					} else {
-						if(!in_array($sector, $temp_sectors)) {
+						if(!in_array($sector->sector, $temp_sectors)) {
 							$sectorlist = new Sectorlist();
 							$sectorlist->setClientId($userId);
-							$sectorlist->setSectorCode($sector);
+							$sectorlist->setSectorCode($sector->sector);
 							$sectorlist->setDateadded(date('Y-m-d'));
-							$sectorlist->setValidity($postdata['validity']);
+							$sectorlist->setValidity($sector->validity);
 							$em->persist($sectorlist);
 							$em->flush();
 							$em->clear();
@@ -343,78 +343,5 @@ class ApplicationController extends Controller
 
         return $response;
 	}
-	
-	/*
-	public function shortlistCheckoutAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $postdata = $request->request->all();
 		
-		$user = $this->get('security.context')->getToken()->getUser();
-		$userId = $user->getId();
-		
-		$status = 'fail';
-		$message = 'Nothing to checkout.';
-		
-		if(isset($postdata['prospectlist'])) {
-			$list_data = json_decode(stripslashes($_POST['prospectlist']));
-			$clientlist = $em->getRepository('RefiBundle:Clientlist')->findOneBy(array('clientId' => $userId));
-			$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($userId);
-			
-			$need_credits = count($list_data) * 3; //temporary
-			$batchSize = 20;
-			
-			if(($credits - $need_credits) >= 0) {
-				foreach($list_data as $key => $val) {
-					foreach($val->properties as $pkey => $pval) {
-						$prospect_ids = $em->getRepository('RefiBundle:Prospect')->fetchProspectIdsByUrakeyAndSector($pkey, $val->sector_code);
-						$i = 1;
-						foreach($prospect_ids as $prospect_val) {
-							$prospectlist = new Prospectlist();
-							$prospectlist->setClientlistId($clientlist->getId());
-							$prospectlist->setProspectId($prospect_val['prospectId']);
-							$prospectlist->setUrakey($pkey);
-							$prospectlist->setScore($pval->property_score);
-							$prospectlist->setDateAssigned(new \DateTime('today'));
-							$prospectlist->setEngaged(0);
-							$prospectlist->setStatus(0);
-							$em->persist($prospectlist);
-							
-							if (($i % $batchSize) == 0) {
-								$em->flush();
-								$em->clear();
-							}
-							
-							$i++;
-						}
-					}
-					
-					// $creditused = new Creditused();
-					// $creditused->setClientId($userId);
-					// $creditused->setDate(new \DateTime('today'));
-					// $creditused->setCreditUsed(3);
-					// $em->persist($creditused);
-					// $em->flush();
-				}
-				
-				$em->flush();
-				$em->clear();
-								
-				$status = 'ok';
-				$message = 'Checked out!';
-			} else {
-				$status = 'fail';
-				$message = 'Not enough credits!';
-			}				
-		}
-		
-		$msg = array('status' => $status, 'message' => $message);
-		
-		$response = new Response(json_encode($msg));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
-    }
-	*/
-	
 }
