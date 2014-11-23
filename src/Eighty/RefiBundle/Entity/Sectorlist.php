@@ -15,7 +15,7 @@ class Sectorlist
 	/**
      * @var integer
      *
-     * @ORM\Column(name="client_id", type="tinyint")
+     * @ORM\Column(name="client_id", type="bigint")
      */
     private $clientId;
 	
@@ -36,7 +36,7 @@ class Sectorlist
 	/**
      * @var integer
      *
-     * @ORM\Column(name="validity", type="tinyint")
+     * @ORM\Column(name="validity", type="bigint")
      */
     private $validity;
 

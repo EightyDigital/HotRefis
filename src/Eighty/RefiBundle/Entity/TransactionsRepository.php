@@ -88,7 +88,18 @@ class TransactionsRepository extends EntityRepository
 			->getArrayResult();
 	}
 	
-	
+	public function fetchSectorsInListByClientId($id)
+	{
+		return $this->getEntityManager()
+			->createQuery(
+				'SELECT sl.sectorCode
+					FROM RefiBundle:Sectorlist sl
+					WHERE sl.clientId = :cId
+				'
+			)
+			->setParameter('cId', $id)
+			->getArrayResult();
+	}
 	
 	public function fetchProspectByTransactionsId($id)
 	{

@@ -2,7 +2,7 @@
 
 namespace Eighty\RefiBundle\Controller;
 
-use Eighty\RefiBundle\Entity\Prospectlist;
+use Eighty\RefiBundle\Entity\Sectorlist;
 use Eighty\RefiBundle\Entity\Creditused;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -282,18 +282,67 @@ class ApplicationController extends Controller
 	|	postdata:
 	|		- prospectlist : json_encode of filter API
 	--------------------------------------------------*/
-    // public function shortlistCheckoutAction(Request $request)
-    // {
-		// $em = $this->getDoctrine()->getManager();
-        // $postdata = $request->request->all();
+    public function shortlistCheckoutAction(Request $request)
+    {
+		$em = $this->getDoctrine()->getManager();
+        $postdata = $request->request->all();
 		
-		// $user = $this->get('security.context')->getToken()->getUser();
-		// $userId = $user->getId();
+		$user = $this->get('security.context')->getToken()->getUser();
+		$userId = $user->getId();
 		
-		// if (!isset($postdata['sector'])) $postdata['sector'] = 0;
+		$status = 'fail';
+		$message = 'Nothing to checkout.';
 		
+		if (!isset($postdata['sectors'])) $postdata['sectors'] = 0;
+		if (!isset($postdata['validity'])) $postdata['validity'] = 3;
 		
-	// }
+		if($postdata['sectors'] !== 0) {
+			$sectors = json_decode($postdata['sectors']);
+			$sector_list = $em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($userId);
+			$temp_sectors = array();
+			
+			foreach($sector_list as $val) {
+				$temp_sectors[] = $val['sectorCode'];
+			}
+			
+			$sector_count = count($temp_sectors);
+			$ctr = 0;
+			
+			if($sector_count >= 3) {
+				$status = 'fail';
+				$message = 'You already have 3 sectors in your list.';
+			} else {
+				foreach($sectors as $key => $sector) {
+					if(($sector_count + $ctr) == 3) {
+						break;
+					} else {
+						if(!in_array($sector, $temp_sectors)) {
+							$sectorlist = new Sectorlist();
+							$sectorlist->setClientId($userId);
+							$sectorlist->setSectorCode($sector);
+							$sectorlist->setDateadded(date('Y-m-d'));
+							$sectorlist->setValidity($postdata['validity']);
+							$em->persist($sectorlist);
+							$em->flush();
+							$em->clear();
+							
+							$ctr++;
+						}
+					}
+				}
+				
+				$status = 'ok';
+				$message = 'Checked out!';
+			}
+		}
+		
+		$msg = array('status' => $status, 'message' => $message);
+		
+		$response = new Response(json_encode($msg));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+	}
 	
 	/*
 	public function shortlistCheckoutAction(Request $request)
