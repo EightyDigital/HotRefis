@@ -676,34 +676,34 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   $scope.pointArray = [];
   api__service.filterBroadcast();
 
-  // $scope.heatmap = new google.maps.visualization.HeatmapLayer({
-  //   data: $scope.heatMapData,
-  //   radius: heatmap__service.radius,
-  //   gradient: heatmap__service.gradient3,
-  //   dissipating: true,
-  //   maxIntensity: 100,
-  //   opacity: 0.5
-  // });
+  $scope.heatmap = new google.maps.visualization.HeatmapLayer({
+    data: $scope.heatMapData,
+    radius: heatmap__service.radius,
+    gradient: heatmap__service.gradient3,
+    dissipating: true,
+    maxIntensity: 100,
+    opacity: 0.5
+  });
   var testData = {}
 
-  var heatmapOverlay = new HeatmapOverlay(map__service.google, {
-      // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-      "radius": 20,
-      "maxOpacity": 1,
-      // scales the radius based on map zoom
-      "scaleRadius": true,
-      // if set to false the heatmap uses the global maximum for colorization
-      // if activated: uses the data maximum within the current map boundaries
-      //   (there will always be a red spot with useLocalExtremas true)
-      "useLocalExtrema": true,
-      // which field name in your data represents the latitude - default "lat"
-      latField: 'lat',
-      // which field name in your data represents the longitude - default "lng"
-      lngField: 'lng',
-      // which field name in your data represents the data value - default "value"
-      valueField: 'count'
-    }
-  );
+  // var heatmapOverlay = new HeatmapOverlay(map__service.google, {
+  //     // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+  //     "radius": 20,
+  //     "maxOpacity": 1,
+  //     // scales the radius based on map zoom
+  //     "scaleRadius": true,
+  //     // if set to false the heatmap uses the global maximum for colorization
+  //     // if activated: uses the data maximum within the current map boundaries
+  //     //   (there will always be a red spot with useLocalExtremas true)
+  //     "useLocalExtrema": true,
+  //     // which field name in your data represents the latitude - default "lat"
+  //     latField: 'lat',
+  //     // which field name in your data represents the longitude - default "lng"
+  //     lngField: 'lng',
+  //     // which field name in your data represents the data value - default "value"
+  //     valueField: 'count'
+  //   }
+  // );
 
   // Create a new 'Map' instance
   map__service.google.mapTypes.set('map_style', map__service.styledMap);
@@ -733,7 +733,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
         animation: google.maps.Animation.DROP
     });
     //console.log(location);
-    marker.content = '<div class="address"><div class="streetname"><span>'+location.name+'</span></div>&nbsp;<div class="score">Potential: <span>'+location.sector_score+'%</span></div><div class="prospects">Prospects: <span>'+location.total_sector_prospects+'</span></div></div>';
+    marker.content = '<div class="address"><div class="streetname"><span>'+location.name+'</span></div>&nbsp;</div><div class="prospects">Prospects: <span>'+location.total_sector_prospects+'</span></div></div>';
 
     google.maps.event.addListener(marker, 'click', function(){
         $scope.infoWindow.setContent('<h2>Postal Sector: ' + marker.title + '</h2>'+ marker.content +'<br/><div class="addShort"><a href="/add">Add to ShortList</a></div>');
@@ -742,7 +742,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     //console.log(marker);
     //marker.setMap(map);
     $scope.markers.push(marker);
-
+    console.log("marker: "+marker)
     // Create radius
     // enable this to create circles
     /*$scope.circle = new google.maps.Circle({
@@ -788,6 +788,8 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   var setMapData = function(){
     $scope.geolocations = list__service.maindata;
     $scope.heatdata = [];
+    $scope.sectordata = [];
+
     clearMarkers();
     var buffer;
     $scope.prospectCount = 0;
@@ -796,25 +798,31 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     // console.log($scope.geolocations);
     $.each($scope.geolocations, function(a, sectorList) {
       // Sector by Sector
-      // console.log(sectorList);
-      $.each(sectorList, function(b, condoList) {
-        createMarker(condoList);
+      //console.log(sectorList);
+      //createMarker(sectorList);
 
+      //$scope.heatdata.push({latitude: condoList.latitude, longitude: condoList.longitude, weight: condoList.sector_score});
+      //$scope.sectordata.push({latitude: sectorList.latitude, longitude: sectorList.longitude});
+
+      $.each(sectorList, function(b, sectorItem) {
+        console.log(sectorItem);
+
+        createMarker(sectorItem);
         // Individual Condo Info
         // console.log(condoList.properties);
-        $.each(condoList.properties, function(b, condo) {
-          //console.log('condo propscore: '+condo.property_score);
-          $scope.heatdata.push({latitude: condoList.latitude, longitude: condoList.longitude, weight: condoList.sector_score});
-          //totalProspects = parseInt(totalProspects + condo.total_property_prospects,10);
-          buffer = parseInt(condo.total_property_prospects,10);
-          $scope.prospectCount += buffer;
-          //heatmap__service.prospectCount += buffer;
-        });
+        // $.each(condoList.properties, function(b, condo) {
+        //   //console.log('condo propscore: '+condo.property_score);
+        //   $scope.heatdata.push({latitude: condoList.latitude, longitude: condoList.longitude, weight: condoList.sector_score});
+        //   //totalProspects = parseInt(totalProspects + condo.total_property_prospects,10);
+        //   buffer = parseInt(condo.total_property_prospects,10);
+        //   $scope.prospectCount += buffer;
+        //   //heatmap__service.prospectCount += buffer;
+        // });
       });
     });
-    heatmap__service.prepForBroadcast($scope.heatdata);
+    //list__service.prepForBroadcast($scope.sectordata);
     //heatmap__service.prospectCount = $scope.prospectCount;
-    $('.heatmap__control--results .value').text( accounting.formatNumber( $scope.prospectCount ) );
+    //$('.heatmap__control--results .value').text( accounting.formatNumber( $scope.prospectCount ) );
 
   }
 
@@ -835,7 +843,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     $scope.heatMapData = [];
     $.each(heatmap__service.locations, function(a, condoLocation) {
       //$scope.heatMapData.push({ location: new google.maps.LatLng(condoLocation.latitude, condoLocation.longitude), weight: condoLocation.weight} );
-      $scope.heatMapData.push({ latitude: condoLocation.latitude, longitude: condoLocation.longitude, weight: condoLocation.weight} );
+      //$scope.heatMapData.push({ latitude: condoLocation.latitude, longitude: condoLocation.longitude, weight: condoLocation.weight} );
     });
 
     //$scope.pointArray = [];
@@ -844,20 +852,20 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     //   max: parseInt($scope.heatMapData.length,10),
     //   data: $scope.heatMapData
     // };  origin.latitude = 1.30208;
-  //origin.longitude = 103.81984;
-    var testData = {
-      max: 8,
-      data: [{lat: 1.30208, lng:103.81984, count: 3},{lat: 1.31208, lng:103.81984, count: 1}]
-    };
+    //origin.longitude = 103.81984;
+    // var testData = {
+    //   max: 8,
+    //   data: [{lat: 1.30208, lng:103.81984, count: 3},{lat: 1.31208, lng:103.81984, count: 1}]
+    // };
     //heatmap.data = $scope.heatMapData;
 
-    heatmapOverlay.setData = testData;
+    //heatmapOverlay.setData = testData;
     //console.log(testData);
     //console.log($scope.heatMapData);
-    console.log(heatmapOverlay);
+    //console.log(heatmapOverlay);
     //console.log($scope.heatmap.data);
 
-    // $scope.heatmap.setMap(null);
+    //$scope.heatmap.setMap(null);
     //$scope.heatmap.setMap(map__service.google);
   }
 
