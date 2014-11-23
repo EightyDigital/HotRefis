@@ -109,7 +109,7 @@ class ApplicationController extends Controller
 	|	route: <domain>/api/filter/property
 	|	postdata: none;
 	--------------------------------------------------*/
-	public function filterPropertyAction(Request $request)
+	public function filterPropertyAction()
 	{
 		$em = $this->getDoctrine()->getManager();
 		$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectors();
@@ -140,12 +140,14 @@ class ApplicationController extends Controller
 	|		- age_min; age_max;
 	|		- assets_min; assets_max;
 	|		- debt_min; debt_max;
+	|		- rating;
+	|		- sector;
 	--------------------------------------------------*/
     public function filterProspectAction(Request $request)
     {
 		$em = $this->getDoctrine()->getManager();
-		$usr = $this->get('security.context')->getToken()->getUser();
-		$id = $usr->getId();
+		$user = $this->get('security.context')->getToken()->getUser();
+		$userId = $user->getId();
         $postdata = $request->query->all();
         
         if (!isset($postdata['property_value_min'])) $postdata['property_value_min'] = 0;
@@ -176,7 +178,7 @@ class ApplicationController extends Controller
 		if (!isset($postdata['sector'])) $postdata['sector'] = 0;
 		
 		if ($postdata['sector'] == 0) {
-			$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspectsBySector(0, $id);
+			$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspectsBySector(0, $userId);
 		} else {
 			$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspectsBySector(1, $postdata['sector']);
 		}
@@ -252,13 +254,23 @@ class ApplicationController extends Controller
 			$sector[$val['sector']]['sector_code'] = $val['sector'];
 			$sector[$val['sector']]['longitude'] = $val['pr_long'];
 			$sector[$val['sector']]['latitude'] = $val['pr_lat'];
-			$sector[$val['sector']]['sector_score'] = round($temp_sector_score[$val['sector']] / $temp[$val['sector']], 0);
+			
+			if($temp[$val['sector']] != 0)
+				$sector[$val['sector']]['sector_score'] = round($temp_sector_score[$val['sector']] / $temp[$val['sector']], 0);
+			else
+				$sector[$val['sector']]['sector_score'] = 0;
+			
 			$sector[$val['sector']]['total_sector_prospects'] = $temp[$val['sector']];
 			
 			$sector[$val['sector']]['properties'][$val['urakey']]['longitude'] = $val['longitude'];
 			$sector[$val['sector']]['properties'][$val['urakey']]['latitude'] = $val['latitude'];
 			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = $temp_property_score;
 			$sector[$val['sector']]['properties'][$val['urakey']]['total_property_prospects'] = $temp[$val['urakey']]['rating_count'];
+			
+			if($temp_score >= $postdata['rating']) {
+				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_id'] = $val['prospectId'];
+				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_score'] = $temp_score;
+			}
 		}
 		
 		$response = new Response(json_encode($sector));
@@ -273,6 +285,18 @@ class ApplicationController extends Controller
 	|		- prospectlist : json_encode of filter API
 	--------------------------------------------------*/
     public function shortlistCheckoutAction(Request $request)
+    {
+		$em = $this->getDoctrine()->getManager();
+        $postdata = $request->request->all();
+		
+		$user = $this->get('security.context')->getToken()->getUser();
+		$userId = $user->getId();
+		
+		if (!isset($postdata['sector'])) $postdata['sector'] = 0;
+	}
+	
+	/*
+	public function shortlistCheckoutAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $postdata = $request->request->all();
@@ -342,5 +366,6 @@ class ApplicationController extends Controller
 
         return $response;
     }
+	*/
 	
 }
