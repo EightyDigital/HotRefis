@@ -284,16 +284,18 @@ class ApplicationController extends Controller
 	|	postdata:
 	|		- prospectlist : json_encode of filter API
 	--------------------------------------------------*/
-    public function shortlistCheckoutAction(Request $request)
-    {
-		$em = $this->getDoctrine()->getManager();
-        $postdata = $request->request->all();
+    // public function shortlistCheckoutAction(Request $request)
+    // {
+		// $em = $this->getDoctrine()->getManager();
+        // $postdata = $request->request->all();
 		
-		$user = $this->get('security.context')->getToken()->getUser();
-		$userId = $user->getId();
+		// $user = $this->get('security.context')->getToken()->getUser();
+		// $userId = $user->getId();
 		
-		if (!isset($postdata['sector'])) $postdata['sector'] = 0;
-	}
+		// if (!isset($postdata['sector'])) $postdata['sector'] = 0;
+		
+		
+	// }
 	
 	/*
 	public function shortlistCheckoutAction(Request $request)
