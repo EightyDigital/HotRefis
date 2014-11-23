@@ -186,30 +186,63 @@ class ApplicationController extends Controller
 		$sector = array();
 		foreach($property_data as $val) {
 			$score = 0;
-				
-			if(($val['average_price'] >= $postdata['property_value_min'] && $val['average_price'] <= $postdata['property_value_max']) || ($val['average_newprice'] >= $postdata['property_value_min'] && $val['average_newprice'] <= $postdata['property_value_max']))
-				$score++;
 			
-			if($val['average_ltv'] >= $postdata['ltv_min'] && $val['average_ltv'] <= $postdata['ltv_max'])
+			if($postdata['property_value_min'] == $postdata['property_value_max'] && ($val['average_price'] >= $postdata['property_value_min'] || $val['average_newprice'] >= $postdata['property_value_min'])) { 
 				$score++;
+			} else {
+				if(($val['average_price'] >= $postdata['property_value_min'] && $val['average_price'] <= $postdata['property_value_max']) || ($val['average_newprice'] >= $postdata['property_value_min'] && $val['average_newprice'] <= $postdata['property_value_max']))
+					$score++;
+			}
 			
-			if($val['average_loan_age'] >= $postdata['loan_age_min'] && $val['average_loan_age'] <= $postdata['loan_age_max'])
+			if($postdata['ltv_min'] == $postdata['ltv_max'] && $val['average_ltv'] >= $postdata['ltv_min']) {
 				$score++;
-							
-			if($val['average_income'] >= $postdata['income_min'] && $val['average_income'] <= $postdata['income_max'])
-				$score++;
+			} else {
+				if($val['average_ltv'] >= $postdata['ltv_min'] && $val['average_ltv'] <= $postdata['ltv_max'])
+					$score++;
+			}
 			
-			if($val['average_assets_owned'] >= $postdata['property_owned_min'] && $val['average_assets_owned'] <= $postdata['property_owned_max'])
+			if($postdata['loan_age_min'] == $postdata['loan_age_max'] && $val['average_loan_age'] >= $postdata['loan_age_min']) {
 				$score++;
-			if(($val['average_assets_owned'] * $val['average_newprice']) >= $postdata['assets_min'] && ($val['average_assets_owned'] * $val['average_newprice']) <= $postdata['assets_max'])
-				$score++;	
+			} else {
+				if($val['average_loan_age'] >= $postdata['loan_age_min'] && $val['average_loan_age'] <= $postdata['loan_age_max'])
+					$score++;
+			}
 			
-			if($val['average_prospect_age'] >= $postdata['age_min'] && $val['average_prospect_age'] <= $postdata['age_max'])
+			if($postdata['income_min'] == $postdata['income_max'] && $val['average_income'] >= $postdata['income_min']) {
 				$score++;
+			} else {
+				if($val['average_income'] >= $postdata['income_min'] && $val['average_income'] <= $postdata['income_max'])
+					$score++;
+			}
+			
+			if($postdata['property_owned_min'] == $postdata['property_owned_max'] && $val['average_assets_owned'] >= $postdata['property_owned_min']) {
+				$score++;
+			} else {
+				if($val['average_assets_owned'] >= $postdata['property_owned_min'] && $val['average_assets_owned'] <= $postdata['property_owned_max'])
+					$score++;
+			}
+			
+			if($postdata['assets_min'] == $postdata['assets_max'] && ($val['average_assets_owned'] * $val['average_newprice']) >= $postdata['assets_min']) {
+				$score++;
+			} else {
+				if(($val['average_assets_owned'] * $val['average_newprice']) >= $postdata['assets_min'] && ($val['average_assets_owned'] * $val['average_newprice']) <= $postdata['assets_max'])
+					$score++;	
+			}
+			
+			if($postdata['age_min'] == $postdata['age_max'] && $val['average_prospect_age'] >= $postdata['age_min']) {
+				$score++;
+			} else {
+				if($val['average_prospect_age'] >= $postdata['age_min'] && $val['average_prospect_age'] <= $postdata['age_max'])
+					$score++;
+			}
 			
 			$debt = ($val['average_ltv'] / 100) * $val['average_price'];
-			if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max'])
+			if($postdata['debt_min'] == $postdata['debt_max'] && $debt >= $postdata['debt_min']) {
 				$score++;
+			} else {
+				if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max'])
+					$score++;
+			}			
 			
 			$temp_score = (int) (($score / 8) * 100);
 			
