@@ -70,7 +70,8 @@ class TransactionsRepository extends EntityRepository
 					  AVG(pl.ltv) AS average_ltv,
 					  AVG(
 						timestampdiff(YEAR, pl.loanDate, CURRENT_DATE())
-					  ) AS average_loan_age
+					  ) AS average_loan_age,
+					  pl.prospectId
 					FROM RefiBundle:Prospectloan pl
 					JOIN RefiBundle:Transactions t
 						WITH t.id = pl.transactionId
@@ -86,6 +87,8 @@ class TransactionsRepository extends EntityRepository
 			->setParameter('param', $param)
 			->getArrayResult();
 	}
+	
+	
 	
 	public function fetchProspectByTransactionsId($id)
 	{
