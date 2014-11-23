@@ -30,6 +30,7 @@ class TransactionsRepository extends EntityRepository
 					LEFT JOIN RefiBundle:Sectorlist sl
 						WITH sl.sectorCode = t.sector
 					WHERE sl.sectorCode IS NULL
+					OR DATEDIFF(CURRENT_DATE(), sl.dateadded) > sl.validity
 					GROUP BY t.sector
 					ORDER BY t.sector ASC
 				'
@@ -44,6 +45,7 @@ class TransactionsRepository extends EntityRepository
 				JOIN RefiBundle:Sectorlist sl
 				WITH sl.sectorCode = t.sector
 				WHERE sl.clientId = :param
+				AND DATEDIFF(CURRENT_DATE(), sl.dateadded) < sl.validity
 			";
 		} else {
 			$where = "
@@ -88,7 +90,19 @@ class TransactionsRepository extends EntityRepository
 			->getArrayResult();
 	}
 	
-	
+	public function fetchSectorsInListByClientId($id)
+	{
+		return $this->getEntityManager()
+			->createQuery(
+				'SELECT sl.sectorCode
+					FROM RefiBundle:Sectorlist sl
+					WHERE sl.clientId = :cId
+					AND DATEDIFF(CURRENT_DATE(), sl.dateadded) < sl.validity
+				'
+			)
+			->setParameter('cId', $id)
+			->getArrayResult();
+	}
 	
 	public function fetchProspectByTransactionsId($id)
 	{
