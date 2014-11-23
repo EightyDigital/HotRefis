@@ -259,7 +259,7 @@ class ApplicationController extends Controller
 		foreach($sector as $keys => $vals) {
 			$temp_score = 0; $ctr = 0; $temp_prospects = 0;
 			foreach($vals['properties'] as $keyp => $valp) {
-				if($valp['property_score'] < $postdata['certainty']) {
+				if($valp['property_score'] < $postdata['certainty'] || ($postdata['certainty'] == 0 && $valp['property_score'] <= $postdata['certainty'])) {
 					unset($sector[$keys]['properties'][$keyp]);
 				} else {
 					$temp_prospects += $valp['total_property_prospects'];
