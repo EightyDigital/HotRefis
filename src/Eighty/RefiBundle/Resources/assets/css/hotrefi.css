@@ -6410,18 +6410,150 @@ table {
   position: relative;
 }
 
+/* line 23, ../sass/hotrefi/_layout.scss */
+.loading .data__loading {
+  display: block;
+}
+
+/* line 27, ../sass/hotrefi/_layout.scss */
+.data__loading {
+  z-index: 999;
+  display: none;
+  position: fixed;
+  top: 220px;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+  text-align: center;
+  background: #fff;
+  background: rgba(0, 0, 0, 0.75);
+}
+/* line 38, ../sass/hotrefi/_layout.scss */
+.data__loading h2 {
+  font-size: 1.69231em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 30px 0 70px 0;
+}
+
 /*= Body =*/
 /*= Footer =*/
-/* line 29, ../sass/hotrefi/_layout.scss */
+/* line 52, ../sass/hotrefi/_layout.scss */
 #ft {
   width: 100%;
   text-align: center;
   clear: both;
 }
 
-/* line 30, ../sass/hotrefi/_layout.scss */
+/* line 53, ../sass/hotrefi/_layout.scss */
 #ft .pgWidth {
   border-top: 1px solid #ccc;
+}
+
+@-webkit-keyframes ngdialog-fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes ngdialog-fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes ngdialog-fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes ngdialog-fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* line 41, ../sass/hotrefi/modules/_ngDialog.scss */
+.ngdialog {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: fixed;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 10000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+/* line 45, ../sass/hotrefi/modules/_ngDialog.scss */
+.ngdialog * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 49, ../sass/hotrefi/modules/_ngDialog.scss */
+.ngdialog *:before, .ngdialog *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 65, ../sass/hotrefi/modules/_ngDialog.scss */
+.ngdialog-overlay {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-backface-visibility: hidden;
+  -webkit-animation: ngdialog-fadein 0.5s;
+  animation: ngdialog-fadein 0.5s;
+}
+
+/* line 77, ../sass/hotrefi/modules/_ngDialog.scss */
+.ngdialog.ngdialog-closing .ngdialog-overlay {
+  -webkit-backface-visibility: hidden;
+  -webkit-animation: ngdialog-fadeout 0.5s;
+  animation: ngdialog-fadeout 0.5s;
+}
+
+/* line 83, ../sass/hotrefi/modules/_ngDialog.scss */
+.ngdialog-content {
+  background: white;
+  -webkit-backface-visibility: hidden;
+  -webkit-animation: ngdialog-fadein 0.5s;
+  animation: ngdialog-fadein 0.5s;
+}
+
+/* line 90, ../sass/hotrefi/modules/_ngDialog.scss */
+.ngdialog.ngdialog-closing .ngdialog-content {
+  -webkit-backface-visibility: hidden;
+  -webkit-animation: ngdialog-fadeout 0.5s;
+  animation: ngdialog-fadeout 0.5s;
+}
+
+/* line 96, ../sass/hotrefi/modules/_ngDialog.scss */
+.ngdialog-close:before {
+  font-family: 'Helvetica', Arial, sans-serif;
+  content: '\00D7';
+  cursor: pointer;
+}
+
+/* line 102, ../sass/hotrefi/modules/_ngDialog.scss */
+body.ngdialog-open {
+  overflow: hidden;
 }
 
 /* line 1, ../sass/hotrefi/modules/_account__status.scss */
@@ -6550,7 +6682,7 @@ table {
   display: block;
   position: fixed;
   z-index: 10002;
-  top: 50%;
+  top: 300px;
   left: 50%;
 }
 /* line 83, ../sass/hotrefi/modules/_loadingbar.scss */
@@ -7209,64 +7341,84 @@ table {
   border-radius: 5px 5px 0 0;
 }
 /* line 25, ../sass/hotrefi/modules/_short__list.scss */
+.short__list .count {
+  font-size: 13px;
+  text-transform: none;
+  display: block;
+  padding: 5px 10px 5px 10px;
+  text-align: center;
+}
+/* line 32, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--list {
   padding: 5px 10px;
 }
-/* line 27, ../sass/hotrefi/modules/_short__list.scss */
+/* line 34, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--list > li {
   border-bottom: 1px solid #ccc;
   margin: 10px 0 0 0;
   padding: 0 0 10px 0;
 }
-/* line 33, ../sass/hotrefi/modules/_short__list.scss */
+/* line 38, ../sass/hotrefi/modules/_short__list.scss */
+.short__list .property--list > li.empty {
+  border-bottom: none;
+  text-align: center;
+  padding: 10px 0 20px 0;
+  margin: 0;
+}
+/* line 44, ../sass/hotrefi/modules/_short__list.scss */
+.short__list .property--list > li.last {
+  border-bottom: none;
+  padding: 0 0 20px 0;
+}
+/* line 50, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--prospects {
   font-size: 13px;
 }
-/* line 36, ../sass/hotrefi/modules/_short__list.scss */
+/* line 53, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--price {
   padding: 10px 0;
 }
-/* line 38, ../sass/hotrefi/modules/_short__list.scss */
+/* line 55, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--price .value {
   font-size: 16px;
   font-weight: 600;
 }
-/* line 45, ../sass/hotrefi/modules/_short__list.scss */
+/* line 62, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--duration {
   clear: both;
   padding: 10px 0;
 }
-/* line 48, ../sass/hotrefi/modules/_short__list.scss */
+/* line 65, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--duration ul {
   padding: 0 0 0 2px;
   overflow: auto;
 }
-/* line 52, ../sass/hotrefi/modules/_short__list.scss */
+/* line 69, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--duration li {
   float: left;
   margin-right: 10px;
 }
-/* line 57, ../sass/hotrefi/modules/_short__list.scss */
+/* line 74, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .item__include {
   float: left;
   margin: 10px;
 }
-/* line 61, ../sass/hotrefi/modules/_short__list.scss */
+/* line 78, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .short__list--item {
   overflow: hidden;
   padding: 6px 0;
   margin-left: 20px;
 }
-/* line 65, ../sass/hotrefi/modules/_short__list.scss */
+/* line 82, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .short__list--item h2 {
   font-size: 16px;
 }
-/* line 69, ../sass/hotrefi/modules/_short__list.scss */
+/* line 86, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .short__list--footer {
   overflow: auto;
   clear: both;
 }
-/* line 72, ../sass/hotrefi/modules/_short__list.scss */
+/* line 89, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .short__list--footer .total {
   float: right;
   text-align: right;

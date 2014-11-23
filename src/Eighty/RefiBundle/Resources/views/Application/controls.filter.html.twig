@@ -138,20 +138,34 @@
     <div class="filter__controller--list">
       <div class="filter__controller--list--inside">
         <div class="short__list">
-          <h2 class="header">Postal Sector Shortlist</h2>
+
+          <h2 class="header">Postal Sector Shortlist<span class="count">{[ shortlist.length ]} / 3 in shortlist</span></h2>
+
           <ul class="property--list">
-            <li>
+            <li ng-class="{last: $last==true}" ng-repeat="item in shortlist">
+              <div class="short__list--item">
+                <h2>
+                  Postal Sector {[ item.sector ]}
+                </h2>
+
+                <div class="property--prospects">
+                  <span class="value">({[ item.prospects ]} Prospects)</span>
+                </div>
+
+                <div class="property--duration">
+                  <ul>
+                    <li><input type="radio" ng-model="duration" checked name="{[ $index + 1]}" value="3"> 3 Months</li>
+                    <li><input type="radio" ng-model="duration" name="{[ $index + 1]}" value="6"> 6 Months</li>
+                    <li><input type="radio" ng-model="duration" name="{[ $index + 1]}" value="12"> 1 Year</li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+
+            <li class="animate-repeat empty" ng-if="shortlist.length == 0">
               <h2>Empty</h2>
             </li>
           </ul>
-          <div class="short__list--footer">
-
-            <div class="total">
-              <span class="label">Total: </span>
-              <span class="value">$0</span>
-            </div>
-          </div>
-
         </div>
         <div class="filter__aux">
           <a class="ionicons ion-checkmark-circled" href="/list">Own Sectors</a>
