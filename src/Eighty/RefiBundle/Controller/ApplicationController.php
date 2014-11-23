@@ -174,7 +174,7 @@ class ApplicationController extends Controller
 		if (!isset($postdata['debt_min'])) $postdata['debt_min'] = 0;
         if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 5000000;
 		
-		if (!isset($postdata['rating'])) $postdata['rating'] = 0;
+		if (!isset($postdata['certainty'])) $postdata['certainty'] = 0;
 		if (!isset($postdata['sector'])) $postdata['sector'] = 0;
 		
 		if ($postdata['sector'] == 0) {
@@ -218,59 +218,57 @@ class ApplicationController extends Controller
 			else
 				$temp[$val['urakey']]['num_prospects'] = 1;
 				
-			if(isset($temp[$val['urakey']]['rating_count'])) {
-				if($temp_score >= $postdata['rating']) {
-					$temp[$val['urakey']]['rating_count']++;
+			if(isset($temp[$val['urakey']]['perfect_score'])) {
+				if($temp_score >= 100) {
+					$temp[$val['urakey']]['perfect_score']++;
 				}
 			} else {
-				if($temp_score >= $postdata['rating']) {
-					$temp[$val['urakey']]['rating_count'] = 1;
+				if($temp_score >= 100) {
+					$temp[$val['urakey']]['perfect_score'] = 1;
 				} else {
-					$temp[$val['urakey']]['rating_count'] = 0;
+					$temp[$val['urakey']]['perfect_score'] = 0;
 				}
 			}
 			
-			if(isset($temp[$val['sector']])) {
-				if($temp_score >= $postdata['rating']) {
-					$temp[$val['sector']]++;
-				}
-			} else {
-				if($temp_score >= $postdata['rating']) {
-					$temp[$val['sector']] = 1;
-				} else {
-					$temp[$val['sector']] = 0;
-				}
-			}
-			
-			$temp_property_score = round(($temp[$val['urakey']]['rating_count'] / $temp[$val['urakey']]['num_prospects']) * 100, 0);
+			$temp_property_score = round(($temp[$val['urakey']]['perfect_score'] / $temp[$val['urakey']]['num_prospects']) * 100, 0);
 			
 			if(isset($temp_sector_score[$val['sector']])) {
 				$temp_sector_score[$val['sector']] += $temp_property_score;
 			} else {
 				$temp_sector_score[$val['sector']] = $temp_property_score;
 			}
-									
+			
 			$sector[$val['sector']]['name'] = !empty($val['sector_name']) ? $val['sector_name'] : "Temporary Sector Name";
 			$sector[$val['sector']]['sector_code'] = $val['sector'];
 			$sector[$val['sector']]['longitude'] = $val['pr_long'];
 			$sector[$val['sector']]['latitude'] = $val['pr_lat'];
-			
-			if($temp[$val['sector']] != 0)
-				$sector[$val['sector']]['sector_score'] = round($temp_sector_score[$val['sector']] / $temp[$val['sector']], 0);
-			else
-				$sector[$val['sector']]['sector_score'] = 0;
-			
-			$sector[$val['sector']]['total_sector_prospects'] = $temp[$val['sector']];
+			$sector[$val['sector']]['sector_score'] = 0;
+			$sector[$val['sector']]['total_sector_prospects'] = 0;
 			
 			$sector[$val['sector']]['properties'][$val['urakey']]['longitude'] = $val['longitude'];
 			$sector[$val['sector']]['properties'][$val['urakey']]['latitude'] = $val['latitude'];
 			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = $temp_property_score;
-			$sector[$val['sector']]['properties'][$val['urakey']]['total_property_prospects'] = $temp[$val['urakey']]['rating_count'];
+			$sector[$val['sector']]['properties'][$val['urakey']]['total_property_prospects'] = $temp[$val['urakey']]['perfect_score'];
 			
-			if($temp_score >= $postdata['rating']) {
+			if($temp_score >= 100) {
 				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_id'] = $val['prospectId'];
-				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_score'] = $temp_score;
+				// $sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_score'] = $temp_score;
 			}
+		}
+		
+		foreach($sector as $keys => $vals) {
+			$temp_score = 0; $ctr = 0; $temp_prospects = 0;
+			foreach($vals['properties'] as $keyp => $valp) {
+				if($valp['property_score'] < $postdata['certainty']) {
+					unset($sector[$keys]['properties'][$keyp]);
+				} else {
+					$temp_prospects += $valp['total_property_prospects'];
+					$temp_score++;
+				}
+				$ctr++;
+			}
+			$sector[$keys]['sector_score'] = round(($temp_score / $ctr) * 100, 0);
+			$sector[$keys]['total_sector_prospects'] = $temp_prospects;
 		}
 		
 		$response = new Response(json_encode($sector));
