@@ -89,6 +89,11 @@ class ApplicationController extends Controller
 	
 	public function addAction()
     {
+		$array = array();
+		for($x = 1; $x <= 82; $x++) {
+			$array[] = $x;
+		}
+		print_r(implode("','", $array)); exit();
         return $this->render('RefiBundle:Application:add.html.twig');
         //, array('name' => $name)
     }
@@ -112,18 +117,22 @@ class ApplicationController extends Controller
 	public function filterPropertyAction()
 	{
 		$em = $this->getDoctrine()->getManager();
-		$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectors();
+		$sectors = array('01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82');
 		
-		$sector = array();
-		foreach($property_data as $val) {
-			$sector[$val['sector']]['name'] = !empty($val['sector_name']) ? $val['sector_name'] : "Temporary Sector Name";
-			$sector[$val['sector']]['sector_code'] = $val['sector'];
-			$sector[$val['sector']]['longitude'] = $val['pr_long'];
-			$sector[$val['sector']]['latitude'] = $val['pr_lat'];
-			$sector[$val['sector']]['total_sector_prospects'] = $val['num_prospects'];
+		$sector_data = array();
+		foreach($sectors as $sector) {
+			$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectorByCode($sector);
+			$sector_info = $em->getRepository('RefiBundle:Transactions')->fetchSectorInfoByCode($sector);
+			if(!empty($sector_info)) {
+				$sector_data[$sector]['name'] = $sector_info[0]['name'];
+				$sector_data[$sector]['sector_code'] = $sector;
+				$sector_data[$sector]['longitude'] = $sector_info[0]['longitude'];
+				$sector_data[$sector]['latitude'] = $sector_info[0]['latitude'];
+				$sector_data[$sector]['total_sector_prospects'] = count($property_data);
+			}
 		}
 		
-		$response = new Response(json_encode($sector));
+		$response = new Response(json_encode($sector_data));
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
@@ -284,8 +293,7 @@ class ApplicationController extends Controller
 			$sector[$val['sector']]['properties'][$val['urakey']]['total_property_prospects'] = $temp[$val['urakey']]['perfect_score'];
 			
 			if($temp_score >= 100) {
-				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_id'] = $val['prospectId'];
-				// $sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_score'] = $temp_score;
+				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][]['prospect_id'] = $val['prospectId'];
 			}
 		}
 		
