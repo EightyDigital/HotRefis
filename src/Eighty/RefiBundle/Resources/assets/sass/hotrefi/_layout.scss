@@ -19,7 +19,30 @@
 
 #hd .pgWidth { position:relative; }
 
+.loading {
+  .data__loading{
+    display:block;
+  }
+}
+.data__loading {
+  z-index:999;
+  display:none;
+  position:fixed;
+  top:220px;
+  left:50%;
+  width:400px;
+  margin-left:-200px;
+  text-align:center;
+  background:#fff;
+  background:rgba(0,0,0,0.75);
+  h2 {
+    font-size:em(22px);
+    text-transform:uppercase;
+    color:#fff;
+    padding:30px 0 70px 0;
 
+  }
+}
 
 /*= Body =*/
 #bd {  }

@@ -22,12 +22,29 @@
     @include radius(5px 5px 0 0);
 
   }
+  .count {
+    font-size:13px;
+    text-transform:none;
+    display:block;
+    padding:5px 10px 5px 10px;
+    text-align:center;
+  }
   .property--list {
     padding:5px 10px;
     & > li {
       border-bottom:1px solid #ccc;
       margin:10px 0 0 0;
       padding:0 0 10px 0;
+      &.empty {
+        border-bottom:none;
+        text-align:center;
+        padding: 10px 0 20px 0;
+        margin: 0;
+      }
+      &.last {
+        border-bottom:none;
+        padding: 0 0 20px 0;
+      }
     }
   }
   .property--prospects {
