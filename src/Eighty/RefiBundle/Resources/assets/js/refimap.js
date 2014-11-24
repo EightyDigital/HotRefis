@@ -607,7 +607,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   });
 
   // Property Loan Age
-  $scope.slider = $( ".property__loanAge" ).slider(1
+  $scope.slider = $( ".property__loanAge" ).slider(
     range: true,
     min: 0,
     max: 10,
