@@ -12,15 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProspectlistRepository extends EntityRepository
 {
-	public function getProspectList($id, $key)
+	public function getProspectList($id)
 	{
 		return $this->getEntityManager()
 			->createQuery(
-				'SELECT pl.prospectId,
-						pl.engaged,
+				'SELECT pr.name AS sector_name,
+						pl.prospectId,
 						p.profession,
 						p.derivedIncome,
-						pl.score,
 						COUNT(plo.transactionId) AS property_owned,
 						pl.status,
 						pl.note
@@ -29,15 +28,15 @@ class ProspectlistRepository extends EntityRepository
 						WITH pl.prospectId = p.id
 					JOIN RefiBundle:Prospectloan plo
 						WITH pl.prospectId = plo.prospectId
-					JOIN RefiBundle:Clientlist cl
-						WITH cl.id = pl.clientlistId
-					WHERE cl.clientId = :uId
-					AND pl.urakey = :uKey
+					JOIN RefiBundle:Sectorlist sl
+						WITH sl.id = pl.sectorlistId
+					JOIN RefiBundle:Postalregion pr
+						WITH pr.regionCode = sl.sectorCode
+					WHERE sl.clientId = :uId
 					GROUP BY pl.prospectId
 				'
 			)
 			->setParameter('uId', $id)
-			->setParameter('uKey', $key)
 			->getArrayResult();
 	}
 	

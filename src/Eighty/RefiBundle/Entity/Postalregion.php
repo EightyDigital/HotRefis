@@ -48,20 +48,6 @@ class Postalregion
     private $latitude;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="min_temp", type="float", precision=10, scale=0, nullable=true)
-     */
-    private $minTemp;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="max_temp", type="float", precision=10, scale=0, nullable=true)
-     */
-    private $maxTemp;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="bigint")
@@ -185,52 +171,6 @@ class Postalregion
     public function getLatitude()
     {
         return $this->latitude;
-    }
-
-    /**
-     * Set minTemp
-     *
-     * @param float $minTemp
-     * @return Postalregion
-     */
-    public function setMinTemp($minTemp)
-    {
-        $this->minTemp = $minTemp;
-
-        return $this;
-    }
-
-    /**
-     * Get minTemp
-     *
-     * @return float 
-     */
-    public function getMinTemp()
-    {
-        return $this->minTemp;
-    }
-
-    /**
-     * Set maxTemp
-     *
-     * @param float $maxTemp
-     * @return Postalregion
-     */
-    public function setMaxTemp($maxTemp)
-    {
-        $this->maxTemp = $maxTemp;
-
-        return $this;
-    }
-
-    /**
-     * Get maxTemp
-     *
-     * @return float 
-     */
-    public function getMaxTemp()
-    {
-        return $this->maxTemp;
     }
 
     /**

@@ -17,15 +17,16 @@
   <div class="row-fluid">
     <div class="span12">
       <h2 style="font-size: 32px;
-font-weight: 400;
-color: #555;
-margin: 15px  0;
-text-transform: uppercase;">Prospect List</h2>
-      {% for list in prospect_list %}
+				 font-weight: 400;
+				 color: #555;
+				 margin: 15px  0;
+				 text-transform: uppercase;">Prospect List</h2>
+      
+	  {% for list in prospect_list %}
 	  <table id="Prospect-Table" border="1" ng-app="tablemod">
         <thead>
           <th colspan='12'>
-            <span class="thleft">Prospects for <span style="font-weight:400;">{{ list.condo }}</span></span>
+            <span class="thleft">Prospects for <span style="font-weight:400;">{{ list.sector }}</span></span>
             <span class="thright">{{ list.current_min_row }}-{{ list.current_max_row }} of {{ list.total_rows }}</span>
           </th>
           {{ knp_pagination_render(list.pagination) }}
@@ -33,35 +34,30 @@ text-transform: uppercase;">Prospect List</h2>
         <tbody>
 
           <tr>
-            <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Add</a></td>
             <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">ID</a></td>
             <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Profession</a></td>
-            <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Salary Range</a></td>
-            <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Potential</a></td>
+            <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Derived Income</a></td>
             <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Properties</a></td>
             <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Status</a></td>
-            <td style="background:#063141;" colspan='7' width="10%"><a href="#"  style="color:#fff; text-transform:uppercase; font-size:14px;">Notes</a></td>
+            <td style="background:#063141;" colspan='9' width="30%"><a href="#"  style="color:#fff; text-transform:uppercase; font-size:14px;">Notes</a></td>
           </tr>
 
 		{% for prospect in list.pagination %}
 		  <tr>
-            <td><input type="checkbox" disabled="disabled" name="prospect_engaged[{{ prospect.prospectId }}]" value="{{ prospect.engaged }}"></td>
-            <td><a href="/prospect/">{{ prospect.index }}</a></td>
+            <td><a href="/prospect/">{{ prospect.prospectId }}</a></td>
             <td><a href="/prospect/">{{ prospect.profession }}</a></td>
-            <td><a href="/prospect/">{{ prospect.income_range }}</a></td>
-            <td><a href="/prospect/"><hr class="M"></a></td>
+            <td><a href="/prospect/">{{ prospect.derivedIncome }}</a></td>
             <td><a href="/prospect/">{{ prospect.property_owned }}</a></td>
-            <td><a href="/prospect/">{% if prospect.status == 1 %}Contacted{% else %}Not Contacted{% endif %}</a></td>
-            <td colspan='7' width="30%"><a href="#">{{ prospect.note }}</a></td>
+            <td><a href="/prospect/">{% if prospect.status == 1 %}Contacted{% elseif prospect.status == 2 %}Engaged{% else %}Blasted{% endif %}</a></td>
+            <td colspan='9' width="30%"><a href="#">{{ prospect.note }}</a></td>
           </tr>
 		{% endfor %}
 		
         </tbody>
       </table>
 	  {% endfor %}
-      <a class="ionicons ion-navigate blast--prospect" href="/calculator" style="">Blast Prospects</a>
-	  
-    </div>
+    
+	</div>
   </div>
 </div>
 {% endblock content %}
