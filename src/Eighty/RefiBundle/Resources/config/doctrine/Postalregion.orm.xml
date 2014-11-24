@@ -9,7 +9,5 @@
 	<field name="name" type="string" column="name" length="4" nullable="true"/>
     <field name="longitude" type="float" column="longitude" precision="10" scale="0" nullable="true"/>
     <field name="latitude" type="float" column="latitude" precision="10" scale="0" nullable="true"/>
-    <field name="minTemp" type="float" column="min_temp" precision="10" scale="0" nullable="true"/>
-    <field name="maxTemp" type="float" column="max_temp" precision="10" scale="0" nullable="true"/>
   </entity>
 </doctrine-mapping>

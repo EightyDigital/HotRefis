@@ -15,9 +15,9 @@ class Prospectlist
     /**
      * @var integer
      *
-     * @ORM\Column(name="clientlist_id", type="bigint", nullable=true)
+     * @ORM\Column(name="sectorlist_id", type="bigint", nullable=true)
      */
-    private $clientlistId;
+    private $sectorlistId;
 
     /**
      * @var integer
@@ -29,31 +29,17 @@ class Prospectlist
 	/**
      * @var string
      *
-     * @ORM\Column(name="urakey", type="text", nullable=true)
-     */
-    private $urakey;
-	
-	/**
-     * @var integer
-     *
-     * @ORM\Column(name="score", type="bigint", nullable=true)
-     */
-    private $score;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="note", type="text", nullable=true)
      */
     private $note;
-
-    /**
-     * @var boolean
+	
+	/**
+     * @var \DateTime
      *
-     * @ORM\Column(name="engaged", type="boolean", nullable=true)
+     * @ORM\Column(name="date_contacted", type="datetime", nullable=true)
      */
-    private $engaged;
-
+    private $dateContacted;
+	
     /**
      * @var \DateTime
      *
@@ -62,13 +48,6 @@ class Prospectlist
     private $dateEngaged;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_assigned", type="datetime", nullable=true)
-     */
-    private $dateAssigned;
-	
-	/**
      * @var integer
      *
      * @ORM\Column(name="status", type="bigint", nullable=true)
@@ -87,26 +66,26 @@ class Prospectlist
 
 
     /**
-     * Set clientlistId
+     * Set sectorlistId
      *
-     * @param integer $clientlistId
+     * @param integer $sectorlistId
      * @return Prospectlist
      */
-    public function setClientlistId($clientlistId)
+    public function setSectorlistId($sectorlistId)
     {
-        $this->clientlistId = $clientlistId;
+        $this->sectorlistId = $sectorlistId;
 
         return $this;
     }
 
     /**
-     * Get clientlistId
+     * Get sectorlistId
      *
      * @return integer 
      */
-    public function getClientlistId()
+    public function getSectorlistId()
     {
-        return $this->clientlistId;
+        return $this->sectorlistId;
     }
 
     /**
@@ -133,52 +112,6 @@ class Prospectlist
     }
 	
 	/**
-     * Set urakey
-     *
-     * @param string $urakey
-     * @return Prospectlist
-     */
-    public function setUrakey($urakey)
-    {
-        $this->urakey = $urakey;
-
-        return $this;
-    }
-
-    /**
-     * Get urakey
-     *
-     * @return string 
-     */
-    public function getUrakey()
-    {
-        return $this->urakey;
-    }
-	
-	/**
-     * Set score
-     *
-     * @param integer $score
-     * @return Prospectlist
-     */
-    public function setScore($score)
-    {
-        $this->score = $score;
-
-        return $this;
-    }
-
-    /**
-     * Get score
-     *
-     * @return integer 
-     */
-    public function getScore()
-    {
-        return $this->score;
-    }
-
-    /**
      * Set note
      *
      * @param string $note
@@ -200,28 +133,28 @@ class Prospectlist
     {
         return $this->note;
     }
-
-    /**
-     * Set engaged
+	
+	/**
+     * Set dateContacted
      *
-     * @param boolean $engaged
+     * @param \DateTime $dateContacted
      * @return Prospectlist
      */
-    public function setEngaged($engaged)
+    public function setDateContacted($dateContacted)
     {
-        $this->engaged = $engaged;
+        $this->dateContacted = $dateContacted;
 
         return $this;
     }
 
     /**
-     * Get engaged
+     * Get dateContacted
      *
-     * @return boolean 
+     * @return \DateTime 
      */
-    public function getEngaged()
+    public function getDateContacted()
     {
-        return $this->engaged;
+        return $this->dateContacted;
     }
 
     /**
@@ -248,29 +181,6 @@ class Prospectlist
     }
 
     /**
-     * Set dateAssigned
-     *
-     * @param \DateTime $dateAssigned
-     * @return Prospectlist
-     */
-    public function setDateAssigned($dateAssigned)
-    {
-        $this->dateAssigned = $dateAssigned;
-
-        return $this;
-    }
-
-    /**
-     * Get dateAssigned
-     *
-     * @return \DateTime 
-     */
-    public function getDateAssigned()
-    {
-        return $this->dateAssigned;
-    }
-	
-	/**
      * Set status
      *
      * @param integer $status

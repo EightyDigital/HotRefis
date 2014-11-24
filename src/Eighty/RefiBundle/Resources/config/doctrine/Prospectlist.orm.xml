@@ -4,14 +4,11 @@
     <id name="id" type="bigint" column="id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="clientlistId" type="bigint" column="clientlist_id" nullable="true"/>
+    <field name="sectorlistId" type="bigint" column="sectorlist_id" nullable="true"/>
     <field name="prospectId" type="bigint" column="prospect_id" nullable="true"/>
-	<field name="urakey" type="text" column="urakey" nullable="true"/>
-	<field name="score" type="bigint" column="score" nullable="true"/>
-    <field name="note" type="text" column="note" nullable="true"/>
-    <field name="engaged" type="boolean" column="engaged" nullable="true"/>
+	<field name="note" type="text" column="note" nullable="true"/>
+    <field name="dateContacted" type="datetime" column="date_contacted" nullable="true"/>
     <field name="dateEngaged" type="datetime" column="date_engaged" nullable="true"/>
-    <field name="dateAssigned" type="datetime" column="date_assigned" nullable="true"/>
-	<field name="status" type="bigint" column="status" nullable="true"/>
+    <field name="status" type="bigint" column="status" nullable="true"/>
   </entity>
 </doctrine-mapping>

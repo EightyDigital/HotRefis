@@ -90,7 +90,10 @@ class TransactionsRepository extends EntityRepository
 						WITH t.sector = pr.regionCode
 					JOIN RefiBundle:Prospect p
 						WITH p.id = pl.prospectId
+					LEFT JOIN RefiBundle:Prospectlist ppl
+						WITH ppl.prospectId = pl.prospectId
 					$where
+					AND ppl.prospectId IS NULL
 					GROUP BY pl.prospectId
 					ORDER BY t.sector ASC
 				"
