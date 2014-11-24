@@ -511,7 +511,7 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, filter
     change: function( event, ui ) {
       //heatmap__service.filterScore((ui.value));
       filter__service.certainty = ui.value;
-      $( ".filter__slider" ).slider({ disabled: true });
+      //$( ".filter__slider" ).slider({ disabled: true });
       console.log(filter__service.isZoomed);
       if(filter__service.isZoomed == true) {
         heatmap__service.requestSector( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty, sector: filter__service.isZoomedSector } );
@@ -519,6 +519,7 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, filter
       else{
         api__service.filterBroadcast( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty } );
       }
+      $('.heatmap__control--legend .value__wrap  .value').html(ui.value+"%");
     },
     create: function( event, ui ) {
       //$('.heatmap__control--results .value').text( accounting.formatNumber(100000) );
