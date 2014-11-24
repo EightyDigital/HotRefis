@@ -607,7 +607,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   });
 
   // Property Loan Age
-  $scope.slider = $( ".property__loanAge" ).slider(
+  $scope.slider = $( ".property__loanAge" ).slider({
     range: true,
     min: 0,
     max: 10,
@@ -642,7 +642,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
   // FINANCIAL SLIDERS
   // Income
-  $scope.slider = $( ".financials__income" ).slider(1
+  $scope.slider = $( ".financials__income" ).slider({
     range: true,
     min: 0,
     max: 5000000,
@@ -675,7 +675,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   });
 
   // Property Owned
-  $scope.slider = $( ".financials__property" ).slider(1
+  $scope.slider = $( ".financials__property" ).slider({
     range: true,
     min: 0,
     max: 10,
@@ -707,7 +707,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   });
 
   // Age of loan
-  $scope.slider = $( ".financials__age" ).slider(1
+  $scope.slider = $( ".financials__age" ).slider({
     range: true,
     min: 18,
     max: 70,
@@ -740,7 +740,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   });
 
   // Assets
-  $scope.slider = $( ".financials__assets" ).slider(1
+  $scope.slider = $( ".financials__assets" ).slider({
     range: true,
     min: 0,
     max: 10000000,
@@ -773,7 +773,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   });
 
   // Debt
-  $scope.slider = $( ".financials__debt" ).slider(1
+  $scope.slider = $( ".financials__debt" ).slider({
     range: true,
     min: 0,
     max: 5000000,
