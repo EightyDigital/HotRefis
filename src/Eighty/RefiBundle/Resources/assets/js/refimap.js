@@ -808,16 +808,15 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   // Price selection
   $scope.applyFilters = function () {
     $( ".filter__slider" ).slider({ disabled: true });
-    //api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
     if(filter__service.isZoomed == true) {
       heatmap__service.requestSector( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty, sector: filter__service.isZoomedSector } );
     }
     else{
       api__service.filterBroadcast( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty } );
     }
-    //$( ".heatmap__slider" ).slider({ value: 0 });
   }
- // I am the list of friends to show.
+
+  // I am the shortlist
   $scope.shortlist = [];
 
   $scope.$on('shortlistBroadcast', function() {
@@ -833,9 +832,6 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   $scope.heatMapData = [];
   $scope.geoLocations = [];
   $scope.prospectCount = 0;
-  //$scope.pointArray = new google.maps.MVCArray($scope.heatMapData);
-
-  //api__service.filterBroadcast();
 
   $scope.heatmap = new google.maps.visualization.HeatmapLayer({
     data: $scope.heatMapData,
@@ -871,10 +867,8 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
         icon: map__service.iconBase + 'placemark_circle.png',
         animation: google.maps.Animation.DROP
     });
-    //console.log(location);
-    marker.content = "<div class='sectorinfo__wrap'><h2>Postal Sector: " + location.sector_code + "</h2><div class='address'><div class='streetname'><span>"+location.name+"</span></div>&nbsp;</div><div class='condos'><span>Condos: "+location.properties+"</span></div><div class='prospects'>Prospects: <span>"+location.total_sector_prospects+"</span></div>";
-    marker.content += "<div class='addShort'><a class='add' ng-click='addShortlist("+location.sector_code+",3,"+location.total_sector_prospects+")' data-sector='"+location.sector_code+"'>Add to ShortList</a></div></div><br/>";
-    //marker.content = "<div class=\"click__wrap\"><a ng-include ng-click=\"addShortlist("+location.sector_code+")\" >Add to ShortList</a></div>";
+    marker.content = "<div class='sectorinfo__wrap'><h2>" + location.name + "</h2><div class='sector'><span class='title'>Postal Sector:</span><span class='value'>" + location.sector_code + "</span></div><div class='condos'><span class='label'>Condos:</span> <span class='value'>"+location.properties+"</span></div><div class='prospects'><span class='label'>Prospects:</span> <span class='value'>"+location.total_sector_prospects+"</span></div>";
+    marker.content += "<div class='addShort'><a class='add ionicons ion-plus-circled' ng-click='addShortlist(\""+location.name+"\","+location.sector_code+",3,"+location.total_sector_prospects+")' data-sector='"+location.sector_code+"'>Add to ShortList</a></div></div><br/>";
 
     var compiled = $compile(marker.content)($scope);
 
@@ -928,14 +922,16 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   // Push Json Markers
   var setMapData = function(){
     $scope.geolocations = list__service.maindata;
-
     clearMarkers();
     var buffer;
     // All Sectors
     $.each($scope.geolocations, function(a, sectorList) {
       // Sector by Sector
       $.each(sectorList, function(b, sectorItem) {
+        console.log(sectorItem);
+
         createMarker(sectorItem);
+
       });
     });
   }

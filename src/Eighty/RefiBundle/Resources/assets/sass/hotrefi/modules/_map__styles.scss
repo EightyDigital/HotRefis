@@ -9,5 +9,28 @@
   @include query($tabletTrigger){
     position:absolute;
   }
+
 }
 
+
+.sectorinfo__wrap {
+
+  a {
+    display:inline-block;
+    padding:10px 15px 12px 40px;
+    background: $color__brand;
+    color:#fff;
+    font-size:13px;
+    text-decoration:none;
+    position:relative;
+    margin:10px auto;
+    &:before {
+      position:absolute;
+      left:0;
+      top:-3px;
+      font-size:18px;
+      padding:10px;
+      margin-right:5px;
+    }
+  }
+}

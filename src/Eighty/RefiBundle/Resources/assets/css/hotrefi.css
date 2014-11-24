@@ -6827,6 +6827,27 @@ body.ngdialog-open {
   }
 }
 
+/* line 18, ../sass/hotrefi/modules/_map__styles.scss */
+.sectorinfo__wrap a {
+  display: inline-block;
+  padding: 10px 15px 12px 40px;
+  background: #00c0ff;
+  color: #fff;
+  font-size: 13px;
+  text-decoration: none;
+  position: relative;
+  margin: 10px auto;
+}
+/* line 27, ../sass/hotrefi/modules/_map__styles.scss */
+.sectorinfo__wrap a:before {
+  position: absolute;
+  left: 0;
+  top: -3px;
+  font-size: 18px;
+  padding: 10px;
+  margin-right: 5px;
+}
+
 /* line 1, ../sass/hotrefi/modules/_heatmap__control.scss */
 .heatmap__control {
   overflow: auto;
