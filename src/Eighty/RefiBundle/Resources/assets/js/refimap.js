@@ -567,7 +567,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       filter__service.set_property_value_max(ui.values[1]);
     },
     create: function( event, ui ) {
-      $( ".property__value .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
+      $( ".property__value .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".property__value .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(10000000, { symbol: "$",  format: "%s%v" })+"</span>");
     },
     fetch: function(min, max) {
@@ -601,13 +601,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".property__ltv .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>0%</span>");
+      $( ".property__ltv .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>0%</span>");
       $( ".property__ltv .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>100%</span>");
     }
   });
 
   // Property Loan Age
-  $scope.slider = $( ".property__loanAge" ).slider({
+  $scope.slider = $( ".property__loanAge" ).slider(1
     range: true,
     min: 0,
     max: 10,
@@ -635,14 +635,14 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".property__loanAge .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
+      $( ".property__loanAge .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
       $( ".property__loanAge .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>10+</span>");
     }
   });
 
   // FINANCIAL SLIDERS
   // Income
-  $scope.slider = $( ".financials__income" ).slider({
+  $scope.slider = $( ".financials__income" ).slider(1
     range: true,
     min: 0,
     max: 5000000,
@@ -669,13 +669,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".financials__income .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
+      $( ".financials__income .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".financials__income .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(5000000, { symbol: "$",  format: "%s%v" })+"</span>");
     }
   });
 
   // Property Owned
-  $scope.slider = $( ".financials__property" ).slider({
+  $scope.slider = $( ".financials__property" ).slider(1
     range: true,
     min: 0,
     max: 10,
@@ -701,13 +701,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".financials__property .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
+      $( ".financials__property .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
       $( ".financials__property .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>10</span>");
     }
   });
 
   // Age of loan
-  $scope.slider = $( ".financials__age" ).slider({
+  $scope.slider = $( ".financials__age" ).slider(1
     range: true,
     min: 18,
     max: 70,
@@ -734,13 +734,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".financials__age .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>18 years</span>");
+      $( ".financials__age .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>18 years</span>");
       $( ".financials__age .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>70 years+</span>");
     }
   });
 
   // Assets
-  $scope.slider = $( ".financials__assets" ).slider({
+  $scope.slider = $( ".financials__assets" ).slider(1
     range: true,
     min: 0,
     max: 10000000,
@@ -767,13 +767,13 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".financials__assets .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
+      $( ".financials__assets .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".financials__assets .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(10000000, { symbol: "$",  format: "%s%v" })+"</span>");
     }
   });
 
   // Debt
-  $scope.slider = $( ".financials__debt" ).slider({
+  $scope.slider = $( ".financials__debt" ).slider(1
     range: true,
     min: 0,
     max: 5000000,
@@ -799,7 +799,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".financials__debt .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
+      $( ".financials__debt .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".financials__debt .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(5000000, { symbol: "$",  format: "%s%v" })+"</span>");
     }
   });
