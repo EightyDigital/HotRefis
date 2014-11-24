@@ -12,29 +12,38 @@ use Doctrine\ORM\EntityRepository;
  */
 class TransactionsRepository extends EntityRepository
 {
-	public function filterSectors()
+	public function filterSectorByCode($sector)
 	{
 		return $this->getEntityManager()
 			->createQuery(
 				'SELECT 
-					  COUNT(t.id) as num_prospects,
-					  t.sector,
-					  pr.longitude AS pr_long,
-					  pr.latitude AS pr_lat,
-					  pr.name AS sector_name
-					FROM RefiBundle:Prospectloan pl
-					JOIN RefiBundle:Transactions t
+					  t.sector
+					FROM RefiBundle:Transactions t
+					JOIN RefiBundle:Prospectloan pl
 						WITH t.id = pl.transactionId
-					JOIN RefiBundle:Postalregion pr
-						WITH t.sector = pr.regionCode
 					LEFT JOIN RefiBundle:Sectorlist sl
 						WITH sl.sectorCode = t.sector
-					WHERE sl.sectorCode IS NULL
-					OR DATEDIFF(CURRENT_DATE(), sl.dateadded) > sl.validity
-					GROUP BY t.sector
-					ORDER BY t.sector ASC
+					WHERE sl.sectorCode IS NULL AND t.sector = :sector
+					GROUP BY pl.prospectId
 				'
 			)
+			->setParameter('sector', $sector)
+			->getArrayResult();
+	}
+	
+	public function fetchSectorInfoByCode($sector)
+	{
+		return $this->getEntityManager()
+			->createQuery(
+				'SELECT 
+					  pr.longitude,
+					  pr.latitude,
+					  pr.name
+					FROM RefiBundle:Postalregion pr
+					WHERE pr.regionCode = :sector
+				'
+			)
+			->setParameter('sector', $sector)
 			->getArrayResult();
 	}
 	
@@ -45,7 +54,7 @@ class TransactionsRepository extends EntityRepository
 				JOIN RefiBundle:Sectorlist sl
 				WITH sl.sectorCode = t.sector
 				WHERE sl.clientId = :param
-				AND DATEDIFF(CURRENT_DATE(), sl.dateadded) < sl.validity
+				AND DATEDIFF(CURRENT_DATE(), sl.dateadded) < (sl.validity * 30)
 			";
 		} else {
 			$where = "
