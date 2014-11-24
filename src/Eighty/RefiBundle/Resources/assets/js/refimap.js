@@ -511,7 +511,7 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, filter
     change: function( event, ui ) {
       //heatmap__service.filterScore((ui.value));
       filter__service.certainty = ui.value;
-      $( ".filter__slider" ).slider({ disabled: true });
+      //$( ".filter__slider" ).slider({ disabled: true });
       console.log(filter__service.isZoomed);
       if(filter__service.isZoomed == true) {
         heatmap__service.requestSector( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty, sector: filter__service.isZoomedSector } );
@@ -519,6 +519,7 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, filter
       else{
         api__service.filterBroadcast( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty } );
       }
+      $('.heatmap__control--legend .value__wrap  .value').html(ui.value+"%");
     },
     create: function( event, ui ) {
       //$('.heatmap__control--results .value').text( accounting.formatNumber(100000) );
@@ -567,7 +568,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
       filter__service.set_property_value_max(ui.values[1]);
     },
     create: function( event, ui ) {
-      $( ".property__value .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
+      $( ".property__value .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".property__value .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(10000000, { symbol: "$",  format: "%s%v" })+"</span>");
     },
     fetch: function(min, max) {
@@ -601,7 +602,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".property__ltv .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>0%</span>");
+      $( ".property__ltv .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>0%</span>");
       $( ".property__ltv .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>100%</span>");
     }
   });
@@ -635,7 +636,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".property__loanAge .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
+      $( ".property__loanAge .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
       $( ".property__loanAge .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>10+</span>");
     }
   });
@@ -669,7 +670,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".financials__income .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
+      $( ".financials__income .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".financials__income .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(5000000, { symbol: "$",  format: "%s%v" })+"</span>");
     }
   });
@@ -701,7 +702,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".financials__property .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
+      $( ".financials__property .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>0</span>");
       $( ".financials__property .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>10</span>");
     }
   });
@@ -734,7 +735,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".financials__age .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>18 years</span>");
+      $( ".financials__age .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>18 years</span>");
       $( ".financials__age .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>70 years+</span>");
     }
   });
@@ -767,7 +768,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".financials__assets .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
+      $( ".financials__assets .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".financials__assets .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(10000000, { symbol: "$",  format: "%s%v" })+"</span>");
     }
   });
@@ -799,7 +800,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
     },
     create: function( event, ui ) {
-      $( ".financials__debt .ui-slider-handle:nth-child(1)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
+      $( ".financials__debt .ui-slider-handle:nth-child(2)" ).addClass( "min__slider" ).html("<span class='val'>"+accounting.formatMoney(0, { symbol: "$",  format: "%s%v" })+"</span>");
       $( ".financials__debt .ui-slider-handle:nth-child(3)" ).addClass( "max__slider" ).html("<span class='val'>"+accounting.formatMoney(5000000, { symbol: "$",  format: "%s%v" })+"</span>");
     }
   });
