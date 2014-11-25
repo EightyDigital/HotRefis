@@ -16,9 +16,9 @@ refi_homepage:
     pattern: /dashboard/
     defaults: { _controller: RefiBundle:Application:index }
 
-refi_add:
-    pattern: /add/
-    defaults: { _controller: RefiBundle:Application:add }
+refi_campaign:
+    pattern: /campaign/
+    defaults: { _controller: RefiBundle:Application:campaign }
 
 refi_list:
     pattern: /list/
@@ -47,7 +47,3 @@ API_filter_prospect:
 API_shortlist_checkout:
     pattern: /api/shortlist/checkout
     defaults: { _controller: RefiBundle:Application:shortlistCheckout }
-
-API_shortlist_retrieve:
-    pattern: /api/shortlist/retrieve
-    defaults: { _controller: RefiBundle:Application:shortlistRetrieve }

@@ -109,7 +109,7 @@ class TransactionsRepository extends EntityRepository
 				'SELECT sl.sectorCode
 					FROM RefiBundle:Sectorlist sl
 					WHERE sl.clientId = :cId
-					AND DATEDIFF(CURRENT_DATE(), sl.dateadded) < sl.validity
+					AND DATEDIFF(CURRENT_DATE(), sl.dateadded) < (sl.validity * 30)
 				'
 			)
 			->setParameter('cId', $id)
