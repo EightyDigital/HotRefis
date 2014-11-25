@@ -39,22 +39,5 @@ class ProspectlistRepository extends EntityRepository
 			->setParameter('uId', $id)
 			->getArrayResult();
 	}
-	
-	public function getUrakeyByClient($id)
-	{
-		return $this->getEntityManager()
-			->createQuery(
-				'SELECT DISTINCT 
-					  (pl.urakey) AS urakey
-					FROM
-					  RefiBundle:Prospectlist pl 
-					  JOIN RefiBundle:Clientlist cl 
-						WITH cl.id = pl.clientlistId
-					WHERE cl.clientId = :uId
-				'
-			)
-			->setParameter('uId', $id)
-			->getArrayResult();
-	}
 
 }

@@ -68,34 +68,6 @@ class ApplicationController extends Controller
 			);
 		}
 		
-		/*
-		$condo = $em->getRepository('RefiBundle:Prospectlist')->getUrakeyByClient($id);
-		$prospect_list = array();
-		foreach($condo as $ckey => $val) {
-			$prospect_list[$ckey]['condo'] = $val['urakey'];
-			$prospect_list[$ckey]['prospects'] = $em->getRepository('RefiBundle:Prospectlist')->getProspectList($id, $val['urakey']);
-			foreach($prospect_list[$ckey]['prospects'] as $key => $pval) {
-				$quarter = $pval['derivedIncome'] * 0.25;
-				$min = round(($pval['derivedIncome'] - $quarter), 0);
-				$max = round(($pval['derivedIncome'] + $quarter), 0);
-				$prospect_list[$ckey]['prospects'][$key]['income_range'] = "$" . number_format(round($min, (0 - (strlen((string) $min) - 1)))) . " - " . "$" . number_format(round($max, (0 - (strlen((string) $max) - 1))));
-
-				$prospect_list[$ckey]['prospects'][$key]['index'] = $key + 1;
-			}
-
-			$prospect_list[$ckey]['total_rows'] = $total_rows = count($prospect_list[$ckey]['prospects']);
-			$prospect_list[$ckey]['current_max_row'] = $current_max_row = ($total_rows > 10) ? $this->get('request')->query->get('prospect_list_'.$ckey, 1) * 10 : $total_rows;
-			$prospect_list[$ckey]['current_min_row'] = $current_min_row = ($total_rows > 10) ? $current_max_row - 9 : 1;
-
-			$prospect_list[$ckey]['pagination'] = $pagination = $paginator->paginate(
-				$prospect_list[$ckey]['prospects'],
-				$this->get('request')->query->get('prospect_list_'.$ckey, 1),
-				10,
-				array('pageParameterName' => 'prospect_list_'.$ckey)
-			);
-		}
-		*/
-		
 		return $this->render('RefiBundle:Application:list.html.twig',
 			array(
 				'name' => $usr->getFullname(),
@@ -147,6 +119,32 @@ class ApplicationController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$sectors = array('01','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','63','64','65','66','67','68','73','75','76','77','78','79','80','82');
 		
+		if (!isset($postdata['property_value_min'])) $postdata['property_value_min'] = 0;
+        if (!isset($postdata['property_value_max'])) $postdata['property_value_max'] = 10000000;
+
+        if (!isset($postdata['ltv_min'])) $postdata['ltv_min'] = 0;
+        if (!isset($postdata['ltv_max'])) $postdata['ltv_max'] = 100;
+
+        if (!isset($postdata['loan_age_min'])) $postdata['loan_age_min'] = 0;
+        if (!isset($postdata['loan_age_max'])) $postdata['loan_age_max'] = 10;
+
+		if (!isset($postdata['income_min'])) $postdata['income_min'] = 0;
+        if (!isset($postdata['income_max'])) $postdata['income_max'] = 5000000;
+
+        if (!isset($postdata['property_owned_min'])) $postdata['property_owned_min'] = 1;
+        if (!isset($postdata['property_owned_max'])) $postdata['property_owned_max'] = 10;
+
+        if (!isset($postdata['age_min'])) $postdata['age_min'] = 18;
+        if (!isset($postdata['age_max'])) $postdata['age_max'] = 70;
+
+		if (!isset($postdata['assets_min'])) $postdata['assets_min'] = 0;
+        if (!isset($postdata['assets_max'])) $postdata['assets_max'] = 10000000;
+
+		if (!isset($postdata['debt_min'])) $postdata['debt_min'] = 0;
+        if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 5000000;
+
+		if (!isset($postdata['certainty'])) $postdata['certainty'] = 0;
+		
 		$sector_data = array();
 		foreach($sectors as $sector) {
 			$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectorByCode($sector);
@@ -156,7 +154,71 @@ class ApplicationController extends Controller
 				$sector_data[$sector]['sector_code'] = $sector;
 				$sector_data[$sector]['longitude'] = $sector_info[0]['longitude'];
 				$sector_data[$sector]['latitude'] = $sector_info[0]['latitude'];
-				$sector_data[$sector]['total_sector_prospects'] = count($property_data);
+				$sector_data[$sector]['total_sector_prospects'] = 0;
+				foreach($property_data as $key => $val) {
+					$score = 0;
+
+					if($postdata['property_value_min'] == $postdata['property_value_max'] && ($val['average_price'] >= $postdata['property_value_min'] || $val['average_newprice'] >= $postdata['property_value_min'])) {
+						$score++;
+					} else {
+						if(($val['average_price'] >= $postdata['property_value_min'] && $val['average_price'] <= $postdata['property_value_max']) || ($val['average_newprice'] >= $postdata['property_value_min'] && $val['average_newprice'] <= $postdata['property_value_max']))
+							$score++;
+					}
+
+					if($postdata['ltv_min'] == $postdata['ltv_max'] && $val['average_ltv'] >= $postdata['ltv_min']) {
+						$score++;
+					} else {
+						if($val['average_ltv'] >= $postdata['ltv_min'] && $val['average_ltv'] <= $postdata['ltv_max'])
+							$score++;
+					}
+
+					if($postdata['loan_age_min'] == $postdata['loan_age_max'] && $val['average_loan_age'] >= $postdata['loan_age_min']) {
+						$score++;
+					} else {
+						if($val['average_loan_age'] >= $postdata['loan_age_min'] && $val['average_loan_age'] <= $postdata['loan_age_max'])
+							$score++;
+					}
+
+					if($postdata['income_min'] == $postdata['income_max'] && $val['average_income'] >= $postdata['income_min']) {
+						$score++;
+					} else {
+						if($val['average_income'] >= $postdata['income_min'] && $val['average_income'] <= $postdata['income_max'])
+							$score++;
+					}
+
+					if($postdata['property_owned_min'] == $postdata['property_owned_max'] && $val['average_assets_owned'] >= $postdata['property_owned_min']) {
+						$score++;
+					} else {
+						if($val['average_assets_owned'] >= $postdata['property_owned_min'] && $val['average_assets_owned'] <= $postdata['property_owned_max'])
+							$score++;
+					}
+
+					if($postdata['assets_min'] == $postdata['assets_max'] && ($val['average_assets_owned'] * $val['average_newprice']) >= $postdata['assets_min']) {
+						$score++;
+					} else {
+						if(($val['average_assets_owned'] * $val['average_newprice']) >= $postdata['assets_min'] && ($val['average_assets_owned'] * $val['average_newprice']) <= $postdata['assets_max'])
+							$score++;
+					}
+
+					if($postdata['age_min'] == $postdata['age_max'] && $val['average_prospect_age'] >= $postdata['age_min']) {
+						$score++;
+					} else {
+						if($val['average_prospect_age'] >= $postdata['age_min'] && $val['average_prospect_age'] <= $postdata['age_max'])
+							$score++;
+					}
+
+					$debt = ($val['average_ltv'] / 100) * $val['average_price'];
+					if($postdata['debt_min'] == $postdata['debt_max'] && $debt >= $postdata['debt_min']) {
+						$score++;
+					} else {
+						if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max'])
+							$score++;
+					}
+
+					$temp_score = (int) (($score / 8) * 100);
+					if($temp_score >= 100)
+						$sector_data[$sector]['total_sector_prospects']++;
+				}
 			}
 		}
 		
@@ -188,28 +250,28 @@ class ApplicationController extends Controller
         $postdata = $request->query->all();
 
         if (!isset($postdata['property_value_min'])) $postdata['property_value_min'] = 0;
-        if (!isset($postdata['property_value_max'])) $postdata['property_value_max'] = 0;
+        if (!isset($postdata['property_value_max'])) $postdata['property_value_max'] = 10000000;
 
         if (!isset($postdata['ltv_min'])) $postdata['ltv_min'] = 0;
-        if (!isset($postdata['ltv_max'])) $postdata['ltv_max'] = 0;
+        if (!isset($postdata['ltv_max'])) $postdata['ltv_max'] = 100;
 
         if (!isset($postdata['loan_age_min'])) $postdata['loan_age_min'] = 0;
-        if (!isset($postdata['loan_age_max'])) $postdata['loan_age_max'] = 0;
+        if (!isset($postdata['loan_age_max'])) $postdata['loan_age_max'] = 10;
 
 		if (!isset($postdata['income_min'])) $postdata['income_min'] = 0;
-        if (!isset($postdata['income_max'])) $postdata['income_max'] = 0;
+        if (!isset($postdata['income_max'])) $postdata['income_max'] = 5000000;
 
-        if (!isset($postdata['property_owned_min'])) $postdata['property_owned_min'] = 0;
-        if (!isset($postdata['property_owned_max'])) $postdata['property_owned_max'] = 0;
+        if (!isset($postdata['property_owned_min'])) $postdata['property_owned_min'] = 1;
+        if (!isset($postdata['property_owned_max'])) $postdata['property_owned_max'] = 10;
 
-        if (!isset($postdata['age_min'])) $postdata['age_min'] = 0;
-        if (!isset($postdata['age_max'])) $postdata['age_max'] = 0;
+        if (!isset($postdata['age_min'])) $postdata['age_min'] = 18;
+        if (!isset($postdata['age_max'])) $postdata['age_max'] = 70;
 
 		if (!isset($postdata['assets_min'])) $postdata['assets_min'] = 0;
-        if (!isset($postdata['assets_max'])) $postdata['assets_max'] = 0;
+        if (!isset($postdata['assets_max'])) $postdata['assets_max'] = 10000000;
 
 		if (!isset($postdata['debt_min'])) $postdata['debt_min'] = 0;
-        if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 0;
+        if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 5000000;
 
 		if (!isset($postdata['certainty'])) $postdata['certainty'] = 0;
 		if (!isset($postdata['sector'])) $postdata['sector'] = 0;
