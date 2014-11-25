@@ -16,39 +16,6 @@ class TransactionsRepository extends EntityRepository
 	{
 		return $this->getEntityManager()
 			->createQuery(
-				/*'SELECT 
-					  t.urakey,
-					  COUNT(t.id) AS average_assets_owned,
-					  t.longitude,
-					  t.latitude,
-					  t.sector,
-					  pr.longitude AS pr_long,
-					  pr.latitude AS pr_lat,
-					  pr.name AS sector_name,
-					  round(AVG(t.price),2) AS average_price,
-					  round(AVG(t.newprice),2) AS average_newprice,
-					  round(AVG(p.age)) AS average_prospect_age,
-					  round(AVG(p.derivedIncome),2) AS average_income,
-					  round(AVG(pl.loanAmount),2) AS average_loan,
-					  AVG(pl.ltv) AS average_ltv,
-					  AVG(
-						timestampdiff(YEAR, pl.loanDate, CURRENT_DATE())
-					  ) AS average_loan_age,
-					  pl.prospectId
-					FROM RefiBundle:Prospectloan pl
-					JOIN RefiBundle:Transactions t
-						WITH t.id = pl.transactionId
-					JOIN RefiBundle:Postalregion pr
-						WITH t.sector = pr.regionCode
-					JOIN RefiBundle:Prospect p
-						WITH p.id = pl.prospectId
-					LEFT JOIN RefiBundle:Prospectlist ppl
-						WITH ppl.prospectId = pl.prospectId
-					WHERE t.sector = :sector
-					AND ppl.prospectId IS NULL
-					GROUP BY pl.prospectId
-					ORDER BY t.sector ASC
-				'*/
 				'SELECT 
 					  t.sector
 					FROM RefiBundle:Transactions t
