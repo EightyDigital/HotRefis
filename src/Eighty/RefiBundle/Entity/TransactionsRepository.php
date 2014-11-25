@@ -16,7 +16,7 @@ class TransactionsRepository extends EntityRepository
 	{
 		return $this->getEntityManager()
 			->createQuery(
-				'SELECT 
+				/*'SELECT 
 					  t.urakey,
 					  COUNT(t.id) AS average_assets_owned,
 					  t.longitude,
@@ -48,8 +48,8 @@ class TransactionsRepository extends EntityRepository
 					AND ppl.prospectId IS NULL
 					GROUP BY pl.prospectId
 					ORDER BY t.sector ASC
-				'
-				/*'SELECT 
+				'*/
+				'SELECT 
 					  t.sector
 					FROM RefiBundle:Transactions t
 					JOIN RefiBundle:Prospectloan pl
@@ -58,7 +58,7 @@ class TransactionsRepository extends EntityRepository
 						WITH sl.sectorCode = t.sector
 					WHERE sl.sectorCode IS NULL AND t.sector = :sector
 					GROUP BY pl.prospectId
-				'*/
+				'
 			)
 			->setParameter('sector', $sector)
 			->getArrayResult();
