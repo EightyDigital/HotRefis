@@ -19,6 +19,7 @@
       <div class="status__wrap">
         <p>{% if name is defined %}{{ name }}{% endif %}</p>
         <p><span class="credits">{% if credits is defined %}{{ credits }}{% endif %}</span> credits</p>
+		<input type="hidden" id="sectors_owned" value="{% if sectors_owned is defined %}{{ sectors_owned }}{% endif %}" />
       </div>
 
       <div class="account__status">

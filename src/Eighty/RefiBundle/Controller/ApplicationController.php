@@ -20,11 +20,13 @@ class ApplicationController extends Controller
 		$usr = $this->get('security.context')->getToken()->getUser();
 		$id = $usr->getId();
 		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
+		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
 
         return $this->render('RefiBundle:Application:index.html.twig',
 			array(
 				'name' => $usr->getFullname(),
 				'credits' => $credits,
+				'sectors_owned' => $sectors_owned,
 			)
 		);
     }
@@ -35,6 +37,7 @@ class ApplicationController extends Controller
 		$usr = $this->get('security.context')->getToken()->getUser();
 		$id = $usr->getId();
 		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
+		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
 		$paginator = $this->get('knp_paginator');
 		
 		$prospectlist = $em->getRepository('RefiBundle:Prospectlist')->getProspectList($id);
@@ -72,6 +75,7 @@ class ApplicationController extends Controller
 			array(
 				'name' => $usr->getFullname(),
 				'credits' => $credits,
+				'sectors_owned' => $sectors_owned,
 				'prospect_list' => $prospect_list,
 			)
 		);
@@ -83,19 +87,32 @@ class ApplicationController extends Controller
 		$usr = $this->get('security.context')->getToken()->getUser();
 		$id = $usr->getId();
 		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
+		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
 
         return $this->render('RefiBundle:Application:prospect.html.twig',
 			array(
 				'name' => $usr->getFullname(),
 				'credits' => $credits,
+				'sectors_owned' => $sectors_owned,
 			)
 		);
     }
 
-	public function addAction()
+	public function campaignAction()
     {
-		return $this->render('RefiBundle:Application:add.html.twig');
-        //, array('name' => $name)
+		$em = $this->getDoctrine()->getManager();
+		$usr = $this->get('security.context')->getToken()->getUser();
+		$id = $usr->getId();
+		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
+		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
+
+        return $this->render('RefiBundle:Application:campaign.html.twig',
+			array(
+				'name' => $usr->getFullname(),
+				'credits' => $credits,
+				'sectors_owned' => $sectors_owned,
+			)
+		);
     }
 
     public function calculatorAction()
