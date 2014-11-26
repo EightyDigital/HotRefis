@@ -32,6 +32,7 @@
   .property--list {
     padding:5px 10px;
     & > li {
+      position:relative;
       border-bottom:1px solid #ccc;
       margin:10px 0 0 0;
       padding:0 0 10px 0;
@@ -82,6 +83,9 @@
     h2 {
       font-size:16px;
     }
+    p {
+      margin:0 0 5px 0;
+    }
   }
   .short__list--footer {
     overflow:auto;
@@ -91,5 +95,14 @@
       text-align:right;
       margin:10px 10px 10px 10px;
     }
+  }
+
+  .delete--button {
+    display:block;
+    color: $color__brand;
+    font-size:18px;
+    position:absolute;
+    right:5px;
+    top:5px;
   }
 }
