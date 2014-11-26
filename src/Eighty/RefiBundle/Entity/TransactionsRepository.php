@@ -12,11 +12,28 @@ use Doctrine\ORM\EntityRepository;
  */
 class TransactionsRepository extends EntityRepository
 {
-	public function filterSectorByCode($sector)
+	public function filterSectorByCode($sector = 0)
 	{
 		return $this->getEntityManager()
 			->createQuery(
 				'SELECT 
+					  t.sector,
+					  pr.name,
+					  pr.longitude,
+					  pr.latitude,
+					  COUNT(t.sector) AS num_prospects 
+					FROM
+					  RefiBundle:Prospectloan pl 
+					  JOIN RefiBundle:Transactions t 
+						WITH t.id = pl.prospectId
+					  JOIN RefiBundle:Postalregion pr 
+						WITH pr.regionCode = t.sector
+					  LEFT JOIN RefiBundle:Sectorlist sl 
+						WITH sl.sectorCode = t.sector
+					WHERE sl.sectorCode IS NULL 
+					GROUP BY t.sector
+				'
+				/*'SELECT 
 					  t.sector
 					FROM RefiBundle:Transactions t
 					JOIN RefiBundle:Prospectloan pl
@@ -25,9 +42,9 @@ class TransactionsRepository extends EntityRepository
 						WITH sl.sectorCode = t.sector
 					WHERE sl.sectorCode IS NULL AND t.sector = :sector
 					GROUP BY pl.prospectId
-				'
+				'*/
 			)
-			->setParameter('sector', $sector)
+			//->setParameter('sector', $sector)
 			->getArrayResult();
 	}
 	

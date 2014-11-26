@@ -22,6 +22,9 @@
 				 margin: 15px  0;
 				 text-transform: uppercase;">Prospect List</h2>
       
+	  {% if prospect_list is empty %}
+		You have no prospects blasted yet.
+	  {% endif %}
 	  {% for list in prospect_list %}
 	  <table id="Prospect-Table" border="1" ng-app="tablemod">
         <thead>

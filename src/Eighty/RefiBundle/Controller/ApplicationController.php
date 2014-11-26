@@ -40,7 +40,7 @@ class ApplicationController extends Controller
 		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
 		$paginator = $this->get('knp_paginator');
 		
-		$prospectlist = $em->getRepository('RefiBundle:Prospectlist')->getProspectList($id);
+		$prospectlist = $em->getRepository('RefiBundle:Prospectlist')->getProspectListContactedEngaged($id);
 		
 		$temp_prospect_list = array();
 		foreach($prospectlist as $key => $val) {
@@ -117,14 +117,36 @@ class ApplicationController extends Controller
 
     public function calculatorAction()
     {
-        return $this->render('RefiBundle:Application:calculator.html.twig');
-        //, array('name' => $name)
+		$em = $this->getDoctrine()->getManager();
+		$usr = $this->get('security.context')->getToken()->getUser();
+		$id = $usr->getId();
+		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
+		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
+		
+        return $this->render('RefiBundle:Application:calculator.html.twig',
+			array(
+				'name' => $usr->getFullname(),
+				'credits' => $credits,
+				'sectors_owned' => $sectors_owned,
+			)
+		);
     }
 
     public function reportAction()
     {
-        return $this->render('RefiBundle:Application:report.html.twig');
-        //, array('name' => $name)
+        $em = $this->getDoctrine()->getManager();
+		$usr = $this->get('security.context')->getToken()->getUser();
+		$id = $usr->getId();
+		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
+		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
+		
+        return $this->render('RefiBundle:Application:report.html.twig',
+			array(
+				'name' => $usr->getFullname(),
+				'credits' => $credits,
+				'sectors_owned' => $sectors_owned,
+			)
+		);
     }
 
 	/*-------------------------------------------------/
@@ -134,6 +156,7 @@ class ApplicationController extends Controller
 	public function filterPropertyAction()
 	{
 		$em = $this->getDoctrine()->getManager();
+		/*
 		$sectors = array('01','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','63','64','65','66','67','68','73','75','76','77','78','79','80','82');
 		
 		$sector_data = array();
@@ -150,6 +173,17 @@ class ApplicationController extends Controller
 					$sector_data[$sector]['total_sector_prospects'] = $prospect_count; 
 				}
 			}
+		}
+		*/
+		
+		$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectorByCode();
+		$sector_data = array();
+		foreach($property_data as $property_data) {
+			$sector_data[$property_data['sector']]['name'] = $property_data['name'];
+			$sector_data[$property_data['sector']]['sector_code'] = $property_data['sector'];
+			$sector_data[$property_data['sector']]['longitude'] = $property_data['longitude'];
+			$sector_data[$property_data['sector']]['latitude'] = $property_data['latitude'];
+			$sector_data[$property_data['sector']]['total_sector_prospects'] = $property_data['num_prospects']; 
 		}
 		
 		$response = new Response(json_encode($sector_data));

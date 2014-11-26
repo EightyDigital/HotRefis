@@ -36,8 +36,10 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 		elseif ($this->security->isGranted('ROLE_USER'))
 		{
 			$this->_clientLoginLog($request->getClientIp());
-			// redirect the user to where they were before the login process begun.
-			$referer_url = $request->headers->get('referer');
+			if(count($this->em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($this->security->getToken()->getUser()->getId())) > 0)
+				$referer_url = $this->router->generate('refi_campaign');
+			else
+				$referer_url = $request->headers->get('referer');
 						
 			$response = new RedirectResponse($referer_url);
 		}
