@@ -9,5 +9,36 @@
   @include query($tabletTrigger){
     position:absolute;
   }
+
 }
 
+
+.sectorinfo__wrap {
+  h2 {
+    font-size:em(18px);
+    text-align:center;
+    padding:0 0 5px 0;
+    margin:0;
+  }
+  .sector {
+    text-align:center;
+  }
+  a {
+    display:inline-block;
+    padding:7px 10px 7px 35px;
+    background: $color__brand;
+    color:#fff;
+    font-size:13px;
+    text-decoration:none;
+    position:relative;
+    margin:10px auto;
+    &:before {
+      position:absolute;
+      left:5px;
+      top:-3px;
+      font-size:18px;
+      padding:5px;
+      margin-right:5px;
+    }
+  }
+}

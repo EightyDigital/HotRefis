@@ -145,21 +145,22 @@
             <li ng-class="{last: $last==true}" ng-repeat="item in shortlist">
               <div class="short__list--item">
                 <h2>
-                  Postal Sector {[ item.sector ]}
+                  {[ item.name ]}
                 </h2>
-
+                <p>Postal Sector {[ item.sector ]}</p>
                 <div class="property--prospects">
                   <span class="value">({[ item.prospects ]} Prospects)</span>
                 </div>
 
                 <div class="property--duration">
                   <ul>
-                    <li><input type="radio" ng-model="duration" checked name="{[ $index + 1]}" value="3"> 3 Months</li>
-                    <li><input type="radio" ng-model="duration" name="{[ $index + 1]}" value="6"> 6 Months</li>
-                    <li><input type="radio" ng-model="duration" name="{[ $index + 1]}" value="12"> 1 Year</li>
+                    <li><input type="radio" ng-model="duration" checked name="chk_{[ $index + 1]}" value="3"> 3 Months</li>
+                    <li><input type="radio" ng-model="duration" name="chk_{[ $index + 1]}" value="6"> 6 Months</li>
+                    <li><input type="radio" ng-model="duration" name="chk_{[ $index + 1]}" value="12"> 1 Year</li>
                   </ul>
                 </div>
               </div>
+              <a class="delete--button ionicons ion-close-circled" ng-click="delete($index, item.sector)"></a>
             </li>
 
             <li class="animate-repeat empty" ng-if="shortlist.length == 0">

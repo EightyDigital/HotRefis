@@ -6827,6 +6827,38 @@ body.ngdialog-open {
   }
 }
 
+/* line 17, ../sass/hotrefi/modules/_map__styles.scss */
+.sectorinfo__wrap h2 {
+  font-size: 1.38462em;
+  text-align: center;
+  padding: 0 0 5px 0;
+  margin: 0;
+}
+/* line 23, ../sass/hotrefi/modules/_map__styles.scss */
+.sectorinfo__wrap .sector {
+  text-align: center;
+}
+/* line 26, ../sass/hotrefi/modules/_map__styles.scss */
+.sectorinfo__wrap a {
+  display: inline-block;
+  padding: 7px 10px 7px 35px;
+  background: #00c0ff;
+  color: #fff;
+  font-size: 13px;
+  text-decoration: none;
+  position: relative;
+  margin: 10px auto;
+}
+/* line 35, ../sass/hotrefi/modules/_map__styles.scss */
+.sectorinfo__wrap a:before {
+  position: absolute;
+  left: 5px;
+  top: -3px;
+  font-size: 18px;
+  padding: 5px;
+  margin-right: 5px;
+}
+
 /* line 1, ../sass/hotrefi/modules/_heatmap__control.scss */
 .heatmap__control {
   overflow: auto;
@@ -7303,7 +7335,7 @@ body.ngdialog-open {
 .filter__controller--list .filter__aux a:before {
   position: absolute;
   left: 0;
-  top: -3px;
+  top: -1px;
   font-size: 22px;
   padding: 10px;
   margin-right: 5px;
@@ -7354,73 +7386,87 @@ body.ngdialog-open {
 }
 /* line 34, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--list > li {
+  position: relative;
   border-bottom: 1px solid #ccc;
   margin: 10px 0 0 0;
   padding: 0 0 10px 0;
 }
-/* line 38, ../sass/hotrefi/modules/_short__list.scss */
+/* line 39, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--list > li.empty {
   border-bottom: none;
   text-align: center;
   padding: 10px 0 20px 0;
   margin: 0;
 }
-/* line 44, ../sass/hotrefi/modules/_short__list.scss */
+/* line 45, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--list > li.last {
   border-bottom: none;
   padding: 0 0 20px 0;
 }
-/* line 50, ../sass/hotrefi/modules/_short__list.scss */
+/* line 51, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--prospects {
   font-size: 13px;
 }
-/* line 53, ../sass/hotrefi/modules/_short__list.scss */
+/* line 54, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--price {
   padding: 10px 0;
 }
-/* line 55, ../sass/hotrefi/modules/_short__list.scss */
+/* line 56, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--price .value {
   font-size: 16px;
   font-weight: 600;
 }
-/* line 62, ../sass/hotrefi/modules/_short__list.scss */
+/* line 63, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--duration {
   clear: both;
   padding: 10px 0;
 }
-/* line 65, ../sass/hotrefi/modules/_short__list.scss */
+/* line 66, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--duration ul {
   padding: 0 0 0 2px;
   overflow: auto;
 }
-/* line 69, ../sass/hotrefi/modules/_short__list.scss */
+/* line 70, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .property--duration li {
   float: left;
   margin-right: 10px;
 }
-/* line 74, ../sass/hotrefi/modules/_short__list.scss */
+/* line 75, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .item__include {
   float: left;
   margin: 10px;
 }
-/* line 78, ../sass/hotrefi/modules/_short__list.scss */
+/* line 79, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .short__list--item {
   overflow: hidden;
   padding: 6px 0;
   margin-left: 20px;
 }
-/* line 82, ../sass/hotrefi/modules/_short__list.scss */
+/* line 83, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .short__list--item h2 {
   font-size: 16px;
 }
 /* line 86, ../sass/hotrefi/modules/_short__list.scss */
+.short__list .short__list--item p {
+  margin: 0 0 5px 0;
+}
+/* line 90, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .short__list--footer {
   overflow: auto;
   clear: both;
 }
-/* line 89, ../sass/hotrefi/modules/_short__list.scss */
+/* line 93, ../sass/hotrefi/modules/_short__list.scss */
 .short__list .short__list--footer .total {
   float: right;
   text-align: right;
   margin: 10px 10px 10px 10px;
+}
+/* line 100, ../sass/hotrefi/modules/_short__list.scss */
+.short__list .delete--button {
+  display: block;
+  color: #00c0ff;
+  font-size: 18px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }

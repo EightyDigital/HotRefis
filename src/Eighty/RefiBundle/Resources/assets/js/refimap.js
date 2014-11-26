@@ -35,6 +35,23 @@ refis.factory('list__service', function($rootScope) {
     $rootScope.$broadcast('maindataBroadcast');
   };
 
+  list.refreshProspectCount = function(override) {
+    if(override == null){
+      list.prospectCount = 0;
+      $.each(list.maindata, function(a, sectorList) {
+        // Sector by Sector
+        $.each(sectorList, function(b, sectorItem) {
+          list.prospectCount += parseInt(sectorItem.total_sector_prospects,10);
+        });
+      });
+      console.log(list.prospectCount);
+      $('.heatmap__control--results .value--wrap .value').text( accounting.formatNumber( list.prospectCount ) );
+    }
+    else {
+      $('.heatmap__control--results .value--wrap .value').text( accounting.formatNumber( override ) );
+    }
+  };
+
   return list;
 });
 
@@ -43,21 +60,53 @@ refis.factory('shortlist__service', function($rootScope, list__service) {
   var shortlist = {name: "ShortList", listdata: []};
 
   shortlist.listdata = [];
-
-  shortlist.addShortlistItem = function(list_sector, duration, potentialProspects) {
+  var valid = true;
+  shortlist.addShortlistItem = function(sector_name, list_sector, duration, potentialProspects) {
     if(this.listdata.length < 3){
-      this.listdata.push({sector: list_sector, validity: duration, prospects: potentialProspects });
-      this.broadcastItem();
+
+      for(var i = 0; i < this.listdata.length; i++){
+        if(this.listdata[i].sector == list_sector){
+          // duplicate sector!
+          valid = false;
+        }
+        else{
+          valid = true;
+        }
+      }
+      if(valid == true){
+        this.listdata.push({name: sector_name, sector: list_sector, validity: duration, prospects: potentialProspects });
+        this.broadcastItem();
+        alert("Sector: "+sector_name+" added to shortlist");
+
+      }
+      else{
+        alert('Not added - Duplicate sectors found');
+      }
+      // $.each(this.listdata, function(a, shortlist) {
+      //   // Sector by Sector
+      //   $.each(sectorList, function(b, sectorItem) {
+      //     list.prospectCount += parseInt(sectorItem.total_sector_prospects,10);
+      //   });
+      // });
+
     }
     else{
-      console.log("too many in shortlist");
+      alert("Too many in shortlist");
     }
 
     //console.log("maindata contains: "+_.keys(list.maindata).length);
   };
 
+  shortlist.removeFromList = function(sector) {
+    var index = this.listdata.indexOf(sector);
+    if (index > -1) {
+      this.listdata.splice(index, 1);
+      this.broadcastItem();
+    }
+  };
   shortlist.broadcastItem = function() {
     $rootScope.$broadcast('shortlistBroadcast');
+
   };
 
   return shortlist;
@@ -329,7 +378,7 @@ refis.factory('api__service', function($rootScope, $http, list__service, filter_
       list__service.prepForBroadcast(data);
       $( ".filter__slider" ).slider({ disabled: false });
       $('body').removeClass('loading');
-
+      list__service.refreshProspectCount();
       ///console.log(values);
       api.broadcastItem();
     });
@@ -337,7 +386,7 @@ refis.factory('api__service', function($rootScope, $http, list__service, filter_
       alert("Could not fetch prospects, contact FortyTu");
       $( ".filter__slider" ).slider({ disabled: false });
       $('.data__loading h2').text('Error Loading Data');
-
+      list__service.refreshProspectCount(0);
       api.broadcastItem();
     });
   };
@@ -499,30 +548,15 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, filter
     step: 2,
     value: 0,
     slide: function( event, ui ) {
-      // var tempVal = ui.value*500;
-      // var newVal = 100000 - tempVal
-      // $('.heatmap__control--results .value').text( accounting.formatNumber( newVal ) );
-      // if(ui.value == 0){
-      //   $('.heatmap__control--results .value').text( accounting.formatNumber(100000) );
-      // }
-      console.log(ui.value);
+      // EMPTY
     },
     // State change we must update step value - more of an inbetween
     change: function( event, ui ) {
-      //heatmap__service.filterScore((ui.value));
       filter__service.certainty = ui.value;
-      //$( ".filter__slider" ).slider({ disabled: true });
-      console.log(filter__service.isZoomed);
-      if(filter__service.isZoomed == true) {
-        heatmap__service.requestSector( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty, sector: filter__service.isZoomedSector } );
-      }
-      else{
-        api__service.filterBroadcast( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty } );
-      }
       $('.heatmap__control--legend .value__wrap  .value').html(ui.value+"%");
     },
     create: function( event, ui ) {
-      //$('.heatmap__control--results .value').text( accounting.formatNumber(100000) );
+      // EMPTY
     }
   });
   $scope.sliderDown = function(){
@@ -543,12 +577,23 @@ var heatmap_slider = refis.controller('heatmap__slider', function($scope, filter
 
     // Increase the step value
     s.slider("value", val+step);
+  }
 
+
+  // Price selection
+  $scope.applyFilters = function () {
+    $( ".filter__slider" ).slider({ disabled: true });
+    if(filter__service.isZoomed == true) {
+      heatmap__service.requestSector( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty, sector: filter__service.isZoomedSector } );
+    }
+    else{
+      api__service.filterBroadcast( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty } );
+    }
   }
 });
 
 
-var filter_controller = refis.controller('filter__controller', function($scope, $log, $http, list__service, api__service, filter__service, shortlist__service) {
+var filter_controller = refis.controller('filter__controller', function($scope, $log, $http, list__service, api__service, filter__service, shortlist__service, heatmap__service) {
 
   // Property Value
   $scope.slider = $( ".property__value" ).slider({
@@ -808,23 +853,27 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   // Price selection
   $scope.applyFilters = function () {
     $( ".filter__slider" ).slider({ disabled: true });
-    //api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
     if(filter__service.isZoomed == true) {
       heatmap__service.requestSector( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty, sector: filter__service.isZoomedSector } );
     }
     else{
       api__service.filterBroadcast( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty } );
     }
-    //$( ".heatmap__slider" ).slider({ value: 0 });
   }
- // I am the list of friends to show.
+
+  // I am the shortlist
   $scope.shortlist = [];
 
   $scope.$on('shortlistBroadcast', function() {
-    console.log("something added to shortlist");
     $scope.duration = '3';
     $scope.shortlist = shortlist__service.listdata;
   });
+
+  $scope.delete = function ( idx, sector ) {
+    //var sector__index = $scope.persons[idx];
+    shortlist__service.removeFromList(sector);
+    $scope.shortlist.splice(idx, 1);
+  };
 });
 
 var map_controller = refis.controller('map__controller', function($scope, $http, $compile, list__service, heatmap__service, district__service, map__service, api__service, shortlist__service, filter__service, heatmap__service) {
@@ -832,10 +881,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   $scope.maindata = {};
   $scope.heatMapData = [];
   $scope.geoLocations = [];
-  $scope.prospectCount = 0;
-  //$scope.pointArray = new google.maps.MVCArray($scope.heatMapData);
-
-  //api__service.filterBroadcast();
+  //$scope.total__prospects = 0;
 
   $scope.heatmap = new google.maps.visualization.HeatmapLayer({
     data: $scope.heatMapData,
@@ -845,6 +891,10 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     maxIntensity: 100,
     opacity: 0.8
   });
+
+  /****** NEED TO MOVE THIS SOMEWHERE! ******/
+  api__service.filterBroadcast( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty } );
+  /******************************************/
 
   // Create a new 'Map' instance
   map__service.google.mapTypes.set('map_style', map__service.styledMap);
@@ -871,10 +921,14 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
         icon: map__service.iconBase + 'placemark_circle.png',
         animation: google.maps.Animation.DROP
     });
-    //console.log(location);
-    marker.content = "<div class='sectorinfo__wrap'><h2>Postal Sector: " + location.sector_code + "</h2><div class='address'><div class='streetname'><span>"+location.name+"</span></div>&nbsp;</div><div class='condos'><span>Condos: "+location.properties+"</span></div><div class='prospects'>Prospects: <span>"+location.total_sector_prospects+"</span></div>";
-    marker.content += "<div class='addShort'><a class='add' ng-click='addShortlist("+location.sector_code+",3,"+location.total_sector_prospects+")' data-sector='"+location.sector_code+"'>Add to ShortList</a></div></div><br/>";
-    //marker.content = "<div class=\"click__wrap\"><a ng-include ng-click=\"addShortlist("+location.sector_code+")\" >Add to ShortList</a></div>";
+
+
+
+
+    //marker.content = "<div class='sectorinfo__wrap'><h2>" + location.name + "</h2><div class='sector'><span class='title'>Postal Sector: </span><span class='value'>" + location.sector_code + "</span></div><div class='prospects'><span class='label'>There are </span><span class='value'>"+location.total_sector_prospects+"</span> <span class='label'> prospects available in this postal sector</span></div>";
+    marker.content = "<div class='sectorinfo__wrap'><h2>" + location.name + "</h2><div class='sector'><span class='title'>Postal Sector: </span><span class='value'>" + location.sector_code + "</span></div>";
+
+    marker.content += "<div class='addShort'><a class='add ionicons ion-plus-circled' ng-click='addShortlist(\""+location.name+"\","+location.sector_code+",3,"+location.total_sector_prospects+")' data-sector='"+location.sector_code+"'>Add to ShortList</a></div></div><br/>";
 
     var compiled = $compile(marker.content)($scope);
 
@@ -928,14 +982,18 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   // Push Json Markers
   var setMapData = function(){
     $scope.geolocations = list__service.maindata;
+    //$scope.total__prospects = 0;
 
     clearMarkers();
-    var buffer;
     // All Sectors
+
     $.each($scope.geolocations, function(a, sectorList) {
       // Sector by Sector
       $.each(sectorList, function(b, sectorItem) {
+        $scope.total__prospects += parseInt(sectorItem.total_sector_prospects,10);
+        //console.log(sectorItem);
         createMarker(sectorItem);
+
       });
     });
   }
@@ -1002,20 +1060,22 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     console.log("Change in map detected");
   });
 
-  $scope.applyFilters = function () {
-    $( ".filter__slider" ).slider({ disabled: true });
-    //api__service.filterBroadcast( { property_value_min: $scope.property_value_min, property_value_max: $scope.property_value_max, ltv_min: $scope.ltv_min, ltv_max: $scope.ltv_max, loan_age_min: $scope.loan_age_min, loan_age_max: $scope.loan_age_max, income_min: $scope.income_min, income_max: $scope.income_max, property_owned_min: $scope.property_owned_min, property_owned_max: $scope.property_owned_max, age_min: $scope.age_min, age_max: $scope.age_max, assets_min: $scope.assets_min, assets_max: $scope.assets_max, debt_min: $scope.debt_min, debt_max: $scope.debt_max } );
-    if(filter__service.isZoomed == true) {
-      heatmap__service.requestSector( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty, sector: filter__service.isZoomedSector } );
-    }
-    else{
-      api__service.filterBroadcast( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty } );
-    }
-  }
 
-  $scope.addShortlist = function (sector,duration,prospects) {
-    shortlist__service.addShortlistItem(sector, duration, prospects);
-    alert("Sector: "+sector+" added to shortlist");
+
+  $scope.addShortlist = function (name, sector, duration, prospects) {
+    shortlist__service.addShortlistItem(name, sector, duration, prospects);
+
+    // heatmap__service.requestSector( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty, sector: sector } );
+    // $scope.total__prospects = 0;
+    // // Loop through sector list
+    // $.each(list__service.prospectData, function(a, sectorList) {
+    //   // Get individual Sector
+    //   $.each(sectorList, function(b, sectorItem) {
+    //     $scope.total__prospects += parseInt(sectorItem.total_sector_prospects,10);
+    //   });
+    // });
+    // $('.heatmap__control--results .value').text( accounting.formatNumber( $scope.total__prospects ) );
+
   }
 });
 
