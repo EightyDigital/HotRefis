@@ -21,16 +21,25 @@ class TransactionsRepository extends EntityRepository
 					  pr.name,
 					  pr.longitude,
 					  pr.latitude,
-					  COUNT(t.sector) AS num_prospects 
+					  COUNT(DISTINCT pl.prospectId) AS num_prospects 
 					FROM
 					  RefiBundle:Prospectloan pl 
 					  JOIN RefiBundle:Transactions t 
-						WITH t.id = pl.prospectId
+						WITH t.id = pl.transactionId
 					  JOIN RefiBundle:Postalregion pr 
 						WITH pr.regionCode = t.sector
+					  JOIN RefiBundle:Prospect p
+						WITH p.id = pl.prospectId
 					  LEFT JOIN RefiBundle:Sectorlist sl 
 						WITH sl.sectorCode = t.sector
 					WHERE sl.sectorCode IS NULL 
+					  AND t.price IS NOT NULL
+					  AND t.newprice IS NOT NULL
+					  AND p.age IS NOT NULL
+					  AND p.derivedIncome IS NOT NULL
+					  AND pl.loanAmount IS NOT NULL
+					  AND pl.ltv IS NOT NULL
+					  AND pl.loanDate IS NOT NULL
 					GROUP BY t.sector
 				'
 				/*'SELECT 
@@ -100,17 +109,25 @@ class TransactionsRepository extends EntityRepository
 						timestampdiff(YEAR, pl.loanDate, CURRENT_DATE())
 					  ) AS average_loan_age,
 					  pl.prospectId
-					FROM RefiBundle:Prospectloan pl
-					JOIN RefiBundle:Transactions t
+					FROM
+					  RefiBundle:Prospectloan pl 
+					  JOIN RefiBundle:Transactions t 
 						WITH t.id = pl.transactionId
-					JOIN RefiBundle:Postalregion pr
-						WITH t.sector = pr.regionCode
-					JOIN RefiBundle:Prospect p
+					  JOIN RefiBundle:Postalregion pr 
+						WITH pr.regionCode = t.sector
+					  JOIN RefiBundle:Prospect p
 						WITH p.id = pl.prospectId
 					LEFT JOIN RefiBundle:Prospectlist ppl
 						WITH ppl.prospectId = pl.prospectId
 					$where
-					AND ppl.prospectId IS NULL
+					  AND t.price IS NOT NULL
+					  AND t.newprice IS NOT NULL
+					  AND p.age IS NOT NULL
+					  AND p.derivedIncome IS NOT NULL
+					  AND pl.loanAmount IS NOT NULL
+					  AND pl.ltv IS NOT NULL
+					  AND pl.loanDate IS NOT NULL
+					  AND ppl.prospectId IS NULL
 					GROUP BY pl.prospectId
 					ORDER BY t.sector ASC
 				"

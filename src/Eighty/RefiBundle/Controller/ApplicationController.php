@@ -214,28 +214,28 @@ class ApplicationController extends Controller
         $postdata = $request->query->all();
 
         if (!isset($postdata['property_value_min'])) $postdata['property_value_min'] = 0;
-        if (!isset($postdata['property_value_max'])) $postdata['property_value_max'] = 0; //10000000;
+        if (!isset($postdata['property_value_max'])) $postdata['property_value_max'] = 10000000; //10000000;
 
         if (!isset($postdata['ltv_min'])) $postdata['ltv_min'] = 0;
-        if (!isset($postdata['ltv_max'])) $postdata['ltv_max'] = 0; //100;
+        if (!isset($postdata['ltv_max'])) $postdata['ltv_max'] = 100; //100;
 
         if (!isset($postdata['loan_age_min'])) $postdata['loan_age_min'] = 0;
-        if (!isset($postdata['loan_age_max'])) $postdata['loan_age_max'] = 0; //10;
+        if (!isset($postdata['loan_age_max'])) $postdata['loan_age_max'] = 10; //10;
 
 		if (!isset($postdata['income_min'])) $postdata['income_min'] = 0;
-        if (!isset($postdata['income_max'])) $postdata['income_max'] = 0; //5000000;
+        if (!isset($postdata['income_max'])) $postdata['income_max'] = 5000000; //5000000;
 
         if (!isset($postdata['property_owned_min'])) $postdata['property_owned_min'] = 1;
-        if (!isset($postdata['property_owned_max'])) $postdata['property_owned_max'] = 1; //10;
+        if (!isset($postdata['property_owned_max'])) $postdata['property_owned_max'] = 10; //10;
 
-        if (!isset($postdata['age_min'])) $postdata['age_min'] = 0; //18;
-        if (!isset($postdata['age_max'])) $postdata['age_max'] = 0; //70;
+        if (!isset($postdata['age_min'])) $postdata['age_min'] = 18; //18;
+        if (!isset($postdata['age_max'])) $postdata['age_max'] = 70; //70;
 
 		if (!isset($postdata['assets_min'])) $postdata['assets_min'] = 0;
-        if (!isset($postdata['assets_max'])) $postdata['assets_max'] = 0; //10000000;
+        if (!isset($postdata['assets_max'])) $postdata['assets_max'] = 10000000; //10000000;
 
 		if (!isset($postdata['debt_min'])) $postdata['debt_min'] = 0;
-        if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 0; //5000000;
+        if (!isset($postdata['debt_max'])) $postdata['debt_max'] = 5000000; //5000000;
 
 		if (!isset($postdata['certainty'])) $postdata['certainty'] = 0;
 		if (!isset($postdata['sector'])) $postdata['sector'] = 0;
@@ -245,11 +245,12 @@ class ApplicationController extends Controller
 		} else {
 			$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspectsBySector(1, $postdata['sector']);
 		}
-
+		
+		$perfect_score = 100;
 		$sector = array();
-		foreach($property_data as $val) {
+		foreach($property_data as $key => $val) {
 			$score = 0;
-
+			
 			if($postdata['property_value_min'] == $postdata['property_value_max'] && ($val['average_price'] >= $postdata['property_value_min'] || $val['average_newprice'] >= $postdata['property_value_min'])) {
 				$score++;
 			} else {
@@ -289,7 +290,7 @@ class ApplicationController extends Controller
 				$score++;
 			} else {
 				if(($val['average_assets_owned'] * $val['average_newprice']) >= $postdata['assets_min'] && ($val['average_assets_owned'] * $val['average_newprice']) <= $postdata['assets_max'])
-					$score++;
+					$score++; 
 			}
 
 			if($postdata['age_min'] == $postdata['age_max'] && $val['average_prospect_age'] >= $postdata['age_min']) {
@@ -303,8 +304,8 @@ class ApplicationController extends Controller
 			if($postdata['debt_min'] == $postdata['debt_max'] && $debt >= $postdata['debt_min']) {
 				$score++;
 			} else {
-				if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max'])
-					$score++;
+				if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max']) {
+					$score++; $test = $test . "h"; }
 			}
 
 			$temp_score = (int) (($score / 8) * 100);
@@ -315,11 +316,11 @@ class ApplicationController extends Controller
 				$temp[$val['urakey']]['num_prospects'] = 1;
 
 			if(isset($temp[$val['urakey']]['perfect_score'])) {
-				if($temp_score >= 100) {
+				if($temp_score >= $perfect_score) {
 					$temp[$val['urakey']]['perfect_score']++;
 				}
 			} else {
-				if($temp_score >= 100) {
+				if($temp_score >= $perfect_score) {
 					$temp[$val['urakey']]['perfect_score'] = 1;
 				} else {
 					$temp[$val['urakey']]['perfect_score'] = 0;
@@ -346,8 +347,9 @@ class ApplicationController extends Controller
 			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = $temp_property_score;
 			$sector[$val['sector']]['properties'][$val['urakey']]['total_property_prospects'] = $temp[$val['urakey']]['perfect_score'];
 
-			if($temp_score >= 100) {
-				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][]['prospect_id'] = $val['prospectId'];
+			if($temp_score >= $perfect_score) {
+				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$key]['prospect_id'] = $val['prospectId'];
+				/*$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$key]['prospect_score'] = $temp_score;*/
 			}
 		}
 
