@@ -304,8 +304,8 @@ class ApplicationController extends Controller
 			if($postdata['debt_min'] == $postdata['debt_max'] && $debt >= $postdata['debt_min']) {
 				$score++;
 			} else {
-				if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max']) {
-					$score++; $test = $test . "h"; }
+				if($debt >= $postdata['debt_min'] && $debt <= $postdata['debt_max'])
+					$score++;
 			}
 
 			$temp_score = (int) (($score / 8) * 100);
