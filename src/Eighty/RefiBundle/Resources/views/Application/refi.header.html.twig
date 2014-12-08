@@ -8,10 +8,11 @@
     <nav>
       <ul>
         {# <li><a href="/professions" class="ionicons ion-ios7-home-outline">HOME</a></li> #}
-        <li><a href="/dashboard" class="ionicons ion-map">DASHBOARD</a></li>
-        <li><a href="/list" class="ionicons ion-ios7-people">PROSPECT LIST</a></li>
-        <li><a href="/calculator" class="ionicons ion-ios7-calculator">REFI CALCULATOR</a></li>
-        <li><a href="/report" class="ionicons ion-ios7-paper-outline">REPORTS</a></li>
+        <li><a href="/dashboard" class="ionicons ion-map {% if app.request.get('_route') == 'refi_dashboard' %} active {% endif %} ">DASHBOARD<span>Find your prospects</span></a></li>
+        <li><a href="/campaign" class="ionicons ion-gear-b {% if app.request.get('_route') == 'refi_campaign' %} active {% endif %} ">CAMPAIGN<span>Blast your prospects</span></a></li>
+        <li><a href="/list" class="ionicons ion-ios7-people {% if app.request.get('_route') == 'refi_list' %} active {% endif %} ">PROSPECT LIST<span>See your leads</span></a></li>
+        <li><a href="/calculator" class="ionicons ion-ios7-calculator {% if app.request.get('_route') == 'refi_calculator' %} active {% endif %} ">REFI CALCULATOR<span>Create your model</span></a></li>
+        <li><a href="/report" class="ionicons ion-ios7-paper-outline {% if app.request.get('_rout') == 'refi_report' %} active {% endif %} ">REPORTS<span>Create report</span></a></li>
       </ul>
     </nav>
 

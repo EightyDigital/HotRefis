@@ -151,7 +151,7 @@ refis.factory('map__service', function($rootScope) {
         "stylers": [
           { "saturation": -100 },
           { "gamma": 1 },
-          { "lightness": -24 }
+          { "lightness": -5 }
         ]
     }, {
         "featureType": "poi",
@@ -173,7 +173,7 @@ refis.factory('map__service', function($rootScope) {
         "featureType": "water",
         "elementType": "geometry.fill",
         "stylers": [
-          { "saturation": -50 }
+          { "saturation": -60 }
         ]
     }, {
         "featureType": "road",
@@ -832,13 +832,12 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   // I am the shortlist
   $scope.shortlist = [];
 
-  $scope.$on('shortlistBroadcast', function() {
+  $scope.$on('shortlistBroadcast', function(max) {
     $scope.duration = '3';
     $scope.shortlist = shortlist__service.listdata;
   });
 
   $scope.delete = function ( idx, sector ) {
-    //var sector__index = $scope.persons[idx];
     shortlist__service.removeFromList(sector);
     $scope.shortlist.splice(idx, 1);
   };
@@ -865,7 +864,10 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   });
 
   /****** NEED TO MOVE THIS SOMEWHERE! ******/
+  //$scope.mode = $scope.campaignMode;
   api__service.filterBroadcast( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty } );
+  //api__service.filterBroadcast( { certainty: filter__service.certainty } );
+
   /******************************************/
 
   // Create a new 'Map' instance
@@ -897,12 +899,12 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
           //path: 'M -2,0 0,-2 2,0 0,2 z', // diamond
-          scale: 5,
+          scale: 7,
           fillColor: "#063141",
           fillOpacity: 1,
-          strokeColor: "#063141",
-          strokeWeight: 3,
-          strokeOpacity: 0.8
+          strokeColor: "#00c0ff",
+          strokeWeight: 1,
+          strokeOpacity: 0.75
         },
         animation: google.maps.Animation.DROP
     });
@@ -914,7 +916,10 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     var compiled = $compile(marker.content)($scope);
 
     google.maps.event.addListener(marker, 'click', function(){
+      clearHeatmapMarkers();
+
       $scope.infoWindow.setContent( compiled[0] );
+
       $scope.infoWindow.open(map__service.google, marker);
       map__service.google.panTo(new google.maps.LatLng(location.latitude, location.longitude));
       map__service.google.setZoom(14);
@@ -924,9 +929,10 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
     });
     google.maps.event.addListener($scope.infoWindow,'closeclick',function(){
-      map__service.google.panTo(new google.maps.LatLng(1.32008, 103.81984));
-      console.log('closed infowin');
-      filter__service.set_isZoomed(false, 0);
+      //map__service.google.panTo(new google.maps.LatLng(1.32008, 103.81984));
+      // console.log('closed infowin');
+      // clearHeatmapMarkers();
+      // filter__service.set_isZoomed(false, 0);
       map__service.google.setZoom(13);
     });
 
@@ -1047,34 +1053,9 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   }
 
   var generateHeatColor = function(value){
-    // var val = parseInt(value);
-    // if (val > 100) {
-    //     val = 100;
-    // }
-    // else if (val < 0) {
-    //     val = 0;
-    // }
-    // var r = Math.floor((255 * val) / 100),
-    //     g = Math.floor((255 * (100 - val)) / 100),
-    //     b = 0;
-
-    // var rgb = "rgb(" + r + "," + g + "," + b + ")";
-
-    // rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
-
-    // return (rgb && rgb.length === 4) ? "#" +
-    //   ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
-    //   ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
-    //   ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
-
     var scale = chroma.scale(['#00c0ff', '#f3ed7b', '#ee4363']  ).domain([0, 100]),
         color = (scale(value).hex());
 
-    // var hot = chroma.scale(
-    //                    ['#00d5c3', '#f3ed7b', '#ee4363'], // colors
-    //                    [0, 50, 100]  // positions
-    //                   ).mode('rgb');
-    //console.log(hot(value).hex());
     return color;  // #7F7FB0
   }
 

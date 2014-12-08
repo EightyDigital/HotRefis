@@ -6799,13 +6799,27 @@ body.ngdialog-open {
 .global__nav li a.active:before, .global__nav li a:hover:before, .global__nav li a:focus:before {
   color: #ccc;
 }
-/* line 40, ../sass/hotrefi/modules/_global__nav.scss */
+/* line 39, ../sass/hotrefi/modules/_global__nav.scss */
+.global__nav li a.active span, .global__nav li a:hover span, .global__nav li a:focus span {
+  color: #fff;
+}
+/* line 43, ../sass/hotrefi/modules/_global__nav.scss */
 .global__nav li a:before {
   font-size: 2.30769em;
   display: block;
   float: left;
   margin: 0 10px 0 0;
   line-height: 0.5em;
+}
+/* line 50, ../sass/hotrefi/modules/_global__nav.scss */
+.global__nav li a span {
+  display: none !important;
+  visibility: hidden !important;
+  color: #063141;
+  text-align: center;
+  clear: both;
+  padding: 10px 0 0 0;
+  font-size: 11px;
 }
 
 /* line 1, ../sass/hotrefi/modules/_map__styles.scss */
@@ -6992,13 +7006,15 @@ body.ngdialog-open {
 }
 /* line 10, ../sass/hotrefi/modules/_heatmap__control--slider.scss */
 .heatmap__control--slider .ui-slider {
+  background: -webkit-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
+  background: -o-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
+  background: linear-gradient(to right, #00d5c3, #f3ed7b, #ee4363);
   border: 1px solid #666;
   border-radius: 0;
   height: 24px;
   margin: 0 auto 15px 45px;
   position: relative;
   width: 415px;
-  background-color: #063141;
 }
 /* line 23, ../sass/hotrefi/modules/_heatmap__control--slider.scss */
 .heatmap__control--slider .ui-slider-handle {

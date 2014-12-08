@@ -25,32 +25,29 @@
               Property Value
             </div>
             <div class="slider__wrap">
-              <div class="property__value" ng-model="filterVals.property__value"></div>
+              <div class="filter__slider property__value" ng-model="filterVals.property__value"></div>
 
             </div>
             <div class="clr"></div>
           </div>
-
 
           <div class="prospect--box">
             <div class="filter__controls--label ionicons ion-ios7-copy-outline">
               LTV
             </div>
             <div class="slider__wrap">
-              <div class="property__ltv" ng-model="filterVals.property__ltv"></div>
+              <div class="filter__slider property__ltv" ng-model="filterVals.property__ltv"></div>
 
             </div>
             <div class="clr"></div>
           </div>
-
-
 
           <div class="prospect--box">
             <div class="filter__controls--label ionicons ion-calendar">
               Loan Age (years)
             </div>
             <div class="slider__wrap">
-              <div class="property__loanAge" ng-model="filterVals.property__loanAge"></div>
+              <div class="filter__slider property__loanAge" ng-model="filterVals.property__loanAge"></div>
 
             </div>
             <div class="clr"></div>
@@ -66,7 +63,7 @@
             </div>
             <div class="slider__wrap">
 
-              <div class="financials__income" ng-model="filterVals.financials__income"></div>
+              <div class="filter__slider financials__income" ng-model="filterVals.financials__income"></div>
 
             </div>
             <div class="clr"></div>
@@ -78,12 +75,11 @@
             </div>
             <div class="slider__wrap">
 
-              <div class="financials__property" ng-model="filterVals.financials__property"></div>
+              <div class="filter__slider financials__property" ng-model="filterVals.financials__property"></div>
 
             </div>
             <div class="clr"></div>
           </div>
-
 
           <div class="prospect--box">
             <div class="filter__controls--label ionicons ion-ios7-timer-outline">
@@ -91,13 +87,11 @@
             </div>
             <div class="slider__wrap">
 
-              <div class="financials__age" ng-model="filterVals.financials__age"></div>
+              <div class="filter__slider financials__age" ng-model="filterVals.financials__age"></div>
 
             </div>
             <div class="clr"></div>
           </div>
-
-
 
           <div class="prospect--box">
             <div class="filter__controls--label ionicons ionicons ion-android-note">
@@ -105,7 +99,7 @@
             </div>
             <div class="slider__wrap">
 
-              <div class="financials__assets" ng-model="filterVals.financials__assets"></div>
+              <div class="filter__slider financials__assets" ng-model="filterVals.financials__assets"></div>
 
             </div>
             <div class="clr"></div>
@@ -119,59 +113,35 @@
             </div>
             <div class="slider__wrap">
 
-              <div class="financials__debt" ng-model="filterVals.financials__debt"></div>
+              <div class="filter__slider financials__debt" ng-model="filterVals.financials__debt"></div>
 
             </div>
             <div class="clr"></div>
           </div>
         </div>
         <!-- END FINANCIAL FILTERS -->
-
       </div>
 
+      <div class="filter__aux">
+        <a class="ionicons ion-ios7-loop-strong" ng-click="applyFilters()" href="#">Filter</a>
+      </div>
 
     </div>
 
     <div class="filter__controller--list">
       <div class="filter__controller--list--inside">
-        <div class="short__list">
-          <h2 class="header">Property Shortlist</h2>
-          <ul class="property--list">
-            <li>
-              <input checked class="item__include" type="checkbox" name="property" value="prop1234">
-              <div class="short__list--item">
-                <h2>
-                  25 Amber Road
-                </h2>
+        {% if sectors_owned is defined %}
+          <div class="short__list">
+            <h2 class="header">Blast Summary</h2>
 
-                <div class="property--prospects">
-                  <span class="value">(821 Prospects)</span>
-                </div>
-
-                <div class="property--price">
-                  <span class="value">Price: ${[ duration ]}</span>
-                </div>
-
-                <div class="property--duration">
-                  <ul>
-                    <li><input type="radio" ng-model="duration" checked name="duration" value="10,000"> 3 Months</li>
-                    <li><input type="radio" ng-model="duration" name="duration" value="15,000"> 6 Months</li>
-                    <li><input type="radio" ng-model="duration" name="duration" value="20,000"> 1 Year</li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <div class="short__list--footer">
-
-            <div class="total">
-              <span class="label">Total: </span>
-              <span class="value">${[ duration ]}</span>
+            <div class="property--list">
+              <p>You will be blasing to <span>100</span> prospects</p>
             </div>
           </div>
+          <div class="filter__aux">
+            <a class="ionicons ion-checkmark-circled" ng-click="ownSectors(shortlist)">Start Campaign</a>
+          </div>
 
-        </div>
-        <div class="filter__aux">
-          <a class="ionicons ion-ios7-cart" href="/list">Checkout</a>
-        </div>
+        {% endif %}
+
       </div>

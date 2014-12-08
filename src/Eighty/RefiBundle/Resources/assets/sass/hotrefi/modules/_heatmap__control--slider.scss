@@ -8,16 +8,16 @@
   background:url(#{$images}/certainty-scale.png) no-repeat 40px bottom;
 
   .ui-slider {
-    // background: -webkit-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
-    // background: -o-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
-    // background: linear-gradient(to right, #00d5c3, #f3ed7b, #ee4363);
+    background: -webkit-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
+    background: -o-linear-gradient(left, #00d5c3, #f3ed7b, #ee4363);
+    background: linear-gradient(to right, #00d5c3, #f3ed7b, #ee4363);
     border: 1px solid #666;
     border-radius: 0;
     height: 24px;
     margin: 0 auto 15px 45px;
     position:relative;
     width:415px;
-    background-color:$color__brand--secondary;
+    //background-color:$color__brand--secondary;
 
   }
   .ui-slider-handle {
