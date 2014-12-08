@@ -153,30 +153,20 @@ class ApplicationController extends Controller
 	|	route: <domain>/api/filter/property
 	|	postdata: none;
 	--------------------------------------------------*/
-	public function filterPropertyAction()
+	public function filterPropertyAction(Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
-		/*
-		$sectors = array('01','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','63','64','65','66','67','68','73','75','76','77','78','79','80','82');
+		$usr = $this->get('security.context')->getToken()->getUser();
 		
-		$sector_data = array();
-		foreach($sectors as $sector) {
-			$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectorByCode($sector);
-			$sector_info = $em->getRepository('RefiBundle:Transactions')->fetchSectorInfoByCode($sector);
-			if(!empty($sector_info)) {
-				$prospect_count = count($property_data);
-				if($prospect_count > 0) {
-					$sector_data[$sector]['name'] = $sector_info[0]['name'];
-					$sector_data[$sector]['sector_code'] = $sector;
-					$sector_data[$sector]['longitude'] = $sector_info[0]['longitude'];
-					$sector_data[$sector]['latitude'] = $sector_info[0]['latitude'];
-					$sector_data[$sector]['total_sector_prospects'] = $prospect_count; 
-				}
-			}
+		$postdata = $request->query->all();
+        if (!isset($postdata['campaign'])) $postdata['campaign'] = false;
+		
+		if($postdata['campaign'] == true) {
+			$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectorsBySectorlistClientId($usr->getId());
+		} else {
+			$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectors();
 		}
-		*/
 		
-		$property_data = $em->getRepository('RefiBundle:Transactions')->filterSectorByCode();
 		$sector_data = array();
 		foreach($property_data as $property_data) {
 			$sector_data[$property_data['sector']]['name'] = $property_data['name'];
@@ -191,7 +181,7 @@ class ApplicationController extends Controller
 
         return $response;
 	}
-
+	
 	/*-------------------------------------------------/
 	|	route: <domain>/api/filter/prospect
 	|	postdata:

@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class TransactionsRepository extends EntityRepository
 {
-	public function filterSectorByCode($sector = 0)
+	public function filterSectors()
 	{
 		return $this->getEntityManager()
 			->createQuery(
@@ -42,18 +42,42 @@ class TransactionsRepository extends EntityRepository
 					  AND pl.loanDate IS NOT NULL
 					GROUP BY t.sector
 				'
-				/*'SELECT 
-					  t.sector
-					FROM RefiBundle:Transactions t
-					JOIN RefiBundle:Prospectloan pl
-						WITH t.id = pl.transactionId
-					LEFT JOIN RefiBundle:Sectorlist sl
-						WITH sl.sectorCode = t.sector
-					WHERE sl.sectorCode IS NULL AND t.sector = :sector
-					GROUP BY pl.prospectId
-				'*/
 			)
-			//->setParameter('sector', $sector)
+			->getArrayResult();
+	}
+	
+	public function filterSectorsBySectorlistClientId($uid)
+	{
+		return $this->getEntityManager()
+			->createQuery(
+				'SELECT 
+					  t.sector,
+					  pr.name,
+					  pr.longitude,
+					  pr.latitude,
+					  COUNT(DISTINCT pl.prospectId) AS num_prospects 
+					FROM
+					  RefiBundle:Prospectloan pl 
+					  JOIN RefiBundle:Transactions t 
+						WITH t.id = pl.transactionId
+					  JOIN RefiBundle:Postalregion pr 
+						WITH pr.regionCode = t.sector
+					  JOIN RefiBundle:Prospect p
+						WITH p.id = pl.prospectId
+					  LEFT JOIN RefiBundle:Sectorlist sl 
+						WITH sl.sectorCode = t.sector
+					WHERE sl.clientId = :uid 
+					  AND t.price IS NOT NULL
+					  AND t.newprice IS NOT NULL
+					  AND p.age IS NOT NULL
+					  AND p.derivedIncome IS NOT NULL
+					  AND pl.loanAmount IS NOT NULL
+					  AND pl.ltv IS NOT NULL
+					  AND pl.loanDate IS NOT NULL
+					GROUP BY t.sector
+				'
+			)
+			->setParameter('uid', $uid)
 			->getArrayResult();
 	}
 	
