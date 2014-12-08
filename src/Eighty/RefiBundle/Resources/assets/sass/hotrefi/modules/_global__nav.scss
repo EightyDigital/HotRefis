@@ -36,6 +36,9 @@
         &:before {
           color:#ccc;
         }
+        span {
+          color:#fff;
+        }
       }
       &:before {
         font-size:em(30px);
@@ -43,6 +46,15 @@
         float:left;
         margin: 0 10px 0 0;
         line-height: 0.5em;
+      }
+      span {
+        display:none!important;
+        visibility:hidden!important;
+        color:#063141;
+        text-align:center;
+        clear:both;
+        padding:10px 0 0 0;
+        font-size:11px;
       }
     }
   }

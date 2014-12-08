@@ -31,7 +31,6 @@
             <div class="clr"></div>
           </div>
 
-
           <div class="prospect--box">
             <div class="filter__controls--label ionicons ion-ios7-copy-outline">
               LTV
@@ -42,8 +41,6 @@
             </div>
             <div class="clr"></div>
           </div>
-
-
 
           <div class="prospect--box">
             <div class="filter__controls--label ionicons ion-calendar">
@@ -84,7 +81,6 @@
             <div class="clr"></div>
           </div>
 
-
           <div class="prospect--box">
             <div class="filter__controls--label ionicons ion-ios7-timer-outline">
               Ages (years)
@@ -96,8 +92,6 @@
             </div>
             <div class="clr"></div>
           </div>
-
-
 
           <div class="prospect--box">
             <div class="filter__controls--label ionicons ionicons ion-android-note">
@@ -126,7 +120,6 @@
           </div>
         </div>
         <!-- END FINANCIAL FILTERS -->
-
       </div>
 
       <div class="filter__aux">
@@ -137,38 +130,52 @@
 
     <div class="filter__controller--list">
       <div class="filter__controller--list--inside">
-        <div class="short__list">
+        {% if sectors_owned is defined %}
+          {% if sectors_owned != max_sectors %}
+            <div class="short__list">
+              <h2 class="header">Postal Sector Shortlist<span class="count">{[ shortlist.length ]} / {{ max_sectors - sectors_owned }}</span></h2>
 
-          <h2 class="header">Postal Sector Shortlist<span class="count">{[ shortlist.length ]} / 3 in shortlist</span></h2>
+              <ul class="property--list">
+                <li ng-class="{last: $last==true}" ng-repeat="item in shortlist">
+                  <div class="short__list--item">
+                    <h2>
+                      {[ item.name ]}
+                    </h2>
+                    <p>Postal Sector {[ item.sector ]}</p>
+                    <div class="property--prospects">
+                      <span class="value">({[ item.prospects ]} Prospects)</span>
+                    </div>
 
-          <ul class="property--list">
-            <li ng-class="{last: $last==true}" ng-repeat="item in shortlist">
-              <div class="short__list--item">
-                <h2>
-                  {[ item.name ]}
-                </h2>
-                <p>Postal Sector {[ item.sector ]}</p>
-                <div class="property--prospects">
-                  <span class="value">({[ item.prospects ]} Prospects)</span>
-                </div>
+                    <div class="property--duration">
+                      <ul>
+                        <li><input type="radio" ng-model="duration" checked name="chk_{[ $index + 1]}" value="3"> 3 Months</li>
+                        <li><input type="radio" ng-model="duration" name="chk_{[ $index + 1]}" value="6"> 6 Months</li>
+                        <li><input type="radio" ng-model="duration" name="chk_{[ $index + 1]}" value="12"> 1 Year</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <a class="delete--button ionicons ion-close-circled" ng-click="delete($index, item.sector)"></a>
+                </li>
 
-                <div class="property--duration">
-                  <ul>
-                    <li><input type="radio" ng-model="duration" checked name="chk_{[ $index + 1]}" value="3"> 3 Months</li>
-                    <li><input type="radio" ng-model="duration" name="chk_{[ $index + 1]}" value="6"> 6 Months</li>
-                    <li><input type="radio" ng-model="duration" name="chk_{[ $index + 1]}" value="12"> 1 Year</li>
-                  </ul>
-                </div>
+                <li class="animate-repeat empty" ng-if="shortlist.length == 0">
+                  <h2>Empty</h2>
+                </li>
+              </ul>
+            </div>
+            <div class="filter__aux">
+              <a class="ionicons ion-checkmark-circled" ng-click="ownSectors(shortlist)">Own Sectors</a>
+            </div>
+
+          {% else %}
+            <div class="short__list">
+              <h2 class="header">Postal Sector Shortlist</h2>
+              <div class="property--list">
+                <p>You have used all your sector credits</p>
+                <p>please contact FortyTu for more</p>
               </div>
-              <a class="delete--button ionicons ion-close-circled" ng-click="delete($index, item.sector)"></a>
-            </li>
+            </div>
+          {% endif %}
 
-            <li class="animate-repeat empty" ng-if="shortlist.length == 0">
-              <h2>Empty</h2>
-            </li>
-          </ul>
-        </div>
-        <div class="filter__aux">
-          <a class="ionicons ion-checkmark-circled" href="/list">Own Sectors</a>
-        </div>
+        {% endif %}
+
       </div>

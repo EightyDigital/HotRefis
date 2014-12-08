@@ -106,7 +106,7 @@
 </head>
 
 
-<body class="{% block bodyclass %}{% endblock bodyclass %}">
+<body ng-class="{% block bodyclass %}{% endblock bodyclass %} {{ app.request.get('_route') | replace({'_' : '-'}) }}">
   <header id="hd">
     {% include "RefiBundle:Application:refi.header.html.twig" %}
   </header>

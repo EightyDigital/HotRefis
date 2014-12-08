@@ -29,12 +29,12 @@
 
 
 {% block content %}
-<div ng-controller="map__controller" class="map__container" >
+<div ng-controller="map__controller" ng-model="campaign__mode" class="map__container" >
   <div id="heatmap" class="angular-google-map-container"></div>
 </div>
 
 {% include "RefiBundle:Application:controls.heatmap.html.twig" %}
-{% include "RefiBundle:Application:addcontrols.filter.html.twig" %}
+{% include "RefiBundle:Application:campaign.filter.html.twig" %}
 {% endblock content %}
 
 
