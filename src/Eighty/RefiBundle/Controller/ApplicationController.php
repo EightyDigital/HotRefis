@@ -3,13 +3,13 @@
 namespace Eighty\RefiBundle\Controller;
 
 use Eighty\RefiBundle\Entity\Sectorlist;
-use Eighty\RefiBundle\Entity\Creditused;
 use Eighty\RefiBundle\Entity\Postalregion;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class ApplicationController extends Controller
@@ -338,8 +338,7 @@ class ApplicationController extends Controller
 			$sector[$val['sector']]['properties'][$val['urakey']]['total_property_prospects'] = $temp[$val['urakey']]['perfect_score'];
 
 			if($temp_score >= $perfect_score) {
-				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$key]['prospect_id'] = $val['prospectId'];
-				/*$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$key]['prospect_score'] = $temp_score;*/
+				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][]['prospect_id'] = $val['prospectId'];
 			}
 		}
 
@@ -429,6 +428,96 @@ class ApplicationController extends Controller
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
+	}
+	
+	/*-------------------------------------------------/
+	|	route: <domain>/api/shortlist/blast
+	|	postdata:
+	|		- prospectlist : json_encode of filter API
+	--------------------------------------------------*/
+    public function shortlistBlastAction(Request $request)
+    {
+		$session = new Session();
+		$postdata = $request->request->all();
+
+		$status = 'fail';
+		$message = 'Nothing to blast.';
+
+		if (!isset($postdata['prospects'])) $postdata['prospects'] = 0;
+
+		$prospect_ids = array();
+		if($postdata['prospects'] !== 0) {
+			$prospects = json_decode($postdata['prospects']);
+		
+			foreach($prospects as $sector) {
+				foreach($sector->properties as $property) {
+					foreach($property->prospects as $prospect) {
+						$prospect_ids[] = $prospect->prospect_id;
+					}
+				}
+			}
+			
+			$session->set('prospect_ids', $prospect_ids);
+			
+			$status = 'ok';
+			$message = 'Blasted!';
+		}
+
+		$msg = array('status' => $status, 'message' => $message);
+
+		$response = new Response(json_encode($msg));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+	}
+	
+	/*-------------------------------------------------/
+	|	route: <domain>/api/shortlist/calculator
+	|	postdata:
+	|		- prospectlist : json_encode of filter API
+	--------------------------------------------------*/
+    public function shortlistCalculatorAction(Request $request)
+    {
+		$session = new Session();
+		
+		$test = $session->get('prospect_ids');
+		
+		print_r($test); exit();
+		
+		
+		
+		// $postdata = $request->request->all();
+
+		// $status = 'fail';
+		// $message = 'Nothing to blast.';
+
+		// if (!isset($postdata['prospects'])) $postdata['prospects'] = 0;
+
+		// $prospect_ids = array();
+		// if($postdata['prospects'] !== 0) {
+			// $prospects = json_decode($postdata['prospects']);
+		
+			// foreach($prospects as $sector) {
+				// foreach($sector->properties as $property) {
+					// foreach($property->prospects as $prospect) {
+						// $prospect_ids[] = $prospect->prospect_id;
+					// }
+				// }
+			// }
+			
+			// $session->start();
+			// $session->set('prospect_ids', $prospect_ids);
+			
+			// $status = 'ok';
+			// $message = 'Blasted!';
+		// }
+
+		// $msg = array('status' => $status, 'message' => $message);
+
+		// $response = new Response(json_encode($msg));
+        // $response->headers->set('Content-Type', 'application/json');
+
+        // return $response;
 	}
 
 }

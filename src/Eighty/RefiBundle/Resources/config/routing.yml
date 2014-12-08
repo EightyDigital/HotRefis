@@ -47,3 +47,11 @@ API_filter_prospect:
 API_shortlist_checkout:
     pattern: /api/shortlist/checkout
     defaults: { _controller: RefiBundle:Application:shortlistCheckout }
+
+API_shortlist_blast:
+    pattern: /api/shortlist/blast
+    defaults: { _controller: RefiBundle:Application:shortlistBlast }
+
+API_shortlist_calculator:
+    pattern: /api/shortlist/calculator
+    defaults: { _controller: RefiBundle:Application:shortlistCalculator }
