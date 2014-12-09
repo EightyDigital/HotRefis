@@ -28,9 +28,7 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    globals:
-        max_sectors: "%max_sectors%"
-
+    
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"

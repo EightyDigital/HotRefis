@@ -12,15 +12,15 @@
         <li><a href="/campaign" class="ionicons ion-gear-b {% if app.request.get('_route') == 'refi_campaign' %} active {% endif %} ">CAMPAIGN<span>Blast your prospects</span></a></li>
         <li><a href="/list" class="ionicons ion-ios7-people {% if app.request.get('_route') == 'refi_list' %} active {% endif %} ">PROSPECT LIST<span>See your leads</span></a></li>
         <li><a href="/calculator" class="ionicons ion-ios7-calculator {% if app.request.get('_route') == 'refi_calculator' %} active {% endif %} ">REFI CALCULATOR<span>Create your model</span></a></li>
-        <li><a href="/report" class="ionicons ion-ios7-paper-outline {% if app.request.get('_rout') == 'refi_report' %} active {% endif %} ">REPORTS<span>Create report</span></a></li>
+        <li><a href="/report" class="ionicons ion-ios7-paper-outline {% if app.request.get('_route') == 'refi_report' %} active {% endif %} ">REPORTS<span>Create report</span></a></li>
       </ul>
     </nav>
 
     <div class="hd__auxwrap">
       <div class="status__wrap">
-        <p>{% if name is defined %}{{ name }}{% endif %}</p>
-        <p><span class="credits">{% if credits is defined %}{{ credits }}{% endif %}</span> credits</p>
-		    <input type="hidden" id="sectors_owned" value="{% if sectors_owned is defined %}{{ sectors_owned }}{% endif %}" />
+        <p>{% if data.name is defined %}{{ data.name }}{% endif %}</p>
+        <p><span class="credits">{% if data.credits is defined %}{{ data.credits }}{% endif %}</span> credits</p>
+		    <input type="hidden" id="sectors_owned" value="{% if data.sectors_owned is defined %}{{ data.sectors_owned }}{% endif %}" />
       </div>
 
       <div class="account__status">

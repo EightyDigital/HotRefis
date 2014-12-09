@@ -22,3 +22,4 @@ parameters:
     compass_listener:       true
 
     max_sectors: 3
+    credit_per_prospect: 1

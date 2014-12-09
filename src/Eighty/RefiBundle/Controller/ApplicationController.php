@@ -14,19 +14,29 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class ApplicationController extends Controller
 {
-    public function indexAction()
-    {
+	private function _getDefaultParams()
+	{
 		$em = $this->getDoctrine()->getManager();
 		$usr = $this->get('security.context')->getToken()->getUser();
-		$id = $usr->getId();
-		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
-		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
-
+		$data = array();
+		
+		$data['id'] = $usr->getId();
+		$data['name'] = $usr->getFullname();
+		$data['credits'] = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($data['id']);
+		$data['sectors_owned'] = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($data['id']));
+		$data['max_sectors'] = $this->container->getParameter('max_sectors');
+		$data['credit_per_prospect'] = $this->container->getParameter('credit_per_prospect');
+		
+		return $data;
+	}
+	
+    public function indexAction()
+    {
+		$data = $this->_getDefaultParams();
+		
         return $this->render('RefiBundle:Application:index.html.twig',
 			array(
-				'name' => $usr->getFullname(),
-				'credits' => $credits,
-				'sectors_owned' => $sectors_owned,
+				'data' => $data,
 			)
 		);
     }
@@ -34,13 +44,10 @@ class ApplicationController extends Controller
     public function listAction()
     {
 		$em = $this->getDoctrine()->getManager();
-		$usr = $this->get('security.context')->getToken()->getUser();
-		$id = $usr->getId();
-		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
-		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
-		$paginator = $this->get('knp_paginator');
+		$data = $this->_getDefaultParams();
 		
-		$prospectlist = $em->getRepository('RefiBundle:Prospectlist')->getProspectListContactedEngaged($id);
+		$paginator = $this->get('knp_paginator');
+		$prospectlist = $em->getRepository('RefiBundle:Prospectlist')->getProspectListContactedEngaged($data['id']);
 		
 		$temp_prospect_list = array();
 		foreach($prospectlist as $key => $val) {
@@ -73,9 +80,7 @@ class ApplicationController extends Controller
 		
 		return $this->render('RefiBundle:Application:list.html.twig',
 			array(
-				'name' => $usr->getFullname(),
-				'credits' => $credits,
-				'sectors_owned' => $sectors_owned,
+				'data' => $data,
 				'prospect_list' => $prospect_list,
 			)
 		);
@@ -83,68 +88,44 @@ class ApplicationController extends Controller
 
 	public function prospectAction()
     {
-		$em = $this->getDoctrine()->getManager();
-		$usr = $this->get('security.context')->getToken()->getUser();
-		$id = $usr->getId();
-		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
-		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
-
+		$data = $this->_getDefaultParams();
+		
         return $this->render('RefiBundle:Application:prospect.html.twig',
 			array(
-				'name' => $usr->getFullname(),
-				'credits' => $credits,
-				'sectors_owned' => $sectors_owned,
+				'data' => $data,
 			)
 		);
     }
 
 	public function campaignAction()
     {
-		$em = $this->getDoctrine()->getManager();
-		$usr = $this->get('security.context')->getToken()->getUser();
-		$id = $usr->getId();
-		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
-		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
+		$data = $this->_getDefaultParams();
 
         return $this->render('RefiBundle:Application:campaign.html.twig',
 			array(
-				'name' => $usr->getFullname(),
-				'credits' => $credits,
-				'sectors_owned' => $sectors_owned,
+				'data' => $data,
 			)
 		);
     }
 
     public function calculatorAction()
     {
-		$em = $this->getDoctrine()->getManager();
-		$usr = $this->get('security.context')->getToken()->getUser();
-		$id = $usr->getId();
-		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
-		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
-		
+		$data = $this->_getDefaultParams();
+
         return $this->render('RefiBundle:Application:calculator.html.twig',
 			array(
-				'name' => $usr->getFullname(),
-				'credits' => $credits,
-				'sectors_owned' => $sectors_owned,
+				'data' => $data,
 			)
 		);
     }
 
     public function reportAction()
     {
-        $em = $this->getDoctrine()->getManager();
-		$usr = $this->get('security.context')->getToken()->getUser();
-		$id = $usr->getId();
-		$credits = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($id);
-		$sectors_owned = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($id));
-		
+        $data = $this->_getDefaultParams();
+
         return $this->render('RefiBundle:Application:report.html.twig',
 			array(
-				'name' => $usr->getFullname(),
-				'credits' => $credits,
-				'sectors_owned' => $sectors_owned,
+				'data' => $data,
 			)
 		);
     }
@@ -433,7 +414,7 @@ class ApplicationController extends Controller
 	/*-------------------------------------------------/
 	|	route: <domain>/api/shortlist/blast
 	|	postdata:
-	|		- prospectlist : json_encode of filter API
+	|		- prospects : json_encode of filter API
 	--------------------------------------------------*/
     public function shortlistBlastAction(Request $request)
     {
@@ -474,50 +455,35 @@ class ApplicationController extends Controller
 	/*-------------------------------------------------/
 	|	route: <domain>/api/shortlist/calculator
 	|	postdata:
-	|		- prospectlist : json_encode of filter API
+	|		- calc_input_values : json_encode of calculator values
 	--------------------------------------------------*/
     public function shortlistCalculatorAction(Request $request)
     {
 		$session = new Session();
-		
-		$test = $session->get('prospect_ids');
-		
-		print_r($test); exit();
-		
-		
-		
-		// $postdata = $request->request->all();
+		$postdata = $request->request->all();
 
-		// $status = 'fail';
-		// $message = 'Nothing to blast.';
+		$status = 'fail';
+		$message = 'No formula inputted.';
 
-		// if (!isset($postdata['prospects'])) $postdata['prospects'] = 0;
+		if (!isset($postdata['calculator_input'])) $postdata['calculator_input'] = 0;
 
-		// $prospect_ids = array();
-		// if($postdata['prospects'] !== 0) {
-			// $prospects = json_decode($postdata['prospects']);
+		$prospect_ids = $session->get('prospect_ids');
+		$calc_input_values = array();
+		if($postdata['calculator_input'] !== 0 && !empty($prospect_ids)) {
+			$calc_input_values = json_decode($postdata['calculator_input']);
 		
-			// foreach($prospects as $sector) {
-				// foreach($sector->properties as $property) {
-					// foreach($property->prospects as $prospect) {
-						// $prospect_ids[] = $prospect->prospect_id;
-					// }
-				// }
-			// }
+			$session->set('calc_input_values', $calc_input_values);
 			
-			// $session->start();
-			// $session->set('prospect_ids', $prospect_ids);
-			
-			// $status = 'ok';
-			// $message = 'Blasted!';
-		// }
+			$status = 'ok';
+			$message = 'Calculator ready!';
+		}
 
-		// $msg = array('status' => $status, 'message' => $message);
+		$msg = array('status' => $status, 'message' => $message);
 
-		// $response = new Response(json_encode($msg));
-        // $response->headers->set('Content-Type', 'application/json');
+		$response = new Response(json_encode($msg));
+        $response->headers->set('Content-Type', 'application/json');
 
-        // return $response;
+        return $response;
 	}
 
 }

@@ -130,10 +130,10 @@
 
     <div class="filter__controller--list">
       <div class="filter__controller--list--inside">
-        {% if sectors_owned is defined %}
-          {% if sectors_owned != max_sectors %}
+        {% if data.sectors_owned is defined %}
+          {% if data.sectors_owned != data.max_sectors %}
             <div class="short__list">
-              <h2 class="header">Postal Sector Shortlist<span class="count">{[ shortlist.length ]} / {{ max_sectors - sectors_owned }}</span></h2>
+              <h2 class="header">Postal Sector Shortlist<span class="count">{[ shortlist.length ]} / {{ data.max_sectors - data.sectors_owned }}</span></h2>
 
               <ul class="property--list">
                 <li ng-class="{last: $last==true}" ng-repeat="item in shortlist">
