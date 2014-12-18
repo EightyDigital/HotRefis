@@ -106,10 +106,23 @@ class TransactionsRepository extends EntityRepository
 				WHERE sl.clientId = :param
 				AND DATEDIFF(CURRENT_DATE(), sl.dateadded) < (sl.validity * 30)
 			";
-		} else {
+		} elseif($switch == 2) { 
 			$where = "
 				WHERE t.sector = :param
 			";
+		} else {
+			$where = "WHERE (t.sector = ";
+			$ctr = 1;
+			foreach($param as $parameters) {
+				$where .= $parameters['sectorCode'];
+				$ctr++;
+				if($ctr <= count($param)) {
+					$where .= " OR t.sector = "; 
+				} else {
+					$where .= ")";
+				}
+			}
+			$param = '';
 		}
 		
 		return $this->getEntityManager()
