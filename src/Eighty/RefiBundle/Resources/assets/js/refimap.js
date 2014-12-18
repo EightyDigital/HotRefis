@@ -352,15 +352,17 @@ refis.factory('heatmap__service', function($rootScope, $http, map__service, list
 
 
 // Heatmap (based from main data)
-refis.factory('api__service', function($rootScope, $http, list__service, filter__service) {
+refis.factory('api__service', function($rootScope, $http, $location, list__service, filter__service) {
   var api = { };
+  api.campaign__mode = false;
 
   api.ownSectors = function(values) {
     if(values == ""){
       alert('Nothing to checkout.');
     }
     else{
-      var responsePromise = $http.get("/api/shortlist/checkout", { params: values  });
+      var responsePromise = $http.get("/api/shortlist/checkout", { params: values });
+
       $('body').addClass('loading');
 
       responsePromise.success(function(data, status, headers, config) {
@@ -369,6 +371,7 @@ refis.factory('api__service', function($rootScope, $http, list__service, filter_
         $('body').removeClass('loading');
         if(status == 200){
           alert('You have checked out these properties');
+          $location.path("/campaign");
         }
       });
       responsePromise.error(function(data, status, headers, config) {
@@ -379,7 +382,12 @@ refis.factory('api__service', function($rootScope, $http, list__service, filter_
   };
 
   api.filterBroadcast = function(values) {
-    var responsePromise = $http.get("/api/filter/property", { params: values  });
+    if(api.campaign__mode == true){
+      values.campaign = api.campaign__mode;
+    }
+    console.log(values);
+
+    var responsePromise = $http.get("/api/filter/property", { params: values });
     $('body').addClass('loading');
     responsePromise.success(function(data, status, headers, config) {
       list__service.prepForBroadcast(data);
@@ -844,6 +852,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
   $scope.ownSectors = function ( sectors ) {
     api__service.ownSectors(sectors);
+
   };
 });
 
@@ -853,6 +862,9 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   $scope.heatMapData = [];
   $scope.geoLocations = [];
   //$scope.total__prospects = 0;
+  //var mode = angular.element($('.campaign__mode')).scope();
+  $scope.campaign__mode = document.getElementsByClassName("campaign__mode").length;
+  //console.log($scope.campaign__mode);
 
   $scope.heatmap = new google.maps.visualization.HeatmapLayer({
     data: $scope.heatMapData,
@@ -865,7 +877,12 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
 
   /****** NEED TO MOVE THIS SOMEWHERE! ******/
   //$scope.mode = $scope.campaignMode;
+  if($scope.campaign__mode == true) {
+    api__service.campaign__mode = true;
+  }
+
   api__service.filterBroadcast( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty } );
+
   //api__service.filterBroadcast( { certainty: filter__service.certainty } );
 
   /******************************************/
@@ -963,23 +980,6 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
     //marker.content += "<div class='addShort'><a class='add ionicons ion-plus-circled' ng-click='addShortlist(\""+location.name+"\","+location.sector_code+",3,"+location.total_sector_prospects+")' data-sector='"+location.sector_code+"'>Add to ShortList</a></div></div><br/>";
 
     var compiled = $compile(marker.content)($scope);
-
-    // google.maps.event.addListener(marker, 'click', function(){
-    //   $scope.infoWindow.setContent( compiled[0] );
-    //   $scope.infoWindow.open(map__service.google, marker);
-    //   map__service.google.panTo(new google.maps.LatLng(location.latitude, location.longitude));
-    //   map__service.google.setZoom(14);
-
-    //   filter__service.set_isZoomed(true, location.sector_code);
-    //   heatmap__service.requestSector( { property_value_min: filter__service.property_value_min, property_value_max: filter__service.property_value_max, ltv_min: filter__service.ltv_min, ltv_max: filter__service.ltv_max, loan_age_min: filter__service.loan_age_min, loan_age_max: filter__service.loan_age_max, income_min: filter__service.income_min, income_max: filter__service.income_max, property_owned_min: filter__service.property_owned_min, property_owned_max: filter__service.property_owned_max, age_min: filter__service.age_min, age_max: filter__service.age_max, assets_min: filter__service.assets_min, assets_max: filter__service.assets_max, debt_min: filter__service.debt_min, debt_max: filter__service.debt_max, certainty: filter__service.certainty, sector: marker.title } );
-
-    // });
-    // google.maps.event.addListener($scope.infoWindow,'closeclick',function(){
-    //   map__service.google.panTo(new google.maps.LatLng(1.32008, 103.81984));
-    //   console.log('closed infowin');
-    //   filter__service.set_isZoomed(false, 0);
-    //   map__service.google.setZoom(13);
-    // });
 
     $scope.heatmapMarkers.push(marker);
   }

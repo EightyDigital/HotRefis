@@ -1,6 +1,7 @@
 <div class="filter__controller" ng-controller="filter__controller" ng-init="tab = 1; filterVals.current = 'Property'; ">
   <div class="pg__width">
-    <div class="filter__controller--header">      <div class="filter__controller--dropdown">
+    <div class="filter__controller--header">
+      <div class="filter__controller--dropdown">
         <a class="ionicons ion-ios7-home " href="" ng-class="{active:tab===1}" ng-click="tab = 1; $event.preventDefault(); $event.stopPropagation(); filterVals.current = 'Property'; " preventDefault>Property Filters</a>
 
         <a class="ionicons ion-stats-bars" href="" ng-class="{active:tab===2}" ng-click="tab = 2; $event.preventDefault(); $event.stopPropagation(); filterVals.current = 'Financial'; " preventDefault>Finance Filters</a>
