@@ -100,7 +100,7 @@ class ApplicationController extends Controller
 	public function campaignAction()
     {
 		$data = $this->_getDefaultParams();
-		
+
         return $this->render('RefiBundle:Application:campaign.html.twig',
 			array(
 				'data' => $data,
@@ -213,11 +213,8 @@ class ApplicationController extends Controller
 
 		if ($postdata['sector'] == 0) {
 			$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspectsBySector(0, $userId);
-		} elseif ($postdata['sector'] == 'campaign') { 
-			$sectors = $em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($userId);
-			$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspectsBySector(1, $sectors);
 		} else {
-			$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspectsBySector(2, $postdata['sector']);
+			$property_data = $em->getRepository('RefiBundle:Transactions')->filterProspectsBySector(1, $postdata['sector']);
 		}
 		
 		$perfect_score = 100;
