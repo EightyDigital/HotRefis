@@ -380,6 +380,25 @@ refis.factory('api__service', function($rootScope, $http, $location, $window, li
   var api = { };
   api.campaign__mode = false;
 
+  api.startCampaign = function(){
+    var values = list__service.prospectData;
+    var responsePromise = $http.get("/api/shortlist/blast", { params: values });
+
+    $('body').addClass('loading');
+
+    responsePromise.success(function(data, status, headers, config) {
+      api.broadcastCampaignStart();
+      $('body').removeClass('loading');
+      if(status == 200){
+        alert('Starting Campaign');
+        $window.location.href="/calculator";
+      }
+    });
+    responsePromise.error(function(data, status, headers, config) {
+      $('body').removeClass('loading');
+      alert('Error Starting Campaign');
+    });
+  }
   api.ownSectors = function(values) {
     if(values == ""){
       alert('Nothing to checkout.');
@@ -395,12 +414,36 @@ refis.factory('api__service', function($rootScope, $http, $location, $window, li
         $('body').removeClass('loading');
         if(status == 200){
           alert('You have checked out these properties');
-          $window.location.href("/campaign");
+          $window.location.href="/campaign";
         }
       });
       responsePromise.error(function(data, status, headers, config) {
         $('body').removeClass('loading');
         alert('You already have 3 sectors in your list.');
+      });
+    }
+  };
+
+  api.ownSectors = function(values) {
+    if(values == ""){
+      alert('No prospects');
+    }
+    else{
+      var responsePromise = $http.get("/api/shortlist/blast", { params: values });
+
+      $('body').addClass('loading');
+
+      responsePromise.success(function(data, status, headers, config) {
+        api.broadcastBlast();
+        $('body').removeClass('loading');
+        if(status == 200){
+          alert('Campaign started');
+          $window.location.href("/calculator");
+        }
+      });
+      responsePromise.error(function(data, status, headers, config) {
+        $('body').removeClass('loading');
+        alert('Error commencing');
       });
     }
   };
@@ -433,6 +476,9 @@ refis.factory('api__service', function($rootScope, $http, $location, $window, li
 
   api.broadcastItem = function() {
     $rootScope.$broadcast('apiBroadcast');
+  };
+  api.broadcastCampaignStart = function() {
+    $rootScope.$broadcast('apiCampaignStartBroadcast');
   };
 
   api.broadcastSectorOwned = function() {
@@ -877,7 +923,11 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
   $scope.ownSectors = function ( sectors ) {
     api__service.ownSectors(sectors);
+  };
 
+
+  $scope.startCampaign = function () {
+    api__service.startCampaign();
   };
 });
 
