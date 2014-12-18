@@ -48,6 +48,10 @@
 #bd {  }
 #bd .pgWidth {  }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 /*= Footer =*/
 #ft { width:100%; text-align:center; clear:both; }
 #ft .pgWidth { border-top:1px solid #ccc; }

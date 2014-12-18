@@ -6437,15 +6437,20 @@ table {
 }
 
 /*= Body =*/
+/* line 51, ../sass/hotrefi/_layout.scss */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 /*= Footer =*/
-/* line 52, ../sass/hotrefi/_layout.scss */
+/* line 56, ../sass/hotrefi/_layout.scss */
 #ft {
   width: 100%;
   text-align: center;
   clear: both;
 }
 
-/* line 53, ../sass/hotrefi/_layout.scss */
+/* line 57, ../sass/hotrefi/_layout.scss */
 #ft .pgWidth {
   border-top: 1px solid #ccc;
 }
