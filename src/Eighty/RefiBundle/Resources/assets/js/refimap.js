@@ -404,7 +404,7 @@ refis.factory('api__service', function($rootScope, $http, $location, $window, li
       alert('Nothing to checkout.');
     }
     else{
-      var responsePromise = $http.get("/api/shortlist/checkout", { params: values });
+      var responsePromise = $http.post("/api/shortlist/checkout", { params: values });
 
       $('body').addClass('loading');
 
@@ -424,7 +424,7 @@ refis.factory('api__service', function($rootScope, $http, $location, $window, li
     }
   };
 
-  api.ownSectors = function(values) {
+  /*api.ownSectors = function(values) {
     if(values == ""){
       alert('No prospects');
     }
@@ -446,7 +446,7 @@ refis.factory('api__service', function($rootScope, $http, $location, $window, li
         alert('Error commencing');
       });
     }
-  };
+  };*/
 
   api.filterBroadcast = function(values) {
     if(api.campaign__mode == true){

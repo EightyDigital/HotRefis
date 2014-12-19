@@ -359,7 +359,7 @@ class ApplicationController extends Controller
 
 		$status = 'fail';
 		$message = 'Nothing to checkout.';
-
+		
 		if (!isset($postdata['sectors'])) $postdata['sectors'] = 0;
 
 		if($postdata['sectors'] !== 0) {
@@ -406,7 +406,12 @@ class ApplicationController extends Controller
 		$msg = array('status' => $status, 'message' => $message);
 
 		$response = new Response(json_encode($msg));
-        $response->headers->set('Content-Type', 'application/json');
+		if($status == 'fail') {
+			$response->setStatusCode(Response::HTTP_BAD_REQUEST);
+		} else {
+			$response->setStatusCode(Response::HTTP_OK);
+		}
+		$response->headers->set('Content-Type', 'application/json');
 
         return $response;
 	}
@@ -447,6 +452,11 @@ class ApplicationController extends Controller
 		$msg = array('status' => $status, 'message' => $message);
 
 		$response = new Response(json_encode($msg));
+		if($status == 'fail') {
+			$response->setStatusCode(Response::HTTP_BAD_REQUEST);
+		} else {
+			$response->setStatusCode(Response::HTTP_OK);
+		}
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
