@@ -382,14 +382,15 @@ refis.factory('api__service', function($rootScope, $http, $location, $window, li
 
   api.startCampaign = function(){
     var values = list__service.prospectData;
-    var responsePromise = $http.get("/api/shortlist/blast", { params: values });
+    var responsePromise = $.post("/api/shortlist/blast", { prospects: JSON.stringify(values) });
 
     $('body').addClass('loading');
 
     responsePromise.success(function(data, status, headers, config) {
       api.broadcastCampaignStart();
+	  console.log(data);
       $('body').removeClass('loading');
-      if(status == 200){
+      if(data.status == 'ok'){
         alert('Starting Campaign');
         $window.location.href="/calculator";
       }
@@ -404,15 +405,15 @@ refis.factory('api__service', function($rootScope, $http, $location, $window, li
       alert('Nothing to checkout.');
     }
     else{
-      var responsePromise = $http.post("/api/shortlist/checkout", { params: values });
+	  var responsePromise = $.post("/api/shortlist/checkout", { sectors: JSON.stringify(values) });
 
       $('body').addClass('loading');
 
       responsePromise.success(function(data, status, headers, config) {
         api.broadcastSectorOwned();
-        console.log(status);
-        $('body').removeClass('loading');
-        if(status == 200){
+        console.log(data);
+		$('body').removeClass('loading');
+        if(data.status == 'ok'){
           alert('You have checked out these properties');
           $window.location.href="/campaign";
         }
@@ -423,30 +424,6 @@ refis.factory('api__service', function($rootScope, $http, $location, $window, li
       });
     }
   };
-
-  /*api.ownSectors = function(values) {
-    if(values == ""){
-      alert('No prospects');
-    }
-    else{
-      var responsePromise = $http.get("/api/shortlist/blast", { params: values });
-
-      $('body').addClass('loading');
-
-      responsePromise.success(function(data, status, headers, config) {
-        api.broadcastBlast();
-        $('body').removeClass('loading');
-        if(status == 200){
-          alert('Campaign started');
-          $window.location.href("/calculator");
-        }
-      });
-      responsePromise.error(function(data, status, headers, config) {
-        $('body').removeClass('loading');
-        alert('Error commencing');
-      });
-    }
-  };*/
 
   api.filterBroadcast = function(values) {
     if(api.campaign__mode == true){

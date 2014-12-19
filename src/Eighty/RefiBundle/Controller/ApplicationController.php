@@ -111,6 +111,9 @@ class ApplicationController extends Controller
     public function calculatorAction()
     {
 		$data = $this->_getDefaultParams();
+		
+		$session = new Session();
+		print_r($session->get('prospect_ids')); exit();
 
         return $this->render('RefiBundle:Application:calculator.html.twig',
 			array(
@@ -347,7 +350,7 @@ class ApplicationController extends Controller
 	/*-------------------------------------------------/
 	|	route: <domain>/api/shortlist/checkout
 	|	postdata:
-	|		- prospectlist : json_encode of filter API
+	|		- sectors : json_encode of filter API
 	--------------------------------------------------*/
     public function shortlistCheckoutAction(Request $request)
     {
@@ -361,10 +364,10 @@ class ApplicationController extends Controller
 		$message = 'Nothing to checkout.';
 		
 		if (!isset($postdata['sectors'])) $postdata['sectors'] = 0;
-
+		
 		if($postdata['sectors'] !== 0) {
 			$sectors = json_decode($postdata['sectors']);
-
+			
 			$sector_list = $em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($userId);
 			$temp_sectors = array();
 
@@ -435,10 +438,12 @@ class ApplicationController extends Controller
 		if($postdata['prospects'] !== 0) {
 			$prospects = json_decode($postdata['prospects']);
 		
-			foreach($prospects as $sector) {
-				foreach($sector->properties as $property) {
-					foreach($property->prospects as $prospect) {
-						$prospect_ids[] = $prospect->prospect_id;
+			foreach($prospects as $object) {
+				foreach($object as $sector) {
+					foreach($sector->properties as $property) {
+						foreach($property->prospects as $prospect) {
+							$prospect_ids[] = $prospect->prospect_id;
+						}
 					}
 				}
 			}
