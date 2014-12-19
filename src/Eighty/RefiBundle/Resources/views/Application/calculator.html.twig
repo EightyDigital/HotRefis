@@ -19,6 +19,7 @@ color: #555;
 margin: 15px  0;
 text-transform: uppercase;">Report Setup</h2>
   <div class="row-fluid whitebox">
+  <form method="post" action="{{ url('refi_calculator') }}" id="calculator_form">
     <div class="span12">
       <div class="boxhead">
         <i class="fa fa-cogs"></i>MODEL SETUP - Required
@@ -27,9 +28,9 @@ text-transform: uppercase;">Report Setup</h2>
 
     <div class="row-fluid">
       <div class="span6 pad">
-        <div class="propertyRow"><label for="PropertyNum">LTV% At Purchase </label><input type="text" placeholder="0"></div>
-        <div class="propertyRow"><label for="PropertyNum">Loan Term </label><input type="text" placeholder="0"></div>
-        <div class="propertyRow"><label for="PropertyNum">Exisiting Loan Mortgage Rate </label><input type="text" placeholder="0"></div>
+        <div class="propertyRow"><label for="PropertyNum">LTV% At Purchase </label><input type="text" placeholder="0" name="ltv_at_purchase" id="ltv_at_purchase" ></div>
+        <div class="propertyRow"><label for="PropertyNum">Loan Term </label><input type="text" placeholder="0" name="loan_term" id="loan_term" ></div>
+        <div class="propertyRow"><label for="PropertyNum">Existing Loan Mortgage Rate </label><input type="text" placeholder="0" name="existing_loan_mortgage_rate" id="existing_loan_mortgage_rate" ></div>
       </div>
     </div>
 
@@ -50,14 +51,18 @@ text-transform: uppercase;">Report Setup</h2>
           <td class="head">First Year</td>
           <td class="head">Second Year</td>
           <td class="head">Third Year</td>
+		  <td class="head">Fourth Year</td>
+		  <td class="head">Fifth Year</td>
           <td class="head">Onwards</td>
         </tr>
         <tr class="data">
           <td>Current Interest Rates:</td>
-          <td><input type="text" value="3.0%"></td>
-          <td><input type="text" value="3.0%"></td>
-          <td><input type="text" value="4.0%"></td>
-          <td><input type="text" value="4.0%"></td>
+          <td><input type="text" placeholder="3.0%" style="width: 100px;"  name="current_first_year" id="current_first_year" ></td>
+          <td><input type="text" placeholder="3.0%" style="width: 100px;"  name="current_second_year" id="current_second_year" ></td>
+          <td><input type="text" placeholder="4.0%" style="width: 100px;"  name="current_third_year" id="current_third_year" ></td>
+          <td><input type="text" placeholder="4.0%" style="width: 100px;"  name="current_fourth_year" id="current_fourth_year" ></td>
+		  <td><input type="text" placeholder="5.0%" style="width: 100px;"  name="current_fifth_year" id="current_fifth_year" ></td>
+		  <td><input type="text" placeholder="5.0%" style="width: 100px;"  name="current_onwards" id="current_onwards" ></td>
         </tr>
 {#         <tr>
           <td></td>
@@ -78,18 +83,23 @@ text-transform: uppercase;">Report Setup</h2>
           <td class="head">First Year</td>
           <td class="head">Second Year</td>
           <td class="head">Third Year</td>
+		  <td class="head">Fourth Year</td>
+		  <td class="head">Fifth Year</td>
           <td class="head">Onwards</td>
         </tr>
         <tr class="data">
           <td>Refi Rates:</td>
-          <td><input type="text" value="2.0%"></td>
-          <td><input type="text" value="2.0%"></td>
-          <td><input type="text" value="3.0%"></td>
-          <td><input type="text" value="3.0%"></td>
+          <td><input type="text" placeholder="2.0%" style="width: 100px;"  name="refi_first_year" id="refi_first_year" ></td>
+          <td><input type="text" placeholder="2.0%" style="width: 100px;"  name="refi_second_year" id="refi_second_year" ></td>
+          <td><input type="text" placeholder="3.0%" style="width: 100px;"  name="refi_third_year" id="refi_third_year" ></td>
+          <td><input type="text" placeholder="3.0%" style="width: 100px;"  name="refi_fourth_year" id="refi_fourth_year" ></td>
+		  <td><input type="text" placeholder="4.0%" style="width: 100px;"  name="refi_fifth_year" id="refi_fifth_year" ></td>
+		  <td><input type="text" placeholder="4.0%" style="width: 100px;"  name="refi_onwards" id="refi_onwards" ></td>
         </tr>
       </table>
       <br>
     </div>
+  </form>
   </div>
   <!-- \whitebox  -->
 </div>
@@ -100,7 +110,7 @@ text-transform: uppercase;">Report Setup</h2>
 <div class="container row6 calcbox">
   <div class="row-fluid">
 	<div class="filter__aux">
-	  <a class="ionicons ion-ios7-cart" href="{{ url('refi_report') }}">Preview Report</a>
+	  <a class="ionicons ion-ios7-cart" href="#" onClick="submitCalc(); return false;" >Preview Report</a>
 	</div>
     <div class="clr"></div>
   </div>

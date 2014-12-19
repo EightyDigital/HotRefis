@@ -108,13 +108,34 @@ class ApplicationController extends Controller
 		);
     }
 
-    public function calculatorAction()
+    public function calculatorAction(Request $request)
     {
 		$data = $this->_getDefaultParams();
-		
 		$session = new Session();
-		print_r($session->get('prospect_ids')); exit();
-
+		
+		$postdata = $request->request->all();
+		if (!isset($postdata['ltv_at_purchase'])) $postdata['ltv_at_purchase'] = 0;
+		
+		if($postdata['ltv_at_purchase'] !== 0) {
+			if ($postdata['current_first_year'] == '') $postdata['current_first_year'] = '3.0%';
+			if ($postdata['current_second_year'] == '') $postdata['current_second_year'] = '3.0%';
+			if ($postdata['current_third_year'] == '') $postdata['current_third_year'] = '4.0%';
+			if ($postdata['current_fourth_year'] == '') $postdata['current_fourth_year'] = '4.0%';
+			if ($postdata['current_fifth_year'] == '') $postdata['current_fifth_year'] = '5.0%';
+			if ($postdata['current_onwards'] == '') $postdata['current_onwards'] = '5.0%';
+			
+			if ($postdata['refi_first_year'] == '') $postdata['refi_first_year'] = '2.0%';
+			if ($postdata['refi_second_year'] == '') $postdata['refi_second_year'] = '2.0%';
+			if ($postdata['refi_third_year'] == '') $postdata['refi_third_year'] = '3.0%';
+			if ($postdata['refi_fourth_year'] == '') $postdata['refi_fourth_year'] = '3.0%';
+			if ($postdata['refi_fifth_year'] == '') $postdata['refi_fifth_year'] = '4.0%';
+			if ($postdata['refi_onwards'] == '') $postdata['refi_onwards'] = '4.0%';
+			
+			$session->set('calc_input_values', $postdata);
+			
+			return $this->redirect($this->generateUrl('refi_report'));
+		}
+		
         return $this->render('RefiBundle:Application:calculator.html.twig',
 			array(
 				'data' => $data,
@@ -122,11 +143,25 @@ class ApplicationController extends Controller
 		);
     }
 
-    public function reportAction()
+    public function reportAction(Request $request)
     {
         $data = $this->_getDefaultParams();
-
-        return $this->render('RefiBundle:Application:report.html.twig',
+		$session = new Session();
+		$postdata = $request->query->all();
+		
+		
+		return $this->render('RefiBundle:Application:report.html.twig',
+			array(
+				'data' => $data,
+			)
+		);
+    }
+	
+	public function prospectreportAction(Request $request)
+    {
+        $data = $this->_getDefaultParams();
+		
+		return $this->render('RefiBundle:Application:report.html.twig',
 			array(
 				'data' => $data,
 			)
@@ -472,7 +507,7 @@ class ApplicationController extends Controller
 	|	postdata:
 	|		- calc_input_values : json_encode of calculator values
 	--------------------------------------------------*/
-    public function shortlistCalculatorAction(Request $request)
+    /*public function shortlistCalculatorAction(Request $request)
     {
 		$session = new Session();
 		$postdata = $request->request->all();
@@ -499,6 +534,6 @@ class ApplicationController extends Controller
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
-	}
+	}*/
 
 }

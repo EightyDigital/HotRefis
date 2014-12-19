@@ -24,3 +24,15 @@ var siteBindings = {
   //   });
   // }
 }
+
+function submitCalc() {
+	if( !$('#ltv_at_purchase').val() ) {
+		return false;
+	} else if( !$('#loan_term').val() ) {
+		return false;
+	} else if( !$('#existing_loan_mortgage_rate').val() ) {
+		return false;
+	} else {
+		$("#calculator_form").submit();
+	}
+}
