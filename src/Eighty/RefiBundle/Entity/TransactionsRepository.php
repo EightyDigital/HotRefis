@@ -225,4 +225,18 @@ class TransactionsRepository extends EntityRepository
 			->setParameter('pId', $pid)
 			->getArrayResult();
 	}
+	
+	public function fetchLoansByProspectIds($pids)
+	{
+		return $this->getEntityManager()
+			->createQuery(
+				"SELECT 
+					  pl.transactionId
+					FROM
+					  RefiBundle:Prospectloan pl 
+					WHERE pl.prospectId IN ($pids)
+				"
+			)
+			->getArrayResult();
+	}
 }

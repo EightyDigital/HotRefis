@@ -29,8 +29,12 @@ refi_calculator:
     defaults: { _controller: RefiBundle:Application:calculator }
 
 refi_report:
-    pattern: /report/
-    defaults: { _controller: RefiBundle:Application:report }
+    pattern: /report/{id}
+    defaults: { _controller: RefiBundle:Application:report, id: 0 }
+
+refi_prospect_report:
+    pattern: /refi/report/{hash}
+    defaults: { _controller: RefiBundle:Application:report, hash: 0 }
 
 refi_prospect:
     pattern: /prospect/

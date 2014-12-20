@@ -14,6 +14,11 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class ApplicationController extends Controller
 {
+	private $_num_div = array(
+		100000000, 10000000, 1000000, 
+		100000, 10000, 1000, 100, 10, 1
+	);
+	
 	private function _getDefaultParams()
 	{
 		$em = $this->getDoctrine()->getManager();
@@ -111,6 +116,8 @@ class ApplicationController extends Controller
     public function calculatorAction(Request $request)
     {
 		$data = $this->_getDefaultParams();
+		$em = $this->getDoctrine()->getManager();
+		
 		$session = new Session();
 		
 		$postdata = $request->request->all();
@@ -133,7 +140,24 @@ class ApplicationController extends Controller
 			
 			$session->set('calc_input_values', $postdata);
 			
-			return $this->redirect($this->generateUrl('refi_report'));
+			$prospect_ids = $session->get('prospect_ids');
+			$temp = $em->getRepository('RefiBundle:Transactions')->fetchLoansByProspectIds(implode(',', $prospect_ids));
+			
+			foreach($temp as $transactions) {
+				$prospect_properties[] = $transactions['transactionId'];
+			}
+			$session->set('prospect_properties', $prospect_properties);
+			
+			if ($session->has('prospect_properties')) {
+				$prospect_properties = $session->get('prospect_properties');
+				if(!isset($prospect_properties[0])) {
+					$prospect_properties[0] = 0;
+				}
+			} else {
+				$prospect_properties[0] = 0;
+			}			
+			
+			return $this->redirect($this->generateUrl('refi_report', array('id' => $prospect_properties[0])));
 		}
 		
         return $this->render('RefiBundle:Application:calculator.html.twig',
@@ -143,16 +167,49 @@ class ApplicationController extends Controller
 		);
     }
 
-    public function reportAction(Request $request)
+    public function reportAction($id, Request $request)
     {
         $data = $this->_getDefaultParams();
+		$em = $this->getDoctrine()->getManager();
+		
 		$session = new Session();
 		$postdata = $request->query->all();
+		$rdata = array();
+		$calc_input_values = $session->get('calc_input_values');
+		
+		$loandata = $em->getRepository('RefiBundle:Prospectloan')->findOneByTransactionId($id);
+		$propertydata = $em->getRepository('RefiBundle:Transactions')->findOneById($id);
+		
+		$loan_amount = $loandata->getLoanAmount();
+		$x = -1; $y = 0;
+		
+		while($x < 0) {
+			$x = $loan_amount - $this->_num_div[$y];
+			$y++;
+		}
+		
+		$round = round($loan_amount / $this->_num_div[$y - 1]) * $this->_num_div[$y - 1];
+				
+		$rdata['loan_amount'] = number_format($loan_amount);
+		$rdata['round_loan_amount'] = number_format($round);
+		$rdata['loan_period'] = $loandata->getLoanTerm() / 12;
+		$rdata['loan_period_remaining'] = $rdata['loan_period'] - (date("Y") - $loandata->getLoanDate()->format("Y"));
+		$rdata['current_interest_rate'] = number_format($loandata->getInterestRate(), 1). "%";
+		$rdata['current_interest_rate_2_years'] = number_format($loandata->getInterestRate() + 1, 1). "%";
+		
+		$rdata['property_price'] = number_format($propertydata->getPrice(), 2);
+		$rdata['loan_amount_decimal'] = number_format($loan_amount, 2);
+		$property_price;
+		$age;
+		$loan_amount;
+		$loan_period;
 		
 		
 		return $this->render('RefiBundle:Application:report.html.twig',
 			array(
 				'data' => $data,
+				'prospect_property' => $id,
+				'rdata' => $rdata,
 			)
 		);
     }
