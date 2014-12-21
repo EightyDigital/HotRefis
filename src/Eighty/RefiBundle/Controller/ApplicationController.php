@@ -27,12 +27,206 @@ class ApplicationController extends Controller
 		
 		$data['id'] = $usr->getId();
 		$data['name'] = $usr->getFullname();
+		$data['email'] = $usr->getEmail();
+		$data['address'] = $usr->getAddress();
+		$data['company'] = $usr->getAgency();
+		
 		$data['credits'] = $em->getRepository('RefiBundle:Client')->getRemainingCreditsById($data['id']);
 		$data['sectors_owned'] = count($em->getRepository('RefiBundle:Transactions')->fetchSectorsInListByClientId($data['id']));
 		$data['max_sectors'] = $this->container->getParameter('max_sectors');
 		$data['credit_per_prospect'] = $this->container->getParameter('credit_per_prospect');
 		
 		return $data;
+	}
+	
+	private function _getReportFormula($calc_input_values, $propertydata, $loandata)
+	{
+		$formula = array();
+		
+		$months = $calc_input_values['loan_term'] * 12;
+		
+		$formula['initial_loan_amount']			= $calc_input_values['ltv_at_purchase'] * $propertydata->getPrice();
+		$formula['equity_at_mortgage_rate'] 	= $propertydata->getPrice() - $formula['initial_loan_amount'];
+		
+		$formula['years_since_loan_taken'] 		= (date("Y") - $loandata->getLoanDate()->format("Y")) + (1 - ($loandata->getLoanDate()->format("n") / 12));
+		$formula['months_since_loan_taken'] 	= $formula['years_since_loan_taken'] * 12;
+		$formula['loan_term_years_remaining']	= round($calc_input_values['loan_term'] - $formula['years_since_loan_taken'], 1);
+		
+		$formula['rate_per_month'] 				= $calc_input_values['existing_loan_mortgage_rate'] / 12;
+		$formula['monthly_payment'] 			= ($formula['rate_per_month'] * $formula['initial_loan_amount']) / (1 - pow(1 + $formula['rate_per_month'], -$months));
+		$formula['principal_remaining'] 		= round(($formula['initial_loan_amount'] * pow(1 + $formula['rate_per_month'], $formula['months_since_loan_taken'])) - ($formula['monthly_payment'] * ((pow(1 + $formula['rate_per_month'], $formula['months_since_loan_taken']) - 1) / $formula['rate_per_month'])));
+		$formula['principal_reduced_by'] 		= $formula['initial_loan_amount'] - $formula['principal_remaining'];
+		$formula['total_payments'] 				= $formula['monthly_payment'] * $formula['months_since_loan_taken'];
+		$formula['interest_paid'] 				= $formula['total_payments'] - $formula['principal_reduced_by'];
+		$formula['principal_paid_deposit'] 		= $formula['equity_at_mortgage_rate'] + $formula['principal_reduced_by'];
+		$formula['equity'] 						= $propertydata->getNewPrice() - $formula['principal_remaining'];
+		$formula['ltv_new'] 					= round(($formula['principal_remaining'] / $propertydata->getNewPrice()) * 100);
+		
+		$formula['remaining_loan_months'] 		= round($formula['loan_term_years_remaining'] * 12);
+		
+		$formula['current_r']					= round(round(($calc_input_values['existing_loan_mortgage_rate'] * 100) / 12, 2) / 100, 10);
+		
+		$formula['current_r_1']					= round(round($calc_input_values['current_first_year'] / 12, 2) / 100, 10);
+		$formula['current_r_2']					= round(round($calc_input_values['current_second_year'] / 12, 2) / 100, 10);
+		$formula['current_r_3']					= round(round($calc_input_values['current_third_year'] / 12, 2) / 100, 10);
+		$formula['current_r_4']					= round(round($calc_input_values['current_fourth_year'] / 12, 2) / 100, 10);
+		$formula['current_r_5']					= round(round($calc_input_values['current_fifth_year'] / 12, 2) / 100, 10);
+		$formula['current_r_6']					= round(round($calc_input_values['current_onwards'] / 12, 2) / 100, 10);
+		
+		$formula['refi_r_1']					= round(round($calc_input_values['refi_first_year'] / 12, 2) / 100, 10);
+		$formula['refi_r_2']					= round(round($calc_input_values['refi_second_year'] / 12, 2) / 100, 10);
+		$formula['refi_r_3']					= round(round($calc_input_values['refi_third_year'] / 12, 2) / 100, 10);
+		$formula['refi_r_4']					= round(round($calc_input_values['refi_fourth_year'] / 12, 2) / 100, 10);
+		$formula['refi_r_5']					= round(round($calc_input_values['refi_fifth_year'] / 12, 2) / 100, 10);
+		$formula['refi_r_6']					= round(round($calc_input_values['refi_onwards'] / 12, 2) / 100, 10);
+		
+		$x = 1;
+		while ($x <= 30) {
+			// current_mortgage_scenario MODEL //
+			
+			switch($x) {
+				case 1:
+					$cur_formula_r = $formula['current_r_1'];
+					break;
+				case 2:
+					$cur_formula_r = $formula['current_r_2'];
+					break;
+				case 3:
+					$cur_formula_r = $formula['current_r_3'];
+					break;
+				case 4:
+					$cur_formula_r = $formula['current_r_4'];
+					break;
+				case 5:
+					$cur_formula_r = $formula['current_r_5'];
+					break;
+				default:
+					$cur_formula_r = $formula['current_r_6'];
+					break;
+			}			
+			
+			$formula['current_mortgage_scenario'][$x]['monthly_payment'] = ($cur_formula_r * $formula['principal_remaining']) / (1 - pow(1 + $cur_formula_r, -$formula['remaining_loan_months']));
+			$formula['current_mortgage_scenario'][$x]['yearly_payment'] = $formula['current_mortgage_scenario'][$x]['monthly_payment'] * 12;
+			
+			if($x == 1) {
+				$formula['current_mortgage_scenario'][$x]['principal_remaining'] = ($formula['principal_remaining'] * pow(1 + $cur_formula_r, 12)) - ($formula['current_mortgage_scenario'][$x]['monthly_payment'] * ((pow(1 + $cur_formula_r,12) - 1) / $cur_formula_r));
+			} else {
+				$formula['current_mortgage_scenario'][$x]['principal_remaining'] = ($formula['current_mortgage_scenario'][$x - 1]['principal_remaining'] * pow(1 + $cur_formula_r, 12)) - ($formula['current_mortgage_scenario'][$x]['monthly_payment'] * ((pow(1 + $cur_formula_r,12) - 1) / $cur_formula_r));
+			}
+			
+			if($formula['current_mortgage_scenario'][$x]['principal_remaining'] < 1) $formula['current_mortgage_scenario'][$x]['principal_remaining'] = 0;
+			
+			if($x == 1) {
+				$formula['current_mortgage_scenario'][$x]['cumulative_principal_repaid'] = $formula['principal_remaining'] - $formula['current_mortgage_scenario'][$x]['principal_remaining'];
+			} else {
+				if($formula['current_mortgage_scenario'][$x - 1]['principal_remaining'] <= 0) {
+					$formula['current_mortgage_scenario'][$x]['cumulative_principal_repaid'] = 0;
+				} else {
+					$formula['current_mortgage_scenario'][$x]['cumulative_principal_repaid'] = $formula['principal_remaining'] - $formula['current_mortgage_scenario'][$x]['principal_remaining'];
+				}
+			}
+			
+			if($x == 1) {
+				$formula['current_mortgage_scenario'][$x]['principal_reduced_pa'] = $formula['current_mortgage_scenario'][$x]['cumulative_principal_repaid'];
+			} else {
+				if($formula['current_mortgage_scenario'][$x]['cumulative_principal_repaid'] <= 0) {
+					$formula['current_mortgage_scenario'][$x]['principal_reduced_pa'] = 0;
+				} else {
+					$formula['current_mortgage_scenario'][$x]['principal_reduced_pa'] = $formula['current_mortgage_scenario'][$x]['cumulative_principal_repaid'] - $formula['current_mortgage_scenario'][$x - 1]['cumulative_principal_repaid'];
+				}
+			}
+			
+			if($formula['current_mortgage_scenario'][$x]['principal_reduced_pa'] <= 0) {
+				$formula['current_mortgage_scenario'][$x]['interest_cost_pa'] = 0;
+			} else {
+				$formula['current_mortgage_scenario'][$x]['interest_cost_pa'] = ($formula['current_mortgage_scenario'][$x]['monthly_payment'] * 12) - $formula['current_mortgage_scenario'][$x]['principal_reduced_pa'];
+			}
+			
+			if($x == 1) {
+				$formula['current_mortgage_scenario'][$x]['cumulative_interest'] = $formula['current_mortgage_scenario'][$x]['interest_cost_pa'];
+			} else {
+				if($formula['current_mortgage_scenario'][$x]['interest_cost_pa'] <= 0) {
+					$formula['current_mortgage_scenario'][$x]['cumulative_interest'] = 0;
+				} else {
+					$formula['current_mortgage_scenario'][$x]['cumulative_interest'] = $formula['current_mortgage_scenario'][$x]['interest_cost_pa'] + $formula['current_mortgage_scenario'][$x - 1]['cumulative_interest'];
+				}
+			}
+			
+			// REFI MODEL //
+			
+			switch($x) {
+				case 1:
+					$ref_formula_r = $formula['refi_r_1'];
+					break;
+				case 2:
+					$ref_formula_r = $formula['refi_r_2'];
+					break;
+				case 3:
+					$ref_formula_r = $formula['refi_r_3'];
+					break;
+				case 4:
+					$ref_formula_r = $formula['refi_r_4'];
+					break;
+				case 5:
+					$ref_formula_r = $formula['refi_r_5'];
+					break;
+				default:
+					$ref_formula_r = $formula['refi_r_6'];
+					break;
+			}
+			
+			
+			$formula['refi_scenario'][$x]['monthly_payment'] = ($ref_formula_r * $formula['principal_remaining']) / (1 - pow(1 + $ref_formula_r, -$formula['remaining_loan_months']));
+			$formula['refi_scenario'][$x]['yearly_payment'] = $formula['refi_scenario'][$x]['monthly_payment'] * 12;
+			
+			if($x == 1) {
+				$formula['refi_scenario'][$x]['principal_remaining'] = ($formula['principal_remaining'] * pow(1 + $ref_formula_r, 12)) - ($formula['refi_scenario'][$x]['monthly_payment'] * ((pow(1 + $ref_formula_r,12) - 1) / $ref_formula_r));
+			} else {
+				$formula['refi_scenario'][$x]['principal_remaining'] = ($formula['refi_scenario'][$x - 1]['principal_remaining'] * pow(1 + $ref_formula_r, 12)) - ($formula['refi_scenario'][$x]['monthly_payment'] * ((pow(1 + $ref_formula_r,12) - 1) / $ref_formula_r));
+			}
+			
+			if($formula['refi_scenario'][$x]['principal_remaining'] < 1) $formula['refi_scenario'][$x]['principal_remaining'] = 0;
+			
+			if($x == 1) {
+				$formula['refi_scenario'][$x]['cumulative_principal_repaid'] = $formula['principal_remaining'] - $formula['refi_scenario'][$x]['principal_remaining'];
+			} else {
+				if($formula['refi_scenario'][$x - 1]['principal_remaining'] <= 0) {
+					$formula['refi_scenario'][$x]['cumulative_principal_repaid'] = 0;
+				} else {
+					$formula['refi_scenario'][$x]['cumulative_principal_repaid'] = $formula['principal_remaining'] - $formula['refi_scenario'][$x]['principal_remaining'];
+				}
+			}
+			
+			if($x == 1) {
+				$formula['refi_scenario'][$x]['principal_reduced_pa'] = $formula['refi_scenario'][$x]['cumulative_principal_repaid'];
+			} else {
+				if($formula['refi_scenario'][$x]['cumulative_principal_repaid'] <= 0) {
+					$formula['refi_scenario'][$x]['principal_reduced_pa'] = 0;
+				} else {
+					$formula['refi_scenario'][$x]['principal_reduced_pa'] = $formula['refi_scenario'][$x]['cumulative_principal_repaid'] - $formula['refi_scenario'][$x - 1]['cumulative_principal_repaid'];
+				}
+			}
+			
+			if($formula['refi_scenario'][$x]['principal_reduced_pa'] <= 0) {
+				$formula['refi_scenario'][$x]['interest_cost_pa'] = 0;
+			} else {
+				$formula['refi_scenario'][$x]['interest_cost_pa'] = ($formula['refi_scenario'][$x]['monthly_payment'] * 12) - $formula['refi_scenario'][$x]['principal_reduced_pa'];
+			}
+			
+			if($x == 1) {
+				$formula['refi_scenario'][$x]['cumulative_interest'] = $formula['refi_scenario'][$x]['interest_cost_pa'];
+			} else {
+				if($formula['refi_scenario'][$x]['interest_cost_pa'] <= 0) {
+					$formula['refi_scenario'][$x]['cumulative_interest'] = 0;
+				} else {
+					$formula['refi_scenario'][$x]['cumulative_interest'] = $formula['refi_scenario'][$x]['interest_cost_pa'] + $formula['refi_scenario'][$x - 1]['cumulative_interest'];
+				}
+			}
+			
+			$x++;
+		}
+		
+		return $formula;
 	}
 	
     public function indexAction()
@@ -91,17 +285,6 @@ class ApplicationController extends Controller
 		);
     }
 
-	public function prospectAction()
-    {
-		$data = $this->_getDefaultParams();
-		
-        return $this->render('RefiBundle:Application:prospect.html.twig',
-			array(
-				'data' => $data,
-			)
-		);
-    }
-
 	public function campaignAction()
     {
 		$data = $this->_getDefaultParams();
@@ -120,52 +303,66 @@ class ApplicationController extends Controller
 		
 		$session = new Session();
 		
-		$postdata = $request->request->all();
-		if (!isset($postdata['ltv_at_purchase'])) $postdata['ltv_at_purchase'] = 0;
-		
-		if($postdata['ltv_at_purchase'] !== 0) {
-			if ($postdata['current_first_year'] == '') $postdata['current_first_year'] = '3.0%';
-			if ($postdata['current_second_year'] == '') $postdata['current_second_year'] = '3.0%';
-			if ($postdata['current_third_year'] == '') $postdata['current_third_year'] = '4.0%';
-			if ($postdata['current_fourth_year'] == '') $postdata['current_fourth_year'] = '4.0%';
-			if ($postdata['current_fifth_year'] == '') $postdata['current_fifth_year'] = '5.0%';
-			if ($postdata['current_onwards'] == '') $postdata['current_onwards'] = '5.0%';
+		if($session->has('prospect_ids')) {
+			$postdata = $request->request->all();
+			if (!isset($postdata['ltv_at_purchase'])) $postdata['ltv_at_purchase'] = 0;
+			if (!isset($postdata['loan_term'])) $postdata['loan_term'] = 0;
+			if (!isset($postdata['existing_loan_mortgage_rate'])) $postdata['existing_loan_mortgage_rate'] = 0;
 			
-			if ($postdata['refi_first_year'] == '') $postdata['refi_first_year'] = '2.0%';
-			if ($postdata['refi_second_year'] == '') $postdata['refi_second_year'] = '2.0%';
-			if ($postdata['refi_third_year'] == '') $postdata['refi_third_year'] = '3.0%';
-			if ($postdata['refi_fourth_year'] == '') $postdata['refi_fourth_year'] = '3.0%';
-			if ($postdata['refi_fifth_year'] == '') $postdata['refi_fifth_year'] = '4.0%';
-			if ($postdata['refi_onwards'] == '') $postdata['refi_onwards'] = '4.0%';
-			
-			$session->set('calc_input_values', $postdata);
-			
-			$prospect_ids = $session->get('prospect_ids');
-			$temp = $em->getRepository('RefiBundle:Transactions')->fetchLoansByProspectIds(implode(',', $prospect_ids));
-			
-			foreach($temp as $transactions) {
-				$prospect_properties[] = $transactions['transactionId'];
-			}
-			$session->set('prospect_properties', $prospect_properties);
-			
-			if ($session->has('prospect_properties')) {
-				$prospect_properties = $session->get('prospect_properties');
-				if(!isset($prospect_properties[0])) {
-					$prospect_properties[0] = 0;
+			if($postdata['ltv_at_purchase'] !== 0 && $postdata['loan_term'] !== 0 && $postdata['existing_loan_mortgage_rate'] !== 0) {
+				$postdata['ltv_at_purchase'] = $postdata['ltv_at_purchase'] / 100;
+				$postdata['existing_loan_mortgage_rate'] = $postdata['existing_loan_mortgage_rate'] / 100;
+				
+				if ($postdata['current_first_year'] == '') $postdata['current_first_year'] = '3';
+				if ($postdata['current_second_year'] == '') $postdata['current_second_year'] = '3';
+				if ($postdata['current_third_year'] == '') $postdata['current_third_year'] = '4';
+				if ($postdata['current_fourth_year'] == '') $postdata['current_fourth_year'] = '4';
+				if ($postdata['current_fifth_year'] == '') $postdata['current_fifth_year'] = '5';
+				if ($postdata['current_onwards'] == '') $postdata['current_onwards'] = '5';
+				
+				if ($postdata['refi_first_year'] == '') $postdata['refi_first_year'] = '2';
+				if ($postdata['refi_second_year'] == '') $postdata['refi_second_year'] = '2';
+				if ($postdata['refi_third_year'] == '') $postdata['refi_third_year'] = '3';
+				if ($postdata['refi_fourth_year'] == '') $postdata['refi_fourth_year'] = '3';
+				if ($postdata['refi_fifth_year'] == '') $postdata['refi_fifth_year'] = '4';
+				if ($postdata['refi_onwards'] == '') $postdata['refi_onwards'] = '4';
+				
+				$session->set('calc_input_values', $postdata);
+				
+				$prospect_ids = $session->get('prospect_ids');
+				$temp = $em->getRepository('RefiBundle:Transactions')->fetchLoansByProspectIds(implode(',', $prospect_ids));
+				
+				foreach($temp as $transactions) {
+					$prospect_properties[] = $transactions['transactionId'];
 				}
-			} else {
-				$prospect_properties[0] = 0;
-			}			
+				$session->set('prospect_properties', $prospect_properties);
+				
+				if ($session->has('prospect_properties')) {
+					$prospect_properties = $session->get('prospect_properties');
+					if(!isset($prospect_properties[0])) {
+						$prospect_properties[0] = 0;
+					}
+				} else {
+					$prospect_properties[0] = 0;
+				}			
+				
+				return $this->redirect($this->generateUrl('refi_report', array('id' => $prospect_properties[0])));
+			}
 			
-			return $this->redirect($this->generateUrl('refi_report', array('id' => $prospect_properties[0])));
+			return $this->render('RefiBundle:Application:calculator.html.twig',
+				array(
+					'data' => $data,
+				)
+			);
+		} else {
+			return $this->render('RefiBundle:Application:calculator.html.twig',
+				array(
+					'data' => $data,
+					'its_empty' => true,
+				)
+			);
 		}
-		
-        return $this->render('RefiBundle:Application:calculator.html.twig',
-			array(
-				'data' => $data,
-			)
-		);
-    }
+	}
 
     public function reportAction($id, Request $request)
     {
@@ -175,44 +372,64 @@ class ApplicationController extends Controller
 		$session = new Session();
 		$postdata = $request->query->all();
 		$rdata = array();
-		$calc_input_values = $session->get('calc_input_values');
+		
+		if(!empty($postdata)) { print_r($postdata); exit(); }
 		
 		$loandata = $em->getRepository('RefiBundle:Prospectloan')->findOneByTransactionId($id);
 		$propertydata = $em->getRepository('RefiBundle:Transactions')->findOneById($id);
 		
-		$loan_amount = $loandata->getLoanAmount();
-		$x = -1; $y = 0;
+		if(!empty($loandata) && !empty($propertydata) && $session->has('calc_input_values')) {
+			$calc_input_values = $session->get('calc_input_values');
+			$formula = $this->_getReportFormula($calc_input_values, $propertydata, $loandata);
+			$loan_amount = $loandata->getLoanAmount();
+			$x = -1; $y = 0;
+			
+			while($x < 0) {
+				$x = $loan_amount - $this->_num_div[$y];
+				$y++;
+			}
+			
+			$round = round($loan_amount / $this->_num_div[$y - 1]) * $this->_num_div[$y - 1];
+					
+			$rdata['loan_amount'] = number_format($loan_amount);
+			$rdata['round_loan_amount'] = number_format($round);
+			$rdata['loan_period'] = $loandata->getLoanTerm() / 12;
+			$rdata['loan_period_remaining'] = $rdata['loan_period'] - (date("Y") - $loandata->getLoanDate()->format("Y"));
+			$rdata['current_interest_rate'] = number_format($loandata->getInterestRate(), 1). "%";
+			$rdata['current_interest_rate_2_years'] = number_format($loandata->getInterestRate() + 1, 1). "%";
+			
+			$rdata['property_price'] = number_format($propertydata->getPrice(), 2);
+			$rdata['loan_amount_decimal'] = number_format($loan_amount, 2);
+			
+			$rdata['monthly_payment_reduce'] = number_format(round($formula['current_mortgage_scenario'][1]['monthly_payment'] - $formula['refi_scenario'][1]['monthly_payment'], 2), 2);
+			
+			$rdata['current_interest_payments_three_years'] = round($formula['current_mortgage_scenario'][3]['cumulative_interest'], -3);
+			$rdata['refinance_interest_costs_three_years'] = round($formula['refi_scenario'][3]['cumulative_interest'], -3);
+			$rdata['approx_savings_three_years'] = round($formula['current_mortgage_scenario'][3]['cumulative_interest'], -3) - round($formula['refi_scenario'][3]['cumulative_interest'], -3);
+			
+			$rdata['five_years_savings'] = number_format(round($formula['current_mortgage_scenario'][5]['cumulative_interest'], -3) - round($formula['refi_scenario'][5]['cumulative_interest'], -3));
+			
+			$rdata['total_loan_amount_current'] = number_format($formula['initial_loan_amount'], 2);
+			$rdata['total_loan_amount_refi'] = number_format($formula['principal_remaining'], 2);
+			$rdata['total_loan_amount_savings'] = number_format($formula['initial_loan_amount'] - $formula['principal_remaining'], 2);
+			
+			return $this->render('RefiBundle:Application:report.html.twig',
+				array(
+					'data' => $data,
+					'prospect_property' => $id,
+					'rdata' => $rdata,
+				)
+			);
 		
-		while($x < 0) {
-			$x = $loan_amount - $this->_num_div[$y];
-			$y++;
+		} else {
+			return $this->render('RefiBundle:Application:report.html.twig',
+				array(
+					'data' => $data,
+					'its_empty' => true,
+				)
+			);
 		}
-		
-		$round = round($loan_amount / $this->_num_div[$y - 1]) * $this->_num_div[$y - 1];
-				
-		$rdata['loan_amount'] = number_format($loan_amount);
-		$rdata['round_loan_amount'] = number_format($round);
-		$rdata['loan_period'] = $loandata->getLoanTerm() / 12;
-		$rdata['loan_period_remaining'] = $rdata['loan_period'] - (date("Y") - $loandata->getLoanDate()->format("Y"));
-		$rdata['current_interest_rate'] = number_format($loandata->getInterestRate(), 1). "%";
-		$rdata['current_interest_rate_2_years'] = number_format($loandata->getInterestRate() + 1, 1). "%";
-		
-		$rdata['property_price'] = number_format($propertydata->getPrice(), 2);
-		$rdata['loan_amount_decimal'] = number_format($loan_amount, 2);
-		$property_price;
-		$age;
-		$loan_amount;
-		$loan_period;
-		
-		
-		return $this->render('RefiBundle:Application:report.html.twig',
-			array(
-				'data' => $data,
-				'prospect_property' => $id,
-				'rdata' => $rdata,
-			)
-		);
-    }
+	}
 	
 	public function prospectreportAction(Request $request)
     {
@@ -558,39 +775,5 @@ class ApplicationController extends Controller
 
         return $response;
 	}
-	
-	/*-------------------------------------------------/
-	|	route: <domain>/api/shortlist/calculator
-	|	postdata:
-	|		- calc_input_values : json_encode of calculator values
-	--------------------------------------------------*/
-    /*public function shortlistCalculatorAction(Request $request)
-    {
-		$session = new Session();
-		$postdata = $request->request->all();
-
-		$status = 'fail';
-		$message = 'No formula inputted.';
-
-		if (!isset($postdata['calculator_input'])) $postdata['calculator_input'] = 0;
-
-		$prospect_ids = $session->get('prospect_ids');
-		$calc_input_values = array();
-		if($postdata['calculator_input'] !== 0 && !empty($prospect_ids)) {
-			$calc_input_values = json_decode($postdata['calculator_input']);
-		
-			$session->set('calc_input_values', $calc_input_values);
-			
-			$status = 'ok';
-			$message = 'Calculator ready!';
-		}
-
-		$msg = array('status' => $status, 'message' => $message);
-
-		$response = new Response(json_encode($msg));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
-	}*/
 
 }

@@ -9,12 +9,12 @@
 
 
 {% block content %}
-{% if prospect_property == 0 %}
+{% if its_empty is defined %}
 	<div class="container">
 	  <div class="row-fluid">
 		<div class="span12">
 		  <br/><br/>
-		  You have no prospects to be blasted yet. Go to campaign first!
+		  You have no prospects to be blasted or calculator values inputted yet. Go to campaign or the calculator screen first!
 		</div>
 	  </div>
 	</div>
@@ -24,7 +24,8 @@
     <div class="span12">
       <div class="alignright">
         <br/><br/>
-        <button class="btn-red btn-gen btn-sendreport">SAVE AND SEND</button>
+		<form method="post" id="reportform"><input type="hidden" value="{{ random() }}" name="reportinput" /></form>
+		<button class="btn-red btn-gen btn-sendreport" onClick="submitReport(); return true;" >SAVE AND SEND</button>
       </div>
     </div>
   </div>
@@ -288,7 +289,7 @@
               <div class="span6">{{ rdata.current_interest_rate }} next two years, {{ rdata.current_interest_rate_2_years }} after that</div>
           </div>
 
-          <p class="text">You could potentially refinance and save $46,000 in just five years.</p>
+          <p class="text">You could potentially refinance and save ${{ rdata.five_years_savings }} in just five years.</p>
         </div>
 
       </div>
@@ -331,7 +332,7 @@
 
           <div class="row-fluid">
             <div class="span12 redRow">
-              You can Reduce your Monthly repayment by <br>SGD299.29
+              You can Reduce your Monthly repayment by <br>SGD{{ rdata.monthly_payment_reduce }}
             </div>
           </div>
 
@@ -342,16 +343,16 @@
                   <th width='15%'></th>
                   <th width='5%'></th>
                   <th width='9%'>CURRENT</th>
-                  <th width='9%'>HSBC</th>
+                  <th width='9%'>REFI</th>
                   <th width='9%'>SAVINGS</th>
                 </thead>
                 <tbody>
                   <tr>
                     <td><span class="pitch-icon tla"></span>Total Loan Amount:</td>
                     <td>S$</td>
-                    <td>500,000.00</td>
-                    <td>200,000.00</td>
-                    <td>50,000.00</td>
+                    <td>{{ rdata.total_loan_amount_current }}</td>
+                    <td>{{ rdata.total_loan_amount_refi }}</td>
+                    <td>{{ rdata.total_loan_amount_savings }}</td>
                   </tr>
                   <tr>
                     <td><span class="pitch-icon mpa"></span>Monthly Payment Amount:</td>
@@ -416,8 +417,7 @@
         {# <img src="/web/tempAssets/css/images/interest_expenses.jpg" alt=""> #}
 
         {# <img src="/web/tempAssets/css/images/ie-graph.jpg" alt=""> #}
-        <h2>Insert Graph from EXCEL (BLACK)</h2>
-        &nbsp;
+        <div id="chart_div" style="width: 99%; height: 300px;"></div>
         <div class="clr"></div>
       </div>
     </div>
@@ -480,16 +480,16 @@
         </div>
         <div class="profile">
           <div class="main pad">
-            <h3 class="name">Grace Reed</h3>
+            <h3 class="name">{{ data.name }}</h3>
             <div class="title">Agent Broker</div>
           </div>
           <!-- main -->
           <div class="others pad">
-            <div><b>Email: </b>info@smb.com</div>
+            <div><b>Email: </b>{{ data.email }}</div>
             <div><b>Phone: </b>1234 5678</div>
             <div><b>Age: </b>32</div>
-            <div><b>Address: </b>Dolor duis dolor in aliquam enim ex dolor</div>
-            <div><b>Company: </b>SMB</div>
+            <div><b>Address: </b>{{ data.address }}</div>
+            <div><b>Company: </b>{{ data.company }}</div>
             <div><b>Years as a broker: </b>7 years</div>
           </div>
           <!-- others -->
@@ -534,5 +534,31 @@
 
 {% block footer %}
   {{ parent() }}
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(drawChart);
+		function drawChart() {
+
+		  var data = google.visualization.arrayToDataTable([
+			['', ''],
+			['Current Interest Payments Over 3 Years', {{ rdata.current_interest_payments_three_years }}],
+			['Refinance Interest Costs Over 3 Years', {{ rdata.refinance_interest_costs_three_years }}],
+			['Approx. Savings Over 3 Years', {{ rdata.approx_savings_three_years }}]
+		  ]);
+
+		  var options = {
+			title: 'Refinanced Mortgage Savings Example',
+			legend: {
+				position: 'none'
+			}
+		  };
+
+		  var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+
+		  chart.draw(data, options);
+
+		}
+	</script>
 {% endblock footer %}
 

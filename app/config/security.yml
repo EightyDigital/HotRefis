@@ -41,8 +41,11 @@ security:
 
     access_control:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/dashboard, roles: ROLE_USER }
          - { path: ^/campaign, roles: ROLE_USER }
          - { path: ^/calculator, roles: ROLE_USER }
+         - { path: ^/report, roles: ROLE_USER }
          - { path: ^/list, roles: ROLE_USER }
          - { path: ^/api, roles: ROLE_USER }
+         - { path: ^/refi, roles: IS_AUTHENTICATED_ANONYMOUSLY }

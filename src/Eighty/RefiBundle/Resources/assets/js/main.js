@@ -36,3 +36,7 @@ function submitCalc() {
 		$("#calculator_form").submit();
 	}
 }
+
+function submitReport() {
+	$("#reportform").submit();
+}

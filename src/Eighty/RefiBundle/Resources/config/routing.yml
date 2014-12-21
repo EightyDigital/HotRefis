@@ -36,10 +36,6 @@ refi_prospect_report:
     pattern: /refi/report/{hash}
     defaults: { _controller: RefiBundle:Application:report, hash: 0 }
 
-refi_prospect:
-    pattern: /prospect/
-    defaults: { _controller: RefiBundle:Application:prospect }
-
 API_filter_property:
     pattern: /api/filter/property
     defaults: { _controller: RefiBundle:Application:filterProperty }
