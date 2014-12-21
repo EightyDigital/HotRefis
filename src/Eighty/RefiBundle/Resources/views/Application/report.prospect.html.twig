@@ -1,4 +1,4 @@
-{% extends "RefiBundle::tempBase2.html.twig" %}
+{% extends "RefiBundle::tempBase2.prospect.html.twig" %}
 
 {% block header %}
 
@@ -19,17 +19,6 @@
 	  </div>
 	</div>
 {% else %}
-<div class="container">
-  <div class="row-fluid">
-    <div class="span12">
-      <div class="alignright">
-        <br/><br/>
-		<form method="post" id="reportform"><input type="hidden" value="{{ random() }}" name="reportinput" /></form>
-		<button class="btn-red btn-gen btn-sendreport" onClick="submitReport(); return true;" >SAVE AND SEND</button>
-      </div>
-    </div>
-  </div>
-</div>
 {# NOT REQUIRED
 <!-- row 1: property details + map   -->
 <div class="container row1">
@@ -404,9 +393,9 @@
         </div>
         <!-- bordered  -->
 
-        {#<div class="alignright rp-btn">
+        <div class="alignright rp-btn">
           <button>Click here to View How</button>
-        </div>#}
+        </div>
 
         <div class="clr"></div>
       </div>
@@ -552,6 +541,7 @@
 
 	}
 </script>
+
 {% endif %}
 {% endblock content %}
 

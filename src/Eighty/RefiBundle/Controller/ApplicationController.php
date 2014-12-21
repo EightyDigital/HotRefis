@@ -4,13 +4,13 @@ namespace Eighty\RefiBundle\Controller;
 
 use Eighty\RefiBundle\Entity\Sectorlist;
 use Eighty\RefiBundle\Entity\Postalregion;
+use Eighty\RefiBundle\Entity\Reportlist;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-
 
 class ApplicationController extends Controller
 {
@@ -370,16 +370,42 @@ class ApplicationController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		
 		$session = new Session();
-		$postdata = $request->query->all();
+		$postdata = $request->request->all();
 		$rdata = array();
 		
-		if(!empty($postdata)) { print_r($postdata); exit(); }
+		if(isset($postdata['reportinput'])) { 
+			$prospect_properties = $session->get('prospect_properties');
+			$serialized_calc_input_values = serialize($session->get('calc_input_values'));
+			
+			$batchSize = 20;
+			foreach($prospect_properties as $i => $transaction_id) {
+				$hash = bin2hex(openssl_random_pseudo_bytes(16));
+				
+				$reportlist = new Reportlist();
+				$reportlist->setClientId($data['id']);
+				$reportlist->setTransactionId($transaction_id);
+				$reportlist->setStatus(0);
+				$reportlist->setCalculatorValues($serialized_calc_input_values);
+				$reportlist->setHash($hash);
+				
+				$em->persist($reportlist);
+				if (($i % $batchSize) == 0) {
+					$em->flush();
+					$em->clear();
+				}
+				print_r($hash . "<br/>");
+			}
+			$em->flush();
+			$em->clear();
+			exit(); 			
+		}
 		
 		$loandata = $em->getRepository('RefiBundle:Prospectloan')->findOneByTransactionId($id);
 		$propertydata = $em->getRepository('RefiBundle:Transactions')->findOneById($id);
 		
 		if(!empty($loandata) && !empty($propertydata) && $session->has('calc_input_values')) {
 			$calc_input_values = $session->get('calc_input_values');
+			
 			$formula = $this->_getReportFormula($calc_input_values, $propertydata, $loandata);
 			$loan_amount = $loandata->getLoanAmount();
 			$x = -1; $y = 0;
@@ -416,7 +442,6 @@ class ApplicationController extends Controller
 			return $this->render('RefiBundle:Application:report.html.twig',
 				array(
 					'data' => $data,
-					'prospect_property' => $id,
 					'rdata' => $rdata,
 				)
 			);
@@ -431,15 +456,77 @@ class ApplicationController extends Controller
 		}
 	}
 	
-	public function prospectreportAction(Request $request)
+	public function prospectreportAction($hash, Request $request)
     {
-        $data = $this->_getDefaultParams();
+        $em = $this->getDoctrine()->getManager();
 		
-		return $this->render('RefiBundle:Application:report.html.twig',
-			array(
-				'data' => $data,
-			)
+		$reportlist = $em->getRepository('RefiBundle:Reportlist')->findOneByHash($hash);
+		$broker = $em->getRepository('RefiBundle:Client')->findOneById($reportlist->getClientId());
+		
+		$data = array(
+			'name' => $broker->getFullname(),
+			'email' => $broker->getEmail(),
+			'address' => $broker->getAddress(),
+			'company' => $broker->getAgency(),
 		);
+		
+		$calc_input_values = unserialize($reportlist->getCalculatorValues());
+		
+		$postdata = $request->request->all();
+		$rdata = array();
+		
+		$loandata = $em->getRepository('RefiBundle:Prospectloan')->findOneByTransactionId($reportlist->getTransactionId());
+		$propertydata = $em->getRepository('RefiBundle:Transactions')->findOneById($reportlist->getTransactionId());
+		
+		if(!empty($loandata) && !empty($propertydata)) {
+			$formula = $this->_getReportFormula($calc_input_values, $propertydata, $loandata);
+			$loan_amount = $loandata->getLoanAmount();
+			$x = -1; $y = 0;
+			
+			while($x < 0) {
+				$x = $loan_amount - $this->_num_div[$y];
+				$y++;
+			}
+			
+			$round = round($loan_amount / $this->_num_div[$y - 1]) * $this->_num_div[$y - 1];
+					
+			$rdata['loan_amount'] = number_format($loan_amount);
+			$rdata['round_loan_amount'] = number_format($round);
+			$rdata['loan_period'] = $loandata->getLoanTerm() / 12;
+			$rdata['loan_period_remaining'] = $rdata['loan_period'] - (date("Y") - $loandata->getLoanDate()->format("Y"));
+			$rdata['current_interest_rate'] = number_format($loandata->getInterestRate(), 1). "%";
+			$rdata['current_interest_rate_2_years'] = number_format($loandata->getInterestRate() + 1, 1). "%";
+			
+			$rdata['property_price'] = number_format($propertydata->getPrice(), 2);
+			$rdata['loan_amount_decimal'] = number_format($loan_amount, 2);
+			
+			$rdata['monthly_payment_reduce'] = number_format(round($formula['current_mortgage_scenario'][1]['monthly_payment'] - $formula['refi_scenario'][1]['monthly_payment'], 2), 2);
+			
+			$rdata['current_interest_payments_three_years'] = round($formula['current_mortgage_scenario'][3]['cumulative_interest'], -3);
+			$rdata['refinance_interest_costs_three_years'] = round($formula['refi_scenario'][3]['cumulative_interest'], -3);
+			$rdata['approx_savings_three_years'] = round($formula['current_mortgage_scenario'][3]['cumulative_interest'], -3) - round($formula['refi_scenario'][3]['cumulative_interest'], -3);
+			
+			$rdata['five_years_savings'] = number_format(round($formula['current_mortgage_scenario'][5]['cumulative_interest'], -3) - round($formula['refi_scenario'][5]['cumulative_interest'], -3));
+			
+			$rdata['total_loan_amount_current'] = number_format($formula['initial_loan_amount'], 2);
+			$rdata['total_loan_amount_refi'] = number_format($formula['principal_remaining'], 2);
+			$rdata['total_loan_amount_savings'] = number_format($formula['initial_loan_amount'] - $formula['principal_remaining'], 2);
+			
+			return $this->render('RefiBundle:Application:report.prospect.html.twig',
+				array(
+					'data' => $data,
+					'rdata' => $rdata,
+				)
+			);
+		
+		} else {
+			return $this->render('RefiBundle:Application:report.prospect.html.twig',
+				array(
+					'data' => $data,
+					'its_empty' => true,
+				)
+			);
+		}
     }
 
 	/*-------------------------------------------------/
