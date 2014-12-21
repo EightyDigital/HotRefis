@@ -240,52 +240,7 @@ class ApplicationController extends Controller
 		);
     }
 
-    public function listAction()
-    {
-		$em = $this->getDoctrine()->getManager();
-		$data = $this->_getDefaultParams();
-		
-		$paginator = $this->get('knp_paginator');
-		$prospectlist = $em->getRepository('RefiBundle:Prospectlist')->getProspectListContactedEngaged($data['id']);
-		
-		$temp_prospect_list = array();
-		foreach($prospectlist as $key => $val) {
-			$temp_prospect_list[$key]['sector'] = $val['sector_name'];
-			$temp_prospect_list[$key]['prospects'][] = array(
-											'prospectId' => $val['prospectId'],
-											'profession' => $val['profession'],
-											'derivedIncome' => $val['derivedIncome'],
-											'property_owned' => $val['property_owned'],
-											'status' => $val['status'],
-											'note' => $val['note']
-										);
-		}
-		
-		$prospect_list = array();
-		foreach($temp_prospect_list as $key => $val) {
-			$prospect_list[$key] = $val;
-			
-			$prospect_list[$key]['total_rows'] = $total_rows = count($val['prospects']);
-			$prospect_list[$key]['current_max_row'] = $current_max_row = ($total_rows > 10) ? $this->get('request')->query->get('prospect_list_'.$key, 1) * 10 : $total_rows;
-			$prospect_list[$key]['current_min_row'] = $current_min_row = ($total_rows > 10) ? $current_max_row - 9 : 1;
-			
-			$prospect_list[$key]['pagination'] = $pagination = $paginator->paginate(
-				$val['prospects'],
-				$this->get('request')->query->get('prospect_list_'.$key, 1),
-				10,
-				array('pageParameterName' => 'prospect_list_'.$key)
-			);
-		}
-		
-		return $this->render('RefiBundle:Application:list.html.twig',
-			array(
-				'data' => $data,
-				'prospect_list' => $prospect_list,
-			)
-		);
-    }
-
-	public function campaignAction()
+    public function campaignAction()
     {
 		$data = $this->_getDefaultParams();
 
@@ -344,7 +299,16 @@ class ApplicationController extends Controller
 					}
 				} else {
 					$prospect_properties[0] = 0;
-				}			
+				}
+
+				// if ($session->has('prospect_ids')) {
+					// $prospect_ids = $session->get('prospect_ids');
+					// if(!isset($prospect_ids[0])) {
+						// $prospect_ids[0] = 0;
+					// }
+				// } else {
+					// $prospect_ids[0] = 0;
+				// }	
 				
 				return $this->redirect($this->generateUrl('refi_report', array('id' => $prospect_properties[0])));
 			}
@@ -377,7 +341,9 @@ class ApplicationController extends Controller
 			$prospect_properties = $session->get('prospect_properties');
 			$serialized_calc_input_values = serialize($session->get('calc_input_values'));
 			
+			$session->clear();
 			$batchSize = 20;
+			
 			foreach($prospect_properties as $i => $transaction_id) {
 				$hash = bin2hex(openssl_random_pseudo_bytes(16));
 				
@@ -397,11 +363,43 @@ class ApplicationController extends Controller
 			}
 			$em->flush();
 			$em->clear();
-			exit(); 			
+			
+			exit(); 
+			
+			// $prospect_ids = $session->get('prospect_ids');
+			// $serialized_calc_input_values = serialize($session->get('calc_input_values'));
+			
+			// $session->clear();
+			// $batchSize = 20;
+			
+			// foreach($prospect_ids as $i => $prospect_id) {
+				// $hash = bin2hex(openssl_random_pseudo_bytes(16));
+				
+				// $prospectlist = new Prospectlist();
+				// $prospectlist->setSectorlistId($data['id']);
+				// $prospectlist->setProspectId($prospect_id);
+				// $prospectlist->setStatus(0);
+				// $prospectlist->setCalculatorValues($serialized_calc_input_values);
+				// $prospectlist->setHash($hash);
+				
+				// $em->persist($reportlist);
+				// if (($i % $batchSize) == 0) {
+					// $em->flush();
+					// $em->clear();
+				// }
+				// print_r($hash . "<br/>");
+			// }
+			// $em->flush();
+			// $em->clear();
+			
+			// exit();
 		}
 		
 		$loandata = $em->getRepository('RefiBundle:Prospectloan')->findOneByTransactionId($id);
 		$propertydata = $em->getRepository('RefiBundle:Transactions')->findOneById($id);
+		
+		// $loandata = $em->getRepository('RefiBundle:Prospectloan')->findOneByProspectId($id);
+		// $propertydata = $em->getRepository('RefiBundle:Transactions')->findOneById($loandata->getTransactionId());
 		
 		if(!empty($loandata) && !empty($propertydata) && $session->has('calc_input_values')) {
 			$calc_input_values = $session->get('calc_input_values');
@@ -439,6 +437,30 @@ class ApplicationController extends Controller
 			$rdata['total_loan_amount_refi'] = number_format($formula['principal_remaining'], 2);
 			$rdata['total_loan_amount_savings'] = number_format($formula['initial_loan_amount'] - $formula['principal_remaining'], 2);
 			
+			$rdata['monthly_payment_amount_current'] = number_format($formula['current_mortgage_scenario'][1]['monthly_payment'], 2);
+			$rdata['monthly_payment_amount_refi'] = number_format($formula['refi_scenario'][1]['monthly_payment'], 2);
+			$rdata['monthly_payment_amount_savings'] = number_format($formula['current_mortgage_scenario'][1]['monthly_payment'] - $formula['refi_scenario'][1]['monthly_payment'], 2);
+			
+			$rdata['interest_expenses_current'] = number_format($formula['current_mortgage_scenario'][1]['interest_cost_pa'], 2);
+			$rdata['interest_expenses_refi'] = number_format($formula['refi_scenario'][1]['interest_cost_pa'], 2);
+			$rdata['interest_expenses_savings'] = number_format($formula['current_mortgage_scenario'][1]['interest_cost_pa'] - $formula['refi_scenario'][1]['interest_cost_pa'], 2);
+			
+			$rdata['first_three_years_current'] = number_format($formula['current_mortgage_scenario'][3]['cumulative_interest'], 2);
+			$rdata['first_three_years_refi'] = number_format($formula['refi_scenario'][3]['cumulative_interest'], 2);
+			$rdata['first_three_years_savings'] = number_format($formula['current_mortgage_scenario'][3]['cumulative_interest'] - $formula['refi_scenario'][3]['cumulative_interest'], 2);
+			
+			$rdata['first_five_years_current'] = number_format($formula['current_mortgage_scenario'][5]['cumulative_interest'], 2);
+			$rdata['first_five_years_refi'] = number_format($formula['refi_scenario'][5]['cumulative_interest'], 2);
+			$rdata['first_five_years_savings'] = number_format($formula['current_mortgage_scenario'][5]['cumulative_interest'] - $formula['refi_scenario'][5]['cumulative_interest'], 2);
+			
+			$rdata['first_ten_years_current'] = number_format($formula['current_mortgage_scenario'][10]['cumulative_interest'], 2);
+			$rdata['first_ten_years_refi'] = number_format($formula['refi_scenario'][10]['cumulative_interest'], 2);
+			$rdata['first_ten_years_savings'] = number_format($formula['current_mortgage_scenario'][10]['cumulative_interest'] - $formula['refi_scenario'][10]['cumulative_interest'], 2);
+			
+			$rdata['total_expenses_current'] = number_format($formula['current_mortgage_scenario'][1]['principal_remaining'], 2);
+			$rdata['total_expenses_refi'] = number_format($formula['refi_scenario'][1]['principal_remaining'], 2);
+			$rdata['total_expenses_savings'] = number_format($formula['current_mortgage_scenario'][1]['principal_remaining'] - $formula['refi_scenario'][1]['principal_remaining'], 2);
+			
 			return $this->render('RefiBundle:Application:report.html.twig',
 				array(
 					'data' => $data,
@@ -461,6 +483,25 @@ class ApplicationController extends Controller
         $em = $this->getDoctrine()->getManager();
 		
 		$reportlist = $em->getRepository('RefiBundle:Reportlist')->findOneByHash($hash);
+		
+		if(empty($reportlist)) {
+			return $this->render('RefiBundle:Application:report.prospect.html.twig',
+				array(
+					'its_empty' => true,
+				)
+			);
+		}
+		
+		$postdata = $request->request->all();
+		if(isset($postdata['reportinput'])) { 
+			$reportlist->setStatus(2); $em->flush();
+			print_r("You are now engaged!"); exit();
+		}
+		
+		if($reportlist->getStatus() < 2) {
+			$reportlist->setStatus(1); $em->flush();
+		}
+		
 		$broker = $em->getRepository('RefiBundle:Client')->findOneById($reportlist->getClientId());
 		
 		$data = array(
@@ -472,62 +513,165 @@ class ApplicationController extends Controller
 		
 		$calc_input_values = unserialize($reportlist->getCalculatorValues());
 		
-		$postdata = $request->request->all();
 		$rdata = array();
 		
 		$loandata = $em->getRepository('RefiBundle:Prospectloan')->findOneByTransactionId($reportlist->getTransactionId());
 		$propertydata = $em->getRepository('RefiBundle:Transactions')->findOneById($reportlist->getTransactionId());
 		
-		if(!empty($loandata) && !empty($propertydata)) {
-			$formula = $this->_getReportFormula($calc_input_values, $propertydata, $loandata);
-			$loan_amount = $loandata->getLoanAmount();
-			$x = -1; $y = 0;
-			
-			while($x < 0) {
-				$x = $loan_amount - $this->_num_div[$y];
-				$y++;
-			}
-			
-			$round = round($loan_amount / $this->_num_div[$y - 1]) * $this->_num_div[$y - 1];
-					
-			$rdata['loan_amount'] = number_format($loan_amount);
-			$rdata['round_loan_amount'] = number_format($round);
-			$rdata['loan_period'] = $loandata->getLoanTerm() / 12;
-			$rdata['loan_period_remaining'] = $rdata['loan_period'] - (date("Y") - $loandata->getLoanDate()->format("Y"));
-			$rdata['current_interest_rate'] = number_format($loandata->getInterestRate(), 1). "%";
-			$rdata['current_interest_rate_2_years'] = number_format($loandata->getInterestRate() + 1, 1). "%";
-			
-			$rdata['property_price'] = number_format($propertydata->getPrice(), 2);
-			$rdata['loan_amount_decimal'] = number_format($loan_amount, 2);
-			
-			$rdata['monthly_payment_reduce'] = number_format(round($formula['current_mortgage_scenario'][1]['monthly_payment'] - $formula['refi_scenario'][1]['monthly_payment'], 2), 2);
-			
-			$rdata['current_interest_payments_three_years'] = round($formula['current_mortgage_scenario'][3]['cumulative_interest'], -3);
-			$rdata['refinance_interest_costs_three_years'] = round($formula['refi_scenario'][3]['cumulative_interest'], -3);
-			$rdata['approx_savings_three_years'] = round($formula['current_mortgage_scenario'][3]['cumulative_interest'], -3) - round($formula['refi_scenario'][3]['cumulative_interest'], -3);
-			
-			$rdata['five_years_savings'] = number_format(round($formula['current_mortgage_scenario'][5]['cumulative_interest'], -3) - round($formula['refi_scenario'][5]['cumulative_interest'], -3));
-			
-			$rdata['total_loan_amount_current'] = number_format($formula['initial_loan_amount'], 2);
-			$rdata['total_loan_amount_refi'] = number_format($formula['principal_remaining'], 2);
-			$rdata['total_loan_amount_savings'] = number_format($formula['initial_loan_amount'] - $formula['principal_remaining'], 2);
-			
-			return $this->render('RefiBundle:Application:report.prospect.html.twig',
-				array(
-					'data' => $data,
-					'rdata' => $rdata,
-				)
-			);
+		$formula = $this->_getReportFormula($calc_input_values, $propertydata, $loandata);
+		$loan_amount = $loandata->getLoanAmount();
+		$x = -1; $y = 0;
 		
-		} else {
-			return $this->render('RefiBundle:Application:report.prospect.html.twig',
-				array(
-					'data' => $data,
-					'its_empty' => true,
-				)
+		while($x < 0) {
+			$x = $loan_amount - $this->_num_div[$y];
+			$y++;
+		}
+		
+		$round = round($loan_amount / $this->_num_div[$y - 1]) * $this->_num_div[$y - 1];
+				
+		$rdata['loan_amount'] = number_format($loan_amount);
+		$rdata['round_loan_amount'] = number_format($round);
+		$rdata['loan_period'] = $loandata->getLoanTerm() / 12;
+		$rdata['loan_period_remaining'] = $rdata['loan_period'] - (date("Y") - $loandata->getLoanDate()->format("Y"));
+		$rdata['current_interest_rate'] = number_format($loandata->getInterestRate(), 1). "%";
+		$rdata['current_interest_rate_2_years'] = number_format($loandata->getInterestRate() + 1, 1). "%";
+		
+		$rdata['property_price'] = number_format($propertydata->getPrice(), 2);
+		$rdata['loan_amount_decimal'] = number_format($loan_amount, 2);
+		
+		$rdata['monthly_payment_reduce'] = number_format(round($formula['current_mortgage_scenario'][1]['monthly_payment'] - $formula['refi_scenario'][1]['monthly_payment'], 2), 2);
+		
+		$rdata['current_interest_payments_three_years'] = round($formula['current_mortgage_scenario'][3]['cumulative_interest'], -3);
+		$rdata['refinance_interest_costs_three_years'] = round($formula['refi_scenario'][3]['cumulative_interest'], -3);
+		$rdata['approx_savings_three_years'] = round($formula['current_mortgage_scenario'][3]['cumulative_interest'], -3) - round($formula['refi_scenario'][3]['cumulative_interest'], -3);
+		
+		$rdata['five_years_savings'] = number_format(round($formula['current_mortgage_scenario'][5]['cumulative_interest'], -3) - round($formula['refi_scenario'][5]['cumulative_interest'], -3));
+		
+		$rdata['total_loan_amount_current'] = number_format($formula['initial_loan_amount'], 2);
+		$rdata['total_loan_amount_refi'] = number_format($formula['principal_remaining'], 2);
+		$rdata['total_loan_amount_savings'] = number_format($formula['initial_loan_amount'] - $formula['principal_remaining'], 2);
+		
+		$rdata['monthly_payment_amount_current'] = number_format($formula['current_mortgage_scenario'][1]['monthly_payment'], 2);
+		$rdata['monthly_payment_amount_refi'] = number_format($formula['refi_scenario'][1]['monthly_payment'], 2);
+		$rdata['monthly_payment_amount_savings'] = number_format($formula['current_mortgage_scenario'][1]['monthly_payment'] - $formula['refi_scenario'][1]['monthly_payment'], 2);
+		
+		$rdata['interest_expenses_current'] = number_format($formula['current_mortgage_scenario'][1]['interest_cost_pa'], 2);
+		$rdata['interest_expenses_refi'] = number_format($formula['refi_scenario'][1]['interest_cost_pa'], 2);
+		$rdata['interest_expenses_savings'] = number_format($formula['current_mortgage_scenario'][1]['interest_cost_pa'] - $formula['refi_scenario'][1]['interest_cost_pa'], 2);
+		
+		$rdata['first_three_years_current'] = number_format($formula['current_mortgage_scenario'][3]['cumulative_interest'], 2);
+		$rdata['first_three_years_refi'] = number_format($formula['refi_scenario'][3]['cumulative_interest'], 2);
+		$rdata['first_three_years_savings'] = number_format($formula['current_mortgage_scenario'][3]['cumulative_interest'] - $formula['refi_scenario'][3]['cumulative_interest'], 2);
+		
+		$rdata['first_five_years_current'] = number_format($formula['current_mortgage_scenario'][5]['cumulative_interest'], 2);
+		$rdata['first_five_years_refi'] = number_format($formula['refi_scenario'][5]['cumulative_interest'], 2);
+		$rdata['first_five_years_savings'] = number_format($formula['current_mortgage_scenario'][5]['cumulative_interest'] - $formula['refi_scenario'][5]['cumulative_interest'], 2);
+		
+		$rdata['first_ten_years_current'] = number_format($formula['current_mortgage_scenario'][10]['cumulative_interest'], 2);
+		$rdata['first_ten_years_refi'] = number_format($formula['refi_scenario'][10]['cumulative_interest'], 2);
+		$rdata['first_ten_years_savings'] = number_format($formula['current_mortgage_scenario'][10]['cumulative_interest'] - $formula['refi_scenario'][10]['cumulative_interest'], 2);
+		
+		$rdata['total_expenses_current'] = number_format($formula['current_mortgage_scenario'][1]['principal_remaining'], 2);
+		$rdata['total_expenses_refi'] = number_format($formula['refi_scenario'][1]['principal_remaining'], 2);
+		$rdata['total_expenses_savings'] = number_format($formula['current_mortgage_scenario'][1]['principal_remaining'] - $formula['refi_scenario'][1]['principal_remaining'], 2);
+		
+		return $this->render('RefiBundle:Application:report.prospect.html.twig',
+			array(
+				'data' => $data,
+				'rdata' => $rdata,
+			)
+		);
+    }
+	
+	public function listAction()
+    {
+		$em = $this->getDoctrine()->getManager();
+		$data = $this->_getDefaultParams();
+		
+		$paginator = $this->get('knp_paginator');
+		$prospectlist = $em->getRepository('RefiBundle:Reportlist')->getReportListContactedEngaged($data['id']);
+		
+		$temp_prospect_list = array();
+		foreach($prospectlist as $key => $val) {
+			$temp_prospect_list[$key]['sector'] = $val['sector_name'];
+			$temp_prospect_list[$key]['prospects'][] = array(
+											'prospectId' => $val['transactionId'],
+											'profession' => '',
+											'derivedIncome' => '',
+											'property_owned' => '',
+											'status' => $val['status'],
+											'note' => $val['note']
+										);
+		}
+		
+		$prospect_list = array();
+		foreach($temp_prospect_list as $key => $val) {
+			$prospect_list[$key] = $val;
+			
+			$prospect_list[$key]['total_rows'] = $total_rows = count($val['prospects']);
+			$prospect_list[$key]['current_max_row'] = $current_max_row = ($total_rows > 10) ? $this->get('request')->query->get('prospect_list_'.$key, 1) * 10 : $total_rows;
+			$prospect_list[$key]['current_min_row'] = $current_min_row = ($total_rows > 10) ? $current_max_row - 9 : 1;
+			
+			$prospect_list[$key]['pagination'] = $pagination = $paginator->paginate(
+				$val['prospects'],
+				$this->get('request')->query->get('prospect_list_'.$key, 1),
+				10,
+				array('pageParameterName' => 'prospect_list_'.$key)
 			);
 		}
+		
+		return $this->render('RefiBundle:Application:list.html.twig',
+			array(
+				'data' => $data,
+				'prospect_list' => $prospect_list,
+			)
+		);
     }
+	
+	// public function listAction()
+    // {
+		// $em = $this->getDoctrine()->getManager();
+		// $data = $this->_getDefaultParams();
+		
+		// $paginator = $this->get('knp_paginator');
+		// $prospectlist = $em->getRepository('RefiBundle:Prospectlist')->getProspectListContactedEngaged($data['id']);
+		
+		// $temp_prospect_list = array();
+		// foreach($prospectlist as $key => $val) {
+			// $temp_prospect_list[$key]['sector'] = $val['sector_name'];
+			// $temp_prospect_list[$key]['prospects'][] = array(
+											// 'prospectId' => $val['prospectId'],
+											// 'profession' => $val['profession'],
+											// 'derivedIncome' => $val['derivedIncome'],
+											// 'property_owned' => $val['property_owned'],
+											// 'status' => $val['status'],
+											// 'note' => $val['note']
+										// );
+		// }
+		
+		// $prospect_list = array();
+		// foreach($temp_prospect_list as $key => $val) {
+			// $prospect_list[$key] = $val;
+			
+			// $prospect_list[$key]['total_rows'] = $total_rows = count($val['prospects']);
+			// $prospect_list[$key]['current_max_row'] = $current_max_row = ($total_rows > 10) ? $this->get('request')->query->get('prospect_list_'.$key, 1) * 10 : $total_rows;
+			// $prospect_list[$key]['current_min_row'] = $current_min_row = ($total_rows > 10) ? $current_max_row - 9 : 1;
+			
+			// $prospect_list[$key]['pagination'] = $pagination = $paginator->paginate(
+				// $val['prospects'],
+				// $this->get('request')->query->get('prospect_list_'.$key, 1),
+				// 10,
+				// array('pageParameterName' => 'prospect_list_'.$key)
+			// );
+		// }
+		
+		// return $this->render('RefiBundle:Application:list.html.twig',
+			// array(
+				// 'data' => $data,
+				// 'prospect_list' => $prospect_list,
+			// )
+		// );
+    // }
 
 	/*-------------------------------------------------/
 	|	route: <domain>/api/filter/property

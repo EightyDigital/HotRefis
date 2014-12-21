@@ -14,7 +14,7 @@
 	  <div class="row-fluid">
 		<div class="span12">
 		  <br/><br/>
-		  You have no prospects to be blasted or calculator values inputted yet. Go to campaign or the calculator screen first!
+		  You have entered the wrong neighbourhood...
 		</div>
 	  </div>
 	</div>
@@ -346,44 +346,44 @@
                   <tr>
                     <td><span class="pitch-icon mpa"></span>Monthly Payment Amount:</td>
                     <td>S$</td>
-                    <td>23,000.00</td>
-                    <td>23,000.00</td>
-                    <td>3,000.00</td>
+                    <td>{{ rdata.monthly_payment_amount_current }}</td>
+                    <td>{{ rdata.monthly_payment_amount_refi }}</td>
+                    <td>{{ rdata.monthly_payment_amount_savings }}</td>
                   </tr>
                   <tr>
                     <td><span class="pitch-icon ie"></span>Interest Expenses:</td>
                     <td>S$</td>
-                    <td>3,000.00</td>
-                    <td>2,000.00</td>
-                    <td>0</td>
+                    <td>{{ rdata.interest_expenses_current }}</td>
+                    <td>{{ rdata.interest_expenses_refi }}</td>
+                    <td>{{ rdata.interest_expenses_savings }}</td>
                   </tr>
                   <tr>
                     <td><span class="pitch-icon f3y"></span>First 3 years:</td>
                     <td>S$</td>
-                    <td>900,000.00</td>
-                    <td>700,000.00</td>
-                    <td>100,000.00</td>
+                    <td>{{ rdata.first_three_years_current }}</td>
+                    <td>{{ rdata.first_three_years_refi }}</td>
+                    <td>{{ rdata.first_three_years_savings }}</td>
                   </tr>
                   <tr>
                     <td><span class="pitch-icon f5y"></span>First 5 years:</td>
                     <td>S$</td>
-                    <td>400,000.00</td>
-                    <td>200,000.00</td>
-                    <td>100,000.00</td>
+                    <td>{{ rdata.first_five_years_current }}</td>
+                    <td>{{ rdata.first_five_years_refi }}</td>
+                    <td>{{ rdata.first_five_years_savings }}</td>
                   </tr>
                   <tr>
                     <td><span class="pitch-icon f10y"></span>First 10 years:</td>
                     <td>S$</td>
-                    <td>50,000.00</td>
-                    <td>10,000.00</td>
-                    <td>10,000.00</td>
+                    <td>{{ rdata.first_ten_years_current }}</td>
+                    <td>{{ rdata.first_ten_years_refi }}</td>
+                    <td>{{ rdata.first_ten_years_savings }}</td>
                   </tr>
                   <tr>
                     <td><span class="pitch-icon te"></span>Total Exprenses:</td>
                     <td>S$</td>
-                    <td>90,000.00</td>
-                    <td>40,000.00</td>
-                    <td>30,000.00</td>
+                    <td>{{ rdata.total_expenses_current }}</td>
+                    <td>{{ rdata.total_expenses_refi }}</td>
+                    <td>{{ rdata.total_expenses_savings }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -394,7 +394,8 @@
         <!-- bordered  -->
 
         <div class="alignright rp-btn">
-          <button>Click here to View How</button>
+		  <form method="post" id="reportform"><input type="hidden" value="{{ random() }}" name="reportinput" /></form>
+		  <button onClick="submitReport(); return true;" >Click here to View How</button>
         </div>
 
         <div class="clr"></div>

@@ -53,6 +53,20 @@ class Prospectlist
      * @ORM\Column(name="status", type="bigint", nullable=true)
      */
     private $status;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="calculator_values", type="text", nullable=true)
+     */
+    private $calculatorValues;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="hash", type="string", length=64, nullable=true)
+     */
+    private $hash;
 
     /**
      * @var integer
@@ -201,6 +215,52 @@ class Prospectlist
     public function getStatus()
     {
         return $this->status;
+    }
+	
+	/**
+     * Set calculatorValues
+     *
+     * @param string $calculatorValues
+     * @return Prospectlist
+     */
+    public function setCalculatorValues($calculatorValues)
+    {
+        $this->calculatorValues = $calculatorValues;
+
+        return $this;
+    }
+
+    /**
+     * Get calculatorValues
+     *
+     * @return string 
+     */
+    public function getCalculatorValues()
+    {
+        return $this->calculatorValues;
+    }
+	
+	/**
+     * Set hash
+     *
+     * @param string $hash
+     * @return Prospectlist
+     */
+    public function setHash($hash)
+    {
+        $this->hash = $hash;
+
+        return $this;
+    }
+
+    /**
+     * Get hash
+     *
+     * @return string 
+     */
+    public function getHash()
+    {
+        return $this->hash;
     }
 
     /**

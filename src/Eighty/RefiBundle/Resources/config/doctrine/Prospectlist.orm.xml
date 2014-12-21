@@ -10,5 +10,7 @@
     <field name="dateContacted" type="datetime" column="date_contacted" nullable="true"/>
     <field name="dateEngaged" type="datetime" column="date_engaged" nullable="true"/>
     <field name="status" type="bigint" column="status" nullable="true"/>
+	<field name="calculatorValues" type="text" column="calculator_values" nullable="true"/>
+	<field name="hash" type="string" column="hash" length="64" nullable="true"/>
   </entity>
 </doctrine-mapping>
