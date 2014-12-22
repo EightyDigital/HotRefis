@@ -17,15 +17,17 @@
     </nav>
 
     <div class="hd__auxwrap">
+      <div class="account__status">
+        <a class="logout__btn" href="/logout"></a>
+        <a class="logout__txt" href="/logout">Logout</a>
+      </div>
       <div class="status__wrap">
         <p>{% if data.name is defined %}{{ data.name }}{% endif %}</p>
         <p><span class="credits">{% if data.credits is defined %}{{ data.credits }}{% endif %}</span> credits</p>
 		    <input type="hidden" id="sectors_owned" value="{% if data.sectors_owned is defined %}{{ data.sectors_owned }}{% endif %}" />
       </div>
 
-      <div class="account__status">
-        <a class="" href="#"></a>
-      </div>
+
     </div>
   </div>
 </div>

@@ -9,7 +9,10 @@
 
 
 {% block content %}
-
+<style>
+  .calcbox h2 { font-size: 32px; font-weight: 400; color: #555; margin: 15px  0; text-transform: uppercase; }
+  .propertyRow .error { display:none; color:red; font-weight:600;margin:0 0 20px 0; }
+</style>
 {% if its_empty is defined %}
 	<div class="container">
 	  <div class="row-fluid">
@@ -22,11 +25,7 @@
 {% else %}
 <!-- row2  -->
 <div class="container row2 calcbox">
-      <h2 style="font-size: 32px;
-font-weight: 400;
-color: #555;
-margin: 15px  0;
-text-transform: uppercase;">Report Setup</h2>
+      <h2>Report Setup</h2>
   <div class="row-fluid whitebox">
   <form method="post" action="{{ url('refi_calculator') }}" id="calculator_form">
     <div class="span12">
@@ -37,9 +36,18 @@ text-transform: uppercase;">Report Setup</h2>
 
     <div class="row-fluid">
       <div class="span6 pad">
-        <div class="propertyRow"><label for="PropertyNum">LTV% At Purchase </label><input type="text" placeholder="0" name="ltv_at_purchase" id="ltv_at_purchase" ></div>
-        <div class="propertyRow"><label for="PropertyNum">Loan Term </label><input type="text" placeholder="0" name="loan_term" id="loan_term" ></div>
-        <div class="propertyRow"><label for="PropertyNum">Existing Loan Mortgage Rate </label><input type="text" placeholder="0" name="existing_loan_mortgage_rate" id="existing_loan_mortgage_rate" ></div>
+        <div class="propertyRow">
+          <label for="PropertyNum">LTV% At Purchase </label><input type="text" placeholder="0" name="ltv_at_purchase" id="ltv_at_purchase" >
+          <p class="error ltv_at_purchase">LTV cannot be blank</p>
+        </div>
+        <div class="propertyRow">
+          <label for="PropertyNum">Loan Term </label><input type="text" placeholder="0" name="loan_term" id="loan_term" >
+          <p class="error loan_term">Loan term cannot be blank</p>
+        </div>
+        <div class="propertyRow">
+          <label for="PropertyNum">Existing Loan Mortgage Rate </label><input type="text" placeholder="0" name="existing_loan_mortgage_rate" id="existing_loan_mortgage_rate" >
+          <p class="error existing_loan_mortgage_rate">Mortgage rate cannot be blank</p>
+        </div>
       </div>
     </div>
 

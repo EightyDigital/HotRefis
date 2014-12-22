@@ -27,12 +27,16 @@ var siteBindings = {
 
 function submitCalc() {
 	if( !$('#ltv_at_purchase').val() ) {
+    $('.ltv_at_purchase').show();
 		return false;
 	} else if( !$('#loan_term').val() ) {
+    $('.loan_term').show();
 		return false;
 	} else if( !$('#existing_loan_mortgage_rate').val() ) {
+    $('.existing_loan_mortgage_rate').show();
 		return false;
 	} else {
+    $('.error').hide();
 		$("#calculator_form").submit();
 	}
 }
