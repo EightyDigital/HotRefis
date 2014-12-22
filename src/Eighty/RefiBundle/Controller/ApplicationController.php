@@ -285,7 +285,8 @@ class ApplicationController extends Controller
 				$session->set('calc_input_values', $postdata);
 				
 				$prospect_ids = $session->get('prospect_ids');
-				$temp = $em->getRepository('RefiBundle:Transactions')->fetchLoansByProspectIds(implode(',', $prospect_ids));
+				$sector_codes = $session->get('sector_codes');				
+				$temp = $em->getRepository('RefiBundle:Transactions')->fetchLoansByProspectIds(implode(',', $prospect_ids), implode(',', $sector_codes));
 				
 				foreach($temp as $transactions) {
 					$prospect_properties[] = $transactions['transactionId'];
@@ -301,15 +302,6 @@ class ApplicationController extends Controller
 					$prospect_properties[0] = 0;
 				}
 
-				// if ($session->has('prospect_ids')) {
-					// $prospect_ids = $session->get('prospect_ids');
-					// if(!isset($prospect_ids[0])) {
-						// $prospect_ids[0] = 0;
-					// }
-				// } else {
-					// $prospect_ids[0] = 0;
-				// }	
-				
 				return $this->redirect($this->generateUrl('refi_report', array('id' => $prospect_properties[0])));
 			}
 			
@@ -337,12 +329,14 @@ class ApplicationController extends Controller
 		$postdata = $request->request->all();
 		$rdata = array();
 		
+		//print_r($session->get('prospect_properties')); exit();
+		
 		if(isset($postdata['reportinput'])) { 
 			$prospect_properties = $session->get('prospect_properties');
 			$serialized_calc_input_values = serialize($session->get('calc_input_values'));
 			
 			$session->clear();
-			$batchSize = 20;
+			$batchSize = 50;
 			
 			foreach($prospect_properties as $i => $transaction_id) {
 				$hash = bin2hex(openssl_random_pseudo_bytes(16));
@@ -359,47 +353,16 @@ class ApplicationController extends Controller
 					$em->flush();
 					$em->clear();
 				}
-				print_r($hash . "<br/>");
+				print_r($this->generateUrl('refi_prospect_report', array('hash' => $hash)) . "<br/>");
 			}
 			$em->flush();
 			$em->clear();
 			
 			exit(); 
-			
-			// $prospect_ids = $session->get('prospect_ids');
-			// $serialized_calc_input_values = serialize($session->get('calc_input_values'));
-			
-			// $session->clear();
-			// $batchSize = 20;
-			
-			// foreach($prospect_ids as $i => $prospect_id) {
-				// $hash = bin2hex(openssl_random_pseudo_bytes(16));
-				
-				// $prospectlist = new Prospectlist();
-				// $prospectlist->setSectorlistId($data['id']);
-				// $prospectlist->setProspectId($prospect_id);
-				// $prospectlist->setStatus(0);
-				// $prospectlist->setCalculatorValues($serialized_calc_input_values);
-				// $prospectlist->setHash($hash);
-				
-				// $em->persist($reportlist);
-				// if (($i % $batchSize) == 0) {
-					// $em->flush();
-					// $em->clear();
-				// }
-				// print_r($hash . "<br/>");
-			// }
-			// $em->flush();
-			// $em->clear();
-			
-			// exit();
 		}
 		
 		$loandata = $em->getRepository('RefiBundle:Prospectloan')->findOneByTransactionId($id);
 		$propertydata = $em->getRepository('RefiBundle:Transactions')->findOneById($id);
-		
-		// $loandata = $em->getRepository('RefiBundle:Prospectloan')->findOneByProspectId($id);
-		// $propertydata = $em->getRepository('RefiBundle:Transactions')->findOneById($loandata->getTransactionId());
 		
 		if(!empty($loandata) && !empty($propertydata) && $session->has('calc_input_values')) {
 			$calc_input_values = $session->get('calc_input_values');
@@ -593,12 +556,11 @@ class ApplicationController extends Controller
 		
 		$temp_prospect_list = array();
 		foreach($prospectlist as $key => $val) {
-			$temp_prospect_list[$key]['sector'] = $val['sector_name'];
-			$temp_prospect_list[$key]['prospects'][] = array(
-											'prospectId' => $val['transactionId'],
-											'profession' => '',
-											'derivedIncome' => '',
-											'property_owned' => '',
+			$temp_prospect_list[$val['regionCode']]['name'] = $val['sector_name'];
+			$temp_prospect_list[$val['regionCode']]['prospects'][] = array(
+											'transactionId' => $val['transactionId'],
+											'prospectId' => $val['prospectId'],
+											'property_owned' => $val['properties'],
 											'status' => $val['status'],
 											'note' => $val['note']
 										);
@@ -628,51 +590,6 @@ class ApplicationController extends Controller
 		);
     }
 	
-	// public function listAction()
-    // {
-		// $em = $this->getDoctrine()->getManager();
-		// $data = $this->_getDefaultParams();
-		
-		// $paginator = $this->get('knp_paginator');
-		// $prospectlist = $em->getRepository('RefiBundle:Prospectlist')->getProspectListContactedEngaged($data['id']);
-		
-		// $temp_prospect_list = array();
-		// foreach($prospectlist as $key => $val) {
-			// $temp_prospect_list[$key]['sector'] = $val['sector_name'];
-			// $temp_prospect_list[$key]['prospects'][] = array(
-											// 'prospectId' => $val['prospectId'],
-											// 'profession' => $val['profession'],
-											// 'derivedIncome' => $val['derivedIncome'],
-											// 'property_owned' => $val['property_owned'],
-											// 'status' => $val['status'],
-											// 'note' => $val['note']
-										// );
-		// }
-		
-		// $prospect_list = array();
-		// foreach($temp_prospect_list as $key => $val) {
-			// $prospect_list[$key] = $val;
-			
-			// $prospect_list[$key]['total_rows'] = $total_rows = count($val['prospects']);
-			// $prospect_list[$key]['current_max_row'] = $current_max_row = ($total_rows > 10) ? $this->get('request')->query->get('prospect_list_'.$key, 1) * 10 : $total_rows;
-			// $prospect_list[$key]['current_min_row'] = $current_min_row = ($total_rows > 10) ? $current_max_row - 9 : 1;
-			
-			// $prospect_list[$key]['pagination'] = $pagination = $paginator->paginate(
-				// $val['prospects'],
-				// $this->get('request')->query->get('prospect_list_'.$key, 1),
-				// 10,
-				// array('pageParameterName' => 'prospect_list_'.$key)
-			// );
-		// }
-		
-		// return $this->render('RefiBundle:Application:list.html.twig',
-			// array(
-				// 'data' => $data,
-				// 'prospect_list' => $prospect_list,
-			// )
-		// );
-    // }
-
 	/*-------------------------------------------------/
 	|	route: <domain>/api/filter/property
 	|	postdata: none;
@@ -926,10 +843,16 @@ class ApplicationController extends Controller
 					if(($sector_count + $ctr) == 3) {
 						break;
 					} else {
-						if(!in_array($sector->sector, $temp_sectors)) {
+						$sector_code = $sector->sector;
+						for($x = 1; $x < 10; $x++) {
+							if($sector_code == $x) {
+								$sector_code = "0" . $x;
+							}
+						}
+						if(!in_array($sector_code, $temp_sectors)) {
 							$sectorlist = new Sectorlist();
 							$sectorlist->setClientId($userId);
-							$sectorlist->setSectorCode($sector->sector);
+							$sectorlist->setSectorCode($sector_code);
 							$sectorlist->setDateadded(date('Y-m-d'));
 							$sectorlist->setValidity($sector->validity);
 							$em->persist($sectorlist);
@@ -975,11 +898,13 @@ class ApplicationController extends Controller
 		if (!isset($postdata['prospects'])) $postdata['prospects'] = 0;
 
 		$prospect_ids = array();
+		$sector_codes = array();
 		if($postdata['prospects'] !== 0) {
 			$prospects = json_decode($postdata['prospects']);
 		
 			foreach($prospects as $object) {
 				foreach($object as $sector) {
+					$sector_codes[] = $sector->sector_code;
 					foreach($sector->properties as $property) {
 						foreach($property->prospects as $prospect) {
 							$prospect_ids[] = $prospect->prospect_id;
@@ -988,6 +913,7 @@ class ApplicationController extends Controller
 				}
 			}
 			
+			$session->set('sector_codes', $sector_codes);
 			$session->set('prospect_ids', $prospect_ids);
 			
 			$status = 'ok';

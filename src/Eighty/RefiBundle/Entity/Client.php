@@ -33,6 +33,13 @@ class Client implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="agency", type="string", length=255, nullable=true)
      */
     private $agency;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=20, nullable=true)
+     */
+    private $phone;
 
     /**
      * @var string
@@ -173,6 +180,29 @@ class Client implements AdvancedUserInterface, \Serializable
     public function getAgency()
     {
         return $this->agency;
+    }
+	
+	/**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Client
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 
     /**

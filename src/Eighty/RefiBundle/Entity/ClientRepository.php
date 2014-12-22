@@ -20,12 +20,14 @@ class ClientRepository extends EntityRepository
 							client  (
 								fullname,
 								email,
+								phone,
 								password,
 								salt
 							) 
 						VALUES (
 							'$postdata[fullname]',
 							'$postdata[email]',
+							'$postdata[phone]',
 							'$postdata[password]',
 							'$postdata[salt]'
 						)"

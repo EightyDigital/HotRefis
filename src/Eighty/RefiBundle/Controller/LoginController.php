@@ -46,20 +46,16 @@ class LoginController extends Controller
     {
 		$encoder = $this->get('security.encoder_factory')->getEncoder('Eighty\RefiBundle\Entity\Client');
 		$em = $this->getDoctrine()->getManager();
-
-		$postdata['fullname'] = $request->request->get('register-firstname') . ' ' . $request->request->get('register-lastname');
-		$postdata['email'] = $request->request->get('register-email');
-		$postdata['salt'] = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-		$postdata['password'] = $encoder->encodePassword($request->request->get('register-password'), $postdata['salt']);
-
+		if(isset($postdata['fullname'])) {
+			$postdata['fullname'] = $request->request->get('register-firstname') . ' ' . $request->request->get('register-lastname');
+			$postdata['email'] = $request->request->get('register-email');
+			$postdata['phone'] = $request->request->get('register-phone');
+			$postdata['salt'] = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+			$postdata['password'] = $encoder->encodePassword($request->request->get('register-password'), $postdata['salt']);
+		}
+		
         $em->getRepository('RefiBundle:Client')->registerUser($postdata);
 
-        return $this->render(
-            'RefiBundle:Login:login.html.twig',
-            array(
-                'last_username' => '',
-                'error'         => ''
-            )
-        );
+        return $this->redirect($this->generateUrl('refi_login'));
     }
 }

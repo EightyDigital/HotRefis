@@ -19,14 +19,20 @@ class ReportlistRepository extends EntityRepository
 				'SELECT pr.name AS sector_name,
 						rl.transactionId,
 						rl.status,
-						rl.note
+						rl.note,
+						pr.regionCode,
+						pl.prospectId,
+						COUNT(pl.prospectId) as properties
 					FROM RefiBundle:Reportlist rl
 					JOIN RefiBundle:Transactions tr
 						WITH tr.id = rl.transactionId
 					JOIN RefiBundle:Postalregion pr
 						WITH pr.regionCode = tr.sector
+					JOIN RefiBundle:Prospectloan pl
+						WITH pl.transactionId = tr.id
 					WHERE rl.clientId = :uId
 					AND rl.status > 0
+					GROUP BY pl.prospectId
 				'
 			)
 			->setParameter('uId', $id)

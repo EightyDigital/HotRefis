@@ -226,15 +226,18 @@ class TransactionsRepository extends EntityRepository
 			->getArrayResult();
 	}
 	
-	public function fetchLoansByProspectIds($pids)
+	public function fetchLoansByProspectIds($pids, $sids)
 	{
 		return $this->getEntityManager()
 			->createQuery(
 				"SELECT 
 					  pl.transactionId
 					FROM
-					  RefiBundle:Prospectloan pl 
+					  RefiBundle:Prospectloan pl
+					JOIN RefiBundle:Transactions t
+					  WITH t.id = pl.transactionId
 					WHERE pl.prospectId IN ($pids)
+					AND t.sector IN ($sids)
 				"
 			)
 			->getArrayResult();
