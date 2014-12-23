@@ -17,16 +17,16 @@
   <div class="row-fluid">
     <div class="span12">
       <h2 style="font-size: 32px;
-				 font-weight: 400;
-				 color: #555;
-				 margin: 15px  0;
-				 text-transform: uppercase;">Prospect List</h2>
-      
-	  {% if prospect_list is empty %}
-		You have no prospects blasted yet.
-	  {% endif %}
-	  {% for list in prospect_list %}
-	  <table id="Prospect-Table" border="1" ng-app="tablemod">
+         font-weight: 400;
+         color: #555;
+         margin: 15px  0;
+         text-transform: uppercase;">Prospect List</h2>
+
+    {% if prospect_list is empty %}
+    You have no prospects blasted yet.
+    {% endif %}
+    {% for list in prospect_list %}
+    <table id="Prospect-Table" border="1" ng-app="tablemod">
         <thead>
           <th colspan='12'>
             <span class="thleft">Prospects for <span style="font-weight:400;">{{ list.name }}</span></span>
@@ -44,21 +44,21 @@
             <td style="background:#063141;" colspan='10' width="30%"><a href="#"  style="color:#fff; text-transform:uppercase; font-size:14px;">Notes</a></td>
           </tr>
 
-		{% for prospect in list.pagination %}
-		  <tr>
+    {% for prospect in list.pagination %}
+      <tr>
             <td><a href="/prospect/">{{ prospect.transactionId }}</a></td>
             <td><a href="/prospect/">{{ prospect.prospectId }}</a></td>
             <td><a href="/prospect/">{{ prospect.property_owned }}</a></td>
             <td><a href="/prospect/">{% if prospect.status == 1 %}Contacted{% elseif prospect.status == 2 %}Engaged{% else %}Blasted{% endif %}</a></td>
-            <td colspan='10' width="30%"><a href="#">{{ prospect.note }}</a></td>
+            <td colspan='10' width="30%"><a href="#"><textarea style="resize:none;" rows="3">{{ prospect.note }}</textarea></a></td>
           </tr>
-		{% endfor %}
-		
+    {% endfor %}
+
         </tbody>
       </table>
-	  {% endfor %}
-    
-	</div>
+    {% endfor %}
+
+  </div>
   </div>
 </div>
 {% endblock content %}

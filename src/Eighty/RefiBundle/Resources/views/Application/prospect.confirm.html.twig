@@ -1,0 +1,69 @@
+{% extends "RefiBundle::tempBase.html.twig" %}
+
+{% block header %}
+{% endblock header %}
+
+
+
+
+
+{% block content %}
+{# <div ng-controller="map__controller" class="map__container" >
+  <div id="heatmap" class="angular-google-map-container"></div>
+</div> #}
+
+
+<div class="container" style="clear:both; margin-top:25px;">
+  <div class="row-fluid">
+    <div class="span12">
+      <h2 style="font-size: 32px;
+         font-weight: 400;
+         color: #555;
+         margin: 15px  0;
+         text-transform: uppercase;">Get a more detailed report</h2>
+    </div>
+  </div>
+  <style>
+    .form-horizontal .checkbox { margin:0 0 20px 20px; }
+  </style>
+  <div class="row-fluid">
+    <form class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label" for="reportName">Full Name</label>
+        <div class="controls">
+          <input type="text" id="reportName" placeholder="John Tan">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="reportEmail">Email</label>
+        <div class="controls">
+          <input type="text" id="reportEmail" placeholder="john@hotrefis.com">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="reportMobile">Mobile Number</label>
+        <div class="controls">
+          <input type="text" id="reportMobile" placeholder="9123 4321">
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox">
+            <input type="checkbox" checked> Please contact me
+          </label>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}
+
+
+
+
+
+{% block footer %}
+  {{ parent() }}
+{% endblock footer %}
+
