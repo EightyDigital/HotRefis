@@ -126,7 +126,6 @@ class TransactionsRepository extends EntityRepository
 					  round(AVG(t.price),2) AS average_price,
 					  round(AVG(t.newprice),2) AS average_newprice,
 					  round(AVG(p.age)) AS average_prospect_age,
-					  round(AVG(p.derivedIncome),2) AS average_income,
 					  round(AVG(pl.loanAmount),2) AS average_loan,
 					  AVG(pl.ltv) AS average_ltv,
 					  AVG(
@@ -147,7 +146,6 @@ class TransactionsRepository extends EntityRepository
 					  AND t.price IS NOT NULL
 					  AND t.newprice IS NOT NULL
 					  AND p.age IS NOT NULL
-					  AND p.derivedIncome IS NOT NULL
 					  AND pl.loanAmount IS NOT NULL
 					  AND pl.ltv IS NOT NULL
 					  AND pl.loanDate IS NOT NULL
