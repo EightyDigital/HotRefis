@@ -6564,10 +6564,10 @@ body.ngdialog-open {
 /* line 1, ../sass/hotrefi/modules/_account__status.scss */
 .account__status {
   float: right;
-  margin: 10px 10px 0 0;
+  margin: 10px 10px 10px 0;
 }
 /* line 4, ../sass/hotrefi/modules/_account__status.scss */
-.account__status a {
+.account__status a.logout__btn {
   position: relative;
   display: block;
   color: #fff;
@@ -6580,7 +6580,7 @@ body.ngdialog-open {
   border-radius: 50%;
 }
 /* line 12, ../sass/hotrefi/modules/_account__status.scss */
-.account__status a:before {
+.account__status a.logout__btn:before {
   font-family: FontAwesome;
   content: "\f007";
   font-size: 2.15385em;
@@ -6589,18 +6589,26 @@ body.ngdialog-open {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
 }
+/* line 22, ../sass/hotrefi/modules/_account__status.scss */
+.account__status .logout__txt {
+  color: #fff;
+  font-size: 0.84615em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+}
 
 /* line 1, ../sass/hotrefi/modules/_status__wrap.scss */
 .status__wrap {
   float: right;
-  margin: 10px 20px 0 0;
-  text-align: left;
+  margin: 20px 10px 0 0;
+  text-align: right;
 }
 /* line 5, ../sass/hotrefi/modules/_status__wrap.scss */
 .status__wrap p {
   margin: 0;
   color: #fff;
-  font-size: 1.07692em;
+  font-size: 1em;
   margin-right: 10px;
 }
 /* line 11, ../sass/hotrefi/modules/_status__wrap.scss */
@@ -6771,7 +6779,7 @@ body.ngdialog-open {
   display: block;
   background: url(/bundles/refi/images/logo.png) no-repeat center center;
   width: 145px;
-  height: 60px;
+  height: 70px;
   margin: auto 30px auto auto;
 }
 /* line 16, ../sass/hotrefi/modules/_global__nav.scss */
@@ -6790,7 +6798,7 @@ body.ngdialog-open {
 /* line 25, ../sass/hotrefi/modules/_global__nav.scss */
 .global__nav li a {
   display: block;
-  padding: 25px 15px;
+  padding: 32px 15px;
   text-decoration: none;
   color: #fff;
   font-size: 1em;

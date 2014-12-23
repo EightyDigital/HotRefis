@@ -1,7 +1,7 @@
 .account__status {
   float:right;
-  margin:10px 10px 0 0;
-  a {
+  margin:10px 10px 10px 0;
+  a.logout__btn {
     position:relative;
     display:block;
     color:#fff;
@@ -18,5 +18,12 @@
       line-height: 1;
       -webkit-font-smoothing: antialiased;
     }
+  }
+  .logout__txt {
+    color:#fff;
+    font-size:em(11px);
+    text-transform:uppercase;
+    text-decoration:none;
+    text-align:center;
   }
 }
