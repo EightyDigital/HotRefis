@@ -703,12 +703,12 @@ class ApplicationController extends Controller
 					$score++;
 			}
 
-			if($postdata['income_min'] == $postdata['income_max'] && $val['average_income'] >= $postdata['income_min']) {
-				$score++;
-			} else {
-				if($val['average_income'] >= $postdata['income_min'] && $val['average_income'] <= $postdata['income_max'])
-					$score++;
-			}
+			// if($postdata['income_min'] == $postdata['income_max'] && $val['average_income'] >= $postdata['income_min']) {
+				// $score++;
+			// } else {
+				// if($val['average_income'] >= $postdata['income_min'] && $val['average_income'] <= $postdata['income_max'])
+					// $score++;
+			// }
 
 			if($postdata['property_owned_min'] == $postdata['property_owned_max'] && $val['average_assets_owned'] >= $postdata['property_owned_min']) {
 				$score++;
@@ -739,7 +739,7 @@ class ApplicationController extends Controller
 					$score++;
 			}
 
-			$temp_score = (int) (($score / 8) * 100);
+			$temp_score = (int) (($score / 7) * 100);
 
 			if(isset($temp[$val['urakey']]['num_prospects']))
 				$temp[$val['urakey']]['num_prospects'] += 1;
