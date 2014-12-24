@@ -441,6 +441,15 @@ class ApplicationController extends Controller
 		}
 	}
 	
+	public function reportsentAction()
+	{
+		return $this->render('RefiBundle:Application:sms.confirm.html.twig',
+			array(
+				
+			)
+		);
+	}
+	
 	public function prospectreportAction($hash, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -545,6 +554,15 @@ class ApplicationController extends Controller
 			)
 		);
     }
+	
+	public function prospectreportengageAction()
+	{
+		return $this->render('RefiBundle:Application:prospect.confirm.html.twig',
+			array(
+				
+			)
+		);
+	}
 	
 	public function listAction()
     {

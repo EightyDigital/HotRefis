@@ -32,9 +32,17 @@ refi_report:
     pattern: /report/{id}
     defaults: { _controller: RefiBundle:Application:report, id: 0 }
 
+refi_report_sent:
+    pattern: /report_sent/
+    defaults: { _controller: RefiBundle:Application:reportsent }
+
 refi_prospect_report:
     pattern: /refi/report/{hash}
     defaults: { _controller: RefiBundle:Application:prospectreport, hash: 0 }
+
+refi_prospect_report_engage:
+    pattern: /refi/engage/{hash}
+    defaults: { _controller: RefiBundle:Application:prospectreportengage, hash: 0 }
 
 API_filter_property:
     pattern: /api/filter/property
