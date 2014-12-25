@@ -22,6 +22,15 @@
 <div class="container">
   <div class="row-fluid">
     <div class="span12">
+	<select name="property_ids" onChange="loadReport()">
+		{% for i in ids %}
+			{% if i == current_id %}
+				<option value="{{ i }}" selected="selected">{{ i }}</option>
+			{% else %}
+				<option value="{{ i }}">{{ i }}</option>
+			{% endif %}
+		{% endfor %}
+	</select>
       <div class="alignright">
         <br/><br/>
 		<form method="post" id="reportform"><input type="hidden" value="{{ random() }}" name="reportinput" /></form>
@@ -278,7 +287,7 @@
           <p class="text">Example:</p>
           <div class="row-fluid">
             <div class="span6">If you had a debt of ${{ rdata.loan_amount }}</div>
-              <div class="span6">(${{ rdata.round_loan_amount }} round it)</div>
+              <div class="span6"></div>
           </div>
           <div class="row-fluid">
             <div class="span6">and had a loan over {{ rdata.loan_period }} years with approx.</div>
@@ -314,14 +323,14 @@
                 <div class="span6">S$ {{ rdata.property_price }}</div>
               </div>
               <div class="row-fluid">
-                <div class="span6">Age:</div>
-                <div class="span6">35</div>
+                <div class="span6"></div>
+                <div class="span6"></div>
               </div>
             </div>
             <div class="span6">
               <div class="row-fluid">
                 <div class="span6">Loan Amount:</div>
-                <div class="span6">S$ {{ rdata.loan_amount_decimal }}</div>
+                <div class="span6">S$ {{ rdata.loan_amount }}</div>
               </div>
               <div class="row-fluid">
                 <div class="span6">Loan Period:</div>
@@ -505,6 +514,11 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
+	function loadReport() {
+		var id = $('select[name=property_ids]').val();
+		window.location.replace("{{ url('refi_report') }}/" + id);
+	}
+	
 	google.load("visualization", "1", {packages:["corechart"]});
 	google.setOnLoadCallback(drawChart);
 	function drawChart() {

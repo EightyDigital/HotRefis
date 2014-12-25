@@ -49,3 +49,4 @@ security:
          - { path: ^/list, roles: ROLE_USER }
          - { path: ^/api, roles: ROLE_USER }
          - { path: ^/refi, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         

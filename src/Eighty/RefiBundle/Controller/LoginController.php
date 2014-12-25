@@ -46,7 +46,9 @@ class LoginController extends Controller
     {
 		$encoder = $this->get('security.encoder_factory')->getEncoder('Eighty\RefiBundle\Entity\Client');
 		$em = $this->getDoctrine()->getManager();
-		if(isset($postdata['fullname'])) {
+		$postdata = $request->request->all();
+		
+		if(isset($postdata['register-firstname'])) {
 			$postdata['fullname'] = $request->request->get('register-firstname') . ' ' . $request->request->get('register-lastname');
 			$postdata['email'] = $request->request->get('register-email');
 			$postdata['phone'] = $request->request->get('register-phone');
