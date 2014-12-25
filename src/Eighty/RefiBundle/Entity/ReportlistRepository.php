@@ -22,7 +22,10 @@ class ReportlistRepository extends EntityRepository
 						rl.note,
 						pr.regionCode,
 						pl.prospectId,
-						COUNT(pl.prospectId) as properties
+						rl.fullname,
+						rl.email,
+						rl.mobilenumber,
+						rl.id
 					FROM RefiBundle:Reportlist rl
 					JOIN RefiBundle:Transactions tr
 						WITH tr.id = rl.transactionId
@@ -32,7 +35,6 @@ class ReportlistRepository extends EntityRepository
 						WITH pl.transactionId = tr.id
 					WHERE rl.clientId = :uId
 					AND rl.status > 0
-					GROUP BY pl.prospectId
 				'
 			)
 			->setParameter('uId', $id)

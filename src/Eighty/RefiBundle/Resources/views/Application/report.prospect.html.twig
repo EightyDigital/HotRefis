@@ -395,7 +395,9 @@
 
         <div class="alignright rp-btn">
 		  <form method="post" id="reportform"><input type="hidden" value="{{ random() }}" name="reportinput" /></form>
+		  {% if alert == false %}
 		  <button onClick="submitReport(); return true;" >Click here to View How</button>
+		  {% endif %}
         </div>
 
         <div class="clr"></div>
@@ -482,29 +484,6 @@
             <div><b>Company: </b>{{ data.company }}</div>
             <div><b>Years as a broker: </b>7 years</div>
           </div>
-          <!-- others -->
-          <div class="bottominfo">
-            <div class="row-fluid">
-              <div class="span4">
-                <div>
-                  <b>58</b>
-                  <div>Projects</div>
-                </div>
-              </div>
-              <div class="span4">
-                <div>
-                  <b>40</b>
-                  <div>Clients</div>
-                </div>
-              </div>
-              <div class="span4">
-                <div>
-                  <b>15.3k</b>
-                  <div>Followers</div>
-                </div>
-              </div>
-            </div>
-          </div>
           <!-- bottominfo -->
         </div>
       </div>
@@ -518,6 +497,9 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
+	{% if alert == true %}
+		alert('An agent will contact you soon!');
+	{% endif %}
 	google.load("visualization", "1", {packages:["corechart"]});
 	google.setOnLoadCallback(drawChart);
 	function drawChart() {

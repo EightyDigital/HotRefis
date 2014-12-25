@@ -37,20 +37,24 @@
         <tbody>
 
           <tr>
-            <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Property ID</a></td>
             <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Prospect ID</a></td>
+            <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Full Name</a></td>
+			<td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Email</a></td>
+			<td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Mobile</a></td>
             <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Properties</a></td>
             <td style="background:#063141;"><a style="color:#fff; text-transform:uppercase; font-size:14px;" href="#">Status</a></td>
-            <td style="background:#063141;" colspan='10' width="30%"><a href="#"  style="color:#fff; text-transform:uppercase; font-size:14px;">Notes</a></td>
+            <td style="background:#063141;" colspan='8' width="30%"><a href="#"  style="color:#fff; text-transform:uppercase; font-size:14px;">Notes</a></td>
           </tr>
 
     {% for prospect in list.pagination %}
       <tr>
-            <td><a href="/prospect/">{{ prospect.transactionId }}</a></td>
-            <td><a href="/prospect/">{{ prospect.prospectId }}</a></td>
-            <td><a href="/prospect/">{{ prospect.property_owned }}</a></td>
-            <td><a href="/prospect/">{% if prospect.status == 1 %}Contacted{% elseif prospect.status == 2 %}Engaged{% else %}Blasted{% endif %}</a></td>
-            <td colspan='10' width="30%"><a href="#"><textarea style="resize:none;" rows="3">{{ prospect.note }}</textarea></a></td>
+            <td>{{ prospect.prospectId }}</td>
+            <td>{{ prospect.fullname }}</td>
+			<td>{{ prospect.email }}</td>
+			<td>{{ prospect.mobilenumber }}</td>
+            <td>{{ prospect.property_owned }}</td>
+            <td>{% if prospect.status == 1 %}Contacted{% elseif prospect.status == 2 %}Engaged{% else %}Blasted{% endif %}</td>
+            <td colspan='8' width="15%"><textarea style="resize:none;" rows="3" data-id="{{ prospect.id }}" class="prospect_note" >{{ prospect.note }}</textarea></td>
           </tr>
     {% endfor %}
 
@@ -61,6 +65,21 @@
   </div>
   </div>
 </div>
+
+<script type="text/javascript">
+	$('.prospect_note').on('blur', function() {
+		var noteVal = $(this).val(), noteId = $(this).data('id');
+		
+		$.ajax({
+			type: "POST",
+			url: "{{ url('API_list_update') }}",
+			data: {note:noteVal , id:noteId},
+			success: function(data) {
+				console.log('note added! yey!');
+			}
+	   })
+	});
+</script>
 {% endblock content %}
 
 

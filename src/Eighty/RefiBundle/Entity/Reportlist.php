@@ -67,6 +67,27 @@ class Reportlist
      * @ORM\Column(name="hash", type="string", length=64, nullable=true)
      */
     private $hash;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="fullname", type="string", length=100, nullable=true)
+     */
+    private $fullname;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=50, nullable=true)
+     */
+    private $email;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="mobilenumber", type="string", length=20, nullable=true)
+     */
+    private $mobilenumber;
 
     /**
      * @var integer
@@ -261,6 +282,76 @@ class Reportlist
     public function getHash()
     {
         return $this->hash;
+    }
+	
+	/////////
+	/**
+     * Set fullname
+     *
+     * @param string $fullname
+     * @return Sectorlist
+     */
+    public function setFullname($fullname)
+    {
+        $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    /**
+     * Get fullname
+     *
+     * @return string 
+     */
+    public function getFullname()
+    {
+        return $this->fullname;
+    }
+	
+	/**
+     * Set email
+     *
+     * @param string $email
+     * @return Sectorlist
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+	
+	/**
+     * Set mobilenumber
+     *
+     * @param string $mobilenumber
+     * @return Sectorlist
+     */
+    public function setMobilenumber($mobilenumber)
+    {
+        $this->mobilenumber = $mobilenumber;
+
+        return $this;
+    }
+
+    /**
+     * Get mobilenumber
+     *
+     * @return string 
+     */
+    public function getMobilenumber()
+    {
+        return $this->mobilenumber;
     }
 
     /**

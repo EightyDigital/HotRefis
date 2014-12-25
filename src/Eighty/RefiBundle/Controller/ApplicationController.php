@@ -470,14 +470,26 @@ class ApplicationController extends Controller
 		
 		$postdata = $request->request->all();
 		if(isset($postdata['reportinput'])) { 
-			$reportlist->setStatus(2); $em->flush();
-			
-			// return $this->render('RefiBundle:Application:prospect.confirm.html.twig',
-				// array(
+			return $this->render('RefiBundle:Application:prospect.confirm.html.twig',
+				array(
 					
-				// )
-			// );
-			print_r("You are now engaged!"); exit();
+				)
+			);
+		}
+		
+		if($reportlist->getStatus() == 2)
+			$alert = true;
+		else
+			$alert = false;
+		
+		if(isset($postdata['reportName'])) {
+			$reportlist->setStatus(2); 
+			$reportlist->setFullname($postdata['reportName']);
+			$reportlist->setEmail($postdata['reportEmail']);
+			$reportlist->setMobilenumber($postdata['reportMobile']);
+			
+			$em->flush();
+			$alert = true;
 		}
 		
 		if($reportlist->getStatus() < 2) {
@@ -561,18 +573,10 @@ class ApplicationController extends Controller
 			array(
 				'data' => $data,
 				'rdata' => $rdata,
+				'alert' => $alert,
 			)
 		);
     }
-	
-	public function prospectreportengageAction()
-	{
-		return $this->render('RefiBundle:Application:prospect.confirm.html.twig',
-			array(
-				
-			)
-		);
-	}
 	
 	public function listAction()
     {
@@ -584,13 +588,21 @@ class ApplicationController extends Controller
 		
 		$temp_prospect_list = array();
 		foreach($prospectlist as $key => $val) {
+			if(isset($temp[$val['regionCode']][$val['prospectId']]))
+				$temp[$val['regionCode']][$val['prospectId']] += 1;
+			else
+				$temp[$val['regionCode']][$val['prospectId']] = 1;
+			
 			$temp_prospect_list[$val['regionCode']]['name'] = $val['sector_name'];
-			$temp_prospect_list[$val['regionCode']]['prospects'][] = array(
-											'transactionId' => $val['transactionId'],
+			$temp_prospect_list[$val['regionCode']]['prospects'][$val['prospectId']] = array(
 											'prospectId' => $val['prospectId'],
-											'property_owned' => $val['properties'],
+											'property_owned' => $temp[$val['regionCode']][$val['prospectId']],
 											'status' => $val['status'],
-											'note' => $val['note']
+											'note' => $val['note'],
+											'fullname' => $val['fullname'],
+											'email' => $val['email'],
+											'mobilenumber' => $val['mobilenumber'],
+											'id' => $val['id'],
 										);
 		}
 		
@@ -619,11 +631,37 @@ class ApplicationController extends Controller
     }
 	
 	/*-------------------------------------------------/
+	|	route: <domain>/api/update_list
+	|	postdata: note;
+	--------------------------------------------------*/
+	public function listupdateAction(Request $request)
+	{
+		if(!$request->isXmlHttpRequest()) {
+			echo('Error! Please contact FortyTu!'); exit();			
+		}
+		
+		$em = $this->getDoctrine()->getManager();
+		
+		$postdata = $request->request->all();
+		$reportlist = $em->getRepository('RefiBundle:Reportlist')->findOneById($postdata['id']);
+		$reportlist->setNote($postdata['note']); $em->flush();
+		
+		$response = new Response(json_encode(array('msg' => 'ok')));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+	}
+	
+	/*-------------------------------------------------/
 	|	route: <domain>/api/filter/property
 	|	postdata: none;
 	--------------------------------------------------*/
 	public function filterPropertyAction(Request $request)
 	{
+		if(!$request->isXmlHttpRequest()) {
+			echo('Error! Please contact FortyTu!'); exit();			
+		}
+		
 		$em = $this->getDoctrine()->getManager();
 		$usr = $this->get('security.context')->getToken()->getUser();
 		
@@ -667,6 +705,10 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function filterProspectAction(Request $request)
     {
+		if(!$request->isXmlHttpRequest()) {
+			echo('Error! Please contact FortyTu!'); exit();			
+		}
+		
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->get('security.context')->getToken()->getUser();
 		$userId = $user->getId();
@@ -839,6 +881,10 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function shortlistCheckoutAction(Request $request)
     {
+		if(!$request->isXmlHttpRequest()) {
+			echo('Error! Please contact FortyTu!'); exit();			
+		}
+		
 		$em = $this->getDoctrine()->getManager();
         $postdata = $request->request->all();
 
@@ -917,6 +963,10 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function shortlistBlastAction(Request $request)
     {
+		if(!$request->isXmlHttpRequest()) {
+			echo('Error! Please contact FortyTu!'); exit();			
+		}
+		
 		$session = new Session();
 		$postdata = $request->request->all();
 

@@ -12,5 +12,8 @@
     <field name="status" type="bigint" column="status" nullable="true"/>
 	<field name="calculatorValues" type="text" column="calculator_values" nullable="true"/>
 	<field name="hash" type="string" column="hash" length="64" nullable="true"/>
+	<field name="fullname" type="string" column="fullname" length="100" nullable="true"/>
+	<field name="email" type="string" column="email" length="50" nullable="true"/>
+	<field name="mobilenumber" type="string" column="mobilenumber" length="20" nullable="true"/>
   </entity>
 </doctrine-mapping>
