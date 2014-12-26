@@ -7,9 +7,13 @@
     <field name="fullname" type="string" column="fullname" length="255" nullable="true"/>
     <field name="email" type="string" column="email" length="400" nullable="true"/>
     <field name="agency" type="string" column="agency" length="255" nullable="true"/>
+	<field name="agencyId" type="integer" column="agency_id" length="11" nullable="true"/>
 	<field name="phone" type="string" column="phone" length="20" nullable="true"/>
+    <field name="title" type="string" column="title" length="20" nullable="true"/>
+	<field name="age" type="integer" column="age" length="4" nullable="true"/>
+	<field name="years" type="integer" column="years" length="4" nullable="true"/>
     <field name="login" type="string" column="login" length="40" nullable="true"/>
-    <field name="password" type="string" column="password" length="64" nullable="false"/>
+	<field name="password" type="string" column="password" length="64" nullable="false"/>
     <field name="salt" type="string" column="salt" length="32" nullable="false"/>
     <field name="address" type="string" column="address" length="500" nullable="true"/>
     <field name="agreeTerms" type="boolean" column="agree_terms" nullable="true"/>

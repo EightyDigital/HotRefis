@@ -473,16 +473,16 @@
         <div class="profile">
           <div class="main pad">
             <h3 class="name">{{ data.name }}</h3>
-            <div class="title">Agent Broker</div>
+            <div class="title">{{ data.title }}</div>
           </div>
           <!-- main -->
           <div class="others pad">
             <div><b>Email: </b>{{ data.email }}</div>
-            <div><b>Phone: </b>1234 5678</div>
-            <div><b>Age: </b>32</div>
+            <div><b>Phone: </b>{{ data.phone }}</div>
+            <div><b>Age: </b>{{ data.age }}</div>
             <div><b>Address: </b>{{ data.address }}</div>
             <div><b>Company: </b>{{ data.company }}</div>
-            <div><b>Years as a broker: </b>7 years</div>
+            <div><b>Years as a broker: </b>{{ data.years_as_a_broker }} years</div>
           </div>
           <!-- bottominfo -->
         </div>

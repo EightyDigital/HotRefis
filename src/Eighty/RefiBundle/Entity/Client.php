@@ -35,11 +35,39 @@ class Client implements AdvancedUserInterface, \Serializable
     private $agency;
 	
 	/**
+     * @var integer
+     *
+     * @ORM\Column(name="agency_id", type="integer", nullable=true)
+     */
+    private $agencyId;
+	
+	/**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=20, nullable=true)
      */
     private $phone;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=20, nullable=true)
+     */
+    private $title;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="age", type="integer", nullable=true)
+     */
+    private $age;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="years", type="integer", nullable=true)
+     */
+    private $years;
 
     /**
      * @var string
@@ -183,6 +211,29 @@ class Client implements AdvancedUserInterface, \Serializable
     }
 	
 	/**
+     * Set agencyId
+     *
+     * @param integer $agencyId
+     * @return Client
+     */
+    public function setAgencyId($agencyId)
+    {
+        $this->agencyId = $agencyId;
+
+        return $this;
+    }
+
+    /**
+     * Get agencyId
+     *
+     * @return integer 
+     */
+    public function getAgencyId()
+    {
+        return $this->agencyId;
+    }
+	
+	/**
      * Set phone
      *
      * @param string $phone
@@ -203,6 +254,75 @@ class Client implements AdvancedUserInterface, \Serializable
     public function getPhone()
     {
         return $this->phone;
+    }
+	
+	/**
+     * Set title
+     *
+     * @param string $title
+     * @return Client
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+	
+	/**
+     * Set age
+     *
+     * @param integer $age
+     * @return Client
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * Get age
+     *
+     * @return integer 
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+	
+	/**
+     * Set years
+     *
+     * @param integer $years
+     * @return Client
+     */
+    public function setYears($years)
+    {
+        $this->years = $years;
+
+        return $this;
+    }
+
+    /**
+     * Get years
+     *
+     * @return integer 
+     */
+    public function getYears()
+    {
+        return $this->years;
     }
 
     /**

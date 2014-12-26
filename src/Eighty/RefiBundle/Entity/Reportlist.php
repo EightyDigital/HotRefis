@@ -284,7 +284,6 @@ class Reportlist
         return $this->hash;
     }
 	
-	/////////
 	/**
      * Set fullname
      *
