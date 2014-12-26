@@ -30,6 +30,7 @@ class ApplicationController extends Controller
 		$data['email'] = $usr->getEmail();
 		$data['address'] = $usr->getAddress();
 		$data['company'] = $usr->getAgency();
+		$data['company_id'] = $usr->getAgencyId();
 		$data['phone'] = $usr->getPhone();
 		$data['title'] = $usr->getTitle();
 		$data['age'] = $usr->getAge();
@@ -266,26 +267,26 @@ class ApplicationController extends Controller
 		
 		if($session->has('prospect_ids')) {
 			$postdata = $request->request->all();
-			if (!isset($postdata['ltv_at_purchase'])) $postdata['ltv_at_purchase'] = 0;
-			if (!isset($postdata['existing_loan_mortgage_rate'])) $postdata['existing_loan_mortgage_rate'] = 0;
+			if (!isset($postdata['ltv_at_purchase'])) $postdata['ltv_at_purchase'] = 70;
+			if (!isset($postdata['existing_loan_mortgage_rate'])) $postdata['existing_loan_mortgage_rate'] = 3;
 			
 			if($postdata['ltv_at_purchase'] !== 0 && $postdata['existing_loan_mortgage_rate'] !== 0) {
 				$postdata['ltv_at_purchase'] = $postdata['ltv_at_purchase'] / 100;
 				$postdata['existing_loan_mortgage_rate'] = $postdata['existing_loan_mortgage_rate'] / 100;
 				
-				if ($postdata['current_first_year'] == '') $postdata['current_first_year'] = '3';
-				if ($postdata['current_second_year'] == '') $postdata['current_second_year'] = '3';
-				if ($postdata['current_third_year'] == '') $postdata['current_third_year'] = '4';
-				if ($postdata['current_fourth_year'] == '') $postdata['current_fourth_year'] = '4';
-				if ($postdata['current_fifth_year'] == '') $postdata['current_fifth_year'] = '5';
-				if ($postdata['current_onwards'] == '') $postdata['current_onwards'] = '5';
+				if (!isset($postdata['current_first_year'])) $postdata['current_first_year'] = '3';
+				if (!isset($postdata['current_second_year'])) $postdata['current_second_year'] = '3';
+				if (!isset($postdata['current_third_year'])) $postdata['current_third_year'] = '4';
+				if (!isset($postdata['current_fourth_year'])) $postdata['current_fourth_year'] = '4';
+				if (!isset($postdata['current_fifth_year'])) $postdata['current_fifth_year'] = '5';
+				if (!isset($postdata['current_onwards'])) $postdata['current_onwards'] = '5';
 				
-				if ($postdata['refi_first_year'] == '') $postdata['refi_first_year'] = '2';
-				if ($postdata['refi_second_year'] == '') $postdata['refi_second_year'] = '2';
-				if ($postdata['refi_third_year'] == '') $postdata['refi_third_year'] = '3';
-				if ($postdata['refi_fourth_year'] == '') $postdata['refi_fourth_year'] = '3';
-				if ($postdata['refi_fifth_year'] == '') $postdata['refi_fifth_year'] = '4';
-				if ($postdata['refi_onwards'] == '') $postdata['refi_onwards'] = '4';
+				if (!isset($postdata['refi_first_year'])) $postdata['refi_first_year'] = '2';
+				if (!isset($postdata['refi_second_year'])) $postdata['refi_second_year'] = '2';
+				if (!isset($postdata['refi_third_year'])) $postdata['refi_third_year'] = '3';
+				if (!isset($postdata['refi_fourth_year'])) $postdata['refi_fourth_year'] = '3';
+				if (!isset($postdata['refi_fifth_year'])) $postdata['refi_fifth_year'] = '4';
+				if (!isset($postdata['refi_onwards'])) $postdata['refi_onwards'] = '4';
 				
 				$session->set('calc_input_values', $postdata);
 				
@@ -329,6 +330,11 @@ class ApplicationController extends Controller
     {
         $data = $this->_getDefaultParams();
 		$em = $this->getDoctrine()->getManager();
+		
+		$agency = $em->getRepository('RefiBundle:Clientcompany')->findOneById($data['company_id']);
+		$data['agency_name'] = $agency->getName();
+		$data['agency_subtitle'] = $agency->getSubtitle();
+		$data['agency_html'] = $agency->getHtml();
 		
 		$session = new Session();
 		$postdata = $request->request->all();
@@ -502,6 +508,7 @@ class ApplicationController extends Controller
 		}
 		
 		$broker = $em->getRepository('RefiBundle:Client')->findOneById($reportlist->getClientId());
+		$agency = $em->getRepository('RefiBundle:Clientcompany')->findOneById($broker->getAgencyId());
 		
 		$data = array(
 			'name' => $broker->getFullname(),
@@ -512,6 +519,9 @@ class ApplicationController extends Controller
 			'title' => $broker->getTitle(),
 			'age' => $broker->getAge(),
 			'years_as_a_broker' => $broker->getYears(),
+			'agency_name' => $agency->getName(),
+			'agency_subtitle' => $agency->getSubtitle(),
+			'agency_html' => $agency->getHtml(),
 		);
 		
 		$calc_input_values = unserialize($reportlist->getCalculatorValues());

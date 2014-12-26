@@ -424,45 +424,11 @@
 
     <div class="span8 whitebox">
       <div class="main pad">
-        <h3 class="bigtext">Singapore Mortgage Brokers</h3>
-        <div class="desc">The Leading Independent Morgage Consultancy in Singapore</div>
+        <h3 class="bigtext">{{ data.agency_name }}</h3>
+        <div class="desc">{{ data.agency_subtitle }}</div>
       </div>
 
-      <div class="row-fluid">
-        <div class="span7">
-          <div class="pad">
-            <div class="subtext">
-              <p>Singapore Mortgage Brokers (SMB) is the premier independent and trusted real estate finance consultancy in Singapore
-                 specializing in commercial and residential property finance.</p>
-              <p>SMB maintains active relationships with major international and local lending banks and finance companies.</p>
-              <p>Our clients hail from Singapore and many other countries around the world including, Hong Kong, UK, US, Germany, and Australia.</p>
-              <p>The main countries of focus are Singapore and Malaysia. SMB also advises clients needing financing in certain locations in
-                Thailand HK, UK, Australia, Dubai and the US.</p>
-              <p><strong>Consulting Services provided:</strong></p>
-              <ol>
-                <li>Mortgage lending</li>
-                <li>Mortgage insurance</li>
-                <li>Commercial real estate finance</li>
-                <li>Individual and company succession planing where real estate is one of the components</li>
-                <li>Business brokerage where real estate is one of the components</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-        <div class="span5 pad">
-          <img src="/web/tempAssets/css/images/smb.jpg" alt="">
-          <div class="alignright rightSubtext">
-            <div>SMB Mortgage Brokers Pte Ltd</div>
-            <div>80 Raffles Place</div>
-            <div>Level 36, UOB Plaza 1</div>
-            <div>Singapore 048624</div>
-            <div>Tel: +65 6248 4831</div>
-            <div>Fax: +65 6248 4531</div>
-            <div>smb@singaporemortgagebrokers.com</div>
-          </div>
-        </div>
-      </div>
-    </div>
+      {{ data.agency_html | raw }}
 
     <div class="span4 whitebox">
 
