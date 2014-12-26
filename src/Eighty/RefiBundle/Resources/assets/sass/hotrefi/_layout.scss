@@ -1,3 +1,9 @@
+html, body {
+  min-width: 1090px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 /*= Header =*/
 #hd {
   position:relative;
@@ -41,6 +47,85 @@
     color:#fff;
     padding:30px 0 70px 0;
 
+  }
+}
+/* For dashboard only */
+.refi-homepage {
+  #bd {
+    overflow:auto;
+  }
+  .filter__controller--header,
+  .active__filter,
+  .filter__aux,
+  .prospect--box,
+  .heatmap__control {
+    display:none;
+    visibility:hidden;
+  }
+  .filter__aux.own--list {
+    display:block;
+    visibility:visible;
+  }
+
+  .map__container {
+    // float:left;
+    // width:75%;
+    // height:100%;
+    position:static;
+  }
+  .filter__controller {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    z-index: 100;
+    border:none;
+    margin:0;
+    // width:25%;
+    // float:left;
+    // margin:0;
+    // border:none;
+    @inlucde box__sizing(border-box);
+    .filter__controller--list{
+      padding: 0 20px;
+      width:auto;
+      .filter__controller--list--inside{
+        padding:0;
+        .short__list {
+          background-color:#fff;
+        }
+      }
+    }
+  }
+  .short__list {
+    .header { padding:10px 20px; }
+  }
+  #bd .pg__width {
+    width:auto;
+  }
+}
+.report__ddl {
+  padding: 45px 0;
+  float:left;
+  .report__ddl--label {
+    display:block;
+    padding:5px 0;
+    font-size:13px;
+  }
+  select {
+    padding:5px 30px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    background: #063141;
+    color:#fff;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
   }
 }
 

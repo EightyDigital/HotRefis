@@ -2,6 +2,7 @@
   overflow:auto;
   clear:both;
   border: 1px solid #ced0d5;
+  max-height:495px;
   @include radius(5px);
 
   ul {

@@ -22,15 +22,23 @@
 <div class="container">
   <div class="row-fluid">
     <div class="span12">
-	<select name="property_ids" onChange="loadReport()">
-		{% for i in ids %}
-			{% if i == current_id %}
-				<option value="{{ i }}" selected="selected">{{ i }}</option>
-			{% else %}
-				<option value="{{ i }}">{{ i }}</option>
-			{% endif %}
-		{% endfor %}
-	</select>
+      <div class="report__ddl">
+        <div class="span6">
+          <span class="report__ddl--label">View report: </span>
+
+        </div>
+        <div class="span6">
+          <select name="property_ids" onChange="loadReport()">
+            {% for i in ids %}
+              {% if i == current_id %}
+                <option value="{{ i }}" selected="selected">{{ i }}</option>
+              {% else %}
+                <option value="{{ i }}">{{ i }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+      </div>
       <div class="alignright">
         <br/><br/>
 		<form method="post" id="reportform"><input type="hidden" value="{{ random() }}" name="reportinput" /></form>
@@ -467,7 +475,6 @@
           </div>
         </div>
         <div class="span5 pad">
-          <img src="/web/tempAssets/css/images/smb.jpg" alt="">
           <div class="alignright rightSubtext">
             <div>SMB Mortgage Brokers Pte Ltd</div>
             <div>80 Raffles Place</div>
@@ -518,7 +525,7 @@
 		var id = $('select[name=property_ids]').val();
 		window.location.replace("{{ url('refi_report') }}/" + id);
 	}
-	
+
 	google.load("visualization", "1", {packages:["corechart"]});
 	google.setOnLoadCallback(drawChart);
 	function drawChart() {
