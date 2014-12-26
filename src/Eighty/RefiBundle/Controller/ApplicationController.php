@@ -658,9 +658,9 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
 	public function filterPropertyAction(Request $request)
 	{
-		if(!$request->isXmlHttpRequest()) {
-			echo('Error! Please contact FortyTu!'); exit();			
-		}
+		// if(!$request->isXmlHttpRequest()) {
+			// echo('Error! Please contact FortyTu!'); exit();			
+		// }
 		
 		$em = $this->getDoctrine()->getManager();
 		$usr = $this->get('security.context')->getToken()->getUser();
@@ -705,9 +705,9 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function filterProspectAction(Request $request)
     {
-		if(!$request->isXmlHttpRequest()) {
-			echo('Error! Please contact FortyTu!'); exit();			
-		}
+		// if(!$request->isXmlHttpRequest()) {
+			// echo('Error! Please contact FortyTu!'); exit();			
+		// }
 		
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->get('security.context')->getToken()->getUser();
@@ -881,9 +881,9 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function shortlistCheckoutAction(Request $request)
     {
-		if(!$request->isXmlHttpRequest()) {
-			echo('Error! Please contact FortyTu!'); exit();			
-		}
+		// if(!$request->isXmlHttpRequest()) {
+			// echo('Error! Please contact FortyTu!'); exit();			
+		// }
 		
 		$em = $this->getDoctrine()->getManager();
         $postdata = $request->request->all();
@@ -963,9 +963,9 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function shortlistBlastAction(Request $request)
     {
-		if(!$request->isXmlHttpRequest()) {
-			echo('Error! Please contact FortyTu!'); exit();			
-		}
+		// if(!$request->isXmlHttpRequest()) {
+			// echo('Error! Please contact FortyTu!'); exit();			
+		// }
 		
 		$session = new Session();
 		$postdata = $request->request->all();
