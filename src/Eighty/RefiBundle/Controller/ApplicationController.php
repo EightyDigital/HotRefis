@@ -270,23 +270,23 @@ class ApplicationController extends Controller
 			if (!isset($postdata['ltv_at_purchase'])) $postdata['ltv_at_purchase'] = 70;
 			if (!isset($postdata['existing_loan_mortgage_rate'])) $postdata['existing_loan_mortgage_rate'] = 3;
 			
-			if($postdata['ltv_at_purchase'] !== 0 && $postdata['existing_loan_mortgage_rate'] !== 0) {
+			if($postdata['ltv_at_purchase'] !== 0 && $postdata['existing_loan_mortgage_rate'] !== 0 && isset($postdata['calc_form'])) {
 				$postdata['ltv_at_purchase'] = $postdata['ltv_at_purchase'] / 100;
 				$postdata['existing_loan_mortgage_rate'] = $postdata['existing_loan_mortgage_rate'] / 100;
 				
-				if (!isset($postdata['current_first_year'])) $postdata['current_first_year'] = '3';
-				if (!isset($postdata['current_second_year'])) $postdata['current_second_year'] = '3';
-				if (!isset($postdata['current_third_year'])) $postdata['current_third_year'] = '4';
-				if (!isset($postdata['current_fourth_year'])) $postdata['current_fourth_year'] = '4';
-				if (!isset($postdata['current_fifth_year'])) $postdata['current_fifth_year'] = '5';
-				if (!isset($postdata['current_onwards'])) $postdata['current_onwards'] = '5';
+				if ($postdata['current_first_year'] == "") $postdata['current_first_year'] = '3';
+				if ($postdata['current_second_year'] == "") $postdata['current_second_year'] = '3';
+				if ($postdata['current_third_year'] == "") $postdata['current_third_year'] = '4';
+				if ($postdata['current_fourth_year'] == "") $postdata['current_fourth_year'] = '4';
+				if ($postdata['current_fifth_year'] == "") $postdata['current_fifth_year'] = '5';
+				if ($postdata['current_onwards'] == "") $postdata['current_onwards'] = '5';
 				
-				if (!isset($postdata['refi_first_year'])) $postdata['refi_first_year'] = '2';
-				if (!isset($postdata['refi_second_year'])) $postdata['refi_second_year'] = '2';
-				if (!isset($postdata['refi_third_year'])) $postdata['refi_third_year'] = '3';
-				if (!isset($postdata['refi_fourth_year'])) $postdata['refi_fourth_year'] = '3';
-				if (!isset($postdata['refi_fifth_year'])) $postdata['refi_fifth_year'] = '4';
-				if (!isset($postdata['refi_onwards'])) $postdata['refi_onwards'] = '4';
+				if ($postdata['refi_first_year'] == "") $postdata['refi_first_year'] = '2';
+				if ($postdata['refi_second_year'] == "") $postdata['refi_second_year'] = '2';
+				if ($postdata['refi_third_year'] == "") $postdata['refi_third_year'] = '3';
+				if ($postdata['refi_fourth_year'] == "") $postdata['refi_fourth_year'] = '3';
+				if ($postdata['refi_fifth_year'] == "") $postdata['refi_fifth_year'] = '4';
+				if ($postdata['refi_onwards'] == "") $postdata['refi_onwards'] = '4';
 				
 				$session->set('calc_input_values', $postdata);
 				
@@ -347,7 +347,6 @@ class ApplicationController extends Controller
 		if(isset($postdata['reportinput'])) { 
 			$serialized_calc_input_values = serialize($calc_input_values);
 			
-			$session->clear();
 			$batchSize = 50;
 			$report_hashes = array();
 			
