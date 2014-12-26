@@ -149,8 +149,8 @@
                       <div class="property--duration">
                         <ul>
                           <li><input type="radio" ng-model="duration" checked name="chk_{[ $index + 1]}" value="3"> 3 Months</li>
-                          <li><input type="radio" ng-model="duration" name="chk_{[ $index + 1]}" value="6"> 6 Months</li>
-                          <li><input type="radio" ng-model="duration" name="chk_{[ $index + 1]}" value="12"> 1 Year</li>
+                          <li><input type="radio" disabled ng-model="duration" name="chk_{[ $index + 1]}" value="6"> 6 Months</li>
+                          <li><input type="radio" disabled ng-model="duration" name="chk_{[ $index + 1]}" value="12"> 1 Year</li>
                         </ul>
                       </div>
                     </div>
@@ -162,7 +162,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="filter__aux">
+              <div class="filter__aux own--list">
                 <a class="ionicons ion-checkmark-circled" ng-click="ownSectors(shortlist)">Own Sectors</a>
               </div>
 

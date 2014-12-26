@@ -82,32 +82,6 @@
   {% endjavascripts %}
 
 
-
-  {# ANGULARRRRGH #}
-  {% javascripts
-    '@RefiBundle/Resources/assets/js/vendor/angular.js'
-  %}
-     <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
-
-  {#<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.min.js"></script>#}
-
-
-  {# Under SHHHCORE! #}
-  {% javascripts
-    '@RefiBundle/Resources/assets/js/vendor/lodash.min.js'
-  %}
-     <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
-
-  {# ANGULARRRRGH Maps #}
-  <script src='//maps.googleapis.com/maps/api/js?libraries=visualization&sensor=false"'></script>
-  {% javascripts
-    '@RefiBundle/Resources/assets/js/vendor/angular-google-maps.min.js'
-  %}
-     <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
-
 </head>
 
 
@@ -128,19 +102,13 @@
 
   {% block javascripts %}
     {% javascripts filter="?yui_js"
+      "@RefiBundle/Resources/assets/js/vendor/bootstrap.min.js"
       "@RefiBundle/Resources/assets/js/plugins.js"
-      "@RefiBundle/Resources/assets/js/vendor/xeditable.min.js"
-      "@RefiBundle/Resources/assets/js/vendor/charts.min.js"
-      "@RefiBundle/Resources/assets/js/vendor/charts-ng.js"
-      "@RefiBundle/Resources/assets/js/vendor/angular-slider-ui.js"
-      "@RefiBundle/Resources/assets/js/refimap.js"
-	     "@RefiBundle/Resources/assets/js/main.js"
+	    "@RefiBundle/Resources/assets/js/main.js"
       %}
       <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
   {% endblock javascripts %}
-  <script src='/tempAssets/js/slider.js'></script>
 
-  <script src='/tempAssets/js/slider.mod.js'></script>
 </body>
 </html>
