@@ -19,8 +19,11 @@
     <div class="heatmap__control--slider">
       <div ng-controller="heatmap__slider" class="heatmap__slider--wrap">
         <a ng-click="sliderDown()" class="control down"></a>
+        <span class="certain--label left">Uncertain</span>
         <div class="heatmap__slider"></div>
         <a ng-click="sliderUp()" class="control up"></a>
+        <span class="certain--label right">Certain</span>
+
       </div>
     </div>
     <div class="heatmap__control--results">

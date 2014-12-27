@@ -889,7 +889,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   $scope.shortlist = [];
 
   $scope.$on('shortlistBroadcast', function(max) {
-    $scope.duration = '3';
+    $scope.duration = max;
     $scope.shortlist = shortlist__service.listdata;
   });
 

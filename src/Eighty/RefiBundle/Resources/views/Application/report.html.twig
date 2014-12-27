@@ -24,7 +24,7 @@
     <div class="span12">
       <div class="report__ddl">
         <div class="span6">
-          <span class="report__ddl--label">View report: </span>
+          <span class="report__ddl--label">View reports: </span>
 
         </div>
         <div class="span6">
@@ -285,12 +285,15 @@
     <div class="span12">
 
       <div class="head pad">
-        <i class="ionicons ion-help-circled"></i> How your Property {% if rdata.property_name is not null %}<u>in {{ rdata.property_name }}</u> {% endif %}can <strong>Save You More</strong>
+        <i class="ionicons ion-help-circled"></i> How your Property&nbsp;{% if rdata.property_name is not null %}<span>in {{ rdata.property_name }}</span> {% endif %}&nbsp;can <strong>Save You More</strong>
       </div>
 
       <div class="row-fluid pad colText">
         <div class="span12">
-          <p class="text">With Your property valuation, there may be a large opportunity to save more on your mortgage.</p>
+
+
+          <p class="text tagLine">You could potentially refinance and save <span>${{ rdata.five_years_savings }}</span> in just five years.</p>
+
 
           <p class="text">Example:</p>
           <div class="row-fluid">
@@ -305,8 +308,8 @@
             <div class="span6">And your current interest rate was</div>
               <div class="span6">{{ rdata.current_interest_rate }} next two years, {{ rdata.current_interest_rate_2_years }} after that</div>
           </div>
+          <p class="text">With Your property valuation, there may be a large opportunity to save more on your mortgage.</p>
 
-          <p class="text">You could potentially refinance and save ${{ rdata.five_years_savings }} in just five years.</p>
         </div>
 
       </div>
@@ -449,11 +452,49 @@
 
     <div class="span8 whitebox">
       <div class="main pad">
-        <h3 class="bigtext">{{ data.agency_name }}</h3>
-        <div class="desc">{{ data.agency_subtitle }}</div>
+{#         <h3 class="bigtext">{{ data.agency_name }}</h3>
+        <div class="desc">{{ data.agency_subtitle }}</div> #}
+        <h3 class="bigtext">Amicus Mortgage Brokers</h3>
+        <div class="desc">The best mortgage brokers in Singapore!</div>
       </div>
-
-      {{ data.agency_html | raw }}
+{#       <div class="agency__data">
+        {{ data.agency_html | raw }}
+      </div> #}
+      <!-- Only include every INSIDE agency__data (see above) -->
+      <div class="agency__data">
+        <div class="row-fluid">
+          <div class="span7">
+            <div class="pad">
+              <div class="subtext">
+                <p>Amicus Mortgage Brokers (AMB) is the premier independent and trusted real estate finance consultancy in Singapore specializing in commercial and residential property finance.</p>
+                <p>SMB maintains active relationships with major international and local lending banks and finance companies.</p>
+                <p>Our clients hail from Singapore and many other countries around the world including, Hong Kong, UK, US, Germany, and Australia.</p>
+                <p>The main countries of focus are Singapore and Malaysia. SMB also advises clients needing financing in certain locations in
+                  Thailand HK, UK, Australia, Dubai and the US.</p>
+                <p><strong>Important Notice:</strong></p>
+                <ol>
+                  <li>All our data are structured to comply with the Personal Data Protection Act 2014.</li>
+                  <li>The data collated herein comply with clause 9, Schedule 2, 3 and 4, and the Annonymization process stipulated in the Act.</li>
+                  <li>Only Registered Person with Amicus can have access to the data.</li>
+                  <li>Kindly proceed to Verification Form below to obtain an One-Time Password. Only Registered Property Agents are allowed to enter the site.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="span5 pad">
+            <img src="http://www.amicusdata.sg/assets/images/logo.png" alt="">
+            <div class="alignright rightSubtext">
+              <div>AMB Amicus Mortgage Brokers Pte Ltd</div>
+              <div>Block 184</div>
+              <div>Toa Payoh #01-358</div>
+              <div>Singapore 310184</div>
+              <div>Tel: +65 6356 7215</div>
+              <div>data@amicusdata.com.sg</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="span4 whitebox">
 
@@ -463,17 +504,25 @@
         </div>
         <div class="profile">
           <div class="main pad">
-            <h3 class="name">{{ data.name }}</h3>
-            <div class="title">{{ data.title }}</div>
+{#             <h3 class="name">{{ data.name }}</h3>
+            <div class="title">{{ data.title }}</div> #}
+            <h3 class="name">William Lai</h3>
+            <div class="title">CEO Amicus</div>
           </div>
           <!-- main -->
           <div class="others pad">
-            <div><b>Email: </b>{{ data.email }}</div>
+{#             <div><b>Email: </b>{{ data.email }}</div>
             <div><b>Phone: </b>{{ data.phone }}</div>
             <div><b>Age: </b>{{ data.age }}</div>
             <div><b>Address: </b>{{ data.address }}</div>
             <div><b>Company: </b>{{ data.company }}</div>
-            <div><b>Years as a broker: </b>{{ data.years_as_a_broker }} years</div>
+            <div><b>Years as a broker: </b>{{ data.years_as_a_broker }} years</div> #}
+            <div><b>Email: </b>data@amicusdata.com.sg</div>
+            <div><b>Phone: </b>6356 7215</div>
+            <div><b>Age: </b>38</div>
+            <div><b>Address: </b>Block 184 Toa Payoh #01-358 (2nd Level) Singapore 310184</div>
+            <div><b>Company: </b>Amicus Mortgage Brokers</div>
+            <div><b>Years as a broker: </b>15 years</div>
           </div>
           <!-- bottominfo -->
         </div>
@@ -481,8 +530,6 @@
       <!-- signature -->
     </div>
 
-
-  </div>
 </div>
 <!-- \row7  -->
 
