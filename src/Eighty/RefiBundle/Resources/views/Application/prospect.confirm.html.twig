@@ -1,4 +1,4 @@
-{% extends "RefiBundle::tempBase.html.twig" %}
+{% extends "RefiBundle::tempBase.prospect.html.twig" %}
 
 {% block header %}
 {% endblock header %}
@@ -51,12 +51,20 @@
           <label class="checkbox">
             <input type="checkbox" checked> Please contact me
           </label>
-          <button type="submit" class="btn btn-primary">Send</button>
+          <button type="submit" class="btn btn-primary" onClick="submitClicked()">Send</button>
         </div>
       </div>
     </form>
   </div>
 </div>
+
+<script type="text/javascript">
+	function submitClicked()
+	{
+		alert('An agent will contact you soon!');
+		return true;
+	}
+</script>
 {% endblock content %}
 
 

@@ -25,11 +25,23 @@
     <div class="span12">
       <p>You have blasted to <span>{{ prospects }}</span> prospects over <span>{{ properties }}</span> properties</p>
 	  
-	  <br><br><br>
-	  {% for i in temp_long_urls %}
-		<p>{{ i }}</p>
-	  {% endfor %}
-    </div>
+	  <br/>
+	  
+	  <table border="1">
+		<thead>
+			<th>Project Name</th>
+			<th># of Blasts</th>
+		</thead>
+		<tbody>
+			{% for transaction in transactions %}
+				<tr>
+					<td>{{ transaction.name }}</td>
+					<td>{{ transaction.count }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	  </table>
+	</div>
   </div>
 </div>
 {% endblock content %}

@@ -240,4 +240,19 @@ class TransactionsRepository extends EntityRepository
 			)
 			->getArrayResult();
 	}
+	
+	public function fetchTransactionsIn($pids)
+	{
+		return $this->getEntityManager()
+			->createQuery(
+				"SELECT 
+					  tr.id,
+					  tr.urakey
+					FROM
+					  RefiBundle:Transactions tr
+					WHERE tr.id IN ($pids)
+				"
+			)
+			->getArrayResult();
+	}
 }

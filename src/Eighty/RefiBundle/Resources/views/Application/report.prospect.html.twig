@@ -463,9 +463,6 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-	{% if alert == true %}
-		alert('An agent will contact you soon!');
-	{% endif %}
 	google.load("visualization", "1", {packages:["corechart"]});
 	google.setOnLoadCallback(drawChart);
 	function drawChart() {

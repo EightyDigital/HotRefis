@@ -343,47 +343,12 @@ class ApplicationController extends Controller
 		$postdata = $request->request->all();
 		$rdata = array();
 		
-		$prospect_ids = $session->get('prospect_ids');
 		$prospect_properties = $session->get('prospect_properties');
 		$calc_input_values = $session->get('calc_input_values');			
 		
 		if(isset($postdata['reportinput'])) { 
-			$serialized_calc_input_values = serialize($calc_input_values);
-			
-			$batchSize = 50;
-			$report_hashes = array();
-			
-			$temp_long_urls = array();
-			
-			foreach($prospect_properties as $i => $transaction_id) {
-				$hash = bin2hex(openssl_random_pseudo_bytes(16));
-				
-				$reportlist = new Reportlist();
-				$reportlist->setClientId($data['id']);
-				$reportlist->setTransactionId($transaction_id);
-				$reportlist->setStatus(0);
-				$reportlist->setCalculatorValues($serialized_calc_input_values);
-				$reportlist->setHash($hash);
-				
-				$em->persist($reportlist);
-				if (($i % $batchSize) == 0) {
-					$em->flush();
-					$em->clear();
-				}
-				$report_hashes = $hash;
-				$temp_long_urls[] = $this->generateUrl('refi_prospect_report', array('hash' => $hash), true);
-			}
-			$em->flush();
-			$em->clear();
-			
-			$session->set('report_hashes', $report_hashes);
-			
-			return $this->render('RefiBundle:Application:sms.confirm.html.twig',
-				array(
-					'prospects' => count($prospect_ids),
-					'properties' => count($prospect_properties),
-					'temp_long_urls' => $temp_long_urls,
-				)
+			return $this->render('RefiBundle:Application:sms.loading.html.twig',
+				array()
 			);
 		}
 		
@@ -652,9 +617,107 @@ class ApplicationController extends Controller
 		);
     }
 	
+	public function blastsummaryAction()
+	{
+		$data = $this->_getDefaultParams();
+		$em = $this->getDoctrine()->getManager();
+		
+		$session = new Session();
+		$prospect_ids = $session->get('prospect_ids');
+		$prospect_properties = $session->get('prospect_properties');
+		
+		$pids = implode(",", $prospect_properties);
+		$transactions_list = $em->getRepository('RefiBundle:Transactions')->fetchTransactionsIn($pids);
+		
+		$transactions = array();
+		foreach($transactions_list as $i => $transaction) {
+			if(isset($temp[$transaction["urakey"]]))
+				$temp[$transaction["urakey"]] += 1;
+			else
+				$temp[$transaction["urakey"]] = 1;
+			
+			$transactions[$transaction["urakey"]]["name"] = $transaction["urakey"];
+			$transactions[$transaction["urakey"]]["count"] = $temp[$transaction["urakey"]];
+		}
+		//$session->clear();
+		
+		return $this->render('RefiBundle:Application:sms.confirm.html.twig',
+			array(
+				'data' => $data,
+				'prospects' => count($prospect_ids),
+				'properties' => count($prospect_properties),
+				'transactions' => $transactions,
+			)
+		);
+	}
+	
+	/*-------------------------------------------------/
+	|	route: <domain>/api/report/save
+	|	postdata: none;
+	--------------------------------------------------*/
+	public function saveandsendAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+		
+		$session = new Session();
+		if(!$session->has('prospect_properties')) exit();
+		
+		$prospect_properties = $session->get('prospect_properties');
+		$calc_input_values = $session->get('calc_input_values');
+		
+		if($session->has('completed')) {
+			$completed = $session->get('completed');
+		} else {
+			$completed = 0;
+		}
+		
+		if(round((($completed) / count($prospect_properties)) * 100) == 100) {
+			$response = new Response(json_encode(array(
+				'percent' => 100,
+			)));
+			$response->headers->set('Content-Type', 'application/json');
+
+			return $response;
+		}
+				
+		$serialized_calc_input_values = serialize($calc_input_values);
+		$batchSize = 25;
+		
+		$usr = $this->get('security.context')->getToken()->getUser();
+		foreach($prospect_properties as $i => $transaction_id) {
+			if($i >= $completed) {
+				$hash = bin2hex(openssl_random_pseudo_bytes(16));
+				$reportlist = new Reportlist();
+				$reportlist->setClientId($usr->getId());
+				$reportlist->setTransactionId($transaction_id);
+				$reportlist->setStatus(0);
+				$reportlist->setCalculatorValues($serialized_calc_input_values);
+				$reportlist->setHash($hash);
+				
+				$em->persist($reportlist);
+				if (($i % $batchSize) == 0 && $i != 0) {
+					break;
+				}
+				//$temp_long_urls = $this->generateUrl('refi_prospect_report', array('hash' => $hash), true); //this is the url for the hashed report
+			}
+		}
+		$em->flush();
+		$em->clear();
+		$session->set('completed', $i + 1);
+		
+		$response = new Response(json_encode(array(
+			'percent' => round((($i + 1) / count($prospect_properties)) * 100),
+			'count' => count($prospect_properties),
+		)));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+	}
+	
 	/*-------------------------------------------------/
 	|	route: <domain>/api/update_list
-	|	postdata: note;
+	|	postdata: 
+	|   	- note;
 	--------------------------------------------------*/
 	public function listupdateAction(Request $request)
 	{

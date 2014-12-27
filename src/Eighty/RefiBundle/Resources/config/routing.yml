@@ -28,6 +28,10 @@ refi_report:
     pattern: /report/{id}
     defaults: { _controller: RefiBundle:Application:report, id: 0 }
 
+refi_blast_summary:
+    pattern: /blast/summary/
+    defaults: { _controller: RefiBundle:Application:blastsummary }
+
 refi_prospect_report:
     pattern: /refi/report/{hash}
     defaults: { _controller: RefiBundle:Application:prospectreport, hash: 0 }
@@ -35,6 +39,10 @@ refi_prospect_report:
 refi_list:
     pattern: /list/
     defaults: { _controller: RefiBundle:Application:list }
+
+API_report_save:
+    pattern: /api/report/save
+    defaults: { _controller: RefiBundle:Application:saveandsend }
 
 API_list_update:
     pattern: /api/update_list
