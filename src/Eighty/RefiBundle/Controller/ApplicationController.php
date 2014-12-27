@@ -49,11 +49,14 @@ class ApplicationController extends Controller
 		$formula = array();
 		
 		$calc_input_values['loan_term'] = $loandata->getLoanTerm() / 12;
+		$property_data['price'] = $propertydata->getPrice();
+		$property_data['newprice'] = $propertydata->getNewPrice();
+		if(is_null($property_data['newprice'])) $property_data['newprice'] = $property_data['price'] * 2;
 		
 		$months = $calc_input_values['loan_term'] * 12;
 		
-		$formula['initial_loan_amount']			= $calc_input_values['ltv_at_purchase'] * $propertydata->getPrice();
-		$formula['equity_at_mortgage_rate'] 	= $propertydata->getPrice() - $formula['initial_loan_amount'];
+		$formula['initial_loan_amount']			= $calc_input_values['ltv_at_purchase'] * $property_data['price'];
+		$formula['equity_at_mortgage_rate'] 	= $property_data['price'] - $formula['initial_loan_amount'];
 		
 		$formula['years_since_loan_taken'] 		= (date("Y") - $loandata->getLoanDate()->format("Y")) + (1 - ($loandata->getLoanDate()->format("n") / 12));
 		$formula['months_since_loan_taken'] 	= $formula['years_since_loan_taken'] * 12;
@@ -66,8 +69,8 @@ class ApplicationController extends Controller
 		$formula['total_payments'] 				= $formula['monthly_payment'] * $formula['months_since_loan_taken'];
 		$formula['interest_paid'] 				= $formula['total_payments'] - $formula['principal_reduced_by'];
 		$formula['principal_paid_deposit'] 		= $formula['equity_at_mortgage_rate'] + $formula['principal_reduced_by'];
-		$formula['equity'] 						= $propertydata->getNewPrice() - $formula['principal_remaining'];
-		$formula['ltv_new'] 					= round(($formula['principal_remaining'] / $propertydata->getNewPrice()) * 100);
+		$formula['equity'] 						= $property_data['newprice'] - $formula['principal_remaining'];
+		$formula['ltv_new'] 					= round(($formula['principal_remaining'] / $property_data['newprice']) * 100);
 		
 		$formula['remaining_loan_months'] 		= round($formula['loan_term_years_remaining'] * 12);
 		
@@ -398,7 +401,8 @@ class ApplicationController extends Controller
 			}
 			
 			$round = round($loan_amount / $this->_num_div[$y - 1]) * $this->_num_div[$y - 1];
-					
+			
+			$rdata['property_name'] = $propertydata->getUrakey();
 			$rdata['loan_amount'] = number_format(ceil($loan_amount / 50000) * 50000);
 			$rdata['round_loan_amount'] = number_format($round);
 			$rdata['loan_period'] = $loandata->getLoanTerm() / 12;
