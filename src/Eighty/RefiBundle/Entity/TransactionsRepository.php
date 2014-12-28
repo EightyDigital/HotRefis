@@ -140,8 +140,8 @@ class TransactionsRepository extends EntityRepository
 						WITH pr.regionCode = t.sector
 					  JOIN RefiBundle:Prospect p
 						WITH p.id = pl.prospectId
-					LEFT JOIN RefiBundle:Prospectlist ppl
-						WITH ppl.prospectId = pl.prospectId
+					LEFT JOIN RefiBundle:Reportlist rl
+						WITH rl.transactionId = t.id
 					$where
 					  AND t.price IS NOT NULL
 					  AND t.newprice IS NOT NULL
@@ -149,7 +149,7 @@ class TransactionsRepository extends EntityRepository
 					  AND pl.loanAmount IS NOT NULL
 					  AND pl.ltv IS NOT NULL
 					  AND pl.loanDate IS NOT NULL
-					  AND ppl.prospectId IS NULL
+					  AND rl.transactionId IS NULL
 					GROUP BY pl.prospectId
 					ORDER BY t.sector ASC
 				"

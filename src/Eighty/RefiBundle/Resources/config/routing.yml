@@ -69,6 +69,6 @@ API_shortlist_calculator:
     defaults: { _controller: RefiBundle:Application:shortlistCalculator }
 
 
-refi_test:
-    pattern: /test/
-    defaults: { _controller: RefiBundle:Application:test }
+refi_clear_data:
+    pattern: /clear
+    defaults: { _controller: RefiBundle:Application:cleardata }

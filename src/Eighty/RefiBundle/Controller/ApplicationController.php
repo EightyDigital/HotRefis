@@ -14,88 +14,34 @@ use Eighty\RefiBundle\Entity\Reportlist;
 
 class ApplicationController extends Controller
 {
-	public function testAction()
+	public function cleardataAction(Request $request)
 	{
-		/*//Data, connection, auth
-        $soapUrl = "http://sms.dncfilter.com/SMS.asmx"; // asmx URL of WSDL
-        
-        // xml post structure
-
-        $xml_post_string = '<?xml version="1.0" encoding="utf-8"?>
-							<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-							  <soap:Body>
-								<sendSMS xmlns="http://tempuri.org/">
-								  <username>hotrefi</username>
-								  <password>348DjR09!Wkk9s</password>
-								  <smsTitle>Test Title 2</smsTitle>
-								  <Message>test message 2</Message>
-								  <unsubNumber>82015620</unsubNumber>
-								  <amicusID>AIDTEST</amicusID>
-								  <TransactionID>test</TransactionID>
-								  <senderNumber>82015620</senderNumber>
-								</sendSMS>
-							  </soap:Body>
-							</soap:Envelope>';   
-
-           $headers = array(
-                        "Content-type: text/xml;charset=\"utf-8\"",
-                        "SOAPAction: http://tempuri.org/sendSMS", 
-                        "Content-length: ".strlen($xml_post_string),
-                    ); 
-
-            $url = $soapUrl;
-
-            // PHP cURL  for https connection with auth
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $xml_post_string); // the SOAP request
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-            // converting
-            $response = curl_exec($ch); 
-            curl_close($ch);
-
-            // converting
-            $response1 = str_replace("<soap:Body>","",$response);
-            $response2 = str_replace("</soap:Body>","",$response1);
-
-            // convertingc to XML
-            $parser = simplexml_load_string($response2);
-            // user $parser to get your data out of XML response and to display it.
+		$em = $this->getDoctrine()->getManager();
+		$conn = $em->getConnection();
+		$postdata = $request->query->all();
+		
+		if($postdata['mail'] == "all") {
+			$stmt = $conn->prepare("TRUNCATE TABLE sectorlist");
+			$stmt->execute();
 			
-			$result = (array) $parser->sendSMSResponse->sendSMSResult;
-			print_r($result[0]); exit();*/
+			$stmt = $conn->prepare("TRUNCATE TABLE reportlist");
+			$stmt->execute();
 			
+			print_r('Data cleared for all accounts!'); exit();
+		} else {
+			$client = $em->getRepository('RefiBundle:Client')->findOneByEmail($postdata['mail']);
+			$client_id = $client->getId();
 			
-			/*
-			$headers = array(
-				"Content-type: application/json",
-			); 
+			$stmt = $conn->prepare("DELETE FROM sectorlist WHERE client_id = :client_id");
+			$stmt->bindParam('client_id', $client_id);
+			$stmt->execute();
 			
-			$ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/urlshortener/v1/url");
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, '{"longUrl": "http://www.google.com/"}'); 
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-            // converting
-            $response = curl_exec($ch); 
-            
+			$stmt = $conn->prepare("DELETE FROM reportlist WHERE client_id = :client_id");
+			$stmt->bindParam('client_id', $client_id);
+			$stmt->execute();
 			
-			if(curl_errno($ch))
-			{
-				echo 'error:' . curl_errno($ch);
-			}
-			
-			curl_close($ch);
-			$res = json_decode($response);
-			print_r($res->id); exit();*/
+			print_r('Data cleared for account: '.$postdata['mail']); exit();
+		}
 	}
 	
 	/*-------------------------------------------------/
