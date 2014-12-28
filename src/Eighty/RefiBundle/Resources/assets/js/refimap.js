@@ -62,12 +62,13 @@ refis.factory('list__service', function($rootScope) {
 
 // Prospect Service
 refis.factory('shortlist__service', function($rootScope, list__service) {
-  var shortlist = {name: "ShortList", listdata: []};
+  var shortlist = {name: "ShortList", listdata: []},
+      valid = true;
 
   shortlist.listdata = [];
-  var valid = true;
-  shortlist.addShortlistItem = function(sector_name, list_sector, duration, potentialProspects) {
-    if(this.listdata.length < 3){
+
+  shortlist.addShortlistItem = function(sector_name, list_sector, duration, potentialProspects, remainingLimit) {
+    if(this.listdata.length < remainingLimit){
 
       for(var i = 0; i < this.listdata.length; i++){
         if(this.listdata[i].sector == list_sector){
@@ -887,6 +888,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
 
   // I am the shortlist
   $scope.shortlist = [];
+  $scope.remaining = 3;
 
   $scope.$on('shortlistBroadcast', function(max) {
     $scope.duration = max;
@@ -899,7 +901,7 @@ var filter_controller = refis.controller('filter__controller', function($scope, 
   };
 
   $scope.ownSectors = function ( sectors ) {
-    api__service.ownSectors(sectors);
+    api__service.ownSectors(sectors, $scope.remaining);
   };
 
 
@@ -917,7 +919,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   //var mode = angular.element($('.campaign__mode')).scope();
   $scope.campaign__mode = document.getElementsByClassName("campaign__mode").length;
   //console.log($scope.campaign__mode);
-
+  $scope.remaining = 3;
   $scope.heatmap = new google.maps.visualization.HeatmapLayer({
     data: $scope.heatMapData,
     radius: heatmap__service.radius,
@@ -1175,7 +1177,7 @@ var map_controller = refis.controller('map__controller', function($scope, $http,
   });
 
   $scope.addShortlist = function (name, sector, duration, prospects) {
-    shortlist__service.addShortlistItem(name, sector, duration, prospects);
+    shortlist__service.addShortlistItem(name, sector, duration, prospects, $scope.remaining);
   }
 });
 
