@@ -18,3 +18,4 @@ UPGRADE-*
 UPGRADE.md
 .sass-cache/
 /web/.htaccess
+web/.htaccess.bak
