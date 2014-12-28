@@ -46,7 +46,9 @@ security:
          - { path: ^/campaign, roles: ROLE_USER }
          - { path: ^/calculator, roles: ROLE_USER }
          - { path: ^/report, roles: ROLE_USER }
+         - { path: ^/blast, roles: ROLE_USER }
          - { path: ^/list, roles: ROLE_USER }
          - { path: ^/api, roles: ROLE_USER }
          - { path: ^/refi, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/test, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          

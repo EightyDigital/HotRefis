@@ -239,6 +239,71 @@ class ApplicationController extends Controller
 		return $formula;
 	}
 	
+	private function _sendSMS($report_hashed_url, $hash, $send_to_number)
+	{
+		sleep(3);
+		
+		// generate tiny url from google
+		$c = curl_init();
+		curl_setopt($c, CURLOPT_URL, "https://www.googleapis.com/urlshortener/v1/url");
+		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($c, CURLOPT_TIMEOUT, 10);
+		curl_setopt($c, CURLOPT_POST, true);
+		curl_setopt($c, CURLOPT_POSTFIELDS, '{"longUrl": "'.$report_hashed_url.'"}'); 
+		curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
+
+		$response = curl_exec($c); 
+		curl_close($c);
+		
+		$report_tiny_url = json_decode($response);
+		
+		// send SMS request
+		$soapUrl = "http://sms.dncfilter.com/SMS.asmx";
+        $xml_post_string = '<?xml version="1.0" encoding="utf-8"?>
+							<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+							  <soap:Body>
+								<sendSMS xmlns="http://tempuri.org/">
+								  <username>hotrefi</username>
+								  <password>348DjR09!Wkk9s</password>
+								  <smsTitle>Test Title</smsTitle>
+								  <Message>'.$report_tiny_url->id.'</Message>
+								  <unsubNumber>82015620</unsubNumber>
+								  <amicusID>AIDTEST</amicusID>
+								  <TransactionID>'.$hash.'</TransactionID>
+								  <senderNumber>'.$send_to_number.'</senderNumber>
+								</sendSMS>
+							  </soap:Body>
+							</soap:Envelope>';   
+
+		$headers = array(
+			"Content-type: text/xml;charset=\"utf-8\"",
+			"SOAPAction: http://tempuri.org/sendSMS", 
+			"Content-length: ".strlen($xml_post_string),
+		); 
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $soapUrl);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $xml_post_string);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+		$response = curl_exec($ch); 
+		curl_close($ch);
+
+		// $response1 = str_replace("<soap:Body>","",$response);
+		// $response2 = str_replace("</soap:Body>","",$response1);
+
+		// $parser = simplexml_load_string($response2);
+		// $result = (array) $parser->sendSMSResponse->sendSMSResult;
+		
+		// return $result[0];
+		
+		return true;
+	}
+	
     public function indexAction()
     {
 		$data = $this->_getDefaultParams();
@@ -651,6 +716,88 @@ class ApplicationController extends Controller
 		);
 	}
 	
+	public function testAction()
+	{
+		/*//Data, connection, auth
+        $soapUrl = "http://sms.dncfilter.com/SMS.asmx"; // asmx URL of WSDL
+        
+        // xml post structure
+
+        $xml_post_string = '<?xml version="1.0" encoding="utf-8"?>
+							<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+							  <soap:Body>
+								<sendSMS xmlns="http://tempuri.org/">
+								  <username>hotrefi</username>
+								  <password>348DjR09!Wkk9s</password>
+								  <smsTitle>Test Title 2</smsTitle>
+								  <Message>test message 2</Message>
+								  <unsubNumber>82015620</unsubNumber>
+								  <amicusID>AIDTEST</amicusID>
+								  <TransactionID>test</TransactionID>
+								  <senderNumber>82015620</senderNumber>
+								</sendSMS>
+							  </soap:Body>
+							</soap:Envelope>';   
+
+           $headers = array(
+                        "Content-type: text/xml;charset=\"utf-8\"",
+                        "SOAPAction: http://tempuri.org/sendSMS", 
+                        "Content-length: ".strlen($xml_post_string),
+                    ); 
+
+            $url = $soapUrl;
+
+            // PHP cURL  for https connection with auth
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $xml_post_string); // the SOAP request
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+            // converting
+            $response = curl_exec($ch); 
+            curl_close($ch);
+
+            // converting
+            $response1 = str_replace("<soap:Body>","",$response);
+            $response2 = str_replace("</soap:Body>","",$response1);
+
+            // convertingc to XML
+            $parser = simplexml_load_string($response2);
+            // user $parser to get your data out of XML response and to display it.
+			
+			$result = (array) $parser->sendSMSResponse->sendSMSResult;
+			print_r($result[0]); exit();*/
+			
+			$headers = array(
+				"Content-type: application/json",
+			); 
+			
+			$ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/urlshortener/v1/url");
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, '{"longUrl": "http://www.google.com/"}'); 
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+            // converting
+            $response = curl_exec($ch); 
+            
+			
+			if(curl_errno($ch))
+			{
+				echo 'error:' . curl_errno($ch);
+			}
+			
+			curl_close($ch);
+			$res = json_decode($response);
+			print_r($res->id); exit();
+	}
+	
 	/*-------------------------------------------------/
 	|	route: <domain>/api/report/save
 	|	postdata: none;
@@ -681,7 +828,7 @@ class ApplicationController extends Controller
 		}
 				
 		$serialized_calc_input_values = serialize($calc_input_values);
-		$batchSize = 25;
+		$batchSize = 10;
 		
 		$usr = $this->get('security.context')->getToken()->getUser();
 		foreach($prospect_properties as $i => $transaction_id) {
@@ -695,10 +842,11 @@ class ApplicationController extends Controller
 				$reportlist->setHash($hash);
 				
 				$em->persist($reportlist);
+				
+				//$this->_sendSMS($this->generateUrl('refi_prospect_report', array('hash' => $hash), true), $hash, $send_to_number);
 				if (($i % $batchSize) == 0 && $i != 0) {
 					break;
 				}
-				//$temp_long_urls = $this->generateUrl('refi_prospect_report', array('hash' => $hash), true); //this is the url for the hashed report
 			}
 		}
 		$em->flush();
@@ -743,10 +891,6 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
 	public function filterPropertyAction(Request $request)
 	{
-		// if(!$request->isXmlHttpRequest()) {
-			// echo('Error! Please contact FortyTu!'); exit();			
-		// }
-		
 		$em = $this->getDoctrine()->getManager();
 		$usr = $this->get('security.context')->getToken()->getUser();
 		
@@ -790,10 +934,6 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function filterProspectAction(Request $request)
     {
-		// if(!$request->isXmlHttpRequest()) {
-			// echo('Error! Please contact FortyTu!'); exit();			
-		// }
-		
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->get('security.context')->getToken()->getUser();
 		$userId = $user->getId();
@@ -966,10 +1106,6 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function shortlistCheckoutAction(Request $request)
     {
-		// if(!$request->isXmlHttpRequest()) {
-			// echo('Error! Please contact FortyTu!'); exit();			
-		// }
-		
 		$em = $this->getDoctrine()->getManager();
         $postdata = $request->request->all();
 
@@ -1048,10 +1184,6 @@ class ApplicationController extends Controller
 	--------------------------------------------------*/
     public function shortlistBlastAction(Request $request)
     {
-		// if(!$request->isXmlHttpRequest()) {
-			// echo('Error! Please contact FortyTu!'); exit();			
-		// }
-		
 		$session = new Session();
 		$postdata = $request->request->all();
 

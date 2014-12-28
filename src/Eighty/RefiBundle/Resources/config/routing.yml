@@ -67,3 +67,8 @@ API_shortlist_blast:
 API_shortlist_calculator:
     pattern: /api/shortlist/calculator
     defaults: { _controller: RefiBundle:Application:shortlistCalculator }
+
+
+refi_test:
+    pattern: /test/
+    defaults: { _controller: RefiBundle:Application:test }
