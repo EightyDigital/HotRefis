@@ -256,6 +256,11 @@ class ReportController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		
 		$session = new Session();
+		
+		if(!$session->has('prospect_properties')) {
+			return $this->redirect($this->generateUrl('refi_homepage'));
+		}
+		
 		$prospect_properties = $session->get('prospect_properties');
 		
 		$pids = implode(",", $prospect_properties);
