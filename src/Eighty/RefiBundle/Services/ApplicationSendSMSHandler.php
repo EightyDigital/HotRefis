@@ -7,6 +7,25 @@ class ApplicationSendSMSHandler
 	public function sendSMS($report_hashed_url, $transactionId, $amicus_person_id)
 	{
 		sleep(3);
+		// $headers = array(
+		// 	"Content-type: text/xml;charset=\"utf-8\"",
+		// 	"SOAPAction: http://tempuri.org/sendSMS",
+		// );
+		// generate tiny url from google
+		$c = curl_init();
+		curl_setopt($c, CURLOPT_URL, "https://www.googleapis.com/urlshortener/v1/url");
+		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($c, CURLOPT_TIMEOUT, 10);
+		curl_setopt($c, CURLOPT_POST, true);
+		curl_setopt($c, CURLOPT_POSTFIELDS, '{"longUrl": "'.$report_hashed_url.'"}');
+		//curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
+
+		$response = curl_exec($c);
+		curl_close($c);
+
+		$report_tiny_url = json_decode($response);
+
 		// send SMS request
 		$soapUrl = "http://sms.dncfilter.com/SMS.asmx";
         $xml_post_string = '<?xml version="1.0" encoding="utf-8"?>
@@ -30,22 +49,6 @@ class ApplicationSendSMSHandler
 			"SOAPAction: http://tempuri.org/sendSMS",
 			"Content-length: ".strlen($xml_post_string),
 		);
-		// generate tiny url from google
-		$c = curl_init();
-		curl_setopt($c, CURLOPT_URL, "https://www.googleapis.com/urlshortener/v1/url");
-		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($c, CURLOPT_TIMEOUT, 10);
-		curl_setopt($c, CURLOPT_POST, true);
-		curl_setopt($c, CURLOPT_POSTFIELDS, '{"longUrl": "'.$report_hashed_url.'"}');
-		curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
-
-		$response = curl_exec($c);
-		curl_close($c);
-
-		$report_tiny_url = json_decode($response);
-
-
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $soapUrl);
