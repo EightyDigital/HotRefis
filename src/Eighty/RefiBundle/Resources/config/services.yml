@@ -6,3 +6,15 @@ services:
     security.logout.handler:
         class:  %security.logout.handler.class%
         arguments:  [@router, @security.context, @doctrine.orm.entity_manager]
+
+    application.defaultparams.handler:
+        class:  %application.defaultparams.handler.class%
+        arguments:  [@security.context, @doctrine.orm.entity_manager, %max_sectors%, %credit_per_prospect%]
+
+    application.reportformula.handler:
+        class:  %application.reportformula.handler.class%
+        arguments:  [@doctrine.orm.entity_manager]
+
+    application.sendsms.handler:
+        class:  %application.sendsms.handler.class%
+        arguments:  []

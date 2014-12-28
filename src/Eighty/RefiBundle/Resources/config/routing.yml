@@ -14,31 +14,31 @@ refi_register:
 
 refi_homepage:
     pattern: /dashboard/
-    defaults: { _controller: RefiBundle:Application:index }
+    defaults: { _controller: RefiBundle:Dashboard:index }
 
 refi_campaign:
     pattern: /campaign/
-    defaults: { _controller: RefiBundle:Application:campaign }
+    defaults: { _controller: RefiBundle:Campaign:campaign }
 
 refi_calculator:
     pattern: /calculator/
-    defaults: { _controller: RefiBundle:Application:calculator }
+    defaults: { _controller: RefiBundle:Calculator:calculator }
 
 refi_report:
     pattern: /report/{id}
-    defaults: { _controller: RefiBundle:Application:report, id: 0 }
+    defaults: { _controller: RefiBundle:Report:report, id: 0 }
 
 refi_blast_summary:
     pattern: /blast/summary/
-    defaults: { _controller: RefiBundle:Application:blastsummary }
+    defaults: { _controller: RefiBundle:Report:blastsummary }
 
 refi_prospect_report:
     pattern: /refi/report/{hash}
-    defaults: { _controller: RefiBundle:Application:prospectreport, hash: 0 }
+    defaults: { _controller: RefiBundle:Report:prospectreport, hash: 0 }
 
 refi_list:
     pattern: /list/
-    defaults: { _controller: RefiBundle:Application:list }
+    defaults: { _controller: RefiBundle:List:list }
 
 API_report_save:
     pattern: /api/report/save

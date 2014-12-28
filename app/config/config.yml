@@ -98,3 +98,6 @@ parameters:
     security.encoder.digest.class: Eighty\RefiBundle\Security\MessageDigestPasswordEncoder
     security.login.handler.class: Eighty\RefiBundle\Security\LoginSuccessHandler
     security.logout.handler.class: Eighty\RefiBundle\Security\LogoutSuccessHandler
+    application.defaultparams.handler.class: Eighty\RefiBundle\Services\ApplicationDefaultParamsHandler
+    application.reportformula.handler.class: Eighty\RefiBundle\Services\ApplicationReportFormulaHandler
+    application.sendsms.handler.class: Eighty\RefiBundle\Services\ApplicationSendSMSHandler

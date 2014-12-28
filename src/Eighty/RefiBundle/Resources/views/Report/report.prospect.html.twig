@@ -257,7 +257,7 @@
     <div class="span12">
 
       <div class="head pad">
-        <i class="ionicons ion-help-circled"></i> How your Property can <strong>Save You More</strong>
+        <i class="ionicons ion-help-circled"></i> How your Property&nbsp;{% if rdata.property_name is not null %}<span>in {{ rdata.property_name }}</span>&nbsp;{% endif %}can <strong>Save You More</strong>
       </div>
 
       <div class="row-fluid pad colText">
