@@ -24,7 +24,7 @@ class ApplicationReportFormulaHandler
 		
 		$property_data['price'] = $propertydata->getPrice();
 		$property_data['newprice'] = $propertydata->getNewPrice();
-		if(is_null($property_data['newprice'])) $property_data['newprice'] = $property_data['price'] * 2;
+		if(is_null($property_data['newprice']) || $property_data['newprice'] < 1) $property_data['newprice'] = $property_data['price'] * 2;
 		
 		$months = $calc_input_values['loan_term'] * 12;
 		
