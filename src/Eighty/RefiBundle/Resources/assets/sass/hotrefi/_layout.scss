@@ -164,8 +164,13 @@ html, body {
   color: #555;
   font-weight: bold;
 }
-
+.report .head span { text-transform:capitalize; display:inline-block; }
+body.report .row5 .colText p.text.tagLine { text-align:center; font-size:24px; font-weight:300; }
+body.report .row5 .colText p.text.tagLine span { font-weight:700; }
 #Prospect-Table textarea { width:100%; }
+
+.agency__data {  }
+
 /* END CLEANUP */
 
 /*= Body =*/

@@ -49,4 +49,21 @@
       left:0;
     }
   }
+  .certain--label  {
+    bottom: -20px;
+    font-weight: 400;
+    position: absolute;
+    font-size: 11px;
+    text-transform: uppercase;
+    &.left {
+      left:0;
+      color:#00c0ff;
+    }
+    &.right {
+
+      right:0;
+      color:#ee4363;
+
+    }
+  }
 }

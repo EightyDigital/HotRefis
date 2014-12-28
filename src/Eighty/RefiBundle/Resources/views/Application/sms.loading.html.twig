@@ -27,20 +27,8 @@
 </div>
 
 <script type="text/javascript">
-  $('.prospect_note').on('blur', function() {
-    var noteVal = $(this).val(), noteId = $(this).data('id');
-
-    $.ajax({
-      type: "POST",
-      url: "{{ url('API_list_update') }}",
-      data: {note:noteVal , id:noteId},
-      success: function(data) {
-        console.log('note added! yey!');
-      }
-     })
-  });
   $(function(){
-        var progressbar = $( "#progressbar" ),
+      var progressbar = $( "#progressbar" ),
       progressLabel = $( ".progress-label" );
 
     progressbar.progressbar({
@@ -50,19 +38,47 @@
       },
       complete: function() {
         progressLabel.text( "Complete!" ).css('color', '#fff');
+        window.location.href="/blast/summary/";
+
       }
     });
-    function progress() {
-      var val = progressbar.progressbar( "value" ) || 0;
 
-      progressbar.progressbar( "value", val + 2 );
 
-      if ( val < 99 ) {
-        setTimeout( progress, 80 );
-      }
+
+   //calling the AJAX
+    $.ajax({
+        url: '/api/report/save',
+        method: 'POST',
+        dataType: 'json',
+        success: function(data){
+          //console.log(data.percent);
+          progressbar.progressbar( "value", data.percent );
+          if (data.percent != 100){
+             //Not 100
+             console.log('nope');
+            reCallAjax();
+          }
+        }
+    });
+    function reCallAjax() {
+      var done = false;
+      console.log('recalling');
+
+      $.ajax({
+          url: '/api/report/save',
+          method: 'POST',
+          dataType: 'json',
+          success: function(data){
+            //console.log("Recalling: "+data.percent);
+            progressbar.progressbar( "value", data.percent );
+
+            if (data.percent != 100){
+               //Not 100
+              reCallAjax();
+            }
+          }
+      });
     }
-
-    setTimeout( progress, 2000 );
   });
 </script>
 {% endblock content %}
