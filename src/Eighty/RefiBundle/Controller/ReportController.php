@@ -256,7 +256,6 @@ class ReportController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		
 		$session = new Session();
-		$prospect_ids = $session->get('prospect_ids');
 		$prospect_properties = $session->get('prospect_properties');
 		
 		$pids = implode(",", $prospect_properties);
@@ -277,7 +276,7 @@ class ReportController extends Controller
 		return $this->render('RefiBundle:Report:sms.confirm.html.twig',
 			array(
 				'data' => $data,
-				'prospects' => count($prospect_ids),
+				'projects' => count($transactions),
 				'properties' => count($prospect_properties),
 				'transactions' => $transactions,
 			)
