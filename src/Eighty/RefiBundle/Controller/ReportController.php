@@ -61,7 +61,6 @@ class ReportController extends Controller
 			$rdata['current_interest_rate_2_years'] = number_format($loandata->getInterestRate() + 1, 1). "%";
 			
 			$rdata['property_price'] = number_format(ceil($propertydata->getPrice() / 50000) * 50000);
-			//$rdata['loan_amount_decimal'] = number_format($loan_amount, 2);
 			
 			$rdata['monthly_payment_reduce'] = number_format(round($formula['current_mortgage_scenario'][1]['monthly_payment'] - $formula['refi_scenario'][1]['monthly_payment']));  //, 2));
 			
@@ -203,7 +202,6 @@ class ReportController extends Controller
 		$rdata['current_interest_rate_2_years'] = number_format($loandata->getInterestRate() + 1, 1). "%";
 		
 		$rdata['property_price'] = number_format(ceil($propertydata->getPrice() / 50000) * 50000);
-		//$rdata['loan_amount_decimal'] = number_format($loan_amount, 2);
 		
 		$rdata['monthly_payment_reduce'] = number_format(round($formula['current_mortgage_scenario'][1]['monthly_payment'] - $formula['refi_scenario'][1]['monthly_payment']));  //, 2));
 			

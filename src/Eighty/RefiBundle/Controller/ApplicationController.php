@@ -89,7 +89,11 @@ class ApplicationController extends Controller
 				
 				$em->persist($reportlist);
 				
-				//$this->get('application.sendsms.handler')->sendSMS($this->generateUrl('refi_prospect_report', array('hash' => $hash), true), $hash, $amicus_person_id);
+				//$this->get('application.sendsms.handler')->sendSMS($this->generateUrl('refi_prospect_report', array('hash' => $hash), true), $transaction_id, $amicus_person_id);
+				if($i == 0) {
+					$this->get('application.sendsms.handler')->sendSMS($this->generateUrl('refi_prospect_report', array('hash' => $hash), true), $transaction_id, "AIDTEST");
+				}
+				
 				if (($i % $batchSize) == 0 && $i != 0) {
 					break;
 				}

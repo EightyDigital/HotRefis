@@ -4,7 +4,7 @@ namespace Eighty\RefiBundle\Services;
 
 class ApplicationSendSMSHandler
 {
-	public function sendSMS($report_hashed_url, $hash, $amicus_person_id)
+	public function sendSMS($report_hashed_url, $transactionId, $amicus_person_id)
 	{
 		sleep(3);
 		
@@ -31,11 +31,11 @@ class ApplicationSendSMSHandler
 								<sendSMS xmlns="http://tempuri.org/">
 								  <username>hotrefi</username>
 								  <password>348DjR09!Wkk9s</password>
-								  <smsTitle>Test Title</smsTitle>
-								  <Message>'.$report_tiny_url->id.'</Message>
+								  <smsTitle>Free Report</smsTitle>
+								  <Message>See how: '.$report_tiny_url->id.'</Message>
 								  <unsubNumber>82015620</unsubNumber>
 								  <amicusID>'.$amicus_person_id.'</amicusID>
-								  <TransactionID>'.$hash.'</TransactionID>
+								  <TransactionID>'.$transactionId.'</TransactionID>
 								  <senderNumber>82015620</senderNumber>
 								</sendSMS>
 							  </soap:Body>
