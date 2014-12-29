@@ -367,6 +367,33 @@ class ApplicationController extends Controller
 			if($temp_score >= $perfect_score) {
 				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][]['prospect_id'] = $val['prospectId'];
 			}
+			
+		  /* // #solution 2 ------
+			if(isset($temp[$val['urakey']]['num_prospects'])) {
+				$temp[$val['urakey']]['num_prospects'] += 1;
+				$temp[$val['urakey']]['temp_score'] += $temp_score;
+			} else {
+				$temp[$val['urakey']]['num_prospects'] = 1;
+				$temp[$val['urakey']]['temp_score'] = $temp_score;
+			}				
+
+			$temp_property_score = $temp[$val['urakey']]['temp_score'] / $temp[$val['urakey']]['num_prospects'];
+
+			$sector[$val['sector']]['name'] = !empty($val['sector_name']) ? $val['sector_name'] : "Temporary Sector Name";
+			$sector[$val['sector']]['sector_code'] = $val['sector'];
+			$sector[$val['sector']]['longitude'] = $val['pr_long'];
+			$sector[$val['sector']]['latitude'] = $val['pr_lat'];
+			$sector[$val['sector']]['sector_score'] = 0;
+			$sector[$val['sector']]['total_sector_prospects'] = 0;
+
+			$sector[$val['sector']]['properties'][$val['urakey']]['longitude'] = $val['longitude'];
+			$sector[$val['sector']]['properties'][$val['urakey']]['latitude'] = $val['latitude'];
+			$sector[$val['sector']]['properties'][$val['urakey']]['property_score'] = $temp_property_score;
+			$sector[$val['sector']]['properties'][$val['urakey']]['total_property_prospects'] = $temp[$val['urakey']]['num_prospects'];
+			
+			$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_id'] = $val['prospectId'];
+			$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_score'] = $temp_score;
+		  */
 		}
 
 		foreach($sector as $keys => $vals) {
