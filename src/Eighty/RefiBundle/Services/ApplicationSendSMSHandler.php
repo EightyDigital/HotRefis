@@ -9,6 +9,10 @@ class ApplicationSendSMSHandler
 		sleep(3);
 		
 		// generate tiny url from google
+		$headers = array(
+			"Content-type: application/json",
+		);
+		
 		$c = curl_init();
 		curl_setopt($c, CURLOPT_URL, "https://www.googleapis.com/urlshortener/v1/url");
 		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
