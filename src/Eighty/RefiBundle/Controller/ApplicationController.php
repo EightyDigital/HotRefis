@@ -71,7 +71,7 @@ class ApplicationController extends Controller
 			echo "<tr>";
 			echo "<td>" . $ctr . "</td>";
 			echo "<td>" . $report->getTransactionId() . "</td>";
-			echo "<td>" . $report->getDateBlasted() . "</td>";
+			echo "<td>" . $report->getDateBlasted()->format('Y-m-d') . "</td>";
 			echo "<td><a href='".$this->generateUrl('refi_prospect_report', array('hash' => $report->getHash()), true)."'>" . $report->getHash() . "</a></td>";
 			echo "</tr>";
 			

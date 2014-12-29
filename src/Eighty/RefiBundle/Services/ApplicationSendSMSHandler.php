@@ -36,10 +36,10 @@ class ApplicationSendSMSHandler
 								  <username>hotrefi</username>
 								  <password>348DjR09!Wkk9s</password>
 								  <smsTitle>Free Report</smsTitle>
-								  <Message>See how: '.$report_tiny_url->id.'</Message>
+								  <Message>See how: '. $report_tiny_url->id .' </Message>
 								  <unsubNumber>82015620</unsubNumber>
-								  <amicusID>'.$amicus_person_id.'</amicusID>
-								  <TransactionID>'.$transactionId.'</TransactionID>
+								  <amicusID>'. $amicus_person_id .'</amicusID>
+								  <TransactionID>'. $transactionId .'</TransactionID>
 								  <senderNumber>82015620</senderNumber>
 								</sendSMS>
 							  </soap:Body>
