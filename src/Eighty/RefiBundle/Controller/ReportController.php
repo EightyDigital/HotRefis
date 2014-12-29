@@ -193,7 +193,8 @@ class ReportController extends Controller
 		}
 		
 		$round = round($loan_amount / $this->_num_div[$y - 1]) * $this->_num_div[$y - 1];
-				
+		
+		$rdata['property_name'] = $propertydata->getUrakey();
 		$rdata['loan_amount'] = number_format(ceil($loan_amount / 50000) * 50000);
 		$rdata['round_loan_amount'] = number_format($round);
 		$rdata['loan_period'] = $loandata->getLoanTerm() / 12;

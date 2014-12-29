@@ -7,6 +7,7 @@
     <field name="clientId" type="bigint" column="client_id" nullable="true"/>
     <field name="transactionId" type="bigint" column="transaction_id" nullable="true"/>
 	<field name="note" type="text" column="note" nullable="true"/>
+	<field name="dateBlasted" type="datetime" column="date_blasted" nullable="true"/>
     <field name="dateContacted" type="datetime" column="date_contacted" nullable="true"/>
     <field name="dateEngaged" type="datetime" column="date_engaged" nullable="true"/>
     <field name="status" type="bigint" column="status" nullable="true"/>

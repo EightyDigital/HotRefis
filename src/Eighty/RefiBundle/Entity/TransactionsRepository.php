@@ -141,7 +141,7 @@ class TransactionsRepository extends EntityRepository
 					  JOIN RefiBundle:Prospect p
 						WITH p.id = pl.prospectId
 					LEFT JOIN RefiBundle:Reportlist rl
-						WITH rl.transactionId = t.id
+						WITH rl.transactionId = t.id AND rl.status = 2
 					$where
 					  AND t.price IS NOT NULL
 					  AND t.newprice IS NOT NULL

@@ -72,3 +72,7 @@ API_shortlist_calculator:
 refi_clear_data:
     pattern: /clear
     defaults: { _controller: RefiBundle:Application:cleardata }
+
+refi_show_blasts:
+    pattern: /show/
+    defaults: { _controller: RefiBundle:Application:showurl }

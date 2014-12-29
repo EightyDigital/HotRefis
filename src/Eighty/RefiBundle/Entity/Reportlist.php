@@ -36,6 +36,13 @@ class Reportlist
 	/**
      * @var \DateTime
      *
+     * @ORM\Column(name="date_blasted", type="datetime", nullable=true)
+     */
+    private $dateBlasted;
+	
+	/**
+     * @var \DateTime
+     *
      * @ORM\Column(name="date_contacted", type="datetime", nullable=true)
      */
     private $dateContacted;
@@ -167,6 +174,29 @@ class Reportlist
     public function getNote()
     {
         return $this->note;
+    }
+	
+	/**
+     * Set dateBlasted
+     *
+     * @param \DateTime $dateBlasted
+     * @return Reportlist
+     */
+    public function setDateBlasted($dateBlasted)
+    {
+        $this->dateBlasted = $dateBlasted;
+
+        return $this;
+    }
+
+    /**
+     * Get dateBlasted
+     *
+     * @return \DateTime 
+     */
+    public function getDateBlasted()
+    {
+        return $this->dateBlasted;
     }
 	
 	/**

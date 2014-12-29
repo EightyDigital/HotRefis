@@ -44,6 +44,46 @@ class ApplicationController extends Controller
 		}
 	}
 	
+	public function showurlAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+		$conn = $em->getConnection();
+		$usr = $this->get('security.context')->getToken()->getUser();
+		
+		$client_id = $usr->getId();
+		
+		$reportlist = $em->getRepository('RefiBundle:Reportlist')->findByClientId($client_id);
+		if(empty($reportlist)) {
+			print_r("Does not exist!"); exit();
+		}
+		
+		$ctr = 1;
+		echo "<pre>";
+		echo "<table border='1'>";
+		echo "<thead>";
+		echo "<th>#</th>";
+		echo "<th>ID</th>";
+		echo "<th>Date Blasted</th>";
+		echo "<th>Hash URL</th>";
+		echo "</thead>";
+		echo "<tbody>";
+		foreach($reportlist as $report) {
+			echo "<tr>";
+			echo "<td>" . $ctr . "</td>";
+			echo "<td>" . $report->getTransactionId() . "</td>";
+			echo "<td>" . $report->getDateBlasted() . "</td>";
+			echo "<td><a href='".$this->generateUrl('refi_prospect_report', array('hash' => $report->getHash()), true)."'>" . $report->getHash() . "</a></td>";
+			echo "</tr>";
+			
+			$ctr++;
+		}
+		echo "</tbody>";
+		echo "</table>";
+		echo "</pre>";
+		
+		exit();
+	}
+	
 	/*-------------------------------------------------/
 	|	route: <domain>/api/report/save
 	|	postdata: none;
@@ -83,6 +123,7 @@ class ApplicationController extends Controller
 				$reportlist = new Reportlist();
 				$reportlist->setClientId($usr->getId());
 				$reportlist->setTransactionId($transaction_id);
+				$reportlist->setDateBlasted(new \DateTime());
 				$reportlist->setStatus(0);
 				$reportlist->setCalculatorValues($serialized_calc_input_values);
 				$reportlist->setHash($hash);
