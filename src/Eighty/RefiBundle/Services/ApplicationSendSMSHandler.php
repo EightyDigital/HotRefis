@@ -7,7 +7,7 @@ class ApplicationSendSMSHandler
 	public function sendSMS($report_hashed_url, $transactionId, $amicus_person_id)
 	{
 		sleep(3);
-		/*
+		
 		// generate tiny url from google
 		$headers = array(
 			"Content-type: application/json",
@@ -61,7 +61,7 @@ class ApplicationSendSMSHandler
 
 		$response = curl_exec($ch);
 		curl_close($ch);
-		*/
+		
 		return true;
 	}
 
