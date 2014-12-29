@@ -1,6 +1,7 @@
-  <div class="filter__controller" ng-controller="filter__controller" ng-init="tab = 1; filterVals.current = 'Property'; ">
+  <div class="filter__controller" ng-controller="filter__controller" ng-init="tab = 1; filterVals.current = 'Property';">
     <div class="pg__width">
-      <div class="filter__controller--header">      <div class="filter__controller--dropdown">
+      <div class="filter__controller--header">
+        <div class="filter__controller--dropdown">
           <a class="ionicons ion-ios7-home " href="" ng-class="{active:tab===1}" ng-click="tab = 1; $event.preventDefault(); $event.stopPropagation(); filterVals.current = 'Property'; " preventDefault>Property Filters</a>
 
           <a class="ionicons ion-stats-bars" href="" ng-class="{active:tab===2}" ng-click="tab = 2; $event.preventDefault(); $event.stopPropagation(); filterVals.current = 'Financial'; " preventDefault>Finance Filters</a>
@@ -131,7 +132,7 @@
       <div class="filter__controller--list">
         <div class="filter__controller--list--inside">
           {% if data.sectors_owned is defined %}
-            {% if data.sectors_owned != data.max_sectors %}
+            {% if data.sectors_owned != (data.max_sectors - data.sectors_owned) %}
               <div class="short__list">
                 <h2 class="header">Postal Sector Shortlist<span class="count">{[ shortlist.length ]} / {{ data.max_sectors - data.sectors_owned }}</span></h2>
 
@@ -149,8 +150,8 @@
                       <div class="property--duration">
                         <ul>
                           <li><input type="radio" ng-model="duration" checked name="chk_{[ $index + 1]}" value="3"> 3 Months</li>
-                          <li><input type="radio" disabled ng-model="duration" name="chk_{[ $index + 1]}" value="6"> 6 Months</li>
-                          <li><input type="radio" disabled ng-model="duration" name="chk_{[ $index + 1]}" value="12"> 1 Year</li>
+                          <li><input type="radio" ng-model="duration" name="chk_{[ $index + 1]}" value="6"> 6 Months</li>
+                          <li><input type="radio" ng-model="duration" name="chk_{[ $index + 1]}" value="12"> 1 Year</li>
                         </ul>
                       </div>
                     </div>

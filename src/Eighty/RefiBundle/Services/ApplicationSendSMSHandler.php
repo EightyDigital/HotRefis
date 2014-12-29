@@ -7,7 +7,7 @@ class ApplicationSendSMSHandler
 	public function sendSMS($report_hashed_url, $transactionId, $amicus_person_id)
 	{
 		sleep(3);
-		
+		/*
 		// generate tiny url from google
 		$headers = array(
 			"Content-type: application/json",
@@ -19,14 +19,14 @@ class ApplicationSendSMSHandler
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($c, CURLOPT_TIMEOUT, 10);
 		curl_setopt($c, CURLOPT_POST, true);
-		curl_setopt($c, CURLOPT_POSTFIELDS, '{"longUrl": "'.$report_hashed_url.'"}'); 
+		curl_setopt($c, CURLOPT_POSTFIELDS, '{"longUrl": "'.$report_hashed_url.'"}');
 		curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
 
-		$response = curl_exec($c); 
+		$response = curl_exec($c);
 		curl_close($c);
-		
+
 		$report_tiny_url = json_decode($response);
-		
+
 		// send SMS request
 		$soapUrl = "http://sms.dncfilter.com/SMS.asmx";
         $xml_post_string = '<?xml version="1.0" encoding="utf-8"?>
@@ -43,13 +43,13 @@ class ApplicationSendSMSHandler
 								  <senderNumber>82015620</senderNumber>
 								</sendSMS>
 							  </soap:Body>
-							</soap:Envelope>';   
+							</soap:Envelope>';
 
 		$headers = array(
 			"Content-type: text/xml;charset=\"utf-8\"",
-			"SOAPAction: http://tempuri.org/sendSMS", 
+			"SOAPAction: http://tempuri.org/sendSMS",
 			"Content-length: ".strlen($xml_post_string),
-		); 
+		);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $soapUrl);
@@ -59,9 +59,9 @@ class ApplicationSendSMSHandler
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $xml_post_string);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-		$response = curl_exec($ch); 
+		$response = curl_exec($ch);
 		curl_close($ch);
-		
+		*/
 		return true;
 	}
 
