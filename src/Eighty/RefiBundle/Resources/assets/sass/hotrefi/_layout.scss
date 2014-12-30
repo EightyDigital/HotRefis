@@ -6,7 +6,8 @@ html, body {
 }
 /*= Header =*/
 #hd {
-  position:relative;
+  position: fixed;
+  width:100%;
   overflow:auto;
   clear:both;
   z-index:12;
@@ -171,10 +172,13 @@ body.report .row5 .colText p.text.tagLine span { font-weight:700; }
 
 .agency__data {  }
 
+#ltv_at_purchase,
+#existing_loan_mortgage_rate { width:40px; }
+
 /* END CLEANUP */
 
 /*= Body =*/
-#bd {  }
+#bd { padding-top: 78px; }
 #bd .pgWidth {  }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
