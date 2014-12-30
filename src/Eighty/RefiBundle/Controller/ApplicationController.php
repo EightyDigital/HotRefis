@@ -326,7 +326,7 @@ class ApplicationController extends Controller
 			}
 
 			$temp_score = (int) (($score / 7) * 100);
-          /* // #solution 1 ------
+            // #solution 1 ------
 			if(isset($temp[$val['urakey']]['num_prospects']))
 				$temp[$val['urakey']]['num_prospects'] += 1;
 			else
@@ -367,8 +367,8 @@ class ApplicationController extends Controller
 			if($temp_score >= $perfect_score) {
 				$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][]['prospect_id'] = $val['prospectId'];
 			}
-		  */	
-		    // #solution 2 ------
+		  	
+		  /*  // #solution 2 ------
 			if(isset($temp[$val['urakey']]['num_prospects'])) {
 				$temp[$val['urakey']]['num_prospects'] += 1;
 				$temp[$val['urakey']]['temp_score'] += $temp_score;
@@ -393,7 +393,7 @@ class ApplicationController extends Controller
 			
 			$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_id'] = $val['prospectId'];
 			$sector[$val['sector']]['properties'][$val['urakey']]['prospects'][$temp[$val['urakey']]['num_prospects'] - 1]['prospect_score'] = $temp_score;
-		  
+		  */
 		}
 
 		foreach($sector as $keys => $vals) {
