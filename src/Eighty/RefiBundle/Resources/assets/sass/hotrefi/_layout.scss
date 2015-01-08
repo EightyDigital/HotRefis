@@ -175,6 +175,11 @@ body.report .row5 .colText p.text.tagLine span { font-weight:700; }
 #ltv_at_purchase,
 #existing_loan_mortgage_rate { width:40px; }
 
+
+/* Report Cleanup */
+.report--sales__header { background:url(/tempAssets/img/report_header.jpg) 0 0 no-repeat; }
+.report--sales__header .inside { padding:22px 20px; }
+.report--sales__header h2 { color:$color__brand; font-weight:600; font-size:22px;}
 /* END CLEANUP */
 
 /*= Body =*/
