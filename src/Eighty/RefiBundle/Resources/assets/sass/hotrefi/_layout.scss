@@ -179,7 +179,9 @@ body.report .row5 .colText p.text.tagLine span { font-weight:700; }
 /* Report Cleanup */
 .report--sales__header { background:url(/tempAssets/img/report_header.jpg) 0 0 no-repeat; }
 .report--sales__header .inside { padding:22px 20px; }
-.report--sales__header h2 { color:$color__brand; font-weight:600; font-size:22px;}
+.report--sales__header h2 { color:$color__brand; font-weight:400; font-size:22px; }
+body.report .whitebox .head { border-bottom:1px solid #ccc; margin:0 20px; }
+
 /* END CLEANUP */
 
 /*= Body =*/

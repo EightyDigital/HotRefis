@@ -6620,31 +6620,37 @@ body.report .row5 .colText p.text.tagLine span {
 /* line 182, ../sass/hotrefi/_layout.scss */
 .report--sales__header h2 {
   color: #00c0ff;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 22px;
+}
+
+/* line 183, ../sass/hotrefi/_layout.scss */
+body.report .whitebox .head {
+  border-bottom: 1px solid #ccc;
+  margin: 0 20px;
 }
 
 /* END CLEANUP */
 /*= Body =*/
-/* line 186, ../sass/hotrefi/_layout.scss */
+/* line 188, ../sass/hotrefi/_layout.scss */
 #bd {
   padding-top: 78px;
 }
 
-/* line 189, ../sass/hotrefi/_layout.scss */
+/* line 191, ../sass/hotrefi/_layout.scss */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
 /*= Footer =*/
-/* line 194, ../sass/hotrefi/_layout.scss */
+/* line 196, ../sass/hotrefi/_layout.scss */
 #ft {
   width: 100%;
   text-align: center;
   clear: both;
 }
 
-/* line 195, ../sass/hotrefi/_layout.scss */
+/* line 197, ../sass/hotrefi/_layout.scss */
 #ft .pgWidth {
   border-top: 1px solid #ccc;
 }
