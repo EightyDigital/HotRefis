@@ -209,6 +209,9 @@ class ApplicationReportFormulaHandler
 			$x++;
 		}
 		
+		$formula['current_third_year'] = $calc_input_values['current_third_year'];
+		$formula['current_fourth_year'] = $calc_input_values['current_fourth_year'];
+		
 		return $formula;
 	}
 

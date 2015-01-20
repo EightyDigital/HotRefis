@@ -63,8 +63,8 @@ class ReportController extends Controller
 			$rdata['round_loan_amount'] = number_format($round);
 			$rdata['loan_period'] = $loandata->getLoanTerm() / 12;
 			$rdata['loan_period_remaining'] = $rdata['loan_period'] - (date("Y") - $loandata->getLoanDate()->format("Y"));
-			$rdata['current_interest_rate'] = number_format($loandata->getInterestRate(), 1). "%";
-			$rdata['current_interest_rate_2_years'] = number_format($loandata->getInterestRate() + 1, 1). "%";
+			$rdata['current_interest_rate'] = number_format($formula['current_third_year'], 1) "%"; //number_format($loandata->getInterestRate(), 1). "%";
+			$rdata['current_interest_rate_2_years'] = number_format($formula['current_fourth_year'], 1) "%"; //number_format($loandata->getInterestRate() + 1, 1). "%";
 			
 			$rdata['property_price'] = number_format(ceil($propertydata->getPrice() / 50000) * 50000);
 			
@@ -205,8 +205,8 @@ class ReportController extends Controller
 		$rdata['round_loan_amount'] = number_format($round);
 		$rdata['loan_period'] = $loandata->getLoanTerm() / 12;
 		$rdata['loan_period_remaining'] = $rdata['loan_period'] - (date("Y") - $loandata->getLoanDate()->format("Y"));
-		$rdata['current_interest_rate'] = number_format($loandata->getInterestRate(), 1). "%";
-		$rdata['current_interest_rate_2_years'] = number_format($loandata->getInterestRate() + 1, 1). "%";
+		$rdata['current_interest_rate'] = number_format($formula['current_third_year'], 1) "%"; //number_format($loandata->getInterestRate(), 1). "%";
+		$rdata['current_interest_rate_2_years'] = number_format($formula['current_fourth_year'], 1) "%"; //number_format($loandata->getInterestRate() + 1, 1). "%";
 		
 		$rdata['property_price'] = number_format(ceil($propertydata->getPrice() / 50000) * 50000);
 		
