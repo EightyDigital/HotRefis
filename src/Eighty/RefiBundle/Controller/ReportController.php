@@ -43,11 +43,17 @@ class ReportController extends Controller
 		if(!empty($loandata) && !empty($propertydata) && $session->has('calc_input_values')) {
 			$formula = $this->get('application.reportformula.handler')->getReportFormula($calc_input_values, $propertydata, $loandata);
 			$loan_amount = $loandata->getLoanAmount();
-			$x = -1; $y = 0;
 			
-			while($x < 0) {
-				$x = $loan_amount - $this->_num_div[$y];
-				$y++;
+			if($loan_amount <= 0) {
+				$y = 0;
+				$loan_amount = 0;
+			} else {
+				$x = -1; $y = 0;
+				while($x < 0) {
+					$x = $loan_amount - $this->_num_div[$y];
+					$y++;
+				}
+				
 			}
 			
 			$round = round($loan_amount / $this->_num_div[$y - 1]) * $this->_num_div[$y - 1];
