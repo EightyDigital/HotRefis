@@ -165,7 +165,14 @@ html, body {
   color: #555;
   font-weight: bold;
 }
-.report .head span { text-transform:capitalize; display:inline-block; }
+.report .head span {
+  text-transform:capitalize;
+  display:inline-block;
+  .lower {
+    text-transform:lowercase;
+  }
+}
+
 body.report .row5 .colText p.text.tagLine { text-align:center; font-size:24px; font-weight:300; }
 body.report .row5 .colText p.text.tagLine span { font-weight:700; }
 #Prospect-Table textarea { width:100%; }
@@ -188,7 +195,12 @@ body.report .whitebox .head { border-bottom:1px solid #ccc; margin:0 20px; }
     font-weight:600;
   }
 }
-
+.colText {
+  .example--text {
+    font-size:16px;
+  }
+}
+body.report .row6 .whitebox table.sales-pitch thead th { text-align:center; }
 
 /* END CLEANUP */
 

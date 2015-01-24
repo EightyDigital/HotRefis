@@ -257,21 +257,19 @@
     <div class="span12">
 
       <div class="head pad">
-        <i class="ionicons ion-help-circled"></i> How your Property&nbsp;{% if rdata.property_name is not null %}<span>in {{ rdata.property_name }}</span>&nbsp;{% endif %}can <strong>Save You More</strong>
+        <i class="ionicons ion-help-circled"></i> How your Property&nbsp;{% if rdata.property_name is not null %}<span><span class="lower">in</span> {{ rdata.property_name }}</span>&nbsp;{% endif %}can <strong>Save You More</strong>
       </div>
 
       <div class="row-fluid pad colText">
         <div class="span12">
 
           <p class="text">Example:</p>
-          <p>
-            If you had a debt of <strong>${{ rdata.loan_amount }}</strong> and had a loan over {{ rdata.loan_period }} years with approx <strong>{{ rdata.loan_period_remaining }} years remaining</strong> and your current interest rate was {{ rdata.current_interest_rate }} in the next two years and {{ rdata.current_interest_rate_2_years }} after that.
-          </p>
-          <p>With Your property valuation, there may be a large opportunity to save more on your mortgage.
+          <p class="example--text">
+            With a debt of <strong>${{ rdata.loan_amount }}</strong>, on a {{ rdata.loan_period }} year loan - and a current interest rate of <strong>{{ rdata.current_interest_rate }}</strong>, you may be able to refinance and
+
           </p>
           <br/>
-          <p class="text tagLine">You could potentially refinance and save <span>${{ rdata.five_years_savings }}</span> in just five years.</p>
-
+          <p class="text tagLine">Save <span>${{ rdata.five_years_savings }}</span> in just five years!</p>
 
         </div>
 
@@ -308,7 +306,7 @@
               </div>
               <div class="row-fluid">
                 <div class="span6">Loan Period:</div>
-                <div class="span6">{{ rdata.loan_period }}</div>
+                <div class="span6">{{ rdata.loan_period }} years</div>
               </div>
             </div>
           </div>
